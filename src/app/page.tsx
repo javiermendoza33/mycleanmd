@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import HeroCanvas from '@/components/HeroCanvas'
+import Image from 'next/image'
 
 const NAV_LINKS = ['Specialties', 'How it works', 'For employers', 'About']
 const TRUST = ['Licensed in all 50 states', 'HIPAA-secure visits', 'Same-day appointments', 'Prescriptions delivered']
@@ -40,9 +40,22 @@ export default function HomePage() {
 
       {/* HERO */}
       <section style={{ minHeight: '100vh', display: 'grid', gridTemplateColumns: '1fr 1fr', paddingTop: 68, position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, var(--bg-dark) 42%, rgba(11,24,40,0.3) 100%)', zIndex: 1, pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', top: 0, right: 0, width: '52%', height: '100%', zIndex: 0 }}>
-          <HeroCanvas />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, var(--bg-dark) 38%, transparent 58%)', zIndex: 1, pointerEvents: 'none' }} />
+        {/* Hero photo */}
+        <div style={{ position: 'absolute', top: 0, right: 0, width: '60%', height: '100%', zIndex: 0 }}>
+          <Image
+            src="/hero.png"
+            alt="Happy couple after telehealth visit"
+            fill
+            priority
+            style={{ objectFit: 'cover', objectPosition: 'center top', opacity: 0.55, filter: 'brightness(0.85) saturate(0.7)' }}
+          />
+          {/* Fade left into dark bg */}
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, var(--bg-dark) 0%, rgba(11,24,40,0.6) 30%, rgba(11,24,40,0) 65%)' }} />
+          {/* Fade top */}
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, var(--bg-dark) 0%, rgba(11,24,40,0) 15%, rgba(11,24,40,0) 80%, rgba(11,24,40,0.6) 100%)' }} />
+          {/* Teal tint for brand cohesion */}
+          <div style={{ position: 'absolute', inset: 0, background: 'rgba(7,16,24,0.28)' }} />
         </div>
 
         <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '80px 0 80px 72px', maxWidth: 620 }}>
