@@ -3,7 +3,6 @@ import Image from 'next/image'
 
 const NAV_LINKS = ['Specialties', 'How it works', 'For employers', 'About']
 const TRUST = ['Licensed in all 50 states', 'HIPAA-secure visits', 'Same-day appointments', 'Prescriptions delivered']
-const PRESS = ['Forbes', 'Business Insider', 'TechCrunch', 'STAT News', 'Fierce Healthcare', 'MedCity News', 'Axios', 'Modern Healthcare']
 const STEPS = [
   { num: '01', icon: '🔍', title: 'Choose your specialty', desc: 'Primary care, mental health, dermatology, urgent care. No referrals needed.' },
   { num: '02', icon: '📹', title: 'Meet your doctor', desc: 'Secure video visit on any device. Your doctor listens and creates a care plan.' },
@@ -95,17 +94,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* PRESS */}
-      <div style={{ background: '#F4F8FC', padding: '36px 0', overflow: 'hidden' }}>
-        <p style={{ textAlign: 'center', fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#9AACBA', marginBottom: 28, fontWeight: 600 }}>As seen in</p>
-        <div style={{ overflow: 'hidden', position: 'relative' }}>
-          <div style={{ display: 'flex', gap: 72, animation: 'marquee 28s linear infinite', width: 'max-content' }}>
-            {[...PRESS, ...PRESS].map((p, i) => (
-              <span key={i} style={{ fontSize: 17, fontWeight: 700, color: '#7A9EB5', whiteSpace: 'nowrap', letterSpacing: -0.5 }}>{p}</span>
-            ))}
-          </div>
-        </div>
-      </div>
 
       {/* HOW IT WORKS */}
       <section style={{ padding: '100px 72px' }}>
@@ -181,10 +169,6 @@ export default function HomePage() {
         </div>
       </footer>
 
-      <style>{`
-        @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-        @media (prefers-reduced-motion: reduce) { [style*="marquee"] { animation: none; } }
-      `}</style>
     </div>
   )
 }
