@@ -29,12 +29,13 @@ const CARE_COLOR: Record<string, string> = {
   menopause:   '#A855F7',
 }
 
+type ProfileRow = { full_name: string | null; email: string | null }
 type Submission = {
   id: string
   care_type: string
   answers: Record<string, unknown>
   submitted_at: string
-  profiles: { full_name: string | null; email: string | null } | null
+  profiles: ProfileRow | ProfileRow[] | null
 }
 
 export default async function SubmissionsPage() {
@@ -46,7 +47,7 @@ export default async function SubmissionsPage() {
     .order('submitted_at', { ascending: false })
     .limit(200)
 
-  const submissions: Submission[] = (data ?? []) as Submission[]
+  const submissions: Submission[] = (data ?? []) as unknown as Submission[]
 
   const careTypes = Array.from(new Set(submissions.map(s => s.care_type))).sort()
 
@@ -94,8 +95,9 @@ export default async function SubmissionsPage() {
 
             {/* Rows */}
             {submissions.map((s, i) => {
-              const name = s.profiles?.full_name || s.profiles?.email || 'Unknown patient'
-              const email = s.profiles?.email ?? ''
+              const profile = Array.isArray(s.profiles) ? s.profiles[0] : s.profiles
+              const name = profile?.full_name || profile?.email || 'Unknown patient'
+              const email = profile?.email ?? ''
               const color = CARE_COLOR[s.care_type] ?? 'var(--teal)'
               const label = CARE_LABELS[s.care_type] ?? s.care_type
               const date = new Date(s.submitted_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
