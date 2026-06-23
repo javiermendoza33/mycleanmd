@@ -1,7 +1,9 @@
+import { ReactNode } from 'react'
+
 interface StatCardProps {
   label: string
   value: string
-  sub?: string
+  sub?: ReactNode
   accent?: string
 }
 

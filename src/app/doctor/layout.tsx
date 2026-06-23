@@ -4,6 +4,7 @@ const NAV = [
   { label: 'Dashboard',     href: '/doctor/dashboard',     icon: '🏠' },
   { label: 'My Schedule',   href: '/doctor/schedule',      icon: '📅' },
   { label: 'Patients',      href: '/doctor/patients',      icon: '👥' },
+  { label: 'Patient Intakes', href: '/doctor/intakes',     icon: '📋' },
   { label: 'Consultations', href: '/doctor/consultations', icon: '📹' },
   { label: 'Prescriptions', href: '/doctor/prescriptions', icon: '💊' },
   { label: 'Lab Orders',    href: '/doctor/lab-orders',    icon: '🧪' },

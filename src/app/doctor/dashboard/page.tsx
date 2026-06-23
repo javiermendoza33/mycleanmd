@@ -26,6 +26,7 @@ export default function DoctorDashboard() {
           <StatCard label="Total Patients"        value="142" sub="8 new this month" accent="var(--teal)" />
           <StatCard label="Pending Tasks"         value="3"  sub="1 high priority" accent="var(--amber)" />
           <StatCard label="Avg. Rating"           value="4.9" sub="Based on 98 reviews" accent="var(--green)" />
+          <StatCard label="New Intakes"          value="—"   sub={<a href="/doctor/intakes" style={{color:'var(--teal)'}}>Review now →</a>} accent="var(--teal)" />
         </div>
 
         <div className="grid grid-cols-3 gap-6">
