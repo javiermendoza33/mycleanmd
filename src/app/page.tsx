@@ -46,18 +46,18 @@ export default function HomePage() {
 
       {/* HERO */}
       <section style={{ minHeight: '100vh', display: 'grid', gridTemplateColumns: '1fr 1fr', paddingTop: 68, position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(to right, ${BG} 38%, transparent 58%)`, zIndex: 1, pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(to right, ${BG} 42%, transparent 62%)`, zIndex: 1, pointerEvents: 'none' }} />
         {/* Hero photo */}
-        <div style={{ position: 'absolute', top: 0, right: 0, width: '60%', height: '100%', zIndex: 0 }}>
+        <div style={{ position: 'absolute', top: 0, right: 0, width: '72%', height: '100%', zIndex: 0 }}>
           <Image
             src="/hero.png"
             alt="Happy couple after telehealth visit"
             fill
             priority
-            style={{ objectFit: 'cover', objectPosition: 'center top', opacity: 0.88, filter: 'brightness(1.0) saturate(1.1)' }}
+            style={{ objectFit: 'cover', objectPosition: 'left top', opacity: 0.78, filter: 'brightness(1.0) saturate(1.1)' }}
           />
-          <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(to right, ${BG} 0%, rgba(244,247,245,0.5) 30%, rgba(244,247,245,0) 65%)` }} />
-          <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(to bottom, ${BG} 0%, rgba(244,247,245,0) 15%, rgba(244,247,245,0) 80%, rgba(244,247,245,0.5) 100%)` }} />
+          <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(to right, ${BG} 0%, rgba(244,247,245,0.65) 28%, rgba(244,247,245,0) 60%)` }} />
+          <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(to bottom, ${BG} 0%, rgba(244,247,245,0) 15%, rgba(244,247,245,0) 75%, rgba(244,247,245,0.7) 100%)` }} />
         </div>
 
         <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '80px 0 80px 72px', maxWidth: 620 }}>
