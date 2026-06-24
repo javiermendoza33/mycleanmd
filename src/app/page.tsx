@@ -45,33 +45,55 @@ export default function HomePage() {
       </nav>
 
       {/* HERO */}
-      <section style={{ minHeight: '100vh', display: 'grid', gridTemplateColumns: '1fr 1fr', paddingTop: 68, position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(to right, ${BG} 42%, transparent 62%)`, zIndex: 1, pointerEvents: 'none' }} />
-        {/* Hero photo */}
-        <div style={{ position: 'absolute', top: 0, right: 0, width: '72%', height: '100%', zIndex: 0 }}>
+      <style>{`
+        .hero-section {
+          min-height: 100vh; position: relative; overflow: hidden;
+          padding-top: 68px; display: flex; align-items: center;
+        }
+        .hero-text {
+          position: relative; z-index: 2;
+          display: flex; flex-direction: column; justify-content: center;
+          padding: clamp(48px,7vh,88px) 0 clamp(48px,7vh,88px) clamp(28px,5vw,72px);
+          max-width: min(560px, 50vw);
+        }
+        .hero-trust {
+          position: absolute; right: clamp(24px,3.6vw,52px);
+          bottom: clamp(40px,6vh,80px); z-index: 2;
+          display: flex; flex-direction: column; gap: 14px;
+        }
+        @media (max-width: 860px) {
+          .hero-section { min-height: auto; flex-direction: column; align-items: stretch; }
+          .hero-text { max-width: 100%; padding: 48px 24px 36px; }
+          .hero-trust { position: static; padding: 0 24px 40px; flex-direction: row; flex-wrap: wrap; gap: 10px; }
+        }
+      `}</style>
+
+      <section className="hero-section">
+        {/* Full-bleed hero photo */}
+        <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
           <Image
             src="/hero.png"
-            alt="Happy couple after telehealth visit"
+            alt="Active couple enjoying life after telehealth care"
             fill
             priority
             style={{ objectFit: 'cover', objectPosition: 'right top', opacity: 0.78, filter: 'brightness(1.0) saturate(1.1)' }}
           />
-          <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(to right, ${BG} 0%, rgba(244,247,245,0.65) 28%, rgba(244,247,245,0) 60%)` }} />
-          <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(to bottom, ${BG} 0%, rgba(244,247,245,0) 15%, rgba(244,247,245,0) 75%, rgba(244,247,245,0.7) 100%)` }} />
+          <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(to right, ${BG} 0%, ${BG} 34%, rgba(244,247,245,0.82) 48%, rgba(244,247,245,0) 64%)` }} />
+          <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(to bottom, ${BG} 0%, rgba(244,247,245,0) 13%, rgba(244,247,245,0) 76%, rgba(244,247,245,0.75) 100%)` }} />
         </div>
 
-        <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '80px 0 80px 72px', maxWidth: 620 }}>
+        <div className="hero-text">
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '7px 16px', background: 'rgba(126,207,207,0.15)', border: `1px solid rgba(126,207,207,0.35)`, borderRadius: 100, fontSize: 13, color: FG, marginBottom: 32, width: 'fit-content' }}>
             <span style={{ color: TEAL, letterSpacing: -1 }}>★★★★★</span> 4.8 / 5 &nbsp;·&nbsp; 14,200 verified reviews
           </div>
 
-          <h1 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(44px,5.5vw,72px)', fontWeight: 400, lineHeight: 1.1, letterSpacing: -2, marginBottom: 28, color: FG }}>
+          <h1 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(40px,5.5vw,72px)', fontWeight: 400, lineHeight: 1.1, letterSpacing: -2, marginBottom: 28, color: FG }}>
             <strong style={{ fontWeight: 700 }}>Expert providers.</strong><br />
             <em style={{ fontStyle: 'italic', color: TEAL }}>Zero</em> waiting<br />
             rooms.
           </h1>
 
-          <p style={{ fontSize: 17, lineHeight: 1.65, color: MUTED, marginBottom: 40, maxWidth: 460 }}>
+          <p style={{ fontSize: 17, lineHeight: 1.65, color: MUTED, marginBottom: 40, maxWidth: 440 }}>
             Board-certified physicians for primary care, mental health, dermatology, and more — available by video visit,{' '}
             <strong style={{ color: FG, fontWeight: 600 }}>starting at $49.</strong>
           </p>
@@ -87,7 +109,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div style={{ position: 'absolute', right: 52, bottom: 80, zIndex: 2, display: 'flex', flexDirection: 'column', gap: 14 }}>
+        <div className="hero-trust">
           {TRUST.map(t => (
             <div key={t} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 13.5, color: FG }}>
               <span style={{ width: 20, height: 20, borderRadius: '50%', background: 'rgba(126,207,207,0.2)', border: `1.5px solid ${TEAL}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, color: TEAL, flexShrink: 0 }}>✓</span>
