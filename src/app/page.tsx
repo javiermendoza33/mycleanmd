@@ -54,7 +54,7 @@ export default function HomePage() {
             alt="Happy couple after telehealth visit"
             fill
             priority
-            style={{ objectFit: 'cover', objectPosition: 'center top', opacity: 0.85, filter: 'brightness(1.05) saturate(0.75)' }}
+            style={{ objectFit: 'cover', objectPosition: 'center top', opacity: 0.88, filter: 'brightness(1.0) saturate(1.1)' }}
           />
           <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(to right, ${BG} 0%, rgba(244,247,245,0.5) 30%, rgba(244,247,245,0) 65%)` }} />
           <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(to bottom, ${BG} 0%, rgba(244,247,245,0) 15%, rgba(244,247,245,0) 80%, rgba(244,247,245,0.5) 100%)` }} />
