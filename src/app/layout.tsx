@@ -1,8 +1,9 @@
+import { BRAND } from '@/lib/brand'
 import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'XeebiHealth — Telehealth Portal',
+  title: BRAND.title,
   description: 'Modern telehealth platform for patients, doctors, and administrators.',
 }
 

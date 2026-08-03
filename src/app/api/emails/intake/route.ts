@@ -1,9 +1,18 @@
 import { Resend } from 'resend'
 import { NextRequest, NextResponse } from 'next/server'
+import { BRAND } from '@/lib/brand'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Created per request, not at module scope. `new Resend()` throws when the key
+// is absent, and module-scope construction runs during `next build` — which
+// meant the whole app failed to build without the secret. A fresh clone could
+// not be built at all.
+function getResend() {
+  const key = process.env.RESEND_API_KEY
+  if (!key) return null
+  return new Resend(key)
+}
 
-const FROM = 'CareMD <onboarding@resend.dev>'
+const FROM = `${BRAND.name} <onboarding@resend.dev>`
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL ?? 'javier.mendoza@upm.ai'
 
 const CARE_LABELS: Record<string, string> = {
@@ -145,12 +154,19 @@ export async function POST(req: NextRequest) {
 
     const label = CARE_LABELS[careType] ?? careType
 
+    const resend = getResend()
+    if (!resend) {
+      // No key configured — say so plainly instead of throwing a 500 that looks
+      // like the intake itself failed. The intake is already saved by this point.
+      return NextResponse.json({ ok: false, error: 'Email not configured' }, { status: 503 })
+    }
+
     const [patientResult, adminResult] = await Promise.all([
       // Confirmation to patient
       resend.emails.send({
         from: FROM,
         to: patientEmail,
-        subject: `Your ${label} intake is confirmed — CareMD`,
+        subject: `Your ${label} intake is confirmed — ${BRAND.name}`,
         html: patientHtml(patientName || 'there', careType, answers),
       }),
       // Alert to admin

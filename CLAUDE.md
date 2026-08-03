@@ -17,9 +17,32 @@ npm run dev        # http://localhost:3000
 
 > npm cache permission issue? Run: `sudo chown -R $(whoami) ~/.npm && npm install`
 
+## Names — three of them, all current
+
+| Thing | Name |
+|---|---|
+| GitHub repo | `javiermendoza33/xeebihealth` (local `~/xeebihealth`) |
+| Vercel project | `mycleanmd` |
+| Domains | mycleanmd.com · thelabomethod.com (added Aug 2026) · xeebihealth.vercel.app |
+| Brand in the product | **MyCleanMD** — rename in `src/lib/brand.ts` only |
+
+The Labo Method rebrand is planned; change `src/lib/brand.ts` rather than hunting
+strings. The brand used to be hardcoded across ~10 files, which is how production
+ended up saying MyCleanMD while the code still said XeebiHealth.
+
+## Site-access gate
+
+Everything except `/gate` redirects there unless the `_gate` cookie matches
+`NEXT_PUBLIC_GATE_TOKEN` (see `src/proxy.ts`). Soft gate only — unsigned cookie,
+password checked client-side. It keeps the unreleased site off the public
+internet; it is not security. Real auth is still Supabase, behind it.
+
+Local dev needs `NEXT_PUBLIC_GATE_PASSWORD` and `NEXT_PUBLIC_GATE_TOKEN` in
+`.env.local`; `vercel env pull` does not supply them.
+
 ## Live URLs
 
-- Production: https://xeebihealth.vercel.app
+- Production: https://mycleanmd.com and https://thelabomethod.com
 - Figma: https://www.figma.com/design/ZebttRC419nXGKZZYLs0dF/XeebiHealth-%E2%80%94-Telehealth-Portal
 
 ## Architecture
@@ -27,7 +50,8 @@ npm run dev        # http://localhost:3000
 ```
 src/
   app/
-    page.tsx                    # Public landing page (dark navy, CareMD branding)
+    page.tsx                    # Public landing page — GLP-1 / medical weight loss
+    gate/                       # Site-access gate (see above)
     auth/login                  # Supabase email/password login
     auth/signup                 # Signup with role selection
     auth/callback/route.ts      # OAuth callback handler
@@ -115,7 +139,7 @@ Each lives at `/patient/care/<key>/` (landing) and `/patient/care/<key>/intake/`
 
 ## Current state
 
-- Landing page: complete (dark navy, hero image `/public/hero.png`, specialties grid, how-it-works steps)
+- Landing page: GLP-1 weight-loss marketing page (hero `/public/hero.png`, how-it-works, what's-included, stats, footer). Rebuilt Aug 2026 from the live production build — it had been deployed from an uncommitted tree and existed nowhere in git.
 - Onboarding: 6-step flow (name → DOB → state → care type → insurance → goals), saves to Supabase profiles
 - All 11 care landing + intake pages: built using `CareShell` and `IntakeFlow` components
 - Weight care: most detailed — BMI visualization, 6-month projection chart, personalized plan page
@@ -129,4 +153,12 @@ Each lives at `/patient/care/<key>/` (landing) and `/patient/care/<key>/intake/`
 NEXT_PUBLIC_SUPABASE_URL
 NEXT_PUBLIC_SUPABASE_ANON_KEY
 SUPABASE_SERVICE_ROLE_KEY
+RESEND_API_KEY
+NEXT_PUBLIC_GATE_PASSWORD     # gate only — not in Vercel, set locally
+NEXT_PUBLIC_GATE_TOKEN        # gate only — not in Vercel, set locally
 ```
+
+⚠️ These pull **blank** from Vercel (they're marked sensitive), so a fresh
+`vercel env pull` leaves you unable to run locally. Put real values in
+`.env.local` by hand. Nothing should construct a client at module scope —
+that used to break `next build` outright whenever a key was missing.

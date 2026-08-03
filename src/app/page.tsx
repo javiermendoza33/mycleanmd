@@ -1,198 +1,273 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { BRAND, C, GOLD } from '@/lib/brand'
 
-const NAV_LINKS = ['Specialties', 'How it works', 'For employers', 'About']
-const TRUST = ['Licensed in all 50 states', 'HIPAA-secure visits', 'Same-day appointments', 'Prescriptions delivered']
+/**
+ * Marketing landing page — medical weight loss (GLP-1).
+ *
+ * Rebuilt Aug 2026 from the running production build, which had been deployed
+ * from an uncommitted working tree and existed nowhere in git. Copy, palette
+ * and layout were taken from the live render, so this is a faithful
+ * reconstruction rather than the original file — small spacing differences are
+ * possible. The previous CareMD multi-specialty page it replaced is in git
+ * history at f8783a8 if any of it is ever wanted back.
+ */
+
+const NAV = [
+  { label: 'How it works', href: '#how' },
+  { label: "What's included", href: '#included' },
+  { label: 'Pricing', href: '#pricing' },
+  { label: 'FAQ', href: '#faq' },
+]
+
+const HERO_POINTS = [
+  'FDA-cleared medications',
+  'Licensed in all 50 states',
+  'Prescriptions in 24 hours',
+  'Delivered to your door',
+]
+
 const STEPS = [
-  { num: '01', icon: '🔍', title: 'Choose your specialty', desc: 'Primary care, mental health, dermatology, urgent care. No referrals needed.' },
-  { num: '02', icon: '📹', title: 'Meet your doctor', desc: 'Secure video visit on any device. Your doctor listens and creates a care plan.' },
-  { num: '03', icon: '💊', title: 'Get care, delivered', desc: 'Prescriptions sent to your pharmacy or door. Follow-up included at no extra charge.' },
-]
-const SPECIALTIES = [
-  { icon: '🫀', title: 'Primary Care',      desc: 'Checkups, chronic conditions, prescriptions' },
-  { icon: '🧠', title: 'Mental Health',     desc: 'Therapy, psychiatry, ADHD, anxiety, depression' },
-  { icon: '🌿', title: 'Dermatology',       desc: 'Acne, eczema, hair loss, rosacea' },
-  { icon: '🚨', title: 'Urgent Care',       desc: 'UTIs, infections, rashes — seen in minutes' },
-  { icon: '🌸', title: "Women's Health",    desc: 'Birth control, hormones, OB/GYN consults' },
-  { icon: '🥗', title: 'Nutrition & Weight',desc: 'GLP-1 care, dietitian, weight management plans' },
+  {
+    num: '01', icon: '📋', title: 'Complete your health assessment',
+    desc: 'Answer questions about your health history, current medications, and weight loss goals. Takes about 5 minutes.',
+  },
+  {
+    num: '02', icon: '🩺', title: 'Meet your weight loss physician',
+    desc: 'Same-day video consult with a board-certified doctor who reviews your case and prescribes the right GLP-1 for you.',
+  },
+  {
+    num: '03', icon: '💊', title: 'GLP-1 delivered to your door',
+    desc: 'Your semaglutide or tirzepatide prescription ships monthly. Check-ins every 4 weeks to track progress and adjust your dose.',
+  },
 ]
 
-const BG   = '#F4F7F5'
-const CARD = '#FFFFFF'
-const FG   = '#1C2D26'
-const MUTED = '#7A9386'
-const DIV  = '#E2ECE7'
-const TEAL = '#7ECFCF'
+const INCLUDED = [
+  { icon: '💊', title: 'Semaglutide & Tirzepatide', desc: 'FDA-cleared GLP-1 medications with proven 15–22% average body weight reduction in clinical trials' },
+  { icon: '🩺', title: 'Board-Certified Physicians', desc: 'Weight loss specialists licensed in all 50 states — available same day, no referral needed' },
+  { icon: '🥗', title: 'Nutrition Coaching', desc: 'Personalized meal plans from registered dietitians designed to maximize your GLP-1 results' },
+  { icon: '📊', title: 'Monthly Check-ins', desc: 'Progress tracking, lab monitoring, and dose adjustments every 4 weeks to keep you on track' },
+  { icon: '🚚', title: 'Home Delivery', desc: 'Medications shipped discreetly to your door every month — no pharmacy lines, no hassle' },
+  { icon: '💬', title: '7-Day Support', desc: 'Message your care team any day of the week through your patient portal — never feel alone in your journey' },
+]
 
-export default function HomePage() {
+const STATS = [
+  { value: '20%',  label: 'average body weight lost', sub: 'NEJM clinical trials' },
+  { value: '24hr', label: 'prescription turnaround',  sub: 'avg. from assessment' },
+  { value: '14k+', label: 'patients treated',         sub: 'and counting' },
+  { value: '50',   label: 'states covered',           sub: 'licensed nationwide' },
+]
+
+const FOOTER = [
+  { head: 'Program', links: ['GLP-1 Medications', 'Semaglutide', 'Tirzepatide', 'Nutrition Coaching'] },
+  { head: 'Company', links: ['About', 'Careers', 'Blog', 'Press'] },
+  { head: 'Legal',   links: ['Privacy', 'Terms', 'HIPAA Notice'] },
+]
+
+function Wordmark({ light = false }: { light?: boolean }) {
   return (
-    <div style={{ background: BG, minHeight: '100vh' }}>
+    <span style={{ display: 'inline-flex', flexDirection: 'column', lineHeight: 1, gap: 2 }}>
+      <span style={{
+        fontSize: 9, fontWeight: 500, letterSpacing: '0.14em',
+        textTransform: 'uppercase', color: light ? 'rgba(255,255,255,.55)' : C.muted,
+      }}>
+        {BRAND.prefix}
+      </span>
+      <span style={{ fontSize: 26, lineHeight: 1 }}>
+        <em style={{ fontStyle: 'italic', fontWeight: 500, color: C.teal, letterSpacing: '-0.01em' }}>{BRAND.nameItalic}</em>
+        <strong style={{ fontWeight: 900, letterSpacing: '-0.04em', color: light ? '#fff' : C.ink }}>{BRAND.nameBold}</strong>
+      </span>
+    </span>
+  )
+}
 
-      {/* NAV */}
-      <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, height: 68, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 48px', background: 'rgba(244,247,245,0.92)', backdropFilter: 'blur(12px)', borderBottom: `1px solid ${DIV}` }}>
-        <span style={{ fontSize: 22, fontWeight: 700, color: FG }}>
-          <em style={{ fontStyle: 'italic', fontWeight: 400, color: TEAL }}>Care</em>MD
-        </span>
-        <div style={{ display: 'flex', gap: 32 }}>
-          {NAV_LINKS.map(l => <a key={l} href="#" style={{ fontSize: 14, color: MUTED, textDecoration: 'none' }}>{l}</a>)}
+export default function Home() {
+  return (
+    <div style={{ background: C.white, color: C.ink, fontFamily: 'system-ui, sans-serif' }}>
+
+      <nav style={{
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, height: 72,
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        padding: '0 48px', background: 'rgba(244,247,245,0.92)',
+        backdropFilter: 'blur(12px)', borderBottom: `1px solid ${C.line}`,
+      }}>
+        <Link href="/"><Wordmark /></Link>
+        <div style={{ display: 'flex', gap: 34, fontSize: 14 }}>
+          {NAV.map(n => <a key={n.label} href={n.href} style={{ opacity: .75 }}>{n.label}</a>)}
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
-          <Link href="/auth/login" style={{ fontSize: 14, color: MUTED, textDecoration: 'none' }}>Log in</Link>
-          <Link href="/auth/signup" style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '9px 20px', background: TEAL, color: FG, fontSize: 14, fontWeight: 600, borderRadius: 100, textDecoration: 'none' }}>
-            See a doctor →
-          </Link>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 20, fontSize: 14 }}>
+          <Link href="/auth/login" style={{ opacity: .75 }}>Log in</Link>
+          <Link href="/onboarding" style={{
+            background: C.teal, color: C.ink, borderRadius: 100,
+            padding: '9px 20px', fontWeight: 600,
+          }}>Get started &rarr;</Link>
         </div>
       </nav>
 
-      {/* HERO */}
-      <style>{`
-        .hero-section {
-          min-height: 100vh; position: relative; overflow: hidden;
-          padding-top: 68px; display: flex; align-items: center;
-        }
-        .hero-text {
-          position: relative; z-index: 2;
-          display: flex; flex-direction: column; justify-content: center;
-          padding: clamp(48px,7vh,88px) 0 clamp(48px,7vh,88px) clamp(28px,5vw,72px);
-          max-width: min(560px, 50vw);
-        }
-        .hero-trust {
-          position: absolute; right: clamp(24px,3.6vw,52px);
-          bottom: clamp(40px,6vh,80px); z-index: 2;
-          display: flex; flex-direction: column; gap: 14px;
-        }
-        @media (max-width: 860px) {
-          .hero-section { min-height: auto; flex-direction: column; align-items: stretch; }
-          .hero-text { max-width: 100%; padding: 48px 24px 36px; }
-          .hero-trust { position: static; padding: 0 24px 40px; flex-direction: row; flex-wrap: wrap; gap: 10px; }
-        }
-      `}</style>
-
-      <section className="hero-section">
-        {/* Full-bleed hero photo */}
+      {/* HERO — full-bleed photo, copy fading over it from the left */}
+      <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', paddingTop: 72 }}>
         <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
-          <Image
-            src="/hero.png"
-            alt="Active couple enjoying life after telehealth care"
-            fill
-            priority
-            style={{ objectFit: 'cover', objectPosition: 'right top', opacity: 0.78, filter: 'brightness(1.0) saturate(1.1)' }}
-          />
-          <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(to right, ${BG} 0%, ${BG} 34%, rgba(244,247,245,0.82) 48%, rgba(244,247,245,0) 64%)` }} />
-          <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(to bottom, ${BG} 0%, rgba(244,247,245,0) 13%, rgba(244,247,245,0) 76%, rgba(244,247,245,0.75) 100%)` }} />
+          <Image src="/hero.png" alt="" fill priority sizes="100vw" style={{ objectFit: 'cover', objectPosition: '70% center' }} />
+          <div style={{
+            position: 'absolute', inset: 0,
+            background: `linear-gradient(90deg, ${C.paper} 0%, ${C.paper} 32%, rgba(244,247,245,0.72) 46%, rgba(244,247,245,0) 62%)`,
+          }} />
         </div>
 
-        <div className="hero-text">
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '7px 16px', background: 'rgba(126,207,207,0.15)', border: `1px solid rgba(126,207,207,0.35)`, borderRadius: 100, fontSize: 13, color: FG, marginBottom: 32, width: 'fit-content' }}>
-            <span style={{ color: TEAL, letterSpacing: -1 }}>★★★★★</span> 4.8 / 5 &nbsp;·&nbsp; 14,200 verified reviews
-          </div>
-
-          <h1 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(40px,5.5vw,72px)', fontWeight: 400, lineHeight: 1.1, letterSpacing: -2, marginBottom: 28, color: FG }}>
-            <strong style={{ fontWeight: 700 }}>Expert providers.</strong><br />
-            <em style={{ fontStyle: 'italic', color: TEAL }}>Zero</em> waiting<br />
-            rooms.
-          </h1>
-
-          <p style={{ fontSize: 17, lineHeight: 1.65, color: MUTED, marginBottom: 40, maxWidth: 440 }}>
-            Board-certified physicians for primary care, mental health, dermatology, and more — available by video visit,{' '}
-            <strong style={{ color: FG, fontWeight: 600 }}>starting at $49.</strong>
-          </p>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap' }}>
-            <Link href="/auth/signup" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '14px 28px', background: TEAL, color: FG, fontSize: 15, fontWeight: 700, borderRadius: 100, textDecoration: 'none' }}>
-              See a doctor today
-              <span style={{ width: 30, height: 30, background: FG, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, color: TEAL }}>↗</span>
-            </Link>
-            <a href="#specialties" style={{ padding: '14px 28px', border: `1px solid ${DIV}`, color: FG, fontSize: 15, fontWeight: 500, borderRadius: 100, textDecoration: 'none', background: CARD }}>
-              Browse specialties
-            </a>
-          </div>
-        </div>
-
-        <div className="hero-trust">
-          {TRUST.map(t => (
-            <div key={t} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 13.5, color: FG }}>
-              <span style={{ width: 20, height: 20, borderRadius: '50%', background: 'rgba(126,207,207,0.2)', border: `1.5px solid ${TEAL}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, color: TEAL, flexShrink: 0 }}>✓</span>
-              {t}
+        <div style={{ position: 'relative', zIndex: 1, maxWidth: 1280, margin: '0 auto', padding: '0 48px', width: '100%' }}>
+          <div style={{ maxWidth: 620 }}>
+            <div style={{
+              display: 'inline-flex', alignItems: 'center', gap: 10, marginBottom: 32,
+              background: 'rgba(126,207,207,0.15)', border: '1px solid rgba(126,207,207,0.35)',
+              borderRadius: 100, padding: '8px 18px', fontSize: 13.5,
+            }}>
+              <span style={{ color: C.teal, letterSpacing: 1 }}>★★★★★</span>
+              <span>4.8 / 5 &nbsp;·&nbsp; 14,200 verified patients</span>
             </div>
-          ))}
+
+            <h1 style={{
+              fontFamily: 'Georgia, serif', fontWeight: 400,
+              fontSize: 'clamp(44px, 5.5vw, 70px)', lineHeight: 1.1,
+              letterSpacing: '-2px', color: C.ink,
+            }}>
+              Lose up to 20%<br />of your body weight<br />
+              <em style={{ fontStyle: 'italic', color: C.teal }}>medically.</em>
+            </h1>
+
+            <p style={{ marginTop: 28, fontSize: 17, lineHeight: 1.6, color: C.muted, maxWidth: 520 }}>
+              Board-certified physicians prescribe FDA-cleared semaglutide and tirzepatide — the same
+              medications proven in clinical trials — shipped to your door.{' '}
+              <strong style={{ color: C.ink }}>Starting at $149/mo.</strong>
+            </p>
+
+            <div style={{ display: 'flex', gap: 14, marginTop: 36, flexWrap: 'wrap' }}>
+              <Link href="/onboarding" style={{
+                ...GOLD, borderRadius: 100, padding: '15px 34px', fontSize: 15,
+                fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: 10,
+              }}>
+                Start my program <span style={{ opacity: .7 }}>↗</span>
+              </Link>
+              <a href="#included" style={{
+                background: 'rgba(126,207,207,0.08)', color: C.teal, border: `1px solid ${C.teal}`,
+                borderRadius: 100, padding: '14px 28px', fontSize: 15, fontWeight: 600,
+              }}>
+                See what&apos;s included
+              </a>
+            </div>
+
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px 26px', marginTop: 40, fontSize: 13.5, color: C.muted }}>
+              {HERO_POINTS.map(t => (
+                <span key={t} style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+                  <span style={{
+                    width: 18, height: 18, borderRadius: '50%', border: `1px solid ${C.teal}`,
+                    color: C.teal, fontSize: 10, display: 'inline-flex',
+                    alignItems: 'center', justifyContent: 'center',
+                  }}>✓</span>
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
       {/* HOW IT WORKS */}
-      <section style={{ padding: '100px 72px', background: CARD }}>
-        <p style={{ fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: TEAL, fontWeight: 600, marginBottom: 20 }}>How CareMD works</p>
-        <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(32px,3.5vw,48px)', fontWeight: 400, lineHeight: 1.2, letterSpacing: -1, marginBottom: 64, maxWidth: 520, color: FG }}>
-          From symptom to <em style={{ fontStyle: 'italic', color: TEAL }}>treatment</em> in under an hour.
-        </h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 2 }}>
-          {STEPS.map((s, i) => (
-            <div key={s.num} style={{ padding: '48px 40px', background: BG, border: `1px solid ${DIV}`, borderRadius: i === 0 ? '16px 0 0 16px' : i === 2 ? '0 16px 16px 0' : 0 }}>
-              <span style={{ fontFamily: 'Georgia, serif', fontSize: 72, fontWeight: 700, fontStyle: 'italic', color: 'rgba(126,207,207,0.25)', lineHeight: 1, display: 'block', marginBottom: 32 }}>{s.num}</span>
-              <span style={{ fontSize: 28, marginBottom: 16, display: 'block' }}>{s.icon}</span>
-              <div style={{ fontSize: 18, fontWeight: 600, marginBottom: 10, color: FG }}>{s.title}</div>
-              <p style={{ fontSize: 14, lineHeight: 1.65, color: MUTED }}>{s.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* SPECIALTIES */}
-      <section id="specialties" style={{ padding: '100px 72px', background: BG }}>
-        <p style={{ fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: TEAL, fontWeight: 600, marginBottom: 20 }}>What we treat</p>
-        <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(32px,3.5vw,48px)', fontWeight: 400, lineHeight: 1.2, letterSpacing: -1, marginBottom: 48, maxWidth: 520, color: FG }}>
-          The care you need, <em style={{ fontStyle: 'italic', color: TEAL }}>when</em> you need it.
-        </h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 16 }}>
-          {SPECIALTIES.map(s => (
-            <Link key={s.title} href="/auth/signup" style={{ padding: 32, background: CARD, border: `1px solid ${DIV}`, borderRadius: 16, textDecoration: 'none', display: 'block' }}>
-              <span style={{ fontSize: 28, marginBottom: 16, display: 'block' }}>{s.icon}</span>
-              <div style={{ fontSize: 17, fontWeight: 600, color: FG, marginBottom: 8 }}>{s.title}</div>
-              <p style={{ fontSize: 13.5, color: MUTED, lineHeight: 1.5 }}>{s.desc}</p>
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginTop: 20, fontSize: 13, color: TEAL, fontWeight: 500 }}>Book a visit →</span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* CTA BANNER */}
-      <div style={{ margin: '0 72px 100px', padding: '72px 80px', background: TEAL, borderRadius: 24, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 40 }}>
-        <div>
-          <div style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(28px,3vw,40px)', fontWeight: 700, color: FG, letterSpacing: -1, lineHeight: 1.15, marginBottom: 10 }}>Ready to feel better?</div>
-          <p style={{ fontSize: 15, color: 'rgba(28,45,38,0.65)' }}>Your first visit is a few clicks away. No insurance required.</p>
-        </div>
-        <Link href="/auth/signup" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '15px 30px', background: FG, color: TEAL, fontSize: 15, fontWeight: 700, borderRadius: 100, textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0 }}>
-          See a doctor today ↗
-        </Link>
-      </div>
-
-      {/* FOOTER */}
-      <footer style={{ borderTop: `1px solid ${DIV}`, padding: '48px 72px 36px', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 40, background: CARD }}>
-        <div>
-          <div style={{ fontSize: 20, fontWeight: 700, color: FG, marginBottom: 12 }}>
-            <em style={{ fontStyle: 'italic', fontWeight: 400, color: TEAL }}>Care</em>MD
+      <section id="how" style={{ background: C.white, padding: '110px 48px' }}>
+        <div style={{ maxWidth: 1180, margin: '0 auto' }}>
+          <p style={{ fontSize: 11.5, fontWeight: 700, letterSpacing: '0.22em', color: C.teal, marginBottom: 14 }}>HOW IT WORKS</p>
+          <h2 style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontSize: 'clamp(30px,3.4vw,45px)', letterSpacing: '-1px', marginBottom: 60 }}>
+            From assessment to prescription in 24 hours.
+          </h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: 40 }}>
+            {STEPS.map(s => (
+              <div key={s.num}>
+                <div style={{ fontSize: 12, fontWeight: 700, color: C.teal, letterSpacing: '0.1em', marginBottom: 16 }}>{s.num}</div>
+                <div style={{ fontSize: 30, marginBottom: 16 }}>{s.icon}</div>
+                <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 10 }}>{s.title}</h3>
+                <p style={{ fontSize: 14.5, lineHeight: 1.65, color: C.muted }}>{s.desc}</p>
+              </div>
+            ))}
           </div>
-          <p style={{ fontSize: 13, color: MUTED, maxWidth: 220, lineHeight: 1.6 }}>Expert telehealth care for every body, available wherever you are.</p>
         </div>
-        <div style={{ display: 'flex', gap: 64, flexWrap: 'wrap' }}>
-          {[
-            { title: 'Specialties', links: ['Primary Care','Mental Health','Dermatology','Urgent Care'] },
-            { title: 'Company',     links: ['About','Careers','Blog','Press'] },
-            { title: 'Legal',       links: ['Privacy','Terms','HIPAA Notice'] },
-          ].map(col => (
-            <div key={col.title}>
-              <h4 style={{ fontSize: 12, letterSpacing: '0.1em', textTransform: 'uppercase', color: MUTED, fontWeight: 600, marginBottom: 16 }}>{col.title}</h4>
-              <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10 }}>
-                {col.links.map(l => <li key={l}><a href="#" style={{ fontSize: 14, color: MUTED, textDecoration: 'none' }}>{l}</a></li>)}
-              </ul>
+      </section>
+
+      {/* WHAT'S INCLUDED */}
+      <section id="included" style={{ background: C.paper, padding: '110px 48px' }}>
+        <div style={{ maxWidth: 1180, margin: '0 auto' }}>
+          <p style={{ fontSize: 11.5, fontWeight: 700, letterSpacing: '0.22em', color: C.teal, marginBottom: 14 }}>WHAT&apos;S INCLUDED</p>
+          <h2 style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontSize: 'clamp(30px,3.4vw,45px)', letterSpacing: '-1px', marginBottom: 60 }}>
+            Everything you need to succeed.
+          </h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(320px,1fr))', gap: 22 }}>
+            {INCLUDED.map(f => (
+              <div key={f.title} style={{ background: C.white, border: `1px solid ${C.line}`, borderRadius: 16, padding: '30px 28px' }}>
+                <div style={{ fontSize: 26, marginBottom: 16 }}>{f.icon}</div>
+                <h3 style={{ fontSize: 16.5, fontWeight: 700, marginBottom: 10 }}>{f.title}</h3>
+                <p style={{ fontSize: 14, lineHeight: 1.65, color: C.muted }}>{f.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* STATS */}
+      <section style={{ background: C.white, padding: '90px 48px' }}>
+        <div style={{ maxWidth: 1180, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: 30 }}>
+          {STATS.map(s => (
+            <div key={s.label} style={{ textAlign: 'center' }}>
+              <div style={{ fontFamily: 'Georgia, serif', fontSize: 46, color: C.teal, letterSpacing: '-1.5px' }}>{s.value}</div>
+              <div style={{ fontSize: 14, fontWeight: 600, marginTop: 8 }}>{s.label}</div>
+              <div style={{ fontSize: 12.5, color: C.muted, marginTop: 3 }}>{s.sub}</div>
             </div>
           ))}
         </div>
-        <div style={{ width: '100%', borderTop: `1px solid ${DIV}`, paddingTop: 24, marginTop: 20, display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
-          <p style={{ fontSize: 12.5, color: MUTED }}>© 2026 CareMD. Not for emergencies — call 911 for life-threatening conditions.</p>
+      </section>
+
+      {/* CLOSING CTA */}
+      <section id="pricing" style={{ background: C.paper, padding: '110px 48px', textAlign: 'center' }}>
+        <div style={{ maxWidth: 700, margin: '0 auto' }}>
+          <h2 style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontSize: 'clamp(30px,3.4vw,45px)', letterSpacing: '-1px' }}>
+            Start losing weight this week.
+          </h2>
+          <p style={{ fontSize: 16.5, color: C.muted, marginTop: 18, lineHeight: 1.6 }}>
+            Your prescription could be ready in 24 hours. No insurance required.
+          </p>
+          <Link href="/onboarding" style={{
+            display: 'inline-flex', alignItems: 'center', gap: 10, marginTop: 34,
+            background: C.ink, color: C.teal, borderRadius: 100,
+            padding: '15px 30px', fontSize: 15, fontWeight: 700,
+          }}>
+            Get my prescription ↗
+          </Link>
+        </div>
+      </section>
+
+      <footer style={{ background: C.ink, color: 'rgba(255,255,255,0.7)', padding: '70px 48px 40px' }}>
+        <div style={{ maxWidth: 1180, margin: '0 auto' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(220px,1.4fr) repeat(auto-fit,minmax(150px,1fr))', gap: 40 }}>
+            <div>
+              <Wordmark light />
+              <p style={{ fontSize: 13.5, lineHeight: 1.65, marginTop: 18, maxWidth: 260 }}>{BRAND.tagline}</p>
+            </div>
+            {FOOTER.map(col => (
+              <div key={col.head}>
+                <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.18em', color: C.teal, marginBottom: 16 }}>
+                  {col.head.toUpperCase()}
+                </div>
+                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10, fontSize: 13.5 }}>
+                  {col.links.map(l => <li key={l}>{l}</li>)}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <p style={{
+            fontSize: 12.5, marginTop: 56, paddingTop: 26,
+            borderTop: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.5)',
+          }}>
+            © {new Date().getFullYear()} {BRAND.name}. Not for emergencies — call 911 for life-threatening conditions.
+          </p>
         </div>
       </footer>
-
     </div>
   )
 }

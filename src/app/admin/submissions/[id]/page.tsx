@@ -3,6 +3,13 @@ import TopBar from '@/components/TopBar'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+// Reads live patient submissions with the service-role key, so it must render
+// per request. Without this Next tries to prerender it at build time, which
+// fails whenever the Supabase secrets aren't present — and the data would be
+// stale even when it succeeds.
+export const dynamic = 'force-dynamic'
+
+
 const CARE_LABELS: Record<string, string> = {
   primary: 'Primary Care', mental: 'Mental Health', dermatology: 'Dermatology',
   urgent: 'Urgent Care', womens: "Women's Health", weight: 'Weight Loss',
