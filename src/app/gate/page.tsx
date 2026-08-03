@@ -22,7 +22,10 @@ function GateForm() {
 
   function submit(e: React.FormEvent) {
     e.preventDefault()
-    if (value !== process.env.NEXT_PUBLIC_GATE_PASSWORD) {
+    // Fail closed here too — an unset password must reject everything rather
+    // than accept anything.
+    const expected = process.env.NEXT_PUBLIC_GATE_PASSWORD
+    if (!expected || value !== expected) {
       setError(true)
       return
     }

@@ -11,7 +11,12 @@ export async function proxy(request: NextRequest) {
   // Soft gate only: the token is unsigned and checked client-side, so it stops
   // casual visitors and crawlers, not a determined one. Everything sensitive
   // still sits behind Supabase auth below.
-  if (path !== '/gate' && request.cookies.get(GATE_COOKIE)?.value !== process.env.NEXT_PUBLIC_GATE_TOKEN) {
+  // FAIL CLOSED. If the token isn't configured, `cookies.get()?.value` and the
+  // env var are both undefined, and `undefined !== undefined` is false — which
+  // would wave every visitor straight through and publish an unreleased
+  // telehealth site. Missing config must lock the door, not open it.
+  const gateToken = process.env.NEXT_PUBLIC_GATE_TOKEN
+  if (path !== '/gate' && (!gateToken || request.cookies.get(GATE_COOKIE)?.value !== gateToken)) {
     const url = new URL('/gate', request.url)
     url.searchParams.set('from', path)
     return NextResponse.redirect(url)
