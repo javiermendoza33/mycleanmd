@@ -7,10 +7,10 @@ Full-stack telehealth portal with a public marketing landing page, patient onboa
 ## Quick start on any machine
 
 ```bash
-git clone https://github.com/javiermendoza33/xeebihealth
-cd xeebihealth
+git clone https://github.com/javiermendoza33/mycleanmd
+cd mycleanmd
 npm install
-vercel link        # links to mycleantext/xeebihealth
+vercel link        # links to mycleantext/mycleanmd
 vercel env pull .env.local
 npm run dev        # http://localhost:3000
 ```
@@ -21,7 +21,7 @@ npm run dev        # http://localhost:3000
 
 | Thing | Name |
 |---|---|
-| GitHub repo | `javiermendoza33/xeebihealth` (local `~/xeebihealth`) |
+| GitHub repo | `javiermendoza33/mycleanmd` (renamed from xeebihealth; local dir is still `~/xeebihealth`) |
 | Vercel project | `mycleanmd` |
 | Domains | mycleanmd.com · thelabomethod.com (added Aug 2026) · xeebihealth.vercel.app |
 | Brand in the product | **MyCleanMD** — rename in `src/lib/brand.ts` only |
