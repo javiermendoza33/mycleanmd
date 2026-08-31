@@ -543,3 +543,68 @@
 [data-labo] .step-n { font-size: 30px; font-weight: 200; line-height: .9; display: block; }
 [data-labo] .step .h3-sm { margin-top: 16px; }
 [data-labo] .band-raised .price-row { border-top-color: var(--rule-strong); }
+
+/* ══ LIGHT ═════════════════════════════════════════════════════════════════
+   The handoff bans box-shadows and says depth comes from hairlines. That is a
+   rule about EDGES, not about light — and a flat #F7F4EE field under a design
+   whose only artwork is a set of brass arcs was reading as paper rather than
+   as a lit room. These gradients are atmosphere: no hard stops, no visible
+   banding, nothing that reads as a "gradient" on its own. Section edges stay
+   hard, because that crispness is the design.
+
+   Every value is deliberately near the threshold of perception. If any of
+   these becomes obvious, it is wrong. */
+
+/* Hero: a warm brass haze in the upper right, exactly where the crest arcs
+   sit, so the arcs read as light catching a swell rather than as drawn lines.
+   Plus the faintest vertical settle from bone to bone-raised at the foot. */
+[data-labo] .hero {
+  background:
+    radial-gradient(120% 90% at 88% -12%, rgba(185,139,76,.13) 0%,
+                    rgba(185,139,76,.045) 34%, rgba(185,139,76,0) 62%),
+    radial-gradient(90% 70% at 8% 8%, rgba(18,49,42,.05) 0%, rgba(18,49,42,0) 55%),
+    linear-gradient(180deg, var(--bone) 0%, var(--bone) 58%, #f4f0e8 100%);
+}
+
+/* Pine bands were flat blocks of one colour. A wash from pine toward the
+   deeper footer pine gives them a floor without a border. */
+[data-labo] .band-pine {
+  background:
+    radial-gradient(78% 120% at 82% 0%, rgba(185,139,76,.10) 0%, rgba(185,139,76,0) 58%),
+    linear-gradient(168deg, #163a32 0%, var(--pine) 46%, #0f2a24 100%);
+}
+/* the trust bar is only 60px tall — a 168deg wash across it just looks uneven */
+[data-labo] .band-pine:has(> .trust-in) {
+  background: linear-gradient(90deg, #163a32 0%, var(--pine) 50%, #0f2a24 100%);
+}
+
+/* Raised bands pick up the same warmth so the page reads as one lit surface
+   rather than three unrelated greys. */
+[data-labo] .band-raised {
+  background:
+    radial-gradient(70% 100% at 12% 0%, rgba(185,139,76,.07) 0%, rgba(185,139,76,0) 60%),
+    var(--bone-raised);
+}
+
+/* The ghosted card numerals were a flat tint. Fading them toward the corner
+   they sit in stops them reading as a stamp. */
+[data-labo] .prog-ghost {
+  background: linear-gradient(160deg, var(--pine) 20%, rgba(18,49,42,.35) 90%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}
+
+/* Footer: the deepest point on the page, so it gets the darkest settle. */
+[data-labo] .foot {
+  background: linear-gradient(180deg, #10281f 0%, var(--pine-deep) 40%, #0b1e19 100%);
+}
+
+/* The drawer button sits beside the "Get started" pill, and below ~620px the
+   wordmark + pill + Menu no longer fit on one 74px row — the pill ran off the
+   right edge. The drawer already carries Get started as its first CTA, so the
+   header keeps the wordmark and the way in. */
+@media (max-width: 620px) {
+  [data-labo] .hdr-act .hdr-cta { display: none; }
+  [data-labo] .mark-name { font-size: 19px; }
+  [data-labo] .mark-sub { letter-spacing: .14em; }
+}
