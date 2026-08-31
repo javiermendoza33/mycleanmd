@@ -608,3 +608,42 @@
   [data-labo] .mark-name { font-size: 19px; }
   [data-labo] .mark-sub { letter-spacing: .14em; }
 }
+
+/* ══ THE TOP OF THE PAGE ═══════════════════════════════════════════════════
+   A real, visible warm wash — champagne into bone — across the top of EVERY
+   page, not just the homepage. The first attempt put it on .hero alone, which
+   left the tinted header sitting as a hard band on top of plain bone on every
+   interior page. Painting it on <main> instead means the header and whatever
+   follows are one continuous field on all eleven views.
+
+   640px tall and no-repeat, so it has faded to paper by the time any page gets
+   to its content. Sections with their own ground (band-pine, band-raised)
+   paint straight over it, which is what should happen. */
+[data-labo] main {
+  background-color: var(--bone);
+  background-image: linear-gradient(180deg,
+    #ece2cf 0%,
+    #f0e8da 22%,
+    #f4efe3 48%,
+    var(--bone) 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 640px;
+}
+
+/* The hero adds the brass light on top of that shared wash — the arcs sit in
+   the upper right and this is what makes them read as light on a swell. */
+[data-labo] .hero {
+  background:
+    radial-gradient(105% 78% at 84% -6%, rgba(185,139,76,.30) 0%,
+                    rgba(185,139,76,.13) 32%, rgba(185,139,76,0) 66%),
+    radial-gradient(80% 60% at 4% 2%, rgba(18,49,42,.10) 0%, rgba(18,49,42,0) 58%);
+}
+
+/* Header takes the same opening colour so it blends into the wash, and keeps
+   its blur so it still separates once you scroll past the top. */
+[data-labo] .hdr {
+  background:
+    radial-gradient(140% 320% at 84% 0%, rgba(185,139,76,.26) 0%,
+                    rgba(185,139,76,.10) 40%, rgba(185,139,76,0) 78%),
+    linear-gradient(180deg, rgba(234,224,204,.94) 0%, rgba(238,230,214,.92) 100%);
+}
