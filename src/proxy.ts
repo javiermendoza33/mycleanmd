@@ -3,8 +3,40 @@ import { createServerClient } from '@supabase/ssr'
 
 const GATE_COOKIE = '_gate'
 
+/**
+ * thelabomethod.com is a PUBLIC marketing site sharing this app (and this
+ * Vercel project) with the gated MyCleanMD portal. It is served from
+ * src/app/labo/* but must have no /labo prefix in its URLs — the whole point
+ * of the site is organic search, and a prefix would put it in every canonical.
+ *
+ * So: rewrite by hostname, and return before the gate. The gate exists to keep
+ * the UNRELEASED MyCleanMD portal off the public internet; applying it here
+ * would password-protect a marketing site, which is the opposite of the job.
+ */
+const LABO_HOSTS = ['thelabomethod.com', 'www.thelabomethod.com']
+
 export async function proxy(request: NextRequest) {
   const { pathname: path } = request.nextUrl
+  const host = request.headers.get('host')?.split(':')[0]?.toLowerCase() ?? ''
+
+  if (LABO_HOSTS.includes(host)) {
+    // www → apex, so one canonical host owns the index
+    if (host.startsWith('www.')) {
+      const url = new URL(request.url)
+      url.host = 'thelabomethod.com'
+      return NextResponse.redirect(url, 308)
+    }
+    // /labo/* is the internal path; asking for it directly on this host would
+    // duplicate every page at two URLs, so send it to the clean one.
+    if (path === '/labo' || path.startsWith('/labo/')) {
+      const url = request.nextUrl.clone()
+      url.pathname = path.slice('/labo'.length) || '/'
+      return NextResponse.redirect(url, 308)
+    }
+    const url = request.nextUrl.clone()
+    url.pathname = `/labo${path === '/' ? '' : path}`
+    return NextResponse.rewrite(url)
+  }
 
   // Site-access gate — keeps the in-progress site off the public internet.
   // Runs before Supabase auth so an unreleased site never even reaches login.
