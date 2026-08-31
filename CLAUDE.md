@@ -40,6 +40,69 @@ internet; it is not security. Real auth is still Supabase, behind it.
 Local dev needs `NEXT_PUBLIC_GATE_PASSWORD` and `NEXT_PUBLIC_GATE_TOKEN` in
 `.env.local`; `vercel env pull` does not supply them.
 
+## Social sign-in (Google / Apple / Facebook)
+
+`src/components/SocialAuth.tsx` renders the buttons on `/auth/login` and
+`/auth/signup`. All three are built. **Only providers that are actually enabled
+in Supabase are rendered**, and the list comes from `/api/auth/providers`, which
+probes Supabase server-side (5-minute cache).
+
+**Enable a provider in the Supabase dashboard and its button appears on the next
+page load. No deploy, no code change.**
+
+### Why it works that way
+
+`signInWithOAuth()` does **not** return an error for a disabled provider. It
+hard-navigates to Supabase, which answers with a raw JSON 400:
+
+```
+{"code":400,"error_code":"validation_failed","msg":"Unsupported provider: provider is not enabled"}
+```
+
+A patient on a telehealth login would see that JSON in their browser. Hence the
+probe: `/auth/v1/authorize?provider=X` returns **302 when enabled, 400 when
+not**, and needs no API key. (`/auth/v1/settings` is tidier but wants the anon
+key, which pulls blank from Vercel on this project.)
+
+⚠️ `/api/auth/providers` is in the **public routes list in `src/proxy.ts`**. It
+starts with `/api`, not `/auth`, so without that entry the auth guard bounces it
+to `/auth/login` and the login page silently renders **no** social buttons.
+
+### Status
+
+| Provider | State | What it needs |
+|---|---|---|
+| Google | ✅ enabled | already configured |
+| Apple | ⬜ off | Apple Developer paid account → Services ID, Sign in with Apple key (.p8), Team ID, Key ID |
+| Facebook | ⬜ off | Meta app → App ID + App Secret, "Facebook Login" product added, app taken Live |
+
+**Callback URL for every provider:**
+`https://hprtecdhqozcytihmqvg.supabase.co/auth/v1/callback`
+
+Apple additionally needs `thelabomethod.com` / `mycleanmd.com` registered as a
+verified domain and Return URL on the Services ID.
+
+### Role handling
+
+`/auth/signup` passes the doctor/patient choice through the OAuth round-trip as
+`?role=` on the callback URL. Without it every social signup landed as a patient
+and the role selector was silently ignored.
+
+The callback whitelists `patient | doctor` and applies the role **only when the
+profile has no role yet** — otherwise a crafted `?role=doctor` link would let an
+existing patient re-sign-in as a doctor. `admin` is deliberately not accepted
+from a URL at all.
+
+⚠️ **Pre-existing, not introduced here:** the email signup form already lets
+anyone self-select `doctor`, which grants the doctor dashboard. Worth locking to
+an invite or an admin approval before real patients use the portal.
+
+### Names from providers
+
+Google and Facebook return a name every time. **Apple returns it only on the
+FIRST authorization and never again** — the callback saves it when it arrives so
+onboarding does not ask twice.
+
 ## Live URLs
 
 - Production: https://mycleanmd.com and https://thelabomethod.com

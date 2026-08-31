@@ -77,8 +77,17 @@ export async function proxy(request: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser()
   const pathname = path
 
-  // Public routes — always accessible (once past the gate)
-  if (pathname === '/' || pathname.startsWith('/auth') || pathname.startsWith('/onboarding')) return response
+  // Public routes — always accessible (once past the gate).
+  // /api/auth/providers returns only WHICH OAuth buttons to draw. The login
+  // page needs it before anyone is signed in, and it starts with /api rather
+  // than /auth, so without this line the auth guard bounced it to /auth/login
+  // and the login page silently rendered no social buttons at all.
+  if (
+    pathname === '/' ||
+    pathname.startsWith('/auth') ||
+    pathname === '/api/auth/providers' ||
+    pathname.startsWith('/onboarding')
+  ) return response
 
   // Not logged in → login
   if (!user) return NextResponse.redirect(new URL('/auth/login', request.url))
