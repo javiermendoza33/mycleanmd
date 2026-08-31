@@ -474,3 +474,72 @@
   [data-labo] .trust-in { flex-direction: column; gap: 10px; }
   [data-labo] .trust-sep { display: none; }
 }
+
+/* ── the arcs drift ────────────────────────────────────────────────────────
+   Rendered exactly as specified, the wave art was invisible on a real screen —
+   the only artwork in the design and you could not see it. Stronger values in
+   Sections.tsx, plus a very slow sideways drift here: each arc runs on its own
+   duration (37–71s, all primes so the set never visibly repeats) and alternates
+   direction. Transform only, twelve elements, no repaint. */
+@keyframes labo-drift {
+  from { transform: translate3d(-1.6%, 0, 0); }
+  to   { transform: translate3d(1.6%, 0, 0); }
+}
+[data-labo] .arc {
+  animation-name: labo-drift;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-labo] .arc { animation: none; }
+}
+
+/* ── program cards: a ghosted numeral, and an arrow that moves ─────────────
+   Four identical text blocks read as a table, not as four programs. The index
+   becomes a large Newsreader watermark — the design already leans on oversized
+   numerals (52px step figures, 46px prices), so this is its own vocabulary
+   rather than a new one. */
+[data-labo] .prog-cell { position: relative; overflow: hidden; }
+[data-labo] .prog-ghost { position: absolute; right: 26px; bottom: 8px;
+  font-family: var(--serif); font-weight: 200; font-size: 132px; line-height: .8;
+  color: var(--pine); opacity: .045; pointer-events: none; user-select: none;
+  transition: opacity .25s ease, transform .25s ease; }
+[data-labo] .prog-cell:hover .prog-ghost { opacity: .085; transform: translateY(-4px); }
+[data-labo] .prog-more i { transition: transform .22s ease; }
+[data-labo] .prog-cell:hover .prog-more i { transform: translateX(5px); }
+[data-labo] .prog-cell:hover .prog-more { color: var(--brass); }
+
+/* ── principles band ───────────────────────────────────────────────────────
+   Pine, so it lands between two bone sections and breaks a very long light
+   page. The numerals are the flavour: 200-weight Newsreader at 64px in brass,
+   which is the boldest typographic move on the site and the only place the
+   accent is allowed to be big. */
+[data-labo] .prin { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+  background: var(--pine-line); border-top: 1px solid var(--pine-line);
+  border-bottom: 1px solid var(--pine-line); margin-top: 46px; }
+[data-labo] .prin > div { background: var(--pine); padding: 44px 40px 48px; }
+[data-labo] .prin-n { font-family: var(--serif); font-weight: 200; font-size: 64px;
+  line-height: .85; color: var(--brass); display: block; }
+[data-labo] .prin-t { font-family: var(--serif); font-weight: 300; font-size: 26px;
+  letter-spacing: -.015em; color: var(--bone); margin: 22px 0 14px; }
+[data-labo] .prin-b { font-size: 15px; line-height: 1.75; color: var(--on-dark); margin: 0; }
+[data-labo] .prin-head { display: flex; align-items: baseline; justify-content: space-between;
+  gap: 40px; flex-wrap: wrap; }
+[data-labo] .prin-h { font-family: var(--serif); font-weight: 300;
+  font-size: clamp(28px, 3.4vw, 40px); letter-spacing: -.02em; color: var(--bone); margin: 0; }
+[data-labo] .prin-note { font-size: 15px; color: var(--on-dark-muted); max-width: 400px; }
+
+@media (max-width: 900px) { [data-labo] .prin { grid-template-columns: 1fr; } }
+@media (max-width: 760px) {
+  [data-labo] .prog-ghost { font-size: 96px; right: 18px; }
+  [data-labo] .prin > div { padding: 34px 26px 38px; }
+}
+
+/* The homepage step numerals were 15px and read as timid beside the 64px
+   principle numerals and the 46px prices. 30px keeps them clearly below the
+   /how-it-works page's 52px, so the hierarchy between the short and long
+   version of the same four steps survives. */
+[data-labo] .step-n { font-size: 30px; font-weight: 200; line-height: .9; display: block; }
+[data-labo] .step .h3-sm { margin-top: 16px; }
+[data-labo] .band-raised .price-row { border-top-color: var(--rule-strong); }

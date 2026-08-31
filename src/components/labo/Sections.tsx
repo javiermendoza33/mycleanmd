@@ -53,38 +53,56 @@ export function ClosingCTA({
 
 /**
  * The hero's decorative wave art: oversized ellipses clipped so only their top
- * edge shows. Every value is from the handoff. Pure CSS on purpose — the design
- * has no icons and no SVG, and that restraint is the whole look.
+ * edge shows. Pure CSS on purpose — the design has no icons and no SVG, and
+ * that restraint is the whole look.
+ *
+ * The handoff's own values, roughly doubled in strength with a few more lines.
+ * Rendered exactly as specified they were invisible on a real screen: the only
+ * artwork in the entire design, and you could not see it. These still read as a
+ * whisper at arm's length; they just now read as something.
+ *
+ * The 5th tuple entry is a drift duration. Each arc runs on its own clock —
+ * 37–71s, all primes, so the set never visibly repeats — and alternates
+ * direction. Transform only, twelve elements, and off under reduced-motion.
  */
-const BOTTOM_ARCS: [string, string, number, string][] = [
-  ["-14%", "128%", 96, "rgba(18,49,42,.09)"],
-  ["-16%", "132%", 128, "rgba(185,139,76,.26)"],
-  ["-12%", "124%", 162, "rgba(18,49,42,.07)"],
-  ["-18%", "136%", 200, "rgba(185,139,76,.16)"],
-  ["-13%", "126%", 242, "rgba(18,49,42,.06)"],
-  ["-17%", "134%", 288, "rgba(185,139,76,.11)"],
+type Arc = [left: string, width: string, top: number, color: string, seconds: number];
+
+const BOTTOM_ARCS: Arc[] = [
+  ["-14%", "128%", 78, "rgba(18,49,42,.16)", 41],
+  ["-16%", "132%", 112, "rgba(185,139,76,.46)", 53],
+  ["-12%", "124%", 150, "rgba(18,49,42,.13)", 37],
+  ["-18%", "136%", 192, "rgba(185,139,76,.30)", 61],
+  ["-13%", "126%", 236, "rgba(18,49,42,.11)", 47],
+  ["-17%", "134%", 284, "rgba(185,139,76,.22)", 67],
+  ["-15%", "130%", 330, "rgba(18,49,42,.09)", 43],
+  ["-19%", "138%", 378, "rgba(185,139,76,.16)", 59],
 ];
-const CREST_ARCS: [string, string, number, string][] = [
-  ["-10%", "120%", 40, "rgba(18,49,42,.07)"],
-  ["-14%", "128%", 88, "rgba(185,139,76,.18)"],
-  ["-8%", "116%", 142, "rgba(18,49,42,.05)"],
+const CREST_ARCS: Arc[] = [
+  ["-10%", "120%", 34, "rgba(18,49,42,.13)", 49],
+  ["-14%", "128%", 82, "rgba(185,139,76,.34)", 71],
+  ["-8%", "116%", 136, "rgba(18,49,42,.10)", 39],
+  ["-12%", "124%", 196, "rgba(185,139,76,.20)", 57],
 ];
+
+function Arcs({ arcs }: { arcs: Arc[] }) {
+  return (
+    <>
+      {arcs.map(([left, width, top, color, seconds], i) => (
+        <span key={i} className="arc" style={{
+          left, width, top, borderTop: `1px solid ${color}`,
+          animationDuration: `${seconds}s`,
+          animationDirection: i % 2 ? "alternate-reverse" : "alternate",
+        }} />
+      ))}
+    </>
+  );
+}
 
 export function WaveArt() {
   return (
     <>
-      <div className="waves" aria-hidden="true">
-        {BOTTOM_ARCS.map(([left, width, top, color], i) => (
-          <span key={i} className="arc"
-                style={{ left, width, top, borderTop: `1px solid ${color}` }} />
-        ))}
-      </div>
-      <div className="waves-crest" aria-hidden="true">
-        {CREST_ARCS.map(([left, width, top, color], i) => (
-          <span key={i} className="arc"
-                style={{ left, width, top, borderTop: `1px solid ${color}` }} />
-        ))}
-      </div>
+      <div className="waves" aria-hidden="true"><Arcs arcs={BOTTOM_ARCS} /></div>
+      <div className="waves-crest" aria-hidden="true"><Arcs arcs={CREST_ARCS} /></div>
     </>
   );
 }

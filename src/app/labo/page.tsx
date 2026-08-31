@@ -58,6 +58,9 @@ export default function LaboHome() {
         <div className="hair prog-grid">
           {PROGRAMS.map((p) => (
             <Link key={p.slug} className="prog-cell" href={`/programs/${p.slug}`}>
+              {/* the index again, oversized and ghosted — four identical text
+                  blocks were reading as a table rather than four programs */}
+              <span className="prog-ghost" aria-hidden="true">{p.index}</span>
               <div className="prog-top">
                 <span className="eyebrow-brass">{p.index}</span>
                 <span className="prog-price">{p.priceMeta}</span>
@@ -86,6 +89,30 @@ export default function LaboHome() {
         </div>
       </section>
 
+      {/* ── HOW I PRACTICE ──────────────────────────────────────────────
+          The three principles were buried on /about, and they are the most
+          opinionated copy the practice has. On pine, between two bone
+          sections, they also break what was otherwise 4,300px of light page. */}
+      <section className="band-pine">
+        <div className="wrap" style={{ paddingBlock: 88 }}>
+          <div className="prin-head">
+            <h2 className="prin-h">How I practice</h2>
+            <p className="prin-note">
+              Three commitments that decide what gets prescribed here — and what does not.
+            </p>
+          </div>
+          <div className="prin">
+            {ABOUT.practice.map((pr, i) => (
+              <div key={pr.title}>
+                <span className="prin-n">{String(i + 1).padStart(2, "0")}</span>
+                <h3 className="prin-t">{pr.title}</h3>
+                <p className="prin-b">{pr.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── CLINICIAN ───────────────────────────────────────────────────── */}
       <section className="wrap sect">
         <div className="clin">
@@ -103,7 +130,8 @@ export default function LaboHome() {
       </section>
 
       {/* ── PRICING PREVIEW ─────────────────────────────────────────────── */}
-      <section className="wrap sect-sm">
+      <section className="band-raised">
+        <div className="wrap sect-sm">
         <div className="head-row">
           <h2 className="h2">Straightforward pricing</h2>
           <Link className="link-brass" href="/pricing">See what&rsquo;s included</Link>
@@ -120,6 +148,7 @@ export default function LaboHome() {
             <span className="price-name">{EXTRA_PRICING[0].name}</span>
             <span className="price-note">One-time, credited toward your first month</span>
             <span className="price-amt">{EXTRA_PRICING[0].price}</span>
+          </div>
           </div>
         </div>
       </section>
