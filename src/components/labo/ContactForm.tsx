@@ -2,7 +2,7 @@
 
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
-import { submitContact, type ContactState } from "@/app/labo/contact/actions";
+import { submitContact, type ContactState } from "@/app/labo/(site)/contact/actions";
 import { PRACTICE } from "@/labo/content";
 
 const FIELDS = [
