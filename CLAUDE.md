@@ -225,3 +225,37 @@ NEXT_PUBLIC_GATE_TOKEN        # gate only — not in Vercel, set locally
 `vercel env pull` leaves you unable to run locally. Put real values in
 `.env.local` by hand. Nothing should construct a client at module scope —
 that used to break `next build` outright whenever a key was missing.
+
+## The Labo Method homepage — ported from the 18 Sep 2026 prototype (Sep 18)
+
+`~/Downloads/labo-home-prototype.html` + `HANDOFF.md` ("Labo White Room") replaced the
+homepage. The handoff's rule: port it, don't reinterpret it.
+
+- **Two visual systems now share `src/app/labo/`, each owning its chrome.**
+  `(home)/` = the new homepage: `layout.tsx` (Inter + IBM Plex Mono via next/font,
+  wrapper `[data-labo-home]`), `home.css` (the prototype CSS with EVERY selector
+  prefixed `[data-labo-home]` — regenerate with the postcss snippet in git history if
+  the prototype changes), `page.tsx` (markup section for section), `Gate.tsx`
+  (client component, the eligibility gate). `(site)/` = about, contact, faq,
+  how-it-works, legal, pricing, programs — unchanged pages, still `[data-labo]` +
+  `labo.css` + shared Header/Footer, now via `(site)/layout.tsx`. `labo/layout.tsx`
+  keeps only metadata/robots/JSON-LD. Route groups don't change URLs; imports of the
+  moved server action must include the group: `@/app/labo/(site)/contact/actions`.
+- **The gate stores and submits NOTHING** (handoff §8, HIPAA): answers live in React
+  state only. Out-of-state → honest decline + a `mailto:` waitlist link the visitor
+  sends themselves. Adding any POST here needs a BAA on every hop first.
+- **Still placeholder, on purpose:** the four photos in `public/labo/shot-0*.jpg`
+  (stock, captioned with shot numbers for the shoot), the example lab panel (values
+  FABRICATED — labelled illustrative; Monika must correct/remove), and every CTA goes
+  through `HEALTHIE.*` in `src/labo/content.ts`, which still point at the bare
+  `app.gethealthie.com` — the handoff says that is the exact bug to fix once the
+  practice supplies its registration / booking / login URLs. `LAUNCH_READY` stays
+  false (noindex) until Monika's items clear. NPP / privacy / terms don't exist yet;
+  the footer links point at `/legal` meanwhile.
+- **Next per the handoff:** port the inner pages onto the new token system, wire the
+  three Healthie URLs, privacy-safe analytics, then lead capture (blocked on the BAA).
+- **Testing trap:** headless Chrome's minimum viewport is 500px — a `--window-size=420`
+  screenshot CROPS the right edge and looks like horizontal overflow. Measure
+  `scrollWidth` before believing it. To reach the Labo home locally send
+  `-H 'Host: thelabomethod.com'` (or `--host-resolver-rules`) — `/labo` on localhost
+  hits the portal gate and 307s.
