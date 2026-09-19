@@ -231,16 +231,18 @@ that used to break `next build` outright whenever a key was missing.
 `~/Downloads/labo-home-prototype.html` + `HANDOFF.md` ("Labo White Room") replaced the
 homepage. The handoff's rule: port it, don't reinterpret it.
 
-- **Two visual systems now share `src/app/labo/`, each owning its chrome.**
-  `(home)/` = the new homepage: `layout.tsx` (Inter + IBM Plex Mono via next/font,
-  wrapper `[data-labo-home]`), `home.css` (the prototype CSS with EVERY selector
-  prefixed `[data-labo-home]` — regenerate with the postcss snippet in git history if
-  the prototype changes), `page.tsx` (markup section for section), `Gate.tsx`
-  (client component, the eligibility gate). `(site)/` = about, contact, faq,
-  how-it-works, legal, pricing, programs — unchanged pages, still `[data-labo]` +
-  `labo.css` + shared Header/Footer, now via `(site)/layout.tsx`. `labo/layout.tsx`
-  keeps only metadata/robots/JSON-LD. Route groups don't change URLs; imports of the
-  moved server action must include the group: `@/app/labo/(site)/contact/actions`.
+- **The whole of `src/app/labo/` is on the White Room system** (inner pages ported
+  Sep 18, same day, second session). `labo/layout.tsx` owns metadata/robots/JSON-LD
+  plus the fonts (Inter + IBM Plex Mono via next/font) and the `[data-labo]` wrapper;
+  `labo.css` is the prototype CSS rescoped `[data-labo-home]`→`[data-labo]` with an
+  "inner pages" block appended (defs rows, hlrow, faq, fld inputs, car carousel, tl
+  lists — same tokens and shapes). `(home)/page.tsx` keeps the prototype's header
+  inline and shares `Footer` from `components/labo/Chrome.tsx`; `(site)/layout.tsx`
+  wraps the inner pages in the route-aware `Header` + shared `Footer`. Like the
+  prototype, there is NO mobile nav drawer — nav hides under 880px and the footer is
+  the site map. The old Newsreader/brass/pine system is gone. Route groups don't
+  change URLs; imports of the moved server action must include the group:
+  `@/app/labo/(site)/contact/actions`.
 - **The gate stores and submits NOTHING** (handoff §8, HIPAA): answers live in React
   state only. Out-of-state → honest decline + a `mailto:` waitlist link the visitor
   sends themselves. Adding any POST here needs a BAA on every hop first.

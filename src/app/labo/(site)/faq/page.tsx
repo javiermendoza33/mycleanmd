@@ -1,4 +1,4 @@
-import { Eyebrow } from "@/components/labo/Sections";
+import { PageHero } from "@/components/labo/Sections";
 import Faq from "@/components/labo/Faq";
 import { FAQ, HEALTHIE } from "@/labo/content";
 
@@ -21,25 +21,24 @@ const jsonLd = {
 
 export default function FaqPage() {
   return (
-    <section className="wrap wrap-narrow" style={{ paddingBlock: "88px 88px" }}>
+    <>
       <script type="application/ld+json"
               dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <Eyebrow>Frequently asked</Eyebrow>
-      <h1 className="h1" style={{ marginTop: 24, marginBottom: 40, fontSize: "clamp(34px,4.8vw,58px)" }}>
-        Before you start
-      </h1>
-      <Faq />
-      <div className="inset" style={{ gridTemplateColumns: "1fr auto", alignItems: "center", gap: 30 }}>
-        <div>
-          <h2 className="h2-sub" style={{ fontSize: 28 }}>Still unsure whether this fits?</h2>
-          <p className="body-sm" style={{ margin: "12px 0 0" }}>
-            Book a consult and ask. There is no obligation to start a program.
-          </p>
+      <PageHero eyebrow="Frequently asked" title="Before you start" />
+      <section>
+        <div className="wrap tight">
+          <Faq />
+          <div className="tile" style={{ marginTop: 56 }}>
+            <h3>Still unsure whether this fits?</h3>
+            <p>Book a consult and ask. There is no obligation to start a program.</p>
+            <div>
+              <a className="btn btn-ghost" href={HEALTHIE.book} target="_blank" rel="noopener noreferrer">
+                Book a $149 consult
+              </a>
+            </div>
+          </div>
         </div>
-        <a className="btn btn-pine" href={HEALTHIE.book} target="_blank" rel="noopener noreferrer">
-          Book a consult
-        </a>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

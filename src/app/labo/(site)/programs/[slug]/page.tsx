@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Eyebrow } from "@/components/labo/Sections";
+import { Eyebrow, ClosingCTA } from "@/components/labo/Sections";
 import { PROGRAMS, getProgram, HEALTHIE } from "@/labo/content";
 
 /** One template, four content objects — exactly as the handoff specifies. */
@@ -31,77 +31,82 @@ export default async function ProgramPage(
 
   return (
     <>
-      <header className="phead" style={{ paddingBottom: 60 }}>
-        <div className="wrap">
-          <div className="pg-head">
-            <div>
-              <Eyebrow brass>Program {p.index}</Eyebrow>
-              <h1 className="h1" style={{ fontSize: "clamp(34px,5.2vw,60px)", lineHeight: 1.06 }}>
-                {p.name}
-              </h1>
-              <p className="lead" style={{ maxWidth: 580 }}>{p.lede}</p>
-            </div>
-            <div className="pg-card">
-              <span className="eyebrow">Program fee</span>
-              <div className="pg-card-price">{p.priceMeta}</div>
-              <p className="pg-card-note">{p.priceNote}</p>
-              <a className="btn btn-pine btn-block" href={HEALTHIE.program(p.slug)}
-                 target="_blank" rel="noopener noreferrer">Start your intake</a>
-            </div>
+      <header className="pageh">
+        <div className="wrap proghead">
+          <div>
+            <Eyebrow>Program {p.index}</Eyebrow>
+            <h1 style={{ marginTop: 15, fontSize: "clamp(2.3rem,5.4vw,3.8rem)", letterSpacing: "-.033em" }}>
+              {p.name}
+            </h1>
+            <p className="sub" style={{ marginTop: 18 }}>{p.lede}</p>
           </div>
+          <aside className="tile pricecard">
+            <span className="kicker">Program fee</span>
+            <span className="amt mono">{p.price}<span className="u"> / mo</span></span>
+            <p style={{ fontSize: ".92rem", color: "var(--muted)" }}>{p.priceNote}</p>
+            <a className="btn btn-primary" href={HEALTHIE.program(p.slug)}
+               target="_blank" rel="noopener noreferrer">Start your intake</a>
+          </aside>
         </div>
       </header>
 
-      <section className="wrap" style={{ paddingBlock: 72 }}>
-        <div className="pg-two">
-          <div>
-            <h2 className="h2-sub" style={{ fontSize: "clamp(24px,2.6vw,30px)" }}>{p.leftHeading}</h2>
-            <div className="pg-list">
-              {p.leftItems.map((i) => <div key={i} className="pg-item">{i}</div>)}
-            </div>
-          </div>
-          <div>
-            <h2 className="h2-sub" style={{ fontSize: "clamp(24px,2.6vw,30px)" }}>{p.rightHeading}</h2>
-            <div className="pg-list">
-              {p.rightItems.map((r) => (
-                <div key={r.key} className="pg-item pg-kv">
-                  <span className="pg-k">{r.key}</span>
-                  <span>{r.value}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="band-pine">
-        <div className="wrap" style={{ paddingBlock: 76 }}>
-          <div className="pg-note-band">
-            <h2 className="pg-note-h">{p.noteHeading}</h2>
+      <section>
+        <div className="wrap">
+          <div className="clin" style={{ alignItems: "start" }}>
             <div>
-              <p className="pg-note-b">{p.noteBody}</p>
-              <div className="pg-note-btns">
-                <a className="btn btn-brass" href={HEALTHIE.book}
-                   target="_blank" rel="noopener noreferrer">Book a consult</a>
-                <Link className="btn btn-ghost" href="/faq">Read the FAQ</Link>
-              </div>
+              <h3>{p.leftHeading}</h3>
+              <ul className="tl" style={{ marginTop: 22, gap: 14 }}>
+                {p.leftItems.map((i) => <li key={i}>{i}</li>)}
+              </ul>
+            </div>
+            <div>
+              <h3>{p.rightHeading}</h3>
+              <ul className="defs kv" style={{ marginTop: 10 }}>
+                {p.rightItems.map((r) => (
+                  <li key={r.key}>
+                    <span className="dt">{r.key}</span>
+                    <span className="dd">{r.value}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="wrap" style={{ paddingBlock: 76 }}>
-        <span className="eyebrow">Other programs</span>
-        <div className="hair other-grid">
-          {others.map((o) => (
-            <Link key={o.slug} className="other-cell" href={`/programs/${o.slug}`}>
-              <span className="eyebrow-brass">{o.index}</span>
-              <div className="other-t">{o.name}</div>
-              <p className="other-b">{o.navBlurb}</p>
-            </Link>
-          ))}
+      <section className="grey">
+        <div className="wrap tight">
+          <Eyebrow>Worth saying plainly</Eyebrow>
+          <h2 style={{ marginTop: 15 }}>{p.noteHeading}</h2>
+          <p className="sub" style={{ marginTop: 17 }}>{p.noteBody}</p>
+          <div style={{ display: "flex", gap: 18, flexWrap: "wrap", marginTop: 30 }}>
+            <a className="btn btn-primary" href={HEALTHIE.book}
+               target="_blank" rel="noopener noreferrer">Book a $149 consult</a>
+            <Link className="btn btn-ghost" href="/faq">Read the FAQ</Link>
+          </div>
         </div>
       </section>
+
+      <section>
+        <div className="wrap">
+          <div className="tight" style={{ marginBottom: 42 }}>
+            <Eyebrow>Other programs</Eyebrow>
+            <h2 style={{ marginTop: 15 }}>Every one begins with a panel.</h2>
+          </div>
+          <div className="tiles">
+            {others.map((o) => (
+              <article className="tile" key={o.slug}>
+                <span className="kicker">Program {o.index}</span>
+                <h3>{o.name}</h3>
+                <p>{o.navBlurb}</p>
+                <Link className="more" href={`/programs/${o.slug}`}>Learn more</Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <ClosingCTA />
     </>
   );
 }

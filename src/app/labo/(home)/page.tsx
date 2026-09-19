@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Gate from "./Gate";
+import { Footer } from "@/components/labo/Chrome";
 import { HEALTHIE, PRACTICE, PROGRAMS } from "@/labo/content";
 
 /**
@@ -265,45 +266,7 @@ export default function LaboHome() {
         </section>
       </main>
 
-      <footer className="site">
-        <div className="wrap">
-          <div className="fnav">
-            <div>
-              <h5>Programs</h5>
-              <ul>
-                <li><Link href={GLP1}>GLP-1 Weight Management</Link></li>
-                <li><Link href={PEP}>Peptide Therapy</Link></li>
-                <li><Link href={TRT}>Testosterone for Men</Link></li>
-                <li><Link href={HRT}>Hormone Therapy for Women</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h5>Practice</h5>
-              <ul>
-                <li><Link href="/about">About the provider</Link></li>
-                <li><Link href="/pricing">Pricing</Link></li>
-                <li><Link href="/how-it-works">How it works</Link></li>
-                <li><a href={`mailto:${PRACTICE.email}`}>{PRACTICE.email}</a></li>
-              </ul>
-            </div>
-            <div>
-              <h5>Legal</h5>
-              <ul>
-                {/* NPP, privacy policy and terms do not exist yet (handoff §10) — /legal carries the disclaimers until they do */}
-                <li><Link href="/legal">Notice of Privacy Practices</Link></li>
-                <li><Link href="/legal">Privacy policy</Link></li>
-                <li><Link href="/legal">Terms of service</Link></li>
-                <li><Link href="/legal">Disclaimers &amp; notices</Link></li>
-              </ul>
-            </div>
-          </div>
-          <div className="legal">
-            <p>This website is for general information and is not medical advice. A patient relationship begins only after intake, a completed clinical evaluation and a documented visit. Clinical services are provided by a nurse practitioner licensed in California and Washington; patients must be physically located in one of these states at the time of each visit.</p>
-            <p>Some medications prescribed through this practice are compounded by state-licensed pharmacies and are not reviewed or approved by the FDA. Certain peptides are prescribed for uses that are not FDA-approved; evidence quality varies by agent. Testosterone is a Schedule III controlled substance. Individual results vary and no outcome is guaranteed.</p>
-            <p>Email and web forms are not secure channels. Do not send clinical information through them. If this is an emergency, call 911.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

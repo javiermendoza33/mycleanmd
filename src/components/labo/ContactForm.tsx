@@ -15,7 +15,7 @@ const FIELDS = [
 function Send() {
   const { pending } = useFormStatus();
   return (
-    <button type="submit" className="btn btn-pine btn-block" disabled={pending}>
+    <button type="submit" className="btn btn-primary" disabled={pending}>
       {pending ? "Sending…" : "Send message"}
     </button>
   );
@@ -26,9 +26,9 @@ export default function ContactForm() {
 
   if (state.status === "success") {
     return (
-      <div className="ct-panel">
-        <h2 className="h2-sub" style={{ fontSize: 28 }}>Message sent</h2>
-        <p className="body-sm" style={{ marginTop: 14 }}>
+      <div className="tile">
+        <h3>Message sent</h3>
+        <p>
           Thank you — it goes straight to the practice inbox and you will hear back from
           Monika, not an autoresponder. For anything clinical, please use the patient portal.
         </p>
@@ -37,13 +37,13 @@ export default function ContactForm() {
   }
 
   return (
-    <form action={action} className="ct-panel">
-      <h2 className="h2-sub" style={{ fontSize: 28 }}>Send a message</h2>
-      <p className="body-sm" style={{ margin: "10px 0 0", fontSize: 14 }}>
+    <form action={action} className="tile">
+      <h3>Send a message</h3>
+      <p style={{ fontSize: ".9rem", color: "var(--muted)" }}>
         For general questions. Not a secure channel — do not include medical information.
       </p>
 
-      {state.status === "error" && <p className="ct-msg" role="alert" style={{ marginTop: 22 }}>{state.message}</p>}
+      {state.status === "error" && <p className="formerr" role="alert">{state.message}</p>}
 
       {/* honeypot — off-screen rather than display:none, which bots detect */}
       <div aria-hidden="true"
@@ -51,25 +51,22 @@ export default function ContactForm() {
         <label>Your website<input type="text" name="website" tabIndex={-1} autoComplete="off" /></label>
       </div>
 
-      <div className="ct-stack">
-        {FIELDS.map((f) => (
-          <div key={f.name} className="fld">
-            <label htmlFor={`ct-${f.name}`}>{f.label}</label>
-            <input id={`ct-${f.name}`} name={f.name} type={f.type} placeholder={f.ph}
-                   autoComplete={f.ac} required={f.name === "name" || f.name === "email"} />
-          </div>
-        ))}
-        <div className="fld">
-          <label htmlFor="ct-message">Message</label>
-          <textarea id="ct-message" name="message" rows={4} required
-                    placeholder="What would you like to ask?" />
+      {FIELDS.map((f) => (
+        <div key={f.name} className="fld">
+          <label htmlFor={`ct-${f.name}`}>{f.label}</label>
+          <input id={`ct-${f.name}`} name={f.name} type={f.type} placeholder={f.ph}
+                 autoComplete={f.ac} required={f.name === "name" || f.name === "email"} />
         </div>
-        <Send />
-        <p className="fine" style={{ margin: 0 }}>
-          Or email <a href={`mailto:${PRACTICE.email}`} style={{ borderBottom: "1px solid var(--brass)" }}>
-          {PRACTICE.email}</a> directly.
-        </p>
+      ))}
+      <div className="fld">
+        <label htmlFor="ct-message">Message</label>
+        <textarea id="ct-message" name="message" rows={4} required
+                  placeholder="What would you like to ask?" />
       </div>
+      <Send />
+      <p className="note" style={{ marginTop: 0 }}>
+        Or email <a href={`mailto:${PRACTICE.email}`}>{PRACTICE.email}</a> directly.
+      </p>
     </form>
   );
 }

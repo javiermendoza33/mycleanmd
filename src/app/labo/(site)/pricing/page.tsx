@@ -1,4 +1,4 @@
-import { ClosingCTA, Eyebrow } from "@/components/labo/Sections";
+import { ClosingCTA, PageHero } from "@/components/labo/Sections";
 import { PROGRAMS, EXTRA_PRICING, PRICING_FOOTNOTE, HEALTHIE } from "@/labo/content";
 
 export const metadata = {
@@ -10,51 +10,47 @@ export const metadata = {
 export default function Pricing() {
   return (
     <>
-      <header className="phead">
+      <PageHero
+        eyebrow="Pricing"
+        title="One monthly fee. Cancel any month."
+        lede="No membership on top of the program, no per-message charge, and no lock-in. Labs are billed separately and can often go through your insurance."
+      />
+
+      <section className="grey">
         <div className="wrap">
-          <Eyebrow>Pricing</Eyebrow>
-          <h1 className="h1">One monthly fee. Medication, visits and messaging included.</h1>
-          <p className="lead">
-            No membership on top of the program, no per-message charge, and no lock-in. Labs are
-            billed separately and can often go through your insurance.
-          </p>
-        </div>
-      </header>
+          <div className="tiles">
+            {PROGRAMS.map((p) => (
+              <article className="tile" key={p.slug}>
+                <h3>{p.name}</h3>
+                <span className="price">{p.priceMeta}</span>
+                <p>{p.pricingNote}</p>
+                <ul className="tl">
+                  {p.pricingBullets.map((b) => <li key={b}>{b}</li>)}
+                </ul>
+                <div style={{ marginTop: "auto", paddingTop: 16 }}>
+                  <a className="btn btn-ghost btn-sm" href={HEALTHIE.program(p.slug)}
+                     target="_blank" rel="noopener noreferrer">Choose this program</a>
+                </div>
+              </article>
+            ))}
+          </div>
 
-      <section className="wrap sect-sm">
-        <div className="hair pr-grid">
-          {PROGRAMS.map((p) => (
-            <div key={p.slug} className="pr-cell">
-              <div className="pr-top">
-                <h2 className="pr-name">{p.name}</h2>
-                <span className="pr-amt">
-                  {p.price}
-                  <span className="pr-per">Per month</span>
-                </span>
+          {/* the homepage's lab-row component, reused without the track — the signature move */}
+          <div className="labwrap" style={{ marginTop: 20 }}>
+            <div className="labhead">
+              <h4>Beyond the monthly fee</h4>
+              <span className="kicker">Self-pay · superbills on request</span>
+            </div>
+            {EXTRA_PRICING.map((e) => (
+              <div className="mk" style={{ gridTemplateColumns: "1fr auto" }} key={e.name}>
+                <div className="nm">{e.name}<em>{e.note}</em></div>
+                <div className="val">{e.price}</div>
               </div>
-              <div className="pr-div" />
-              <ul className="pr-list">
-                {p.pricingBullets.map((b) => (
-                  <li key={b}><i aria-hidden="true">—</i><span>{b}</span></li>
-                ))}
-              </ul>
-              <a className="btn btn-outline btn-block" href={HEALTHIE.program(p.slug)}
-                 target="_blank" rel="noopener noreferrer">Choose this program</a>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        <div className="inset">
-          {EXTRA_PRICING.map((e) => (
-            <div key={e.name}>
-              <span className="eyebrow">{e.name}</span>
-              <div className="inset-price">{e.price}</div>
-              <p className="body-sm" style={{ margin: 0, fontSize: 14.5 }}>{e.note}</p>
-            </div>
-          ))}
+          <p className="note">{PRICING_FOOTNOTE}</p>
         </div>
-
-        <p className="fine" style={{ marginTop: 34, maxWidth: 760 }}>{PRICING_FOOTNOTE}</p>
       </section>
 
       <ClosingCTA />

@@ -1,4 +1,4 @@
-import { Eyebrow } from "@/components/labo/Sections";
+import { PageHero } from "@/components/labo/Sections";
 import { LEGAL } from "@/labo/content";
 
 export const metadata = {
@@ -10,20 +10,20 @@ export const metadata = {
 
 export default function Legal() {
   return (
-    <section className="wrap wrap-legal" style={{ paddingBlock: "88px 60px" }}>
-      <Eyebrow>Legal</Eyebrow>
-      <h1 className="h1-sm" style={{ marginTop: 24, fontSize: "clamp(32px,4.2vw,52px)" }}>
-        Disclaimers &amp; notices
-      </h1>
-      <div style={{ marginTop: 36 }}>
-        {LEGAL.map((s) => (
-          <div key={s.title} className="lg-row">
-            <h2 className="lg-t">{s.title}</h2>
-            <p className="lg-b">{s.body}</p>
-          </div>
-        ))}
-        <div className="rule" />
-      </div>
-    </section>
+    <>
+      <PageHero eyebrow="Legal" title={<>Disclaimers &amp; notices</>} />
+      <section>
+        <div className="wrap tight">
+          <ul className="defs">
+            {LEGAL.map((s) => (
+              <li key={s.title}>
+                <span className="dt">{s.title}</span>
+                <p className="dd">{s.body}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    </>
   );
 }

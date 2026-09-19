@@ -1,4 +1,4 @@
-import { ClosingCTA, Eyebrow } from "@/components/labo/Sections";
+import { ClosingCTA, Eyebrow, PageHero } from "@/components/labo/Sections";
 import Carousel from "@/components/labo/Carousel";
 import { ABOUT, PRACTICE } from "@/labo/content";
 
@@ -24,55 +24,51 @@ export default function About() {
       <script type="application/ld+json"
               dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <section className="wrap" style={{ paddingBlock: "88px 76px" }}>
-        <div className="ab-hero">
-          <div className="ab-sticky"><Carousel /></div>
+      <PageHero eyebrow="About the provider" title={PRACTICE.provider} lede={ABOUT.lede} />
+
+      <section>
+        <div className="wrap abgrid">
+          <Carousel />
           <div>
-            <Eyebrow>About the provider</Eyebrow>
-            <h1 className="h1-sm" style={{ marginTop: 24 }}>{PRACTICE.provider}</h1>
-            <p className="lead" style={{ marginTop: 22 }}>{ABOUT.lede}</p>
-            <div className="rule" style={{ margin: "34px 0" }} />
-            <div className="ab-bio">
+            <div className="bio">
               {ABOUT.bio.map((p, i) => <p key={i}>{p}</p>)}
             </div>
-            <div className="cred">
+            {/* the homepage's credential rows, with the full CV list */}
+            <ul className="creds">
               {ABOUT.credentials.map((c) => (
-                <div key={c.label}>
-                  <span className="micro">{c.label}</span>
-                  <p className="cred-v">{c.value}</p>
-                </div>
+                <li key={c.label}><b>{c.label}</b><span>{c.value}</span></li>
               ))}
-            </div>
+            </ul>
           </div>
         </div>
       </section>
 
-      <section className="wrap" style={{ paddingBlock: 80, borderTop: "1px solid var(--rule)" }}>
-        <h2 className="h2-sub">Practice history</h2>
-        <div style={{ marginTop: 30 }}>
-          {ABOUT.history.map((h) => (
-            <div key={h.dates + h.org} className="hist-row">
-              <span className="hist-d">{h.dates}</span>
-              <div>
-                <span className="hist-r">{h.role}</span>
-                <span className="hist-o">{h.org}</span>
-              </div>
-              <p className="hist-x" style={{ margin: 0 }}>{h.desc}</p>
-            </div>
-          ))}
-          <div className="rule" />
+      <section className="grey">
+        <div className="wrap">
+          <div className="tight" style={{ marginBottom: 42 }}>
+            <Eyebrow>The record</Eyebrow>
+            <h2 style={{ marginTop: 15 }}>Practice history</h2>
+          </div>
+          <ul className="defs">
+            {ABOUT.history.map((h) => (
+              <li key={h.dates + h.org}>
+                <span className="dt">{h.dates}</span>
+                <p className="dd"><b>{h.role} — {h.org}</b>{h.desc}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
-      <section className="band-raised">
-        <div className="wrap" style={{ paddingBlock: 80 }}>
-          <h2 className="h2-sub">How I practice</h2>
-          <div className="steps" style={{ gridTemplateColumns: "repeat(3,1fr)", gap: 48, marginTop: 34 }}>
+      <section>
+        <div className="wrap">
+          <div className="tight" style={{ marginBottom: 46 }}>
+            <Eyebrow>How I practice</Eyebrow>
+            <h2 style={{ marginTop: 15 }}>Three commitments that decide what gets prescribed.</h2>
+          </div>
+          <div className="three">
             {ABOUT.practice.map((p) => (
-              <div key={p.title} className="step">
-                <h3 className="h3-sm" style={{ fontSize: 24, marginTop: 0 }}>{p.title}</h3>
-                <p style={{ fontSize: 15, marginTop: 12 }}>{p.body}</p>
-              </div>
+              <div key={p.title}><h3>{p.title}</h3><p>{p.body}</p></div>
             ))}
           </div>
         </div>

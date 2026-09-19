@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Inter, IBM_Plex_Mono } from "next/font/google";
 import { PRACTICE, AVAILABILITY, LAUNCH_READY } from "@/labo/content";
 import "./labo.css";
 
@@ -7,18 +8,27 @@ import "./labo.css";
  * ROOT of thelabomethod.com — src/proxy.ts rewrites by hostname, so this app
  * can host two brands without either one's URLs carrying a prefix.
  *
- * Two visual systems share this segment on purpose (Sep 18 2026):
- *   (home)  — the redesigned homepage from the "Labo White Room" prototype:
- *             Inter + IBM Plex Mono, single light theme, Ember accent, its own
- *             header/footer. Scoped by [data-labo-home] in (home)/home.css.
- *   (site)  — every inner page (programs, pricing, about, FAQ, contact, legal)
- *             still on the earlier token system, scoped by [data-labo] and
- *             wrapped in the shared Header/Footer. The handoff's build order
- *             ports those onto the new system next; until then each group owns
- *             its chrome so neither palette leaks into the other.
- *
- * This file keeps only what both share: metadata, robots, structured data.
+ * The whole segment is on the "Labo White Room" system (Sep 18 2026 handoff):
+ * Inter + IBM Plex Mono, single light theme, Ember accent, scoped [data-labo]
+ * in labo.css. The two route groups differ only in chrome — (home) carries the
+ * prototype's own header/footer inline, (site) wraps the inner pages in the
+ * shared Header/Footer. Inter stands in for SF Pro; Plex Mono carries every
+ * number, unit and eyebrow. "The white room only works as a white room" —
+ * do not add a dark mode.
  */
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-plex-mono",
+  display: "swap",
+});
 const DESCRIPTION =
   `Telehealth hormone, peptide and metabolic care directed by a board-certified nurse practitioner. GLP-1 weight management, peptide therapy, testosterone and hormone therapy for residents of ${AVAILABILITY}.`;
 
@@ -69,10 +79,10 @@ const jsonLd = {
 
 export default function LaboLayout({ children }: { children: React.ReactNode }) {
   return (
-    <>
+    <div data-labo className={`${inter.variable} ${plexMono.variable}`}>
       <script type="application/ld+json"
               dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {children}
-    </>
+    </div>
   );
 }

@@ -1,32 +1,17 @@
-import { Newsreader, Public_Sans } from "next/font/google";
 import { Header, Footer } from "@/components/labo/Chrome";
 
 /**
- * Inner pages of thelabomethod.com — the earlier token system ([data-labo] in
- * ../labo.css) with the shared Header/Footer. The homepage no longer renders
- * through here; see ../layout.tsx for why the two groups own their own chrome.
+ * Inner pages of thelabomethod.com — the White Room system with the shared
+ * route-aware Header/Footer. The homepage renders its own chrome inline (the
+ * prototype's, ported as-is); everything else comes through here. Tokens,
+ * fonts and the [data-labo] scope live one level up in ../layout.tsx.
  */
-const newsreader = Newsreader({
-  subsets: ["latin"],
-  style: ["normal", "italic"],
-  weight: ["200", "300", "400", "500", "600"],
-  variable: "--font-newsreader",
-  display: "swap",
-});
-
-const publicSans = Public_Sans({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-public-sans",
-  display: "swap",
-});
-
 export default function LaboSiteLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div data-labo className={`${newsreader.variable} ${publicSans.variable}`}>
+    <>
       <Header />
       <main>{children}</main>
       <Footer />
-    </div>
+    </>
   );
 }
