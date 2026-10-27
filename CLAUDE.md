@@ -300,3 +300,5 @@ Javier asked for an emerald ground with matte-gold UI accents, a regal look: gre
 - **Gold is reserved for UI accents:** buttons, kickers, the wordmark, prices, group heads. Headlines stay ivory.
 - **Photos:** the blend gradients fade to emerald. An emerald multiply wash (`.chero.blend::before`, `<i class="tint">` in #clinic and .close) turns the stock photos' white backdrops green. Keep it off the faces; at higher strength skin went green.
 - The MyCleanMD portal isn't affected; everything stays scoped to [data-labo].
+- **Hero photo (Oct 26 2026):** clinic-hero-wide.jpg is fixed at `auto 880px`, starts 90px down, and has fades on its top and bottom. The source photo (Unsplash AYdqXiJ_MBM) ends at the shoulders. Javier wants her elbows, which needs a generative expand downward. Adobe's tool failed because his Creative Cloud storage is full.
+- **Photo fades:** the clinic and consultation photos use long eased ::before/::after fades. Next minifies rgba() to hex, so to confirm a deploy, grep the live CSS for a px or keyword value, not for rgba strings.
