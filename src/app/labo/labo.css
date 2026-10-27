@@ -425,3 +425,7 @@
 [data-labo] .close.lblend .wrap{position:relative;z-index:1}
 [data-labo] .chero.blend .bgcap{top:auto;bottom:190px}
 @media (max-width:760px){[data-labo] .chero.blend .bgcap{top:auto;bottom:16px}}
+/* Oct 26 2026 (Javier: "make The Labo Method larger"): a real wordmark in the bar */
+[data-labo] .bar{height:64px}
+[data-labo] .brand{font-size:1.3rem;font-weight:700;letter-spacing:-.035em}
+@media (max-width:560px){[data-labo] .brand{font-size:1.12rem}[data-labo] .bar{height:58px;gap:14px}}
