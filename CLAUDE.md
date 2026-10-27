@@ -261,3 +261,24 @@ homepage. The handoff's rule: port it, don't reinterpret it.
   `scrollWidth` before believing it. To reach the Labo home locally send
   `-H 'Host: thelabomethod.com'` (or `--host-resolver-rules`) — `/labo` on localhost
   hits the portal gate and 307s.
+
+## Oct 26 2026 — CLINIC FIRST (thelabomethod.com)
+
+Javier: "Now that you know what we will be offering with laser, let's create a better, more premium site" → **one brand, clinic first; photo placeholders; Seattle clinic, address to come.**
+- **Homepage** `(home)/page.tsx`, in order:
+  - laser-clinic hero;
+  - numbered treatment rows (→ /treatments#slug);
+  - "The laser": GentleMax Pro Plus, the Fitzpatrick I–VI wavelength row (755 nm on I–III, 1064 nm on I–VI) and the specs;
+  - first visit;
+  - clinician;
+  - the clinic (Seattle, "address announced soon", "Join the opening list" → /contact);
+  - **telehealth as the second section with the eligibility `Gate` kept**;
+  - close.
+- **New `/treatments`:** one section per service plus the laser FAQ (FAQPage JSON-LD). `Faq` now takes an `items` prop.
+- **Content** lives in `src/labo/content.ts`: `CLINIC`, `TREATMENTS`, `FIRST_VISIT`, `LASER_SPECS`, `LASER_FAQ`.
+  - **Blocking item #5: the "from" prices are Seattle-comp placeholders until Monika confirms them.**
+  - `CLINIC.address` = null → not published.
+- **Photo placeholders:** `.ph` frames are labelled placeholders (no stock in the clinic sections); real photos replace them.
+- **Header / footer:** the header nav is Treatments · Telehealth · …, with a "Request a consultation" button (patient login moved to the footer). The footer has a Clinic column and a laser line in the legal text.
+- **Metadata:** the default title is now "The Labo Method — Laser Clinic, Seattle".
+- Still noindex (LAUNCH_READY false).
