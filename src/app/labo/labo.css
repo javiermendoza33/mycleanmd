@@ -319,7 +319,7 @@
    numbered treatment list, .skinrow = the Fitzpatrick / wavelength signature
    row (the clinic's equivalent of the lab panel), .tele = telehealth rows. */
 [data-labo] .chero{padding-block:88px 0}
-[data-labo] .chero h1{margin-top:18px;max-width:14ch;font-size:clamp(3rem,8vw,5.8rem)}
+[data-labo] .chero h1{margin-top:18px;max-width:14ch;font-size:clamp(2.55rem,6.8vw,4.93rem)}   /* Oct 26 2026: −15% (Javier) */
 [data-labo] .chero .sub{margin-top:24px;max-width:40ch}
 [data-labo] .chero .acts{display:flex;gap:26px;align-items:center;margin-top:30px;flex-wrap:wrap}
 @media (max-width:760px){[data-labo] .chero{padding-block:56px 0}}
