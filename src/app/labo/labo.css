@@ -11,23 +11,25 @@
    Dark set from the dark sheet: black #000 · charcoal #1d1d1f · smoke #333336 · ash #86868b */
 [data-labo]{
   display:block;min-height:100vh;
-  --paper:#FFFFFF;
-  --canvas:#F5F5F7;
-  --wash:#E8E8ED;
-  --ink:#1D1D1F;
-  --graphite:#474747;
-  --muted:#596680;
-  --line:#D6D6D6;
-  --hair:#E8E8ED;
-  --accent:#B64400;
-  --accent-tint:#FBF1EC;
-  --ok:#3E7A4E;
-  --ok-tint:#EFF6F1;
+  /* Oct 26 2026 — "Deep Emerald and Matte Gold" (Javier): green = prosperity, life and natural beauty;
+     gold = auspicious luxury. Rich emerald grounds, ivory type, matte-gold UI accents only. */
+  --paper:#0B3D2E;        /* deep emerald, the page ground */
+  --canvas:#0F4636;       /* the .grey sections and tiles, one step lighter */
+  --wash:#15523F;         /* chips, hovers */
+  --ink:#F3EDDC;          /* ivory */
+  --graphite:#D9D1BC;
+  --muted:#A3B8A9;        /* sage */
+  --line:rgba(197,165,98,.26);
+  --hair:rgba(243,237,220,.09);
+  --accent:#C5A562;       /* matte gold */
+  --accent-tint:rgba(197,165,98,.13);
+  --on-accent:#0A2E23;    /* text on gold */
+  --ok:#8CC7A0;
+  --ok-tint:rgba(140,199,160,.12);
   --radius-card:28px;
 }
-/* Deliberately single-theme: the white room only works as a white room.
-   Every colour is painted explicitly so the page holds on any host ground. */
-[data-labo]{color-scheme:light}
+/* Single theme: emerald. Every colour is painted explicitly so the page holds on any host ground. */
+[data-labo]{color-scheme:dark}
 
 [data-labo] *{box-sizing:border-box}
 [data-labo]{
@@ -76,7 +78,7 @@
   padding:12px 24px;border-radius:980px;border:1px solid transparent;
   cursor:pointer;text-decoration:none;transition:.2s ease;
 }
-[data-labo] .btn-primary{background:var(--accent);color:#fff}
+[data-labo] .btn-primary{background:var(--accent);color:var(--on-accent);font-weight:600}
 [data-labo] .btn-primary:hover{filter:brightness(1.12)}
 [data-labo] .btn-ghost{border-color:var(--accent);color:var(--accent)}
 [data-labo] .btn-ghost:hover{background:var(--accent-tint)}
@@ -95,7 +97,7 @@
   position:absolute;left:14px;bottom:14px;
   font-family:var(--font-plex-mono),ui-monospace,Menlo,monospace;
   font-size:.6rem;letter-spacing:.09em;text-transform:uppercase;
-  color:#fff;background:rgba(29,29,31,.55);
+  color:var(--ink);background:rgba(6,32,24,.6);
   padding:6px 11px;border-radius:980px;
 }
 @supports (backdrop-filter:blur(6px)){[data-labo] figcaption{backdrop-filter:blur(6px)}}
@@ -131,7 +133,7 @@
   background:var(--paper);color:var(--graphite);border:1px solid transparent;border-radius:980px;transition:.16s ease;
 }
 [data-labo] .seg button:hover{color:var(--ink)}
-[data-labo] .seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
+[data-labo] .seg button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent)}
 [data-labo] .seg button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 [data-labo] select{
   font:inherit;font-size:1rem;padding:13px 14px;width:100%;letter-spacing:-.015em;
@@ -144,7 +146,7 @@
 [data-labo] .res p{font-size:.95rem;color:var(--graphite);letter-spacing:-.015em}
 [data-labo] .mini{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
 [data-labo] .mini li{display:flex;gap:12px;font-size:.9rem;color:var(--graphite);letter-spacing:-.012em}
-[data-labo] .mini .n{flex:none;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--font-plex-mono),monospace;font-size:.64rem;display:flex;align-items:center;justify-content:center;margin-top:2px}
+[data-labo] .mini .n{flex:none;width:20px;height:20px;border-radius:50%;background:var(--accent);color:var(--on-accent);font-family:var(--font-plex-mono),monospace;font-size:.64rem;display:flex;align-items:center;justify-content:center;margin-top:2px}
 
 [data-labo] .grey{background:var(--canvas)}
 
@@ -301,7 +303,7 @@
 [data-labo] .car-dot.on{background:#fff}
 [data-labo] .car-dot:focus-visible,[data-labo] .car-arrow:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 [data-labo] .car-arrows{display:flex;gap:8px}
-[data-labo] .car-arrow{font:inherit;font-size:.9rem;line-height:1;width:34px;height:34px;border-radius:50%;border:0;cursor:pointer;color:var(--ink);background:rgba(255,255,255,.82)}
+[data-labo] .car-arrow{font:inherit;font-size:.9rem;line-height:1;width:34px;height:34px;border-radius:50%;border:0;cursor:pointer;color:var(--ink);background:rgba(11,61,46,.82)}
 @supports (backdrop-filter:blur(6px)){[data-labo] .car-arrow{backdrop-filter:blur(6px)}}
 [data-labo] .car-cap{margin-top:12px;font-family:var(--font-plex-mono),ui-monospace,Menlo,monospace;font-size:.64rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
 [data-labo] .bio p{font-size:.98rem;color:var(--graphite);letter-spacing:-.015em}
@@ -323,10 +325,10 @@
 @media (max-width:760px){[data-labo] .chero{padding-block:56px 0}}
 
 [data-labo] .ph{position:relative;border-radius:var(--radius-card);overflow:hidden;aspect-ratio:3/2;
-  background:radial-gradient(120% 90% at 20% 10%,#fff 0%,transparent 55%),linear-gradient(160deg,#EFEDEA 0%,#E4E1DC 55%,#D9D5CF 100%);
+  background:radial-gradient(120% 90% at 20% 10%,rgba(197,165,98,.18) 0%,transparent 55%),linear-gradient(160deg,#145240 0%,#0F4636 55%,#0A3628 100%);
   display:flex;align-items:flex-end}
 [data-labo] .ph::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,rgba(255,255,255,.18) 0 2px,transparent 2px 14px);pointer-events:none}
-[data-labo] .ph span{position:relative;z-index:1;margin:14px;font-family:var(--font-plex-mono),ui-monospace,Menlo,monospace;font-size:.6rem;letter-spacing:.09em;text-transform:uppercase;color:#fff;background:rgba(29,29,31,.55);padding:6px 11px;border-radius:980px}
+[data-labo] .ph span{position:relative;z-index:1;margin:14px;font-family:var(--font-plex-mono),ui-monospace,Menlo,monospace;font-size:.6rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink);background:rgba(6,32,24,.6);padding:6px 11px;border-radius:980px}
 [data-labo] .hero-ph{margin-top:60px;aspect-ratio:21/9}
 @media (max-width:700px){[data-labo] .hero-ph{aspect-ratio:4/3}}
 
@@ -399,29 +401,29 @@
    The photo is the section background; a white wash keeps the copy side legible
    and a bottom fade melts it into the next section. Mobile swaps to a vertical wash. */
 [data-labo] .chero.blend{position:relative;overflow:hidden;padding-block:120px 170px;
-  background:linear-gradient(90deg,#fff 0%,rgba(255,255,255,.96) 34%,rgba(255,255,255,.72) 52%,rgba(255,255,255,.08) 74%,rgba(255,255,255,0) 100%),url(/labo/clinic-hero-wide.jpg) 88% 20%/cover}
-[data-labo] .chero.blend::after{content:"";position:absolute;left:0;right:0;bottom:0;height:180px;background:linear-gradient(rgba(255,255,255,0),#fff);pointer-events:none}
+  background:linear-gradient(90deg,#0B3D2E 0%,rgba(11,61,46,.96) 34%,rgba(11,61,46,.72) 52%,rgba(11,61,46,.08) 74%,rgba(11,61,46,0) 100%),url(/labo/clinic-hero-wide.jpg) 88% 20%/cover}
+[data-labo] .chero.blend::after{content:"";position:absolute;left:0;right:0;bottom:0;height:180px;background:linear-gradient(rgba(11,61,46,0),#0B3D2E);pointer-events:none}
 [data-labo] .chero.blend .wrap{position:relative;z-index:1}
 [data-labo] .chero.blend h1{max-width:12ch}
 [data-labo] .trust{list-style:none;margin:30px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:10px 26px}
 [data-labo] .trust li{display:flex;align-items:center;gap:9px;font-size:.92rem;color:var(--graphite);letter-spacing:-.012em}
 [data-labo] .trust li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ok)}
-[data-labo] .bgcap{position:absolute;right:18px;bottom:18px;z-index:2;font-family:var(--font-plex-mono),ui-monospace,Menlo,monospace;font-size:.58rem;letter-spacing:.09em;text-transform:uppercase;color:#fff;background:rgba(29,29,31,.45);padding:5px 10px;border-radius:980px}
+[data-labo] .bgcap{position:absolute;right:18px;bottom:18px;z-index:2;font-family:var(--font-plex-mono),ui-monospace,Menlo,monospace;font-size:.58rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink);background:rgba(6,32,24,.5);padding:5px 10px;border-radius:980px}
 @media (max-width:760px){
-  [data-labo] .chero.blend{padding-block:56px 340px;background:linear-gradient(180deg,#fff 0%,#fff 58%,rgba(255,255,255,.55) 68%,rgba(255,255,255,0) 82%),url(/labo/clinic-hero-m.jpg) 50% 100%/100% auto no-repeat,#fff}
+  [data-labo] .chero.blend{padding-block:56px 340px;background:linear-gradient(180deg,#0B3D2E 0%,#0B3D2E 58%,rgba(11,61,46,.55) 68%,rgba(11,61,46,0) 82%),url(/labo/clinic-hero-m.jpg) 50% 100%/100% auto no-repeat,#0B3D2E}
   [data-labo] .chero.blend::after{height:90px}
 }
 [data-labo] .cblend{position:relative;overflow:hidden;padding-block:130px;
-  background:linear-gradient(90deg,#fff 0%,rgba(255,255,255,.95) 34%,rgba(255,255,255,.55) 58%,rgba(255,255,255,.08) 100%),url(/labo/clinic-room-wide.jpg) 80% 55%/cover}
+  background:linear-gradient(90deg,#0B3D2E 0%,rgba(11,61,46,.95) 34%,rgba(11,61,46,.55) 58%,rgba(11,61,46,.08) 100%),url(/labo/clinic-room-wide.jpg) 80% 55%/cover}
 [data-labo] .cblend::before,[data-labo] .cblend::after{content:"";position:absolute;left:0;right:0;height:120px;pointer-events:none}
-[data-labo] .cblend::before{top:0;background:linear-gradient(var(--canvas),rgba(245,245,247,0))}
-[data-labo] .cblend::after{bottom:0;background:linear-gradient(rgba(245,245,247,0),var(--canvas))}
+[data-labo] .cblend::before{top:0;background:linear-gradient(var(--canvas),rgba(15,70,54,0))}
+[data-labo] .cblend::after{bottom:0;background:linear-gradient(rgba(15,70,54,0),var(--canvas))}
 [data-labo] .cblend .wrap{position:relative;z-index:1}
 [data-labo] .visit2{max-width:520px}
-[data-labo] .visit2 .defs{background:rgba(255,255,255,.72);border-radius:20px;padding:4px 20px;backdrop-filter:blur(8px)}
-@media (max-width:760px){[data-labo] .cblend{padding-block:72px 260px;background:linear-gradient(180deg,#fff 0%,rgba(255,255,255,.95) 55%,rgba(255,255,255,.3) 85%,rgba(255,255,255,.05) 100%),url(/labo/clinic-room-wide.jpg) 50% 100%/cover}}
-[data-labo] .close.lblend{position:relative;overflow:hidden;background:radial-gradient(70% 80% at 50% 50%,rgba(255,255,255,.96) 0%,rgba(255,255,255,.86) 55%,rgba(255,255,255,.62) 100%),url(/labo/clinic-laser-wide.jpg) 50% 45%/cover}
-[data-labo] .close.lblend::before{content:"";position:absolute;left:0;right:0;top:0;height:120px;background:linear-gradient(var(--canvas),rgba(245,245,247,0));pointer-events:none}
+[data-labo] .visit2 .defs{background:rgba(11,61,46,.72);border-radius:20px;padding:4px 20px;backdrop-filter:blur(8px)}
+@media (max-width:760px){[data-labo] .cblend{padding-block:72px 260px;background:linear-gradient(180deg,#0B3D2E 0%,rgba(11,61,46,.95) 55%,rgba(11,61,46,.3) 85%,rgba(11,61,46,.05) 100%),url(/labo/clinic-room-wide.jpg) 50% 100%/cover}}
+[data-labo] .close.lblend{position:relative;overflow:hidden;background:radial-gradient(70% 80% at 50% 50%,rgba(11,61,46,.96) 0%,rgba(11,61,46,.86) 55%,rgba(11,61,46,.62) 100%),url(/labo/clinic-laser-wide.jpg) 50% 45%/cover}
+[data-labo] .close.lblend::before{content:"";position:absolute;left:0;right:0;top:0;height:120px;background:linear-gradient(var(--canvas),rgba(15,70,54,0));pointer-events:none}
 [data-labo] .close.lblend .wrap{position:relative;z-index:1}
 [data-labo] .chero.blend .bgcap{top:auto;bottom:190px}
 @media (max-width:760px){[data-labo] .chero.blend .bgcap{top:auto;bottom:16px}}
@@ -444,3 +446,20 @@
 [data-labo] .txjump+.txjump{margin-top:10px}
 [data-labo] .txjump>span{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);min-width:96px}
 @media (max-width:640px){[data-labo] .txjump>span{min-width:100%}}
+
+/* Emerald & gold finishing (Oct 26 2026): gold kickers and numerals, a faint gold glow on the ground,
+   photos warmed slightly so the white-room stock sits in the emerald room. */
+[data-labo]{background:radial-gradient(90% 60% at 85% -10%,rgba(197,165,98,.10),transparent 60%),var(--paper)}
+[data-labo] .kicker{color:var(--accent);opacity:.9}
+[data-labo] .brand{color:var(--accent)}
+[data-labo] .tx .pr,[data-labo] .tx .go{color:var(--accent)}
+[data-labo] .txghead h3{color:var(--accent)}
+[data-labo] .ph.has-img img{filter:saturate(.9) sepia(.08)}
+[data-labo] input,[data-labo] select,[data-labo] textarea{background:var(--wash);color:var(--ink);border-color:var(--line)}
+[data-labo] ::selection{background:rgba(197,165,98,.35);color:var(--ink)}
+/* Emerald wash over the blended photos: multiply turns the photos' white studio backdrops emerald and leaves skin tones warm. */
+[data-labo] .chero.blend::before,[data-labo] .cblend .tint,[data-labo] .close.lblend .tint{content:"";position:absolute;inset:0;pointer-events:none;mix-blend-mode:multiply;
+  background:linear-gradient(90deg,rgba(11,61,46,0) 45%,rgba(40,120,92,.28) 72%,rgba(30,104,80,.72) 100%)}
+@media (max-width:760px){[data-labo] .chero.blend::before{background:linear-gradient(180deg,rgba(11,61,46,0) 60%,rgba(40,120,92,.3) 100%)}}
+[data-labo] .cblend .tint,[data-labo] .close.lblend .tint{display:block}
+[data-labo] .cblend .wrap,[data-labo] .close.lblend .wrap{position:relative;z-index:2}

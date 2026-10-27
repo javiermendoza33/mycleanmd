@@ -293,3 +293,10 @@ Don't add links to the shared inner-page header (Chrome.tsx): at 1440 it already
 ## Oct 26 2026 — California taken out (Washington only, "for now")
 Javier: "take out all things California for now". `AVAILABILITY = "Washington"` (content.ts) drives the footer, FAQ, program notes and the telehealth eyebrow. Also changed by hand: the licensure credential line, the legal scope-of-licensure text, the Chrome.tsx footer legal paragraph, the JSON-LD areaServed, the Gate (WA / Elsewhere, 2-column), the home telehealth heading and clinician licensure, and the contact-form placeholder. The bio still names Cedars-Sinai and Cal State Long Beach; that's her history, not a service area. To bring CA back, restore those strings (git show this commit).
 Analytics: src/components/labo/Analytics.tsx loads GA4 only when NEXT_PUBLIC_LABO_GA_ID is set (Vercel project mycleanmd). It's off on /programs, /contact, /start and /intake.
+
+## Oct 26 2026 — Palette: Deep Emerald & Matte Gold (replaces the White Room ember)
+Javier asked for an emerald ground with matte-gold UI accents, a regal look: green = prosperity, life, natural beauty; gold = auspicious luxury.
+- **Tokens** live in labo.css `[data-labo]`: paper #0B3D2E · canvas #0F4636 · wash #15523F · ink (ivory) #F3EDDC · muted (sage) #A3B8A9 · accent (matte gold) #C5A562 · on-accent #0A2E23 · lines are gold at 26%. `color-scheme: dark`.
+- **Gold is reserved for UI accents:** buttons, kickers, the wordmark, prices, group heads. Headlines stay ivory.
+- **Photos:** the blend gradients fade to emerald. An emerald multiply wash (`.chero.blend::before`, `<i class="tint">` in #clinic and .close) turns the stock photos' white backdrops green. Keep it off the faces; at higher strength skin went green.
+- The MyCleanMD portal isn't affected; everything stays scoped to [data-labo].

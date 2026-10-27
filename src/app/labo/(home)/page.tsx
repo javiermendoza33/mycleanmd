@@ -191,6 +191,7 @@ export default function LaboHome() {
 
         {/* ── THE CLINIC ───────────────────────────────────────────────── */}
         <section id="clinic" className="cblend">
+          <i className="tint" aria-hidden="true" />
           <div className="wrap">
             <div className="visit2">
               <div>
@@ -231,6 +232,7 @@ export default function LaboHome() {
 
         {/* ── CLOSE ────────────────────────────────────────────────────── */}
         <section className="close lblend">
+          <i className="tint" aria-hidden="true" />
           <div className="wrap">
             <h2>Start with a consultation.</h2>
             <p className="sub" style={{ margin: "20px auto 0", maxWidth: "44ch" }}>Thirty minutes, an exam, a test spot and a written plan with the full price. No pressure to book the course.</p>
