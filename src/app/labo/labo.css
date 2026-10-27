@@ -404,7 +404,7 @@
    and the hero runs taller so she reaches further down the page before the long bottom fade. */
 [data-labo] .chero.blend{position:relative;overflow:hidden;padding-block:130px 290px;background-color:#0B3D2E;
   background-image:linear-gradient(180deg,#0B3D2E 0,#0B3D2E 90px,rgba(11,61,46,.7) 150px,rgba(11,61,46,.3) 230px,rgba(11,61,46,0) 330px),
-    linear-gradient(90deg,#0B3D2E 0%,rgba(11,61,46,.96) 34%,rgba(11,61,46,.72) 52%,rgba(11,61,46,.08) 74%,rgba(11,61,46,0) 100%),url(/labo/clinic-hero-wide.jpg);
+    linear-gradient(90deg,#0B3D2E 0%,rgba(11,61,46,.96) 31%,rgba(11,61,46,.62) 45%,rgba(11,61,46,.2) 56%,rgba(11,61,46,0) 66%),url(/labo/clinic-hero-wide.jpg);   /* Oct 26 2026: cleared off her face (Javier: "see clear her eyes") */
   background-position:0 0,0 0,88% 90px;background-size:100% 100%,100% 100%,auto 880px;background-repeat:no-repeat}
 /* Oct 26 2026 (Javier: "blend more on the top photo down a bit, very blending fade"): a long eased fade, about 45% of the hero */
 [data-labo] .chero.blend::after{content:"";position:absolute;left:0;right:0;bottom:0;height:46%;pointer-events:none;
@@ -465,10 +465,10 @@
 [data-labo] ::selection{background:rgba(197,165,98,.35);color:var(--ink)}
 /* Emerald wash over the blended photos: multiply turns the photos' white studio backdrops emerald and leaves skin tones warm. */
 [data-labo] .chero.blend::before,[data-labo] .cblend .tint,[data-labo] .close.lblend .tint{content:"";position:absolute;inset:0;pointer-events:none;mix-blend-mode:multiply;
-  background:linear-gradient(90deg,rgba(11,61,46,0) 45%,rgba(40,120,92,.28) 72%,rgba(30,104,80,.72) 100%)}
+  background:linear-gradient(90deg,rgba(11,61,46,0) 62%,rgba(40,120,92,.22) 78%,rgba(30,104,80,.72) 100%)}
 /* phone: the photo (1000×700, width 100%, anchored bottom) is 70vw tall — fade its top edge into the emerald */
 @media (max-width:760px){[data-labo] .chero.blend::before{top:auto;bottom:0;height:70vw;mix-blend-mode:normal;
-  background:linear-gradient(180deg,#0B3D2E 0%,rgba(11,61,46,.8) 10%,rgba(11,61,46,.45) 24%,rgba(11,61,46,.15) 38%,rgba(11,61,46,0) 50%)}}
+  background:linear-gradient(180deg,#0B3D2E 0%,rgba(11,61,46,.75) 8%,rgba(11,61,46,.35) 18%,rgba(11,61,46,.1) 27%,rgba(11,61,46,0) 34%)}}
 [data-labo] .cblend .tint,[data-labo] .close.lblend .tint{display:block}
 [data-labo] .cblend .wrap,[data-labo] .close.lblend .wrap{position:relative;z-index:2}
 
@@ -479,3 +479,6 @@
 [data-labo] .cblend::before,[data-labo] .cblend::after{content:"";position:absolute;left:0;right:0;pointer-events:none;z-index:1}
 [data-labo] .cblend::before{top:0;height:45%;background:linear-gradient(180deg,#0F4636 0%,rgba(15,70,54,.88) 16%,rgba(15,70,54,.6) 36%,rgba(15,70,54,.3) 60%,rgba(15,70,54,.1) 82%,rgba(15,70,54,0) 100%)}
 [data-labo] .cblend::after{bottom:0;height:40%;background:linear-gradient(0deg,#0F4636 0%,rgba(15,70,54,.85) 18%,rgba(15,70,54,.5) 45%,rgba(15,70,54,.18) 72%,rgba(15,70,54,0) 100%)}
+
+/* hero copy keeps its contrast where the overlay now thins out over the photo */
+[data-labo] .chero.blend h1,[data-labo] .chero.blend .sub,[data-labo] .chero.blend .trust{text-shadow:0 1px 18px rgba(6,32,24,.55)}
