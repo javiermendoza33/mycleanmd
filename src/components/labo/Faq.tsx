@@ -8,11 +8,11 @@ import { FAQ } from "@/labo/content";
  * Triggers are <button>s carrying aria-expanded/aria-controls; the prototype
  * used bare anchors, which the handoff lists as an accessibility gap to fix.
  */
-export default function Faq() {
+export default function Faq({ items = FAQ }: { items?: ReadonlyArray<{ q: string; a: string }> } = {}) {
   const [open, setOpen] = useState(0);
   return (
     <div>
-      {FAQ.map((f, i) => {
+      {items.map((f, i) => {
         const isOpen = open === i;
         return (
           <div key={f.q} className="faq-item">

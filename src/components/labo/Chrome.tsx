@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { NAV, PROGRAMS, PRACTICE, HEALTHIE } from "@/labo/content";
+import { NAV, PROGRAMS, PRACTICE, HEALTHIE, TREATMENTS, CLINIC } from "@/labo/content";
 
 /**
  * Header and footer for The Labo Method inner pages — the White Room system.
@@ -25,8 +25,11 @@ export function Header() {
           {PRACTICE.name}
         </Link>
         <nav className="main" aria-label="Primary">
-          <Link href="/#programs" className={pathname.startsWith("/programs") ? "on" : undefined}>
-            Programs
+          <Link href="/treatments" className={pathname.startsWith("/treatments") ? "on" : undefined}>
+            Treatments
+          </Link>
+          <Link href="/#telehealth" className={pathname.startsWith("/programs") ? "on" : undefined}>
+            Telehealth
           </Link>
           {NAV.map((l) => (
             <Link key={l.href} href={l.href} className={pathname === l.href ? "on" : undefined}>
@@ -34,7 +37,7 @@ export function Header() {
             </Link>
           ))}
         </nav>
-        <a className="btn btn-ghost btn-sm" href={HEALTHIE.login} {...ext}>Patient login</a>
+        <Link className="btn btn-primary btn-sm" href="/contact">Request a consultation</Link>
       </div>
     </header>
   );
@@ -45,9 +48,18 @@ export function Footer() {
   return (
     <footer className="site">
       <div className="wrap">
-        <div className="fnav">
+        <div className="fnav fnav4">
           <div>
-            <h5>Programs</h5>
+            <h5>The clinic · {CLINIC.city.split(",")[0]}</h5>
+            <ul>
+              {TREATMENTS.map((t) => (
+                <li key={t.slug}><Link href={`/treatments#${t.slug}`}>{t.name}</Link></li>
+              ))}
+              <li><Link href="/treatments">All treatments</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h5>Telehealth programs</h5>
             <ul>
               {PROGRAMS.map((p) => (
                 <li key={p.slug}><Link href={`/programs/${p.slug}`}>{p.name}</Link></li>
@@ -63,6 +75,7 @@ export function Footer() {
               <li><Link href="/faq">FAQ</Link></li>
               <li><Link href="/contact">Contact</Link></li>
               <li><a href={`mailto:${PRACTICE.email}`}>{PRACTICE.email}</a></li>
+              <li><a href={HEALTHIE.login} {...ext}>Patient login</a></li>
             </ul>
           </div>
           <div>
@@ -77,6 +90,7 @@ export function Footer() {
           </div>
         </div>
         <div className="legal">
+          <p>In-clinic laser treatments are provided in {CLINIC.city} after an examination by a licensed nurse practitioner; results vary and a test spot is performed before treatment.</p>
           <p>This website is for general information and is not medical advice. A patient relationship begins only after intake, a completed clinical evaluation and a documented visit. Clinical services are provided by a nurse practitioner licensed in California and Washington; patients must be physically located in one of these states at the time of each visit.</p>
           <p>Some medications prescribed through this practice are compounded by state-licensed pharmacies and are not reviewed or approved by the FDA. Certain peptides are prescribed for uses that are not FDA-approved; evidence quality varies by agent. Testosterone is a Schedule III controlled substance. Individual results vary and no outcome is guaranteed.</p>
           <p>Email and web forms are not secure channels. Do not send clinical information through them. If this is an emergency, call 911.</p>

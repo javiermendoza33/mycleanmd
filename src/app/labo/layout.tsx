@@ -30,13 +30,13 @@ const plexMono = IBM_Plex_Mono({
   display: "swap",
 });
 const DESCRIPTION =
-  `Telehealth hormone, peptide and metabolic care directed by a board-certified nurse practitioner. GLP-1 weight management, peptide therapy, testosterone and hormone therapy for residents of ${AVAILABILITY}.`;
+  `Laser clinic in Seattle: laser hair removal for every skin type, sun spots, spider veins, skin rejuvenation and laser nail treatment, led by a nurse practitioner. Plus telehealth hormone and metabolic care for residents of ${AVAILABILITY}.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(`https://${PRACTICE.domain}`),
   title: {
     template: `%s | ${PRACTICE.name}`,
-    default: `${PRACTICE.name} — Hormone & Longevity Medicine`,
+    default: `${PRACTICE.name} — Laser Clinic, Seattle`,
   },
   description: DESCRIPTION,
   alternates: { canonical: "/" },
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     type: "website",
     siteName: PRACTICE.name,
     locale: "en_US",
-    title: `${PRACTICE.name} — Hormone & Longevity Medicine`,
+    title: `${PRACTICE.name} — Laser Clinic, Seattle`,
     description: DESCRIPTION,
   },
 };

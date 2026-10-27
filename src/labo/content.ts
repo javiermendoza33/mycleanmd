@@ -404,3 +404,134 @@ export const LEGAL = [
 
 export const FOOTER_BLURB = `Telehealth hormone, peptide and metabolic care for residents of ${AVAILABILITY}.`;
 export const FOOTER_DISCLAIMER = `Clinical services provided by a nurse practitioner licensed in ${AVAILABILITY}. This website does not provide medical advice.`;
+
+/* ───────────────────────────────────────────────────────────────────────────
+ * THE CLINIC — in-person laser care in Seattle (Oct 26 2026, Javier: "Now that
+ * you know what we will be offering with laser, let's create a better, more
+ * premium site" · "one brand, clinic first" · "Seattle-based clinic, address to
+ * come"). The homepage now leads with the clinic; the telehealth programs above
+ * stay as the second line of the practice.
+ *
+ * ⚠️ BLOCKING ITEM #5 for LAUNCH_READY — clinic prices. The "from" prices below
+ * are the floor of Seattle comps researched Oct 26 2026 (hair removal ~$100–250
+ * small area, photofacial ~$400, veins $250–600, nail laser ~$200/session), NOT
+ * rates Monika has set. Confirm with her, then keep or change them here only.
+ * The street address is deliberately absent until Javier/Monika publish it.
+ * ─────────────────────────────────────────────────────────────────────────── */
+export const CLINIC = {
+  city: "Seattle, Washington",
+  address: null as string | null,        // to come — the site says "address announced soon" until this is set
+  status: "Opening soon",
+  device: "Candela GentleMax Pro Plus",
+  hoursNote: "By appointment",
+} as const;
+
+export interface Treatment {
+  slug: string;
+  name: string;
+  short: string;          // the one-line promise on the homepage row
+  treats: string[];
+  wavelength: string;
+  sessions: string;
+  from: string;           // ⚠️ placeholder until Monika confirms (blocking item #5)
+  unit: string;
+  body: string[];
+  skin: string;
+}
+
+export const TREATMENTS: Treatment[] = [
+  {
+    slug: "laser-hair-removal",
+    name: "Laser hair removal",
+    short: "Smooth, permanently reduced hair on any skin tone.",
+    treats: ["Face", "Underarms", "Bikini and Brazilian", "Legs", "Back and chest"],
+    wavelength: "755 nm Alexandrite · 1064 nm Nd:YAG",
+    sessions: "6 to 8 sessions, 4 to 8 weeks apart",
+    from: "$100", unit: " / session · small area",
+    body: [
+      "Hair grows in cycles, and a laser only reaches follicles that are actively growing. That is why a course takes six to eight visits, and why anyone promising one-session results is selling something else.",
+      "We choose the wavelength by your skin, not by the menu: the 755 nm Alexandrite for lighter skin and fine hair, the 1064 nm Nd:YAG for deeper skin tones, where it is the safer choice.",
+    ],
+    skin: "All skin types, I to VI",
+  },
+  {
+    slug: "sun-spots",
+    name: "Sun spots & pigment",
+    short: "Fades brown spots, freckling and uneven tone.",
+    treats: ["Sun spots", "Age spots", "Freckling", "Uneven tone"],
+    wavelength: "755 nm Alexandrite",
+    sessions: "1 to 3 sessions",
+    from: "$350", unit: " / session",
+    body: [
+      "Benign pigment absorbs the 755 nm beam, darkens for a week or two, and flakes away as the skin renews.",
+      "Not every brown spot is benign. Anything that looks unusual is examined first and, where it should be, referred before it is ever treated.",
+    ],
+    skin: "Best on lighter skin types",
+  },
+  {
+    slug: "spider-veins",
+    name: "Spider veins & redness",
+    short: "Clears small facial and leg veins and red marks.",
+    treats: ["Spider veins", "Facial redness", "Cherry angiomas", "Leg veins"],
+    wavelength: "1064 nm Nd:YAG",
+    sessions: "1 to 3 sessions",
+    from: "$250", unit: " / session",
+    body: [
+      "The 1064 nm wavelength reaches the vessel, seals it, and the body clears it over the following weeks.",
+      "Larger or deeper leg veins are a vascular-medicine question, not a cosmetic one. We will tell you when that is the case.",
+    ],
+    skin: "All skin types",
+  },
+  {
+    slug: "skin-rejuvenation",
+    name: "Laser skin rejuvenation",
+    short: "Brighter, firmer, more even skin without downtime.",
+    treats: ["Fine lines", "Texture", "Diffuse redness", "Dullness"],
+    wavelength: "1064 nm Nd:YAG · 755 nm Alexandrite",
+    sessions: "A series of 3 to 4, then maintenance",
+    from: "$350", unit: " / session",
+    body: [
+      "Gentle, non-ablative passes warm the deeper skin to stimulate collagen while the surface stays intact. Most people return to their day the same afternoon.",
+      "Results build over the series rather than overnight, which is why we plan the whole course at the first visit.",
+    ],
+    skin: "All skin types",
+  },
+  {
+    slug: "nail-fungus",
+    name: "Laser nail treatment",
+    short: "A drug-free treatment for stubborn nail fungus.",
+    treats: ["Toenail fungus", "Fingernail fungus"],
+    wavelength: "1064 nm Nd:YAG",
+    sessions: "3 sessions, about 3 months apart",
+    from: "$200", unit: " / session",
+    body: [
+      "The 1064 nm laser heats the nail bed enough to stop the fungus without the liver monitoring some oral medicines need.",
+      "A clear nail has to grow out, so judge the result at six to twelve months, not at the end of the visit.",
+    ],
+    skin: "All skin types",
+  },
+];
+
+export const FIRST_VISIT = [
+  { n: "01", h: "Consultation", meta: "ABOUT 30 MINUTES", p: "Your skin, your history and what you want to change, examined by a nurse practitioner before anything is treated." },
+  { n: "02", h: "Test spot", meta: "SAME VISIT", p: "A small patch at the settings we plan to use, so we see how your skin responds before the full area." },
+  { n: "03", h: "Your course", meta: "A PLAN, WRITTEN DOWN", p: "Number of sessions, spacing, price for the whole course and what to avoid before and after, agreed up front." },
+  { n: "04", h: "Follow-up", meta: "EVERY VISIT", p: "Settings adjust as your skin responds. If something is not working, we change it or stop." },
+];
+
+export const LASER_SPECS = [
+  { k: "Platform", v: "Candela GentleMax Pro Plus" },
+  { k: "Wavelengths", v: "755 nm Alexandrite and 1064 nm Nd:YAG in one system" },
+  { k: "Cooling", v: "Cryogen spray cooling before every pulse, for comfort and protection" },
+  { k: "Skin types", v: "Fitzpatrick I to VI, with the wavelength chosen for your skin" },
+  { k: "Oversight", v: "Every new patient is examined by a nurse practitioner before the first treatment" },
+];
+
+export const LASER_FAQ = [
+  { q: "Does laser hair removal hurt?", a: "Most people describe a quick snap, like a rubber band, softened by the cryogen spray that cools the skin before each pulse. Small areas take minutes." },
+  { q: "Is it safe for darker skin?", a: "Yes, with the right wavelength. The 1064 nm Nd:YAG is the standard of care for deeper skin tones, and we always start with a test spot." },
+  { q: "How many sessions will I need?", a: "Hair removal usually takes six to eight. Pigment and veins often clear in one to three. You get a written plan with the number of sessions and the total price at your consultation." },
+  { q: "What should I avoid before treatment?", a: "Sun exposure and self-tanner for two weeks, and waxing or plucking the area for four. Shaving the day before is fine and recommended." },
+  { q: "Is there downtime?", a: "Usually none beyond some redness for a few hours. Pigment darkens for one to two weeks before it flakes away." },
+  { q: "Who performs the treatments?", a: "A licensed clinician, working under protocols written for this clinic, after a nurse practitioner has examined you." },
+];

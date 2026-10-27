@@ -11,6 +11,7 @@ const BASE = `https://${PRACTICE.domain}`;
 export default function sitemap(): MetadataRoute.Sitemap {
   const paths = [
     { p: "", priority: 1.0 },
+    { p: "/treatments", priority: 1.0 },
     { p: "/how-it-works", priority: 0.9 },
     { p: "/pricing", priority: 0.9 },
     ...PROGRAMS.map((x) => ({ p: `/programs/${x.slug}`, priority: 0.9 })),
