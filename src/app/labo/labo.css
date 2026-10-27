@@ -429,3 +429,18 @@
 [data-labo] .bar{height:64px}
 [data-labo] .brand{font-size:1.3rem;font-weight:700;letter-spacing:-.035em}
 @media (max-width:560px){[data-labo] .brand{font-size:1.12rem}[data-labo] .bar{height:58px;gap:14px}}
+
+/* Oct 26 2026 — category groups + browse-by-concern (SkinSpirit / LaserAway pattern) */
+[data-labo] .concerns{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:-8px 0 44px}
+[data-labo] .concerns>span{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-right:6px}
+[data-labo] .concerns a{font-size:.88rem;padding:9px 16px;border-radius:980px;border:1px solid var(--line);color:var(--ink);text-decoration:none;transition:border-color .18s,background .18s}
+[data-labo] .concerns a:hover{border-color:var(--accent);background:var(--wash)}
+[data-labo] .txgroup+.txgroup,[data-labo] .txgsec+.txgsec{margin-top:56px}
+[data-labo] .txghead{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+[data-labo] .txghead h3{margin:0;font-size:.82rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+[data-labo] .txghead span{font-size:.72rem;color:var(--muted)}
+[data-labo] .txgsec{scroll-margin-top:90px}
+[data-labo] .txjump{align-items:center}
+[data-labo] .txjump+.txjump{margin-top:10px}
+[data-labo] .txjump>span{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);min-width:96px}
+@media (max-width:640px){[data-labo] .txjump>span{min-width:100%}}

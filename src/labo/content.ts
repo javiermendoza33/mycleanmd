@@ -428,6 +428,8 @@ export const CLINIC = {
 
 export interface Treatment {
   slug: string;
+  group: "laser" | "injectables" | "skin";
+  techLabel?: string;     // 'Wavelength' for the laser lines; 'Product' / 'Technique' otherwise
   name: string;
   short: string;          // the one-line promise on the homepage row
   treats: string[];
@@ -441,7 +443,7 @@ export interface Treatment {
 
 export const TREATMENTS: Treatment[] = [
   {
-    slug: "laser-hair-removal",
+    slug: "laser-hair-removal", group: "laser",
     name: "Laser hair removal",
     short: "Smooth, permanently reduced hair on any skin tone.",
     treats: ["Face", "Underarms", "Bikini and Brazilian", "Legs", "Back and chest"],
@@ -455,7 +457,7 @@ export const TREATMENTS: Treatment[] = [
     skin: "All skin types, I to VI",
   },
   {
-    slug: "sun-spots",
+    slug: "sun-spots", group: "laser",
     name: "Sun spots & pigment",
     short: "Fades brown spots, freckling and uneven tone.",
     treats: ["Sun spots", "Age spots", "Freckling", "Uneven tone"],
@@ -469,7 +471,7 @@ export const TREATMENTS: Treatment[] = [
     skin: "Best on lighter skin types",
   },
   {
-    slug: "spider-veins",
+    slug: "spider-veins", group: "laser",
     name: "Spider veins & redness",
     short: "Clears small facial and leg veins and red marks.",
     treats: ["Spider veins", "Facial redness", "Cherry angiomas", "Leg veins"],
@@ -483,7 +485,7 @@ export const TREATMENTS: Treatment[] = [
     skin: "All skin types",
   },
   {
-    slug: "skin-rejuvenation",
+    slug: "skin-rejuvenation", group: "laser",
     name: "Laser skin rejuvenation",
     short: "Brighter, firmer, more even skin without downtime.",
     treats: ["Fine lines", "Texture", "Diffuse redness", "Dullness"],
@@ -497,7 +499,7 @@ export const TREATMENTS: Treatment[] = [
     skin: "All skin types",
   },
   {
-    slug: "nail-fungus",
+    slug: "nail-fungus", group: "laser",
     name: "Laser nail treatment",
     short: "A drug-free treatment for stubborn nail fungus.",
     treats: ["Toenail fungus", "Fingernail fungus"],
@@ -510,7 +512,85 @@ export const TREATMENTS: Treatment[] = [
     ],
     skin: "All skin types",
   },
+  // Oct 26 2026 (Javier: "can we add these services: Botox, dermal fillers, Sculptra, microneedling"). Seattle comps the same day:
+  // Botox $13–16/unit (Well Medical Arts $15, Seattle Face $16), filler $650–850/syringe, Sculptra $850–990/vial, microneedling
+  // $350–425/session. The "from" prices are placeholders until Monika sets hers (blocking item #5).
+  {
+    slug: "botox", group: "injectables", techLabel: "Product",
+    name: "Botox & neurotoxins",
+    short: "Softens frown lines, forehead lines and crow's feet.",
+    treats: ["Frown lines", "Forehead lines", "Crow's feet", "Lip flip", "Jawline / masseter"],
+    wavelength: "Botox®, Dysport® or Xeomin®, dosed by the unit",
+    sessions: "Results in 7 to 14 days, lasting about 3 to 4 months",
+    from: "$13", unit: " / unit",
+    body: [
+      "A neurotoxin relaxes the small muscles that fold the skin into lines. Dosed well, you still look like you on a good day: rested, not frozen.",
+      "We price by the unit, map the dose at your consultation, and see you at two weeks to check the result and adjust if needed.",
+    ],
+    skin: "All skin types",
+  },
+  {
+    slug: "dermal-fillers", group: "injectables", techLabel: "Product",
+    name: "Dermal fillers",
+    short: "Restores lost volume in lips, cheeks, chin and under the eyes.",
+    treats: ["Lips", "Cheeks", "Chin and jawline", "Smile lines", "Under-eye hollows"],
+    wavelength: "Hyaluronic-acid fillers (Juvéderm®, Restylane® families)",
+    sessions: "One visit, lasting about 6 to 18 months by area",
+    from: "$650", unit: " / syringe",
+    body: [
+      "Hyaluronic-acid filler replaces volume where it has thinned with time, and it can be dissolved if ever needed, which is why it is our only filler for the face.",
+      "The plan starts with your proportions, not a syringe count. Most people need less than they expect.",
+    ],
+    skin: "All skin types",
+  },
+  {
+    slug: "sculptra", group: "injectables", techLabel: "Product",
+    name: "Sculptra",
+    short: "Rebuilds your own collagen for gradual, natural lift.",
+    treats: ["Temples", "Cheeks", "Jawline", "Overall facial volume"],
+    wavelength: "Sculptra® (poly-L-lactic acid), a collagen stimulator",
+    sessions: "2 to 3 sessions, 4 to 6 weeks apart; results last 2 years or more",
+    from: "$850", unit: " / vial",
+    body: [
+      "Sculptra is not a filler in the usual sense: it prompts your skin to make new collagen over the following months, so the change is slow, structural and your own.",
+      "Because it builds gradually, it suits people who want to look refreshed rather than visibly treated.",
+    ],
+    skin: "All skin types",
+  },
+  {
+    slug: "microneedling", group: "skin", techLabel: "Technique",
+    name: "Microneedling",
+    short: "Smoother texture, softer acne scars, tighter pores.",
+    treats: ["Acne scars", "Texture", "Pores", "Fine lines", "Stretch marks"],
+    wavelength: "Medical-grade microneedling, depth set by area",
+    sessions: "3 to 4 sessions, about 4 weeks apart",
+    from: "$350", unit: " / session",
+    body: [
+      "Controlled micro-channels trigger the skin's own repair, building collagen and smoothing texture over a series.",
+      "Expect pink skin for a day or two. It pairs well with the laser work and is safe across skin tones.",
+    ],
+    skin: "All skin types",
+  },
 ];
+
+export const GROUPS = { laser: "Laser", injectables: "Injectables", skin: "Skin" } as const;
+export const GROUP_NOTE = {
+  laser: "Candela GentleMax Pro Plus · 755 + 1064 nm",
+  injectables: "Neurotoxins, fillers and collagen stimulators",
+  skin: "Texture, scars and pores",
+} as const;
+
+/** Browse by concern (Oct 26 2026, after SkinSpirit's "shop by benefit" row): each links to the treatment that answers it. */
+export const CONCERNS = [
+  { label: "Lines & wrinkles", slug: "botox" },
+  { label: "Lost volume", slug: "dermal-fillers" },
+  { label: "Gradual lift", slug: "sculptra" },
+  { label: "Unwanted hair", slug: "laser-hair-removal" },
+  { label: "Sun spots", slug: "sun-spots" },
+  { label: "Visible veins", slug: "spider-veins" },
+  { label: "Acne scars & texture", slug: "microneedling" },
+  { label: "Redness & tone", slug: "skin-rejuvenation" },
+] as const;
 
 export const FIRST_VISIT = [
   { n: "01", h: "Consultation", meta: "ABOUT 30 MINUTES", p: "Your skin, your history and what you want to change, examined by a nurse practitioner before anything is treated." },
@@ -533,5 +613,7 @@ export const LASER_FAQ = [
   { q: "How many sessions will I need?", a: "Hair removal usually takes six to eight. Pigment and veins often clear in one to three. You get a written plan with the number of sessions and the total price at your consultation." },
   { q: "What should I avoid before treatment?", a: "Sun exposure and self-tanner for two weeks, and waxing or plucking the area for four. Shaving the day before is fine and recommended." },
   { q: "Is there downtime?", a: "Usually none beyond some redness for a few hours. Pigment darkens for one to two weeks before it flakes away." },
+  { q: "Who does the injections?", a: "Injectables are performed by the nurse practitioner herself, after a consultation and a written plan. Nothing is injected at a first visit unless you want it and it is appropriate." },
+  { q: "How long do Botox and fillers last?", a: "Botox and other neurotoxins about three to four months. Hyaluronic-acid fillers about six to eighteen months depending on the area. Sculptra builds over months and lasts two years or more." },
   { q: "Who performs the treatments?", a: "A licensed clinician, working under protocols written for this clinic, after a nurse practitioner has examined you." },
 ];

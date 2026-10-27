@@ -30,13 +30,13 @@ const plexMono = IBM_Plex_Mono({
   display: "swap",
 });
 const DESCRIPTION =
-  `Laser clinic in Seattle: laser hair removal for every skin type, sun spots, spider veins, skin rejuvenation and laser nail treatment, led by a nurse practitioner. Plus telehealth hormone and metabolic care for residents of ${AVAILABILITY}.`;
+  `Laser and aesthetics clinic in Seattle: laser hair removal for every skin type, sun spots, spider veins, skin rejuvenation, Botox, dermal fillers, Sculptra and microneedling, led by a nurse practitioner. Plus telehealth hormone and metabolic care for residents of ${AVAILABILITY}.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(`https://${PRACTICE.domain}`),
   title: {
     template: `%s | ${PRACTICE.name}`,
-    default: `${PRACTICE.name} — Laser Clinic, Seattle`,
+    default: `${PRACTICE.name} — Laser & Aesthetics, Seattle`,
   },
   description: DESCRIPTION,
   alternates: { canonical: "/" },
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     type: "website",
     siteName: PRACTICE.name,
     locale: "en_US",
-    title: `${PRACTICE.name} — Laser Clinic, Seattle`,
+    title: `${PRACTICE.name} — Laser & Aesthetics, Seattle`,
     description: DESCRIPTION,
   },
 };

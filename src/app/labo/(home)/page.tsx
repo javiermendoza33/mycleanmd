@@ -1,7 +1,9 @@
 import Link from "next/link";
 import Gate from "./Gate";
 import { Footer } from "@/components/labo/Chrome";
-import { CLINIC, FIRST_VISIT, HEALTHIE, LASER_SPECS, PRACTICE, PROGRAMS, TREATMENTS } from "@/labo/content";
+import { CLINIC, CONCERNS, FIRST_VISIT, GROUP_NOTE, GROUPS, HEALTHIE, LASER_SPECS, PRACTICE, PROGRAMS, TREATMENTS } from "@/labo/content";
+
+const GROUP_KEYS = ["laser", "injectables", "skin"] as const;
 
 /**
  * thelabomethod.com homepage — CLINIC FIRST (Oct 26 2026).
@@ -48,10 +50,10 @@ export default function LaboHome() {
         <div className="wrap bar">
           <a className="brand" href="#top">{PRACTICE.name}</a>
           <nav className="main" aria-label="Sections">
-            <Link href="/treatments">Treatments</Link>
-            <a href="#laser">The laser</a>
+            <Link href="/treatments#group-laser">Laser</Link>
+            <Link href="/treatments#group-injectables">Injectables</Link>
+            <Link href="/treatments#group-skin">Skin</Link>
             <a href="#visit">First visit</a>
-            <a href="#clinic">The clinic</a>
             <a href="#telehealth">Telehealth</a>
           </nav>
           <Link className="btn btn-primary btn-sm" href="/contact">Request a consultation</Link>
@@ -64,9 +66,9 @@ export default function LaboHome() {
             the whole hero and washes to white under the copy; a soft fade carries it into the next section. */}
         <section className="chero blend">
           <div className="wrap">
-            <span className="kicker">Laser clinic · {CLINIC.city} · {CLINIC.status}</span>
-            <h1>Laser care, practiced like medicine.</h1>
-            <p className="sub">Hair removal, sun spots, veins and skin on the {CLINIC.device}. Every plan starts with an exam by a nurse practitioner.</p>
+            <span className="kicker">Laser &amp; aesthetics clinic · {CLINIC.city} · {CLINIC.status}</span>
+            <h1>Aesthetic care, practiced like medicine.</h1>
+            <p className="sub">Laser, Botox, fillers, Sculptra and microneedling. Every plan starts with an exam by a nurse practitioner.</p>
             <div className="acts">
               <Link className="btn btn-primary" href="/contact">Request a consultation</Link>
               <Link className="more" href="/treatments">See every treatment</Link>
@@ -83,23 +85,33 @@ export default function LaboHome() {
         <section id="treatments">
           <div className="wrap">
             <div className="headline2">
-              <span className="kicker">Five treatments, one laser</span>
+              <span className="kicker">Laser · Injectables · Skin</span>
               <h2>What we treat.</h2>
             </div>
-            <ol className="txlist">
-              {TREATMENTS.map((t, i) => (
-                <li key={t.slug}>
-                  <Link href={`/treatments#${t.slug}`} className="tx">
-                    <span className="n mono">{String(i + 1).padStart(2, "0")}</span>
-                    <span className="nm"><b>{t.name}</b><em>{t.short}</em></span>
-                    <span className="meta mono">{t.sessions}</span>
-                    <span className="pr mono">from {t.from}<small>{t.unit}</small></span>
-                    <span className="go" aria-hidden="true">›</span>
-                  </Link>
-                </li>
-              ))}
-            </ol>
-            <p className="note">Prices are per session and confirmed in writing at your consultation, with the total for the full course.</p>
+            {/* Oct 26 2026: browse by concern, then the menu grouped by category (SkinSpirit / LaserAway pattern). */}
+            <nav className="concerns" aria-label="Browse by concern">
+              <span className="mono">By concern</span>
+              {CONCERNS.map((c) => <Link key={c.slug} href={`/treatments#${c.slug}`}>{c.label}</Link>)}
+            </nav>
+            {GROUP_KEYS.map((g) => (
+              <div className="txgroup" key={g}>
+                <div className="txghead"><h3>{GROUPS[g]}</h3><span className="mono">{GROUP_NOTE[g]}</span></div>
+                <ol className="txlist">
+                  {TREATMENTS.filter((t) => t.group === g).map((t) => (
+                    <li key={t.slug}>
+                      <Link href={`/treatments#${t.slug}`} className="tx">
+                        <span className="n mono">{String(TREATMENTS.indexOf(t) + 1).padStart(2, "0")}</span>
+                        <span className="nm"><b>{t.name}</b><em>{t.short}</em></span>
+                        <span className="meta mono">{t.sessions}</span>
+                        <span className="pr mono">from {t.from}<small>{t.unit}</small></span>
+                        <span className="go" aria-hidden="true">›</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            ))}
+            <p className="note">Starting prices. Your exact price is confirmed in writing at your consultation, with the total for the full plan.</p>
           </div>
         </section>
 
@@ -165,11 +177,12 @@ export default function LaboHome() {
             <div>
               <span className="kicker">Your clinician</span>
               <blockquote>A laser is a medical device. It should be used like one.</blockquote>
-              <p className="sub">Treatment settings, protocols and every plan are set by a nurse practitioner who examines you first and follows your skin through the whole course.</p>
+              <p className="sub">Laser settings, injection plans and every protocol are set by a nurse practitioner who examines you first and follows your skin through the whole course.</p>
               <ul className="creds">
                 <li><b>Clinician</b><span>{PRACTICE.provider}</span></li>
                 <li><b>Licensure</b><span>Nurse practitioner, Washington and California</span></li>
-                <li><b>Platform</b><span>{CLINIC.device}</span></li>
+                <li><b>Laser</b><span>{CLINIC.device}</span></li>
+                <li><b>Injectables</b><span>Botox, hyaluronic fillers, Sculptra</span></li>
                 <li><b>Approach</b><span>Exam first, test spot, written plan, adjust every visit</span></li>
               </ul>
             </div>

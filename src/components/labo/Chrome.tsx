@@ -90,7 +90,7 @@ export function Footer() {
           </div>
         </div>
         <div className="legal">
-          <p>In-clinic laser treatments are provided in {CLINIC.city} after an examination by a licensed nurse practitioner; results vary and a test spot is performed before treatment.</p>
+          <p>In-clinic laser, injectable and skin treatments are provided in {CLINIC.city} after an examination by a licensed nurse practitioner; results vary and a test spot is performed before treatment.</p>
           <p>This website is for general information and is not medical advice. A patient relationship begins only after intake, a completed clinical evaluation and a documented visit. Clinical services are provided by a nurse practitioner licensed in California and Washington; patients must be physically located in one of these states at the time of each visit.</p>
           <p>Some medications prescribed through this practice are compounded by state-licensed pharmacies and are not reviewed or approved by the FDA. Certain peptides are prescribed for uses that are not FDA-approved; evidence quality varies by agent. Testosterone is a Schedule III controlled substance. Individual results vary and no outcome is guaranteed.</p>
           <p>Email and web forms are not secure channels. Do not send clinical information through them. If this is an emergency, call 911.</p>
