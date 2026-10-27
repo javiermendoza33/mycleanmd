@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import LaboAnalytics from "@/components/labo/Analytics";
 import { Inter, IBM_Plex_Mono } from "next/font/google";
 import { PRACTICE, AVAILABILITY, LAUNCH_READY } from "@/labo/content";
 import "./labo.css";
@@ -83,6 +84,7 @@ export default function LaboLayout({ children }: { children: React.ReactNode }) 
       <script type="application/ld+json"
               dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {children}
+      <LaboAnalytics />
     </div>
   );
 }
