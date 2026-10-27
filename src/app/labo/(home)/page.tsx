@@ -29,10 +29,14 @@ const TELE = [
 /** Fitzpatrick I–VI and which wavelength reaches them safely — the clinic's signature row. */
 const SKIN = ["#F6E3D4", "#EDCDB3", "#D9AE8A", "#B98463", "#8A5A3E", "#5A3826"];
 
-function Ph({ label, ratio, className }: { label: string; ratio?: string; className?: string }) {
+/** A photo frame. With `src` it shows a STOCK stand-in (Unsplash licence, free for commercial use — Oct 26 2026,
+ *  Javier: "add some stock photos… I can replace them later"); without it, a labelled placeholder. Replace the
+ *  files in public/labo/clinic-*.jpg (same names and aspect ratios) and drop the "Stock ·" captions. */
+function Ph({ label, ratio, className, src, alt, pos }: { label: string; ratio?: string; className?: string; src?: string; alt?: string; pos?: string }) {
   return (
-    <figure className={`ph ${className ?? ""}`} style={ratio ? { aspectRatio: ratio } : undefined}>
-      <span>{label}</span>
+    <figure className={`ph ${src ? "has-img" : ""} ${className ?? ""}`} style={ratio ? { aspectRatio: ratio } : undefined}>
+      {src && <img src={src} alt={alt ?? ""} style={pos ? { objectPosition: pos } : undefined} loading={className === "hero-ph" ? "eager" : "lazy"} />}
+      <span>{src ? `Stock · ${label}` : `Photo · ${label}`}</span>
     </figure>
   );
 }
@@ -65,7 +69,7 @@ export default function LaboHome() {
               <Link className="btn btn-primary" href="/contact">Request a consultation</Link>
               <Link className="more" href="/treatments">See every treatment</Link>
             </div>
-            <Ph label="Photo · the treatment room" className="hero-ph" />
+            <Ph label="the treatment room" className="hero-ph" src="/labo/clinic-hero.jpg" alt="A client resting during a gentle facial treatment" pos="60% 40%" />
           </div>
         </section>
 
@@ -102,7 +106,7 @@ export default function LaboHome() {
                 <h2 style={{ marginTop: 15 }}>One platform. Two wavelengths. Chosen for your skin.</h2>
                 <p className="sub" style={{ marginTop: 18 }}>Most clinics own one laser and treat everyone with it. Ours carries two, because the wavelength that is right for fair skin is the wrong one for deep skin.</p>
               </div>
-              <Ph label="Photo · GentleMax Pro Plus" ratio="4/5" />
+              <Ph label="GentleMax Pro Plus" ratio="4/5" src="/labo/clinic-laser.jpg" alt="Laser hair removal on a leg, the handpiece held against the skin" />
             </div>
 
             <div className="skinrow" aria-label="Wavelength by skin type">
@@ -151,7 +155,7 @@ export default function LaboHome() {
         {/* ── CLINICIAN ────────────────────────────────────────────────── */}
         <section className="grey">
           <div className="wrap clin">
-            <Ph label="Photo · Monika, in the clinic" ratio="4/5" className="portrait" />
+            <Ph label="Monika, in the clinic" ratio="4/5" className="portrait" src="/labo/clinic-clinician.jpg" alt="A clinician talking a patient through her plan in a bright treatment room" />
             <div>
               <span className="kicker">Your clinician</span>
               <blockquote>A laser is a medical device. It should be used like one.</blockquote>
@@ -170,7 +174,7 @@ export default function LaboHome() {
         <section id="clinic">
           <div className="wrap">
             <div className="visit">
-              <Ph label="Photo · the clinic, Seattle" ratio="3/2" />
+              <Ph label="the clinic, Seattle" ratio="3/2" src="/labo/clinic-room.jpg" alt="A bright, white clinic reception with curved lines and glass" />
               <div>
                 <span className="kicker">The clinic</span>
                 <h2 style={{ marginTop: 15 }}>{CLINIC.city.split(",")[0]}. {CLINIC.status}.</h2>
