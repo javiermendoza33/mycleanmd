@@ -180,7 +180,7 @@ export default function LaboHome() {
               <p className="sub">Laser settings, injection plans and every protocol are set by a nurse practitioner who examines you first and follows your skin through the whole course.</p>
               <ul className="creds">
                 <li><b>Clinician</b><span>{PRACTICE.provider}</span></li>
-                <li><b>Licensure</b><span>Nurse practitioner, Washington and California</span></li>
+                <li><b>Licensure</b><span>Nurse practitioner, Washington</span></li>
                 <li><b>Laser</b><span>{CLINIC.device}</span></li>
                 <li><b>Injectables</b><span>Botox, hyaluronic fillers, Sculptra</span></li>
                 <li><b>Approach</b><span>Exam first, test spot, written plan, adjust every visit</span></li>
@@ -214,7 +214,7 @@ export default function LaboHome() {
           <div className="wrap">
             <div className="headline2">
               <span className="kicker">Also from {PRACTICE.name} · by video</span>
-              <h2>Hormone and metabolic care, for California and Washington.</h2>
+              <h2>Hormone and metabolic care, for Washington.</h2>
               <p className="sub" style={{ marginTop: 17, maxWidth: "52ch" }}>The same clinician, the same standard: a full lab panel before anything is prescribed.</p>
             </div>
             <div className="tele">

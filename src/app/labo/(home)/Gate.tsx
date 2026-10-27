@@ -6,7 +6,7 @@ import { HEALTHIE, PRACTICE } from "@/labo/content";
 /**
  * The eligibility gate — the hero's primary interactive element and the whole
  * point of the redesign (handoff §2). Two questions, answered immediately:
- * CA or WA → "Yes, I can treat you" + the panel they would start on + three
+ * WA → "Yes, I can treat you" + the panel they would start on + three
  * next steps; anywhere else → an honest decline with a waitlist offer, because
  * telehealth requires the patient to be physically in a state where the
  * clinician is licensed.
@@ -17,7 +17,7 @@ import { HEALTHIE, PRACTICE } from "@/labo/content";
  * answers live in React state for the life of the page — no URL, no storage,
  * no analytics. Adding a POST here needs a BAA on every hop first.
  */
-type Residency = "CA" | "WA" | "OTHER";
+type Residency = "WA" | "OTHER";   // Oct 26 2026: California removed for now
 type Reason = "" | "glp1" | "pep" | "trt" | "hrt" | "unsure";
 
 const COPY: Record<Exclude<Reason, "">, { label: string; panel: string }> = {
@@ -29,7 +29,6 @@ const COPY: Record<Exclude<Reason, "">, { label: string; panel: string }> = {
 };
 
 const STATES: { code: Residency; label: string }[] = [
-  { code: "CA", label: "California" },
   { code: "WA", label: "Washington" },
   { code: "OTHER", label: "Elsewhere" },
 ];
@@ -48,7 +47,7 @@ export default function Gate() {
   const [residency, setResidency] = useState<Residency | null>(null);
   const [reason, setReason] = useState<Reason>("");
 
-  const eligible = residency === "CA" || residency === "WA";
+  const eligible = residency === "WA";
   const p = reason ? COPY[reason] : null;
 
   return (
@@ -60,7 +59,7 @@ export default function Gate() {
       <div className="gb">
         <div className="field">
           <label id="lbl-state">Where do you live?</label>
-          <div className="seg" role="group" aria-labelledby="lbl-state">
+          <div className="seg" role="group" aria-labelledby="lbl-state" style={{ gridTemplateColumns: `repeat(${STATES.length},1fr)` }}>
             {STATES.map((s) => (
               <button key={s.code} type="button" aria-pressed={residency === s.code}
                       onClick={() => setResidency(s.code)}>
@@ -108,7 +107,7 @@ export default function Gate() {
               <h4>Not yet — and I would rather tell you now.</h4>
               <p>
                 Telehealth rules require you to be physically located in a state where your clinician is licensed.
-                I hold licenses in California and Washington only. Leave your email and I will tell you if that changes.
+                I currently treat patients in Washington only. Leave your email and I will tell you if that changes.
               </p>
               <ol className="mini">
                 {WAITLIST_STEPS.map((t, i) => (

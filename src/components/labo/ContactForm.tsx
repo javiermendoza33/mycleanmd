@@ -8,7 +8,7 @@ import { PRACTICE } from "@/labo/content";
 const FIELDS = [
   { name: "name", label: "Name", ph: "First and last", type: "text", ac: "name" },
   { name: "email", label: "Email", ph: "you@example.com", type: "email", ac: "email" },
-  { name: "state", label: "State of residence", ph: "California or Washington", type: "text", ac: "address-level1" },
+  { name: "state", label: "State of residence", ph: "Washington", type: "text", ac: "address-level1" },
   { name: "program", label: "Program of interest", ph: "GLP-1, peptides, testosterone, hormone therapy", type: "text", ac: "off" },
 ];
 

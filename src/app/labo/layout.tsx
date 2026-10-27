@@ -62,7 +62,6 @@ const jsonLd = {
   description: DESCRIPTION,
   medicalSpecialty: "Endocrinology",
   areaServed: [
-    { "@type": "State", name: "California" },
     { "@type": "State", name: "Washington" },
   ],
   availableService: [

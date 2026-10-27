@@ -39,7 +39,8 @@
  */
 export const LAUNCH_READY = false;
 
-export const AVAILABILITY = "California and Washington";
+// Oct 26 2026 (Javier: "take out all things California for now") → Washington only. Restore "California and Washington" to bring CA back.
+export const AVAILABILITY = "Washington";
 
 export const PRACTICE = {
   name: "The Labo Method",
@@ -345,7 +346,7 @@ export const ABOUT = {
    *  practice accepts patients. See the licensure note at the top of the file. */
   credentials: [
     { label: "Credential", value: "DNP, MSN, PHN, NP-C — Family Nurse Practitioner" },
-    { label: "Licensure", value: "California, Washington, New York, Nevada. Oregon pending." },
+    { label: "Licensure", value: "Washington" },
     { label: "Doctorate", value: "Doctor of Nursing Practice, Aspen University, 2025" },
     { label: "Graduate", value: "MSN, Family Nurse Practitioner, Cal State Long Beach, 2014" },
     { label: "Certification", value: "American Academy of Nurse Practitioners, cert. F0415015" },
@@ -392,7 +393,7 @@ export const CONTACT = {
 
 export const LEGAL = [
   { title: "No medical advice", body: "The content on this website is for general information only. It is not medical advice, it is not a substitute for consultation with a licensed clinician, and reading it does not create a patient relationship. A patient relationship begins only after intake, a completed clinical evaluation, and a documented visit." },
-  { title: "Scope of licensure", body: `Clinical services are provided by a nurse practitioner licensed in the State of California and the State of Washington. Patients must be physically located in one of these states at the time of each visit. We cannot treat residents of other states.` },
+  { title: "Scope of licensure", body: `Clinical services are provided by a nurse practitioner licensed in the State of Washington. Patients must be physically located in Washington at the time of each visit. We cannot treat residents of other states.` },
   { title: "Telehealth consent", body: "All care is delivered by telehealth. Telehealth has limitations, including the inability to perform a physical examination. In some cases an in-person evaluation, imaging, or referral will be required, and treatment may be declined if remote care is not clinically appropriate." },
   { title: "Compounded medications", body: "Some medications prescribed through this practice are compounded by state-licensed pharmacies. Compounded preparations are not reviewed or approved by the FDA for safety, effectiveness, or manufacturing quality. Your clinician will identify whether a product is FDA-approved or compounded before you begin." },
   { title: "Peptide therapies", body: "Certain peptides are prescribed for uses that are not FDA-approved. Evidence quality varies by agent, and outcomes are not guaranteed. Risks, benefits and the state of the evidence will be discussed with you before any peptide is prescribed." },

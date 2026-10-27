@@ -289,3 +289,7 @@ Javier: "add these services: Botox, dermal fillers, Sculptra, microneedling" + S
 Home "What we treat" = concern chips + one list per group; home nav = Laser / Injectables / Skin → /treatments#group-*. /treatments = grouped jump chips + `#group-<g>` sections. Two injectable FAQs added.
 Placeholder "from" prices (blocking item #5), from Seattle comps Oct 26 2026: Botox $13/unit (Well Medical Arts $15, Seattle Face $16), filler $650/syringe ($650–850), Sculptra $850/vial ($850–990), microneedling $350/session ($350–425). Monika sets the real ones.
 Don't add links to the shared inner-page header (Chrome.tsx): at 1440 it already wraps "How it works".
+
+## Oct 26 2026 — California taken out (Washington only, "for now")
+Javier: "take out all things California for now". `AVAILABILITY = "Washington"` (content.ts) drives the footer, FAQ, program notes and the telehealth eyebrow. Also changed by hand: the licensure credential line, the legal scope-of-licensure text, the Chrome.tsx footer legal paragraph, the JSON-LD areaServed, the Gate (WA / Elsewhere, 2-column), the home telehealth heading and clinician licensure, and the contact-form placeholder. The bio still names Cedars-Sinai and Cal State Long Beach; that's her history, not a service area. To bring CA back, restore those strings (git show this commit).
+Analytics: src/components/labo/Analytics.tsx loads GA4 only when NEXT_PUBLIC_LABO_GA_ID is set (Vercel project mycleanmd). It's off on /programs, /contact, /start and /intake.
