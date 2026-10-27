@@ -394,3 +394,34 @@
 [data-labo] .ph.has-img::after{display:none}
 [data-labo] .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 [data-labo] .ph span{z-index:2}
+
+/* ── Blended photo sections (Oct 26 2026, FaithTexting style) ──────────────
+   The photo is the section background; a white wash keeps the copy side legible
+   and a bottom fade melts it into the next section. Mobile swaps to a vertical wash. */
+[data-labo] .chero.blend{position:relative;overflow:hidden;padding-block:120px 170px;
+  background:linear-gradient(90deg,#fff 0%,rgba(255,255,255,.96) 34%,rgba(255,255,255,.72) 52%,rgba(255,255,255,.08) 74%,rgba(255,255,255,0) 100%),url(/labo/clinic-hero-wide.jpg) 88% 20%/cover}
+[data-labo] .chero.blend::after{content:"";position:absolute;left:0;right:0;bottom:0;height:180px;background:linear-gradient(rgba(255,255,255,0),#fff);pointer-events:none}
+[data-labo] .chero.blend .wrap{position:relative;z-index:1}
+[data-labo] .chero.blend h1{max-width:12ch}
+[data-labo] .trust{list-style:none;margin:30px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:10px 26px}
+[data-labo] .trust li{display:flex;align-items:center;gap:9px;font-size:.92rem;color:var(--graphite);letter-spacing:-.012em}
+[data-labo] .trust li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ok)}
+[data-labo] .bgcap{position:absolute;right:18px;bottom:18px;z-index:2;font-family:var(--font-plex-mono),ui-monospace,Menlo,monospace;font-size:.58rem;letter-spacing:.09em;text-transform:uppercase;color:#fff;background:rgba(29,29,31,.45);padding:5px 10px;border-radius:980px}
+@media (max-width:760px){
+  [data-labo] .chero.blend{padding-block:56px 340px;background:linear-gradient(180deg,#fff 0%,#fff 58%,rgba(255,255,255,.55) 68%,rgba(255,255,255,0) 82%),url(/labo/clinic-hero-m.jpg) 50% 100%/100% auto no-repeat,#fff}
+  [data-labo] .chero.blend::after{height:90px}
+}
+[data-labo] .cblend{position:relative;overflow:hidden;padding-block:130px;
+  background:linear-gradient(90deg,#fff 0%,rgba(255,255,255,.95) 34%,rgba(255,255,255,.55) 58%,rgba(255,255,255,.08) 100%),url(/labo/clinic-room-wide.jpg) 80% 55%/cover}
+[data-labo] .cblend::before,[data-labo] .cblend::after{content:"";position:absolute;left:0;right:0;height:120px;pointer-events:none}
+[data-labo] .cblend::before{top:0;background:linear-gradient(var(--canvas),rgba(245,245,247,0))}
+[data-labo] .cblend::after{bottom:0;background:linear-gradient(rgba(245,245,247,0),var(--canvas))}
+[data-labo] .cblend .wrap{position:relative;z-index:1}
+[data-labo] .visit2{max-width:520px}
+[data-labo] .visit2 .defs{background:rgba(255,255,255,.72);border-radius:20px;padding:4px 20px;backdrop-filter:blur(8px)}
+@media (max-width:760px){[data-labo] .cblend{padding-block:72px 260px;background:linear-gradient(180deg,#fff 0%,rgba(255,255,255,.95) 55%,rgba(255,255,255,.3) 85%,rgba(255,255,255,.05) 100%),url(/labo/clinic-room-wide.jpg) 50% 100%/cover}}
+[data-labo] .close.lblend{position:relative;overflow:hidden;background:radial-gradient(70% 80% at 50% 50%,rgba(255,255,255,.96) 0%,rgba(255,255,255,.86) 55%,rgba(255,255,255,.62) 100%),url(/labo/clinic-laser-wide.jpg) 50% 45%/cover}
+[data-labo] .close.lblend::before{content:"";position:absolute;left:0;right:0;top:0;height:120px;background:linear-gradient(var(--canvas),rgba(245,245,247,0));pointer-events:none}
+[data-labo] .close.lblend .wrap{position:relative;z-index:1}
+[data-labo] .chero.blend .bgcap{top:auto;bottom:190px}
+@media (max-width:760px){[data-labo] .chero.blend .bgcap{top:auto;bottom:16px}}

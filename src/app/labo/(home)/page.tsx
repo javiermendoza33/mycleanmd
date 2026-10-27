@@ -60,7 +60,9 @@ export default function LaboHome() {
 
       <main id="top">
         {/* ── HERO ─────────────────────────────────────────────────────── */}
-        <section className="chero">
+        {/* Oct 26 2026 (Javier: "more style like faithtexting.com with gradient images that blend"): the photo sits behind
+            the whole hero and washes to white under the copy; a soft fade carries it into the next section. */}
+        <section className="chero blend">
           <div className="wrap">
             <span className="kicker">Laser clinic · {CLINIC.city} · {CLINIC.status}</span>
             <h1>Laser care, practiced like medicine.</h1>
@@ -69,8 +71,13 @@ export default function LaboHome() {
               <Link className="btn btn-primary" href="/contact">Request a consultation</Link>
               <Link className="more" href="/treatments">See every treatment</Link>
             </div>
-            <Ph label="the treatment room" className="hero-ph" src="/labo/clinic-hero.jpg" alt="A client resting during a gentle facial treatment" pos="60% 40%" />
+            <ul className="trust">
+              <li>Exam before every first treatment</li>
+              <li>Every skin type, I to VI</li>
+              <li>Written plan and price up front</li>
+            </ul>
           </div>
+          <span className="bgcap">Stock · the treatment room</span>
         </section>
 
         {/* ── TREATMENTS — editorial numbered rows ─────────────────────── */}
@@ -171,10 +178,9 @@ export default function LaboHome() {
         </section>
 
         {/* ── THE CLINIC ───────────────────────────────────────────────── */}
-        <section id="clinic">
+        <section id="clinic" className="cblend">
           <div className="wrap">
-            <div className="visit">
-              <Ph label="the clinic, Seattle" ratio="3/2" src="/labo/clinic-room.jpg" alt="A bright, white clinic reception with curved lines and glass" />
+            <div className="visit2">
               <div>
                 <span className="kicker">The clinic</span>
                 <h2 style={{ marginTop: 15 }}>{CLINIC.city.split(",")[0]}. {CLINIC.status}.</h2>
@@ -189,6 +195,7 @@ export default function LaboHome() {
               </div>
             </div>
           </div>
+          <span className="bgcap">Stock · the clinic, Seattle</span>
         </section>
 
         {/* ── TELEHEALTH — the practice's second line, gate kept ───────── */}
@@ -212,7 +219,7 @@ export default function LaboHome() {
         </section>
 
         {/* ── CLOSE ────────────────────────────────────────────────────── */}
-        <section className="close">
+        <section className="close lblend">
           <div className="wrap">
             <h2>Start with a consultation.</h2>
             <p className="sub" style={{ margin: "20px auto 0", maxWidth: "44ch" }}>Thirty minutes, an exam, a test spot and a written plan with the full price. No pressure to book the course.</p>
