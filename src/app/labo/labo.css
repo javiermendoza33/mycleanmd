@@ -416,16 +416,16 @@
   [data-labo] .chero.blend::after{height:42%}
 }
 [data-labo] .cblend{position:relative;overflow:hidden;padding-block:130px;
-  background:linear-gradient(90deg,#0B3D2E 0%,rgba(11,61,46,.95) 34%,rgba(11,61,46,.55) 58%,rgba(11,61,46,.08) 100%),url(/labo/clinic-room-wide.jpg) 80% 55%/cover}
-[data-labo] .cblend::before,[data-labo] .cblend::after{content:"";position:absolute;left:0;right:0;height:120px;pointer-events:none}
-[data-labo] .cblend::before{top:0;background:linear-gradient(var(--canvas),rgba(15,70,54,0))}
-[data-labo] .cblend::after{bottom:0;background:linear-gradient(rgba(15,70,54,0),var(--canvas))}
+  background:linear-gradient(90deg,#0F4636 0%,rgba(15,70,54,.95) 34%,rgba(15,70,54,.55) 58%,rgba(15,70,54,.08) 100%),url(/labo/clinic-room-wide.jpg) 80% 55%/cover}
 [data-labo] .cblend .wrap{position:relative;z-index:1}
 [data-labo] .visit2{max-width:520px}
 [data-labo] .visit2 .defs{background:rgba(11,61,46,.72);border-radius:20px;padding:4px 20px;backdrop-filter:blur(8px)}
-@media (max-width:760px){[data-labo] .cblend{padding-block:72px 260px;background:linear-gradient(180deg,#0B3D2E 0%,rgba(11,61,46,.95) 55%,rgba(11,61,46,.3) 85%,rgba(11,61,46,.05) 100%),url(/labo/clinic-room-wide.jpg) 50% 100%/cover}}
-[data-labo] .close.lblend{position:relative;overflow:hidden;background:radial-gradient(70% 80% at 50% 50%,rgba(11,61,46,.96) 0%,rgba(11,61,46,.86) 55%,rgba(11,61,46,.62) 100%),url(/labo/clinic-laser-wide.jpg) 50% 45%/cover}
-[data-labo] .close.lblend::before{content:"";position:absolute;left:0;right:0;top:0;height:120px;background:linear-gradient(var(--canvas),rgba(15,70,54,0));pointer-events:none}
+@media (max-width:760px){[data-labo] .cblend{padding-block:72px 260px;background:linear-gradient(180deg,#0F4636 0%,rgba(15,70,54,.95) 55%,rgba(15,70,54,.3) 85%,rgba(15,70,54,.05) 100%),url(/labo/clinic-room-wide.jpg) 50% 100%/cover}}
+[data-labo] .close.lblend{position:relative;overflow:hidden;background:radial-gradient(70% 80% at 50% 50%,rgba(15,70,54,.96) 0%,rgba(15,70,54,.86) 55%,rgba(15,70,54,.62) 100%),url(/labo/clinic-laser-wide.jpg) 50% 45%/cover}
+/* Oct 26 2026 (Javier: "blend this better"): long eased fades top AND bottom, above the tint, so the photo has no edges */
+[data-labo] .close.lblend::before,[data-labo] .close.lblend::after{content:"";position:absolute;left:0;right:0;height:55%;pointer-events:none;z-index:1}
+[data-labo] .close.lblend::before{top:0;background:linear-gradient(180deg,#0F4636 0%,rgba(15,70,54,.9) 14%,rgba(15,70,54,.68) 32%,rgba(15,70,54,.4) 52%,rgba(15,70,54,.16) 74%,rgba(15,70,54,0) 100%)}
+[data-labo] .close.lblend::after{bottom:0;height:45%;background:linear-gradient(0deg,#0F4636 0%,rgba(15,70,54,.85) 18%,rgba(15,70,54,.5) 45%,rgba(15,70,54,.18) 72%,rgba(15,70,54,0) 100%)}
 [data-labo] .close.lblend .wrap{position:relative;z-index:1}
 [data-labo] .chero.blend .bgcap{top:auto;bottom:190px}
 @media (max-width:760px){[data-labo] .chero.blend .bgcap{top:auto;bottom:16px}}
@@ -470,3 +470,8 @@
 
 /* the fade ends in solid emerald, so the next section must be the same solid emerald (the ground glow showed a seam) */
 [data-labo] .chero.blend + section{background:var(--paper)}
+
+/* Oct 26 2026 (Javier: "and this"): the clinic photo gets the same long eased fades top and bottom, above the tint */
+[data-labo] .cblend::before,[data-labo] .cblend::after{content:"";position:absolute;left:0;right:0;pointer-events:none;z-index:1}
+[data-labo] .cblend::before{top:0;height:45%;background:linear-gradient(180deg,#0F4636 0%,rgba(15,70,54,.88) 16%,rgba(15,70,54,.6) 36%,rgba(15,70,54,.3) 60%,rgba(15,70,54,.1) 82%,rgba(15,70,54,0) 100%)}
+[data-labo] .cblend::after{bottom:0;height:40%;background:linear-gradient(0deg,#0F4636 0%,rgba(15,70,54,.85) 18%,rgba(15,70,54,.5) 45%,rgba(15,70,54,.18) 72%,rgba(15,70,54,0) 100%)}
