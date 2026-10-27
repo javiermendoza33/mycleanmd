@@ -402,7 +402,9 @@
    and a bottom fade melts it into the next section. Mobile swaps to a vertical wash. */
 [data-labo] .chero.blend{position:relative;overflow:hidden;padding-block:120px 170px;
   background:linear-gradient(90deg,#0B3D2E 0%,rgba(11,61,46,.96) 34%,rgba(11,61,46,.72) 52%,rgba(11,61,46,.08) 74%,rgba(11,61,46,0) 100%),url(/labo/clinic-hero-wide.jpg) 88% 20%/cover}
-[data-labo] .chero.blend::after{content:"";position:absolute;left:0;right:0;bottom:0;height:180px;background:linear-gradient(rgba(11,61,46,0),#0B3D2E);pointer-events:none}
+/* Oct 26 2026 (Javier: "blend more on the top photo down a bit, very blending fade"): a long eased fade, about 45% of the hero */
+[data-labo] .chero.blend::after{content:"";position:absolute;left:0;right:0;bottom:0;height:46%;pointer-events:none;
+  background:linear-gradient(180deg,rgba(11,61,46,0) 0%,rgba(11,61,46,.08) 18%,rgba(11,61,46,.24) 36%,rgba(11,61,46,.46) 54%,rgba(11,61,46,.7) 72%,rgba(11,61,46,.9) 87%,#0B3D2E 100%)}
 [data-labo] .chero.blend .wrap{position:relative;z-index:1}
 [data-labo] .chero.blend h1{max-width:12ch}
 [data-labo] .trust{list-style:none;margin:30px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:10px 26px}
@@ -410,8 +412,8 @@
 [data-labo] .trust li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ok)}
 [data-labo] .bgcap{position:absolute;right:18px;bottom:18px;z-index:2;font-family:var(--font-plex-mono),ui-monospace,Menlo,monospace;font-size:.58rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink);background:rgba(6,32,24,.5);padding:5px 10px;border-radius:980px}
 @media (max-width:760px){
-  [data-labo] .chero.blend{padding-block:56px 340px;background:linear-gradient(180deg,#0B3D2E 0%,#0B3D2E 58%,rgba(11,61,46,.55) 68%,rgba(11,61,46,0) 82%),url(/labo/clinic-hero-m.jpg) 50% 100%/100% auto no-repeat,#0B3D2E}
-  [data-labo] .chero.blend::after{height:90px}
+  [data-labo] .chero.blend{padding-block:56px 340px;background:linear-gradient(180deg,#0B3D2E 0%,#0B3D2E 50%,rgba(11,61,46,.92) 56%,rgba(11,61,46,.72) 63%,rgba(11,61,46,.44) 71%,rgba(11,61,46,.18) 79%,rgba(11,61,46,0) 88%),url(/labo/clinic-hero-m.jpg) 50% 100%/100% auto no-repeat,#0B3D2E}
+  [data-labo] .chero.blend::after{height:42%}
 }
 [data-labo] .cblend{position:relative;overflow:hidden;padding-block:130px;
   background:linear-gradient(90deg,#0B3D2E 0%,rgba(11,61,46,.95) 34%,rgba(11,61,46,.55) 58%,rgba(11,61,46,.08) 100%),url(/labo/clinic-room-wide.jpg) 80% 55%/cover}
@@ -460,6 +462,11 @@
 /* Emerald wash over the blended photos: multiply turns the photos' white studio backdrops emerald and leaves skin tones warm. */
 [data-labo] .chero.blend::before,[data-labo] .cblend .tint,[data-labo] .close.lblend .tint{content:"";position:absolute;inset:0;pointer-events:none;mix-blend-mode:multiply;
   background:linear-gradient(90deg,rgba(11,61,46,0) 45%,rgba(40,120,92,.28) 72%,rgba(30,104,80,.72) 100%)}
-@media (max-width:760px){[data-labo] .chero.blend::before{background:linear-gradient(180deg,rgba(11,61,46,0) 60%,rgba(40,120,92,.3) 100%)}}
+/* phone: the photo (1000×700, width 100%, anchored bottom) is 70vw tall — fade its top edge into the emerald */
+@media (max-width:760px){[data-labo] .chero.blend::before{top:auto;bottom:0;height:70vw;mix-blend-mode:normal;
+  background:linear-gradient(180deg,#0B3D2E 0%,rgba(11,61,46,.8) 10%,rgba(11,61,46,.45) 24%,rgba(11,61,46,.15) 38%,rgba(11,61,46,0) 50%)}}
 [data-labo] .cblend .tint,[data-labo] .close.lblend .tint{display:block}
 [data-labo] .cblend .wrap,[data-labo] .close.lblend .wrap{position:relative;z-index:2}
+
+/* the fade ends in solid emerald, so the next section must be the same solid emerald (the ground glow showed a seam) */
+[data-labo] .chero.blend + section{background:var(--paper)}
