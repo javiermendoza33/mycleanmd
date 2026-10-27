@@ -36,7 +36,7 @@ function Ph({ label, ratio, className, src, alt, pos }: { label: string; ratio?:
   return (
     <figure className={`ph ${src ? "has-img" : ""} ${className ?? ""}`} style={ratio ? { aspectRatio: ratio } : undefined}>
       {src && <img src={src} alt={alt ?? ""} style={pos ? { objectPosition: pos } : undefined} loading={className === "hero-ph" ? "eager" : "lazy"} />}
-      <span>{src ? `Stock · ${label}` : `Photo · ${label}`}</span>
+      {!src && <span>{`Photo · ${label}`}</span>}   {/* Oct 26 2026: no caption on stock stand-ins (Javier: "remove the stock message near photos") */}
     </figure>
   );
 }
@@ -77,7 +77,6 @@ export default function LaboHome() {
               <li>Written plan and price up front</li>
             </ul>
           </div>
-          <span className="bgcap">Stock · the treatment room</span>
         </section>
 
         {/* ── TREATMENTS — editorial numbered rows ─────────────────────── */}
@@ -195,7 +194,6 @@ export default function LaboHome() {
               </div>
             </div>
           </div>
-          <span className="bgcap">Stock · the clinic, Seattle</span>
         </section>
 
         {/* ── TELEHEALTH — the practice's second line, gate kept ───────── */}
