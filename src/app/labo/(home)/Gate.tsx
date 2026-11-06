@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { HEALTHIE, PRACTICE } from "@/labo/content";
+import { PRACTICE } from "@/labo/content";
 
 /**
  * The eligibility gate — the hero's primary interactive element and the whole
@@ -17,19 +17,20 @@ import { HEALTHIE, PRACTICE } from "@/labo/content";
  * answers live in React state for the life of the page — no URL, no storage,
  * no analytics. Adding a POST here needs a BAA on every hop first.
  */
-type Residency = "WA" | "OTHER";   // Oct 26 2026: California removed for now
+type Residency = "WA" | "CA" | "OTHER";   // Nov 6 2026: California restored
 type Reason = "" | "glp1" | "pep" | "trt" | "hrt" | "unsure";
 
-const COPY: Record<Exclude<Reason, "">, { label: string; panel: string }> = {
-  glp1:   { label: "GLP-1 Weight Management",  panel: "metabolic panel with HbA1c, fasting insulin and lipids" },
-  pep:    { label: "Peptide Therapy",           panel: "baseline panel with IGF-1 and inflammatory markers" },
-  trt:    { label: "Testosterone for Men",      panel: "full endocrine work-up with hematocrit and PSA" },
-  hrt:    { label: "Hormone Therapy for Women", panel: "hormone panel with estradiol, FSH and progesterone" },
+const COPY: Record<Exclude<Reason, "">, { label: string; panel: string; slug?: string }> = {
+  glp1:   { label: "GLP-1 Weight Management",  panel: "metabolic panel with HbA1c, fasting insulin and lipids", slug: "glp-1-weight-management" },
+  pep:    { label: "Peptide Therapy",           panel: "baseline panel with IGF-1 and inflammatory markers", slug: "peptide-therapy" },
+  trt:    { label: "Testosterone for Men",      panel: "full endocrine work-up with hematocrit and PSA", slug: "testosterone-for-men" },
+  hrt:    { label: "Hormone Therapy for Women", panel: "hormone panel with estradiol, FSH and progesterone", slug: "hormone-therapy-for-women" },
   unsure: { label: "a starting consult",        panel: "broad baseline panel" },
 };
 
 const STATES: { code: Residency; label: string }[] = [
   { code: "WA", label: "Washington" },
+  { code: "CA", label: "California" },
   { code: "OTHER", label: "Elsewhere" },
 ];
 
@@ -47,7 +48,7 @@ export default function Gate() {
   const [residency, setResidency] = useState<Residency | null>(null);
   const [reason, setReason] = useState<Reason>("");
 
-  const eligible = residency === "WA";
+  const eligible = residency === "WA" || residency === "CA";
   const p = reason ? COPY[reason] : null;
 
   return (
@@ -97,7 +98,7 @@ export default function Gate() {
                 ))}
               </ol>
               <div>
-                <a className="btn btn-primary" href={HEALTHIE.intake} target="_blank" rel="noopener noreferrer">
+                <a className="btn btn-primary" href={p?.slug ? `/join/${p.slug}` : "/programs"}>
                   Start my intake
                 </a>
               </div>
@@ -107,7 +108,7 @@ export default function Gate() {
               <h4>Not yet — and I would rather tell you now.</h4>
               <p>
                 Telehealth rules require you to be physically located in a state where your clinician is licensed.
-                I currently treat patients in Washington only. Leave your email and I will tell you if that changes.
+                I currently treat patients in Washington and California only. Leave your email and I will tell you if that changes.
               </p>
               <ol className="mini">
                 {WAITLIST_STEPS.map((t, i) => (
