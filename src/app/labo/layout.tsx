@@ -61,9 +61,7 @@ const jsonLd = {
   email: PRACTICE.email,
   description: DESCRIPTION,
   medicalSpecialty: "Endocrinology",
-  areaServed: [
-    { "@type": "State", name: "Washington" },
-  ],
+  areaServed: AVAILABILITY.split(" and ").map((name) => ({ "@type": "State", name })),
   availableService: [
     { "@type": "MedicalTherapy", name: "GLP-1 Weight Management" },
     { "@type": "MedicalTherapy", name: "Peptide Therapy" },
