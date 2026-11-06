@@ -31,6 +31,15 @@ function LoginInner() {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password })
     if (error) { setError(error.message); setLoading(false); return }
 
+    // A redirect param (e.g. from the Labo portal's auth gate) wins over the
+    // generic role-based destination — but only a same-site relative path.
+    const redirect = params.get('redirect')
+    if (redirect && redirect.startsWith('/') && !redirect.startsWith('//')) {
+      router.push(redirect)
+      router.refresh()
+      return
+    }
+
     const { data: profile } = await supabase
       .from('profiles').select('role').eq('id', data.user.id).single()
     const role = profile?.role ?? 'patient'
