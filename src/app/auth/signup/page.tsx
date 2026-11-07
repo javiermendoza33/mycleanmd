@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { Suspense, useState } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import SocialAuth from '@/components/SocialAuth'
@@ -11,8 +11,9 @@ const ROLES = [
   { value: 'doctor', label: 'Provider', desc: 'I practice medicine', icon: '👨‍⚕️' },
 ] as const
 
-export default function SignupPage() {
+function SignupInner() {
   const router = useRouter()
+  const params = useSearchParams()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -34,7 +35,10 @@ export default function SignupPage() {
     if (data.user) {
       await supabase.from('profiles').upsert({ id: data.user.id, full_name: name, role, email })
     }
-    if (role === 'doctor') router.push('/doctor/dashboard')
+    const redirect = params.get('redirect')
+    if (redirect && redirect.startsWith('/') && !redirect.startsWith('//')) {
+      router.push(redirect)
+    } else if (role === 'doctor') router.push('/doctor/dashboard')
     else router.push('/patient/dashboard')
     router.refresh()
   }
@@ -181,5 +185,15 @@ export default function SignupPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+/* useSearchParams needs a Suspense boundary or the whole route opts out of
+   static rendering (same reason as the login page). */
+export default function SignupPage() {
+  return (
+    <Suspense fallback={null}>
+      <SignupInner />
+    </Suspense>
   )
 }

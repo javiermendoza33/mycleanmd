@@ -15,6 +15,14 @@ export type IntakeConfig = {
   doneHref: string
   careType: string
   steps: IntakeStep[]
+  /** Override the save endpoint (defaults to /api/intake/save + careType).
+   *  Used by the Labo Method portal to save against an enrollment instead of
+   *  the generic MyCleanMD intake_submissions table. When set, the
+   *  fire-and-forget intake email (built for careType-shaped submissions) is
+   *  skipped — the caller owns its own notification if it needs one. */
+  saveUrl?: string
+  /** Extra fields merged into the POST body when saveUrl is set. */
+  extraBody?: Record<string, unknown>
 }
 
 // ── Tokens ────────────────────────────────────────────────────────────────────
@@ -157,16 +165,17 @@ export default function IntakeFlow({ config }: { config: IntakeConfig }) {
               onClick={async () => {
                 setSaving(true)
                 try {
-                  const res = await fetch('/api/intake/save', {
+                  const res = await fetch(config.saveUrl ?? '/api/intake/save', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ careType: config.careType, answers }),
+                    body: JSON.stringify({ careType: config.careType, answers, ...config.extraBody }),
                   })
                   if (!res.ok) {
                     const { error } = await res.json()
                     console.error('Intake save failed:', error)
-                  } else {
-                    // Fire-and-forget email (non-blocking)
+                  } else if (!config.saveUrl) {
+                    // Fire-and-forget email (non-blocking) — only for the generic
+                    // MyCleanMD intake_submissions flow this was built around.
                     const supabase = createClient()
                     const { data: { user } } = await supabase.auth.getUser()
                     if (user) {

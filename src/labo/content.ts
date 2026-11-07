@@ -39,8 +39,9 @@
  */
 export const LAUNCH_READY = false;
 
-// Oct 26 2026 (Javier: "take out all things California for now") → Washington only. Restore "California and Washington" to bring CA back.
-export const AVAILABILITY = "Washington";
+// Nov 6 2026 (Javier: "she is a doctor and can prescribe in WA and CA") → restored.
+// Oct 26 2026 (Javier: "take out all things California for now") had set this to Washington only.
+export const AVAILABILITY = "California and Washington";
 
 export const PRACTICE = {
   name: "The Labo Method",
@@ -88,6 +89,11 @@ export interface Program {
   price: string;
   priceMeta: string;
   priceNote: string;
+  /** Stripe Price ID (subscription, monthly) for /api/labo/checkout. Not set
+   *  yet — Javier creates a Stripe account + these 4 Products/Prices, then
+   *  fills these in (or moves them to env vars if preferred). Checkout
+   *  returns a clear 503 until a real price id replaces the placeholder. */
+  stripePriceId: string;
   leftHeading: string;
   leftItems: string[];
   rightHeading: string;
@@ -110,6 +116,7 @@ export const PROGRAMS: Program[] = [
     price: "$299",
     priceMeta: "$299 / mo",
     priceNote: "Medication, visits and messaging included. Labs billed separately.",
+    stripePriceId: "PRICE_ID_NOT_SET",
     leftHeading: "Who this is for",
     leftItems: [
       "Adults with a BMI of 30 or above, or 27 with a related condition",
@@ -149,6 +156,7 @@ export const PROGRAMS: Program[] = [
     price: "$249",
     priceMeta: "$249 / mo",
     priceNote: "Includes clinician oversight and pharmacy coordination. Peptide cost varies.",
+    stripePriceId: "PRICE_ID_NOT_SET",
     leftHeading: "What people come in for",
     leftItems: [
       "Slow recovery from training or injury",
@@ -188,6 +196,7 @@ export const PROGRAMS: Program[] = [
     price: "$199",
     priceMeta: "$199 / mo",
     priceNote: "Medication, supplies, visits and messaging included. Labs billed separately.",
+    stripePriceId: "PRICE_ID_NOT_SET",
     leftHeading: "Symptoms worth investigating",
     leftItems: [
       "Fatigue that sleep does not fix",
@@ -227,6 +236,7 @@ export const PROGRAMS: Program[] = [
     price: "$199",
     priceMeta: "$199 / mo",
     priceNote: "Medication, visits and messaging included. Labs billed separately.",
+    stripePriceId: "PRICE_ID_NOT_SET",
     leftHeading: "What we treat",
     leftItems: [
       "Hot flashes and night sweats",

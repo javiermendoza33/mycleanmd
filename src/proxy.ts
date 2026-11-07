@@ -33,6 +33,56 @@ export async function proxy(request: NextRequest) {
       url.pathname = path.slice('/labo'.length) || '/'
       return NextResponse.redirect(url, 308)
     }
+
+    // The patient portal (/portal*) is the one part of this host that is NOT
+    // public marketing — it needs a real Supabase session, same mechanism the
+    // mycleanmd.com guard uses lower in this file (that guard never runs for
+    // this host, since we return before reaching it).
+    // API routes and the auth pages live at the app root and are shared by both brands — pass them
+    // through untouched, otherwise the catch-all rewrite below turns /auth/login into /labo/auth/login (404).
+    // Verified Nov 6 2026: login, /api/auth/providers and /api/labo/checkout all 404'd on this host before this.
+    if (path.startsWith('/api/') || path === '/auth' || path.startsWith('/auth/')) {
+      return NextResponse.next({ request })
+    }
+    // The provider portal (/provider*, Nov 6 2026) is gated the same way PLUS an email allowlist
+    // (LABO_PROVIDER_EMAIL, comma-separated). A signed-in patient who tries it lands on their own portal.
+    const isProvider = path === '/provider' || path.startsWith('/provider/')
+    if (path === '/portal' || path.startsWith('/portal/') || isProvider) {
+      let portalResponse = NextResponse.next({ request })
+      const supabase = createServerClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+        {
+          cookies: {
+            getAll() { return request.cookies.getAll() },
+            setAll(cookiesToSet) {
+              cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value))
+              portalResponse = NextResponse.next({ request })
+              cookiesToSet.forEach(({ name, value, options }) =>
+                portalResponse.cookies.set(name, value, options)
+              )
+            },
+          },
+        }
+      )
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) {
+        const loginUrl = new URL('/auth/login', request.url)
+        loginUrl.searchParams.set('redirect', path)
+        return NextResponse.redirect(loginUrl)
+      }
+      if (isProvider) {
+        const allow = (process.env.LABO_PROVIDER_EMAIL || '').split(',').map((s) => s.trim().toLowerCase()).filter(Boolean)
+        if (!allow.includes((user.email || '').toLowerCase())) return NextResponse.redirect(new URL('/portal', request.url))
+      }
+      const url = request.nextUrl.clone()
+      url.pathname = `/labo${path}`
+      const rewritten = NextResponse.rewrite(url)
+      // Carry over any refreshed session cookies Supabase set above.
+      portalResponse.cookies.getAll().forEach((c) => rewritten.cookies.set(c))
+      return rewritten
+    }
+
     const url = request.nextUrl.clone()
     url.pathname = `/labo${path === '/' ? '' : path}`
     return NextResponse.rewrite(url)
