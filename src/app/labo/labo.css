@@ -13,23 +13,23 @@
   display:block;min-height:100vh;
   /* Oct 26 2026 — "Deep Emerald and Matte Gold" (Javier): green = prosperity, life and natural beauty;
      gold = auspicious luxury. Rich emerald grounds, ivory type, matte-gold UI accents only. */
-  --paper:#0B3D2E;        /* deep emerald, the page ground */
-  --canvas:#0F4636;       /* the .grey sections and tiles, one step lighter */
-  --wash:#15523F;         /* chips, hovers */
-  --ink:#F3EDDC;          /* ivory */
-  --graphite:#D9D1BC;
-  --muted:#A3B8A9;        /* sage */
-  --line:rgba(197,165,98,.26);
-  --hair:rgba(243,237,220,.09);
-  --accent:#C5A562;       /* matte gold */
-  --accent-tint:rgba(197,165,98,.13);
-  --on-accent:#0A2E23;    /* text on gold */
-  --ok:#8CC7A0;
-  --ok-tint:rgba(140,199,160,.12);
+  --paper:#FFFFFF;        /* Apple white (Nov 6 2026: emerald → Apple light "for now") */
+  --canvas:#F5F5F7;       /* the .grey sections and tiles */
+  --wash:#EBEBEF;         /* chips, hovers */
+  --ink:#1D1D1F;          /* near-black */
+  --graphite:#424245;
+  --muted:#6E6E73;        /* gray */
+  --line:rgba(0,0,0,.10);
+  --hair:rgba(0,0,0,.06);
+  --accent:#0071E3;       /* Apple blue */
+  --accent-tint:rgba(0,113,227,.10);
+  --on-accent:#FFFFFF;    /* text on blue */
+  --ok:#1F8F45;
+  --ok-tint:rgba(31,143,69,.10);
   --radius-card:28px;
 }
 /* Single theme: emerald. Every colour is painted explicitly so the page holds on any host ground. */
-[data-labo]{color-scheme:dark}
+[data-labo]{color-scheme:light}
 
 [data-labo] *{box-sizing:border-box}
 [data-labo]{
@@ -303,7 +303,7 @@
 [data-labo] .car-dot.on{background:#fff}
 [data-labo] .car-dot:focus-visible,[data-labo] .car-arrow:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 [data-labo] .car-arrows{display:flex;gap:8px}
-[data-labo] .car-arrow{font:inherit;font-size:.9rem;line-height:1;width:34px;height:34px;border-radius:50%;border:0;cursor:pointer;color:var(--ink);background:rgba(11,61,46,.82)}
+[data-labo] .car-arrow{font:inherit;font-size:.9rem;line-height:1;width:34px;height:34px;border-radius:50%;border:0;cursor:pointer;color:var(--ink);background:rgba(255,255,255,.82)}
 @supports (backdrop-filter:blur(6px)){[data-labo] .car-arrow{backdrop-filter:blur(6px)}}
 [data-labo] .car-cap{margin-top:12px;font-family:var(--font-plex-mono),ui-monospace,Menlo,monospace;font-size:.64rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
 [data-labo] .bio p{font-size:.98rem;color:var(--graphite);letter-spacing:-.015em}
@@ -325,7 +325,7 @@
 @media (max-width:760px){[data-labo] .chero{padding-block:56px 0}}
 
 [data-labo] .ph{position:relative;border-radius:var(--radius-card);overflow:hidden;aspect-ratio:3/2;
-  background:radial-gradient(120% 90% at 20% 10%,rgba(197,165,98,.18) 0%,transparent 55%),linear-gradient(160deg,#145240 0%,#0F4636 55%,#0A3628 100%);
+  background:radial-gradient(120% 90% at 20% 10%,rgba(0,113,227,.18) 0%,transparent 55%),linear-gradient(160deg,#F5F5F7 0%,#ECECF0 55%,#E2E2E7 100%)   /* Nov 6 2026: light placeholder tile */;
   display:flex;align-items:flex-end}
 [data-labo] .ph::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,rgba(255,255,255,.18) 0 2px,transparent 2px 14px);pointer-events:none}
 [data-labo] .ph span{position:relative;z-index:1;margin:14px;font-family:var(--font-plex-mono),ui-monospace,Menlo,monospace;font-size:.6rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink);background:rgba(6,32,24,.6);padding:6px 11px;border-radius:980px}
@@ -402,14 +402,15 @@
    and a bottom fade melts it into the next section. Mobile swaps to a vertical wash. */
 /* Oct 26 2026 (Javier: "bring her down a bit"): the photo starts 90px lower, its top fades into the emerald like the bottom,
    and the hero runs taller so she reaches further down the page before the long bottom fade. */
-[data-labo] .chero.blend{position:relative;overflow:hidden;padding-block:130px 290px;background-color:#0B3D2E;
-  background-image:radial-gradient(ellipse 34% 62% at 71% 54%,rgba(11,61,46,0) 0%,rgba(11,61,46,0) 55%,rgba(11,61,46,.35) 78%,rgba(11,61,46,.75) 100%),
-    linear-gradient(180deg,#0B3D2E 0,#0B3D2E 90px,rgba(11,61,46,.86) 140px,rgba(11,61,46,.62) 200px,rgba(11,61,46,.36) 270px,rgba(11,61,46,.14) 350px,rgba(11,61,46,0) 440px),
-    linear-gradient(90deg,#0B3D2E 0%,rgba(11,61,46,.96) 31%,rgba(11,61,46,.62) 45%,rgba(11,61,46,.2) 56%,rgba(11,61,46,0) 66%),url(/labo/clinic-hero-wide.jpg);   /* Oct 26 2026: cleared off her face (Javier: "see clear her eyes") */
-  background-position:0 0,0 0,0 0,88% 90px;background-size:100% 100%,100% 100%,100% 100%,auto 880px;background-repeat:no-repeat}
+[data-labo] .chero.blend{position:relative;overflow:hidden;padding-block:130px 290px;background-color:#FFFFFF;
+  background-image:linear-gradient(270deg,#FFFFFF 0%,rgba(255,255,255,.85) 6%,rgba(255,255,255,.35) 14%,rgba(255,255,255,0) 24%),
+    radial-gradient(ellipse 34% 62% at 71% 54%,rgba(255,255,255,0) 0%,rgba(255,255,255,0) 55%,rgba(255,255,255,.5) 78%,rgba(255,255,255,.95) 100%),
+    linear-gradient(180deg,#FFFFFF 0,#FFFFFF 90px,rgba(255,255,255,.86) 140px,rgba(255,255,255,.62) 200px,rgba(255,255,255,.36) 270px,rgba(255,255,255,.14) 350px,rgba(255,255,255,0) 440px),
+    linear-gradient(90deg,#FFFFFF 0%,rgba(255,255,255,.96) 31%,rgba(255,255,255,.62) 45%,rgba(255,255,255,.2) 56%,rgba(255,255,255,0) 66%),url(/labo/clinic-hero-wide.jpg);   /* Oct 26 2026: cleared off her face (Javier: "see clear her eyes") */
+  background-position:0 0,0 0,0 0,0 0,88% 90px;background-size:100% 100%,100% 100%,100% 100%,100% 100%,auto 880px;background-repeat:no-repeat}
 /* Oct 26 2026 (Javier: "blend more on the top photo down a bit, very blending fade"): a long eased fade, about 45% of the hero */
 [data-labo] .chero.blend::after{content:"";position:absolute;left:0;right:0;bottom:0;height:46%;pointer-events:none;
-  background:linear-gradient(180deg,rgba(11,61,46,0) 0%,rgba(11,61,46,.08) 18%,rgba(11,61,46,.24) 36%,rgba(11,61,46,.46) 54%,rgba(11,61,46,.7) 72%,rgba(11,61,46,.9) 87%,#0B3D2E 100%)}
+  background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.08) 18%,rgba(255,255,255,.24) 36%,rgba(255,255,255,.46) 54%,rgba(255,255,255,.7) 72%,rgba(255,255,255,.9) 87%,#FFFFFF 100%)}
 [data-labo] .chero.blend .wrap{position:relative;z-index:1}
 [data-labo] .chero.blend h1{max-width:12ch}
 [data-labo] .trust{list-style:none;margin:30px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:10px 26px}
@@ -417,20 +418,20 @@
 [data-labo] .trust li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ok)}
 [data-labo] .bgcap{position:absolute;right:18px;bottom:18px;z-index:2;font-family:var(--font-plex-mono),ui-monospace,Menlo,monospace;font-size:.58rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink);background:rgba(6,32,24,.5);padding:5px 10px;border-radius:980px}
 @media (max-width:760px){
-  [data-labo] .chero.blend{padding-block:56px 340px;background:linear-gradient(180deg,#0B3D2E 0%,#0B3D2E 50%,rgba(11,61,46,.92) 56%,rgba(11,61,46,.72) 63%,rgba(11,61,46,.44) 71%,rgba(11,61,46,.18) 79%,rgba(11,61,46,0) 88%),url(/labo/clinic-hero-m.jpg) 50% 100%/100% auto no-repeat,#0B3D2E}
+  [data-labo] .chero.blend{padding-block:56px 340px;background:linear-gradient(180deg,#FFFFFF 0%,#FFFFFF 50%,rgba(255,255,255,.92) 56%,rgba(255,255,255,.72) 63%,rgba(255,255,255,.44) 71%,rgba(255,255,255,.18) 79%,rgba(255,255,255,0) 88%),url(/labo/clinic-hero-m.jpg) 50% 100%/100% auto no-repeat,#FFFFFF}
   [data-labo] .chero.blend::after{height:42%}
 }
 [data-labo] .cblend{position:relative;overflow:hidden;padding-block:130px;
-  background:linear-gradient(90deg,#0F4636 0%,rgba(15,70,54,.95) 34%,rgba(15,70,54,.55) 58%,rgba(15,70,54,.08) 100%),url(/labo/clinic-room-wide.jpg) 80% 55%/cover}
+  background:linear-gradient(90deg,#FFFFFF 0%,rgba(255,255,255,.95) 34%,rgba(255,255,255,.55) 58%,rgba(255,255,255,.08) 100%),url(/labo/clinic-room-wide.jpg) 80% 55%/cover}
 [data-labo] .cblend .wrap{position:relative;z-index:1}
 [data-labo] .visit2{max-width:520px}
-[data-labo] .visit2 .defs{background:rgba(11,61,46,.72);border-radius:20px;padding:4px 20px;backdrop-filter:blur(8px)}
-@media (max-width:760px){[data-labo] .cblend{padding-block:72px 260px;background:linear-gradient(180deg,#0F4636 0%,rgba(15,70,54,.95) 55%,rgba(15,70,54,.3) 85%,rgba(15,70,54,.05) 100%),url(/labo/clinic-room-wide.jpg) 50% 100%/cover}}
-[data-labo] .close.lblend{position:relative;overflow:hidden;background:radial-gradient(70% 80% at 50% 50%,rgba(15,70,54,.96) 0%,rgba(15,70,54,.86) 55%,rgba(15,70,54,.62) 100%),url(/labo/clinic-laser-wide.jpg) 50% 45%/cover}
+[data-labo] .visit2 .defs{background:rgba(255,255,255,.72);border-radius:20px;padding:4px 20px;backdrop-filter:blur(8px)}
+@media (max-width:760px){[data-labo] .cblend{padding-block:72px 260px;background:linear-gradient(180deg,#FFFFFF 0%,rgba(255,255,255,.95) 55%,rgba(255,255,255,.3) 85%,rgba(255,255,255,.05) 100%),url(/labo/clinic-room-wide.jpg) 50% 100%/cover}}
+[data-labo] .close.lblend{position:relative;overflow:hidden;background:radial-gradient(70% 80% at 50% 50%,rgba(255,255,255,.96) 0%,rgba(255,255,255,.86) 55%,rgba(255,255,255,.62) 100%),url(/labo/clinic-laser-wide.jpg) 50% 45%/cover}
 /* Oct 26 2026 (Javier: "blend this better"): long eased fades top AND bottom, above the tint, so the photo has no edges */
 [data-labo] .close.lblend::before,[data-labo] .close.lblend::after{content:"";position:absolute;left:0;right:0;height:55%;pointer-events:none;z-index:1}
-[data-labo] .close.lblend::before{top:0;background:linear-gradient(180deg,#0F4636 0%,rgba(15,70,54,.9) 14%,rgba(15,70,54,.68) 32%,rgba(15,70,54,.4) 52%,rgba(15,70,54,.16) 74%,rgba(15,70,54,0) 100%)}
-[data-labo] .close.lblend::after{bottom:0;height:45%;background:linear-gradient(0deg,#0F4636 0%,rgba(15,70,54,.85) 18%,rgba(15,70,54,.5) 45%,rgba(15,70,54,.18) 72%,rgba(15,70,54,0) 100%)}
+[data-labo] .close.lblend::before{top:0;background:linear-gradient(180deg,#FFFFFF 0%,rgba(255,255,255,.9) 14%,rgba(255,255,255,.68) 32%,rgba(255,255,255,.4) 52%,rgba(255,255,255,.16) 74%,rgba(255,255,255,0) 100%)}
+[data-labo] .close.lblend::after{bottom:0;height:45%;background:linear-gradient(0deg,#FFFFFF 0%,rgba(255,255,255,.85) 18%,rgba(255,255,255,.5) 45%,rgba(255,255,255,.18) 72%,rgba(255,255,255,0) 100%)}
 [data-labo] .close.lblend .wrap{position:relative;z-index:1}
 [data-labo] .chero.blend .bgcap{top:auto;bottom:190px}
 @media (max-width:760px){[data-labo] .chero.blend .bgcap{top:auto;bottom:16px}}
@@ -456,20 +457,20 @@
 
 /* Emerald & gold finishing (Oct 26 2026): gold kickers and numerals, a faint gold glow on the ground,
    photos warmed slightly so the white-room stock sits in the emerald room. */
-[data-labo]{background:radial-gradient(90% 60% at 85% -10%,rgba(197,165,98,.10),transparent 60%),var(--paper)}
+[data-labo]{background:radial-gradient(90% 60% at 85% -10%,rgba(0,113,227,.10),transparent 60%),var(--paper)}
 [data-labo] .kicker{color:var(--accent);opacity:.9}
 [data-labo] .brand{color:var(--accent)}
 [data-labo] .tx .pr,[data-labo] .tx .go{color:var(--accent)}
 [data-labo] .txghead h3{color:var(--accent)}
 [data-labo] .ph.has-img img{filter:saturate(.9) sepia(.08)}
 [data-labo] input,[data-labo] select,[data-labo] textarea{background:var(--wash);color:var(--ink);border-color:var(--line)}
-[data-labo] ::selection{background:rgba(197,165,98,.35);color:var(--ink)}
+[data-labo] ::selection{background:rgba(0,113,227,.35);color:var(--ink)}
 /* Emerald wash over the blended photos: multiply turns the photos' white studio backdrops emerald and leaves skin tones warm. */
 [data-labo] .chero.blend::before,[data-labo] .cblend .tint,[data-labo] .close.lblend .tint{content:"";position:absolute;inset:0;pointer-events:none;mix-blend-mode:multiply;
-  background:linear-gradient(90deg,rgba(11,61,46,0) 62%,rgba(40,120,92,.22) 78%,rgba(30,104,80,.72) 100%)}
+  background:linear-gradient(90deg,rgba(255,255,255,0) 62%,rgba(255,255,255,.22) 78%,rgba(255,255,255,.72) 100%)}
 /* phone: the photo (1000×700, width 100%, anchored bottom) is 70vw tall — fade its top edge into the emerald */
 @media (max-width:760px){[data-labo] .chero.blend::before{top:auto;bottom:0;height:70vw;mix-blend-mode:normal;
-  background:linear-gradient(180deg,#0B3D2E 0%,rgba(11,61,46,.75) 8%,rgba(11,61,46,.35) 18%,rgba(11,61,46,.1) 27%,rgba(11,61,46,0) 34%)}}
+  background:linear-gradient(180deg,#FFFFFF 0%,rgba(255,255,255,.75) 8%,rgba(255,255,255,.35) 18%,rgba(255,255,255,.1) 27%,rgba(255,255,255,0) 34%)}}
 [data-labo] .cblend .tint,[data-labo] .close.lblend .tint{display:block}
 [data-labo] .cblend .wrap,[data-labo] .close.lblend .wrap{position:relative;z-index:2}
 
@@ -478,14 +479,14 @@
 
 /* Oct 26 2026 (Javier: "and this"): the clinic photo gets the same long eased fades top and bottom, above the tint */
 [data-labo] .cblend::before,[data-labo] .cblend::after{content:"";position:absolute;left:0;right:0;pointer-events:none;z-index:1}
-[data-labo] .cblend::before{top:0;height:45%;background:linear-gradient(180deg,#0F4636 0%,rgba(15,70,54,.88) 16%,rgba(15,70,54,.6) 36%,rgba(15,70,54,.3) 60%,rgba(15,70,54,.1) 82%,rgba(15,70,54,0) 100%)}
-[data-labo] .cblend::after{bottom:0;height:40%;background:linear-gradient(0deg,#0F4636 0%,rgba(15,70,54,.85) 18%,rgba(15,70,54,.5) 45%,rgba(15,70,54,.18) 72%,rgba(15,70,54,0) 100%)}
+[data-labo] .cblend::before{top:0;height:45%;background:linear-gradient(180deg,#FFFFFF 0%,rgba(255,255,255,.88) 16%,rgba(255,255,255,.6) 36%,rgba(255,255,255,.3) 60%,rgba(255,255,255,.1) 82%,rgba(255,255,255,0) 100%)}
+[data-labo] .cblend::after{bottom:0;height:40%;background:linear-gradient(0deg,#FFFFFF 0%,rgba(255,255,255,.85) 18%,rgba(255,255,255,.5) 45%,rgba(255,255,255,.18) 72%,rgba(255,255,255,0) 100%)}
 
 /* hero copy keeps its contrast where the overlay now thins out over the photo */
-[data-labo] .chero.blend h1,[data-labo] .chero.blend .sub,[data-labo] .chero.blend .trust{text-shadow:0 1px 18px rgba(6,32,24,.55)}
+[data-labo] .chero.blend h1,[data-labo] .chero.blend .sub,[data-labo] .chero.blend .trust{text-shadow:0 0 22px rgba(255,255,255,.9),0 0 8px rgba(255,255,255,.9)}   /* Nov 6 2026: white halo on the light theme */
 
 /* Oct 26 2026 (Javier: "make this area more premium blend"): the photo now emerges from the emerald in a soft oval (radial
    layer above), the multiply tint no longer darkens the empty band above her head, and the bar floats over the hero as
    tinted glass with a whisper of gold instead of a hard grey rule. */
 [data-labo] .chero.blend::before{-webkit-mask-image:linear-gradient(180deg,transparent 0,transparent 120px,#000 420px);mask-image:linear-gradient(180deg,transparent 0,transparent 120px,#000 420px)}
-[data-labo] header.site{background:linear-gradient(180deg,rgba(11,61,46,.92),rgba(11,61,46,.72));border-bottom:1px solid rgba(197,165,98,.14);box-shadow:0 10px 30px -18px rgba(3,20,15,.6)}
+[data-labo] header.site{background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(255,255,255,.72));border-bottom:1px solid rgba(0,113,227,.14);box-shadow:0 10px 30px -18px rgba(3,20,15,.6)}
