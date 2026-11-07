@@ -412,7 +412,7 @@
 [data-labo] .chero.blend::after{content:"";position:absolute;left:0;right:0;bottom:0;height:46%;pointer-events:none;
   background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.08) 18%,rgba(255,255,255,.24) 36%,rgba(255,255,255,.46) 54%,rgba(255,255,255,.7) 72%,rgba(255,255,255,.9) 87%,#FFFFFF 100%)}
 [data-labo] .chero.blend .wrap{position:relative;z-index:1}
-[data-labo] .chero.blend h1{max-width:12ch}
+[data-labo] .chero.blend h1{max-width:14ch}   /* Nov 6 2026: "Aesthetic care in Seattle, practiced like medicine." */
 [data-labo] .trust{list-style:none;margin:30px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:10px 26px}
 [data-labo] .trust li{display:flex;align-items:center;gap:9px;font-size:.92rem;color:var(--graphite);letter-spacing:-.012em}
 [data-labo] .trust li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ok)}

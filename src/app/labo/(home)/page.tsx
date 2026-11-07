@@ -67,7 +67,7 @@ export default function LaboHome() {
         <section className="chero blend">
           <div className="wrap">
             <span className="kicker">Laser &amp; aesthetics clinic · {CLINIC.city} · {CLINIC.status}</span>
-            <h1>Aesthetic care, practiced like medicine.</h1>
+            <h1>Aesthetic care in Seattle, practiced like medicine.</h1>
             <p className="sub">Laser, Botox, fillers, Sculptra and microneedling. Every plan starts with an exam by a nurse practitioner.</p>
             <div className="acts">
               <Link className="btn btn-primary" href="/contact">Request a consultation</Link>
