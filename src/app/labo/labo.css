@@ -319,7 +319,7 @@
    numbered treatment list, .skinrow = the Fitzpatrick / wavelength signature
    row (the clinic's equivalent of the lab panel), .tele = telehealth rows. */
 [data-labo] .chero{padding-block:88px 0}
-[data-labo] .chero h1{margin-top:18px;max-width:14ch;font-size:clamp(2.55rem,6.8vw,4.93rem)}   /* Oct 26 2026: −15% (Javier) */
+[data-labo] .chero h1{margin-top:18px;max-width:14ch;font-size:clamp(2.17rem,5.8vw,4.19rem);line-height:1.02}   /* Oct 26 2026: −15% (Javier); Nov 6 2026: another −15% + "in Seattle" */
 [data-labo] .chero .sub{margin-top:24px;max-width:40ch}
 [data-labo] .chero .acts{display:flex;gap:26px;align-items:center;margin-top:30px;flex-wrap:wrap}
 @media (max-width:760px){[data-labo] .chero{padding-block:56px 0}}
@@ -412,7 +412,7 @@
 [data-labo] .chero.blend::after{content:"";position:absolute;left:0;right:0;bottom:0;height:46%;pointer-events:none;
   background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.08) 18%,rgba(255,255,255,.24) 36%,rgba(255,255,255,.46) 54%,rgba(255,255,255,.7) 72%,rgba(255,255,255,.9) 87%,#FFFFFF 100%)}
 [data-labo] .chero.blend .wrap{position:relative;z-index:1}
-[data-labo] .chero.blend h1{max-width:14ch}   /* Nov 6 2026: "Aesthetic care in Seattle, practiced like medicine." */
+[data-labo] .chero.blend h1{max-width:13ch}   /* Nov 6 2026: "Aesthetic care in Seattle, practiced like medicine." */
 [data-labo] .trust{list-style:none;margin:30px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:10px 26px}
 [data-labo] .trust li{display:flex;align-items:center;gap:9px;font-size:.92rem;color:var(--graphite);letter-spacing:-.012em}
 [data-labo] .trust li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ok)}
