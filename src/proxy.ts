@@ -38,7 +38,16 @@ export async function proxy(request: NextRequest) {
     // public marketing — it needs a real Supabase session, same mechanism the
     // mycleanmd.com guard uses lower in this file (that guard never runs for
     // this host, since we return before reaching it).
-    if (path === '/portal' || path.startsWith('/portal/')) {
+    // API routes and the auth pages live at the app root and are shared by both brands — pass them
+    // through untouched, otherwise the catch-all rewrite below turns /auth/login into /labo/auth/login (404).
+    // Verified Nov 6 2026: login, /api/auth/providers and /api/labo/checkout all 404'd on this host before this.
+    if (path.startsWith('/api/') || path === '/auth' || path.startsWith('/auth/')) {
+      return NextResponse.next({ request })
+    }
+    // The provider portal (/provider*, Nov 6 2026) is gated the same way PLUS an email allowlist
+    // (LABO_PROVIDER_EMAIL, comma-separated). A signed-in patient who tries it lands on their own portal.
+    const isProvider = path === '/provider' || path.startsWith('/provider/')
+    if (path === '/portal' || path.startsWith('/portal/') || isProvider) {
       let portalResponse = NextResponse.next({ request })
       const supabase = createServerClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -61,6 +70,10 @@ export async function proxy(request: NextRequest) {
         const loginUrl = new URL('/auth/login', request.url)
         loginUrl.searchParams.set('redirect', path)
         return NextResponse.redirect(loginUrl)
+      }
+      if (isProvider) {
+        const allow = (process.env.LABO_PROVIDER_EMAIL || '').split(',').map((s) => s.trim().toLowerCase()).filter(Boolean)
+        if (!allow.includes((user.email || '').toLowerCase())) return NextResponse.redirect(new URL('/portal', request.url))
       }
       const url = request.nextUrl.clone()
       url.pathname = `/labo${path}`
