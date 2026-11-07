@@ -40,6 +40,9 @@ function LoginInner() {
       router.refresh()
       return
     }
+    // thelabomethod.com: provider → /provider, patient → /portal (MyCleanMD's dashboards 404 on that host).
+    const laboHome = await laboHomeOrNull()
+    if (laboHome) { router.push(laboHome); router.refresh(); return }
 
     const { data: profile } = await supabase
       .from('profiles').select('role').eq('id', data.user.id).single()
