@@ -1,5 +1,6 @@
 'use client'
 
+import { laboHomeOrNull } from '@/lib/labo/afterAuth'
 import { Suspense, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
@@ -38,6 +39,8 @@ function SignupInner() {
     const redirect = params.get('redirect')
     if (redirect && redirect.startsWith('/') && !redirect.startsWith('//')) {
       router.push(redirect)
+    } else if (await laboHomeOrNull()) {
+      router.push((await laboHomeOrNull()) as string)
     } else if (role === 'doctor') router.push('/doctor/dashboard')
     else router.push('/patient/dashboard')
     router.refresh()

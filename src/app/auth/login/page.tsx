@@ -1,5 +1,6 @@
 'use client'
 
+import { laboHomeOrNull } from '@/lib/labo/afterAuth'
 import { Suspense, useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
