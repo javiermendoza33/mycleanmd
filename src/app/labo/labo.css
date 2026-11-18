@@ -659,3 +659,6 @@
 [data-labo] .mnav>a:not(.btn){font-size:1.5rem;font-weight:600;letter-spacing:-.025em;text-decoration:none;padding:12px 0;border-bottom:1px solid var(--hair);color:var(--ink)}
 [data-labo] .mnav>.btn{margin-top:22px;align-self:flex-start}
 [data-labo] .mnav .note a{color:var(--accent);text-decoration:none}
+
+/* photo band under a page hero (Nov 18 2026, the old site's section photos) */
+[data-labo] .band img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 30%}

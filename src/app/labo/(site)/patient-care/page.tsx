@@ -18,6 +18,9 @@ export default function PatientCarePage() {
         title="Pre- and post-treatment instructions"
         lede="Getting the best results starts before your visit and continues after you leave. Review the guidance for your treatment below, and reach out with any questions."
       />
+      <section style={{ paddingBlock: 0 }}>
+        <div className="wrap"><div className="band" style={{ marginTop: 44 }}><img src="/labo/img/misc/patient-care.jpg" alt="A patient relaxing during a skin treatment" /></div></div>
+      </section>
       <section style={{ paddingTop: 48 }}>
         <div className="wrap tight">
           {careInstructions.map((care, i) => {

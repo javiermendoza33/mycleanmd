@@ -12,6 +12,9 @@ export default function TestimonialsPage() {
   return (
     <>
       <PageHero eyebrow="Testimonials" title="Kind words from happy, refreshed patients" />
+      <section style={{ paddingBlock: 0 }}>
+        <div className="wrap"><div className="band" style={{ marginTop: 44 }}><img src="/labo/img/misc/testimonials.jpg" alt="Five women of different skin tones standing together" /></div></div>
+      </section>
       <section style={{ paddingTop: 48 }}>
         <div className="wrap"><div className="quotes">{testimonials.map((t) => <TestimonialCard key={t.author} t={t} />)}</div></div>
       </section>

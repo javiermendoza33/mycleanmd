@@ -16,6 +16,9 @@ export default function ServicesPage() {
         title="Injectables, skincare & wellness services in Seattle"
         lede="Because every one of our clients is different and requires a customized approach, we tailor every treatment to your skin type, lifestyle and desired results."
       />
+      <section style={{ paddingBlock: 0 }}>
+        <div className="wrap"><div className="band" style={{ marginTop: 44 }}><img src="/labo/img/misc/services-hero.jpg" alt="Smiling woman with clear, even skin" /></div></div>
+      </section>
       <section style={{ paddingTop: 48 }}>
         <div className="wrap">
           <div className="cards">
