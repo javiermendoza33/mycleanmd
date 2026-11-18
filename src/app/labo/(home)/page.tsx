@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Gate from "./Gate";
 import { Footer } from "@/components/labo/Chrome";
+import HeroVideo from "@/components/labo/HeroVideo";
 import { BookCta, LocationCard, PartnerLogos, SectionHead, ServiceCard, TestimonialCard } from "@/components/labo/Clinic";
 import { CLINIC, HEALTHIE, LASER_SPECS, NAV, PRACTICE, PROGRAMS } from "@/labo/content";
 import { services } from "@/labo/clinic/services";
@@ -47,9 +48,8 @@ export default function LaboHome() {
       <main id="top">
         {/* ── HERO — the old site's looping clinic video under the emerald wash ── */}
         <section className="vhero">
-          <video autoPlay muted loop playsInline poster="/labo/img/hero-poster.png" aria-hidden="true">
-            <source src="/labo/img/hero.mp4" type="video/mp4" />
-          </video>
+          <img className="poster" src="/labo/img/hero-poster.jpg" alt="" aria-hidden="true" />
+          <HeroVideo />
           <div className="wrap">
             <span className="kicker">Medical spa · Seattle &amp; Ruston, Washington</span>
             <h1>Your skincare &amp; wellness <em>haven</em> in Washington</h1>

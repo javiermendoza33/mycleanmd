@@ -497,6 +497,8 @@
    care instructions, the phone-first booking band. Same tokens, same radii, same mono labels. */
 [data-labo] .vhero{position:relative;overflow:hidden;padding-block:130px 150px;min-height:72vh;display:flex;align-items:center;background:#FFFFFF}
 [data-labo] .vhero video,[data-labo] .vhero .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.9)}
+[data-labo] .vhero video{opacity:0;transition:opacity .9s ease}
+[data-labo] .vhero video.on{opacity:1}
 [data-labo] .vhero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(255,255,255,.96) 0%,rgba(255,255,255,.84) 40%,rgba(255,255,255,.38) 68%,rgba(255,255,255,.18) 100%)}
 [data-labo] .vhero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:42%;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.35) 40%,rgba(255,255,255,.8) 78%,#FFFFFF 100%)}
 [data-labo] .vhero .wrap{position:relative;z-index:2;width:100%}
