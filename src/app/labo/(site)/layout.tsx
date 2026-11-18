@@ -8,10 +8,10 @@ import { Header, Footer } from "@/components/labo/Chrome";
  */
 export default function LaboSiteLayout({ children }: { children: React.ReactNode }) {
   return (
-    <>
+    <div data-clinic>
       <Header />
       <main>{children}</main>
       <Footer />
-    </>
+    </div>
   );
 }

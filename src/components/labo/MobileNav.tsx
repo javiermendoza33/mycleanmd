@@ -13,7 +13,7 @@ export default function MobileNav() {
   const [host, setHost] = useState<HTMLElement | null>(null);
   // The sheet is position:fixed, but header.site has a backdrop-filter, which makes the header its containing
   // block — so it is portalled out to the [data-labo] root (still inside the styling scope).
-  useEffect(() => { setHost((document.querySelector("[data-labo]") as HTMLElement | null) ?? document.body); }, []);
+  useEffect(() => { setHost(((document.querySelector("[data-clinic]") ?? document.querySelector("[data-labo]")) as HTMLElement | null) ?? document.body); }, []);
   useEffect(() => {
     document.documentElement.style.overflow = open ? "hidden" : "";
     return () => { document.documentElement.style.overflow = ""; };

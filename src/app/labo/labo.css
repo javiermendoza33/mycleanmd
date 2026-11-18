@@ -21,8 +21,9 @@
   --muted:#6E6E73;        /* gray */
   --line:rgba(0,0,0,.10);
   --hair:rgba(0,0,0,.06);
-  --accent:#0071E3;       /* Apple blue */
-  --accent-tint:rgba(0,113,227,.10);
+  --accent:#0071E3;       /* Apple blue (portals) */
+  --accent-rgb:0,113,227; /* the same color as a triplet, for the tinted glows below */
+  --accent-tint:rgba(var(--accent-rgb),.10);
   --on-accent:#FFFFFF;    /* text on blue */
   --ok:#1F8F45;
   --ok-tint:rgba(31,143,69,.10);
@@ -325,7 +326,7 @@
 @media (max-width:760px){[data-labo] .chero{padding-block:56px 0}}
 
 [data-labo] .ph{position:relative;border-radius:var(--radius-card);overflow:hidden;aspect-ratio:3/2;
-  background:radial-gradient(120% 90% at 20% 10%,rgba(0,113,227,.18) 0%,transparent 55%),linear-gradient(160deg,#F5F5F7 0%,#ECECF0 55%,#E2E2E7 100%)   /* Nov 6 2026: light placeholder tile */;
+  background:radial-gradient(120% 90% at 20% 10%,rgba(var(--accent-rgb),.18) 0%,transparent 55%),linear-gradient(160deg,#F5F5F7 0%,#ECECF0 55%,#E2E2E7 100%)   /* Nov 6 2026: light placeholder tile */;
   display:flex;align-items:flex-end}
 [data-labo] .ph::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,rgba(255,255,255,.18) 0 2px,transparent 2px 14px);pointer-events:none}
 [data-labo] .ph span{position:relative;z-index:1;margin:14px;font-family:var(--font-plex-mono),ui-monospace,Menlo,monospace;font-size:.6rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink);background:rgba(6,32,24,.6);padding:6px 11px;border-radius:980px}
@@ -457,14 +458,14 @@
 
 /* Emerald & gold finishing (Oct 26 2026): gold kickers and numerals, a faint gold glow on the ground,
    photos warmed slightly so the white-room stock sits in the emerald room. */
-[data-labo]{background:radial-gradient(90% 60% at 85% -10%,rgba(0,113,227,.10),transparent 60%),var(--paper)}
+[data-labo]{background:radial-gradient(90% 60% at 85% -10%,rgba(var(--accent-rgb),.10),transparent 60%),var(--paper)}
 [data-labo] .kicker{color:var(--accent);opacity:.9}
 [data-labo] .brand{color:var(--accent)}
 [data-labo] .tx .pr,[data-labo] .tx .go{color:var(--accent)}
 [data-labo] .txghead h3{color:var(--accent)}
 [data-labo] .ph.has-img img{filter:saturate(.9) sepia(.08)}
 [data-labo] input,[data-labo] select,[data-labo] textarea{background:var(--wash);color:var(--ink);border-color:var(--line)}
-[data-labo] ::selection{background:rgba(0,113,227,.35);color:var(--ink)}
+[data-labo] ::selection{background:rgba(var(--accent-rgb),.35);color:var(--ink)}
 /* Emerald wash over the blended photos: multiply turns the photos' white studio backdrops emerald and leaves skin tones warm. */
 [data-labo] .chero.blend::before,[data-labo] .cblend .tint,[data-labo] .close.lblend .tint{content:"";position:absolute;inset:0;pointer-events:none;mix-blend-mode:multiply;
   background:linear-gradient(90deg,rgba(255,255,255,0) 62%,rgba(255,255,255,.22) 78%,rgba(255,255,255,.72) 100%)}
@@ -489,7 +490,7 @@
    layer above), the multiply tint no longer darkens the empty band above her head, and the bar floats over the hero as
    tinted glass with a whisper of gold instead of a hard grey rule. */
 [data-labo] .chero.blend::before{-webkit-mask-image:linear-gradient(180deg,transparent 0,transparent 120px,#000 420px);mask-image:linear-gradient(180deg,transparent 0,transparent 120px,#000 420px)}
-[data-labo] header.site{background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(255,255,255,.72));border-bottom:1px solid rgba(0,113,227,.14);box-shadow:0 10px 30px -18px rgba(3,20,15,.6)}
+[data-labo] header.site{background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(255,255,255,.72));border-bottom:1px solid rgba(var(--accent-rgb),.14);box-shadow:0 10px 30px -18px rgba(3,20,15,.6)}
 
 /* ── Clinic pages (Nov 18 2026) — the Skin Haven site's pages and photos, on the Labo system (Nov 6 2026: Apple-light palette) ─────
    Javier: "make TLM like the site was with same content and photos". Video hero, photo cards for the
@@ -662,3 +663,9 @@
 
 /* photo band under a page hero (Nov 18 2026, the old site's section photos) */
 [data-labo] .band img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+
+/* ── Clinic accent (Nov 18 2026, Javier: "not sure about the colors black and blue… lets try changing the accents") ──
+   The clinic pages ((home) + (site)) sit inside [data-clinic] and take a warm clay accent sampled from Monika's own photos
+   (the #CC8865 / #995532 midtones in cta-bg, clinic.jpg, testimonials.jpg; 5.6:1 on white). The portals keep Apple blue. */
+[data-labo] [data-clinic]{--accent:#9A5636;--accent-rgb:154,86,54;--accent-tint:rgba(154,86,54,.10);
+  background:radial-gradient(90% 60% at 85% -10%,rgba(var(--accent-rgb),.10),transparent 60%),var(--paper);min-height:100vh}
