@@ -1,0 +1,142 @@
+import type { CareInstructionSet } from "./types";
+
+export const careInstructions: CareInstructionSet[] = [
+  {
+    treatment: "Wrinkle Relaxers — Botox & Dysport",
+    serviceSlug: "wrinkle-relaxers",
+    pre: [
+      "For optimal results, and reducing the risk of bleeding or bruising at injection sites. It is important to avoid blood-thinning medications such as Aspirin, and Ibuprofen.",
+      "This also includes supplements such as Fish oil, Vitamin E, Vitamin A, Flax Oil, Gingko Biloba, Garlic, St. John's Wort and Omega 3 for at least three days before your scheduled procedure unless otherwise directed by your provider. If you have a cardiovascular history, please check with your Cardiology team prior to stopping use of aspirin.",
+      "Avoid alcohol for 24-48 hours before treatment.",
+      "Avoid neurotoxin treatment if you are allergic to any of the ingredients within products Botox or Dysport i.e casein protein found within Dysport.",
+      "Inform your practitioner if you're pregnant or breastfeeding or have an active infection. You will not be suitable for neurotoxin treatment as this time.",
+      "It is best to avoid wearing makeup the day of procedure.",
+    ],
+    post: [
+      "It is important to avoid touching injection sites, lying down or bending over for at least four hours.",
+      "Do not massage or apply pressure to the treated areas.",
+      "Avoid facials, or exfoliating the treatment area.",
+      "Avoid strenuous exercise, tanning, or extensive sun or heat (including sauna and hot tubs) for 24 hours.",
+      "Avoid sun exposure or tanning beds.",
+      "May use acetaminophen (Tylenol) for headache or discomfort.",
+      "No NSAIDs use for at least 24 post procedure.",
+    ],
+    notes: [
+      "Neurotoxins may last an average of 2-4 months. Typical side effects include bruising, swelling, redness, hives (welts), and headaches. These side effects are temporary and will resolve.",
+    ],
+  },
+  {
+    treatment: "Dermal Fillers — Juvéderm & Restylane",
+    serviceSlug: "dermal-fillers",
+    pre: [
+      "For optimal results, and reducing the risk of bleeding or bruising at injection sites. It is important to avoid blood-thinning medications such as Aspirin, and Ibuprofen. This also includes supplements such as Fish oil, Vitamin E, Vitamin A, Flax Oil, Gingko Biloba, Garlic, St. John's Wort and Omega 3 for at least three days before your scheduled procedure unless otherwise directed by your provider. If you have a cardiovascular history, please check with your Cardiology team prior to stopping use of aspirin.",
+      "Avoid alcohol for 24-48 hours before treatment.",
+      "Take any immunosuppressive/injectable medications (ex: Biologics such as Humira, Skyrizi, Stelara, Enbrel, Taltz, Cosentyx, Tremfya)",
+      "You are not suitable for dermal fillers treatments if you are pregnant or breastfeeding, are allergic to any of the ingredients within product, have been diagnosed with a neurological or autoimmune disorder, are experience an active infection or symptoms such as cold or flu, or have active inflammatory issues such as cysts, pimples, rashes, or hives over assumed injection sites.",
+      "Dermal fillers should not be administered if you have received any vaccines, immunizations, procedures (including dental) or illnesses within the last two weeks.",
+      "Inform your provider if you have a history of cold sore and/or HSV-1 (Perioral Herpes) in order to receive antiviral therapy prior to treatment such as (Valtrex).",
+      "Avoid topical active ingredients such as Tretinoin (Retin-A), retinoids, glycolic acid, alpha hydroxy acid (AHA), three days prior to scheduled treatment.",
+    ],
+    post: [
+      "You may experience, immediately post treatment temporary swelling, tenderness, itching, pain, bruising, redness, irregularities including lumps or unevenness of injection sites. These side effects may take up to 2-4 weeks to fully resolve.",
+      "Avoid consuming excess amounts of alcohol or salts to avoid excessive swelling for 24-36 hours post treatment.",
+      "Avoid strenuous exercise or excessive sun or heat (including sauna and hot tub use) for 24-36 hours post treatment.",
+      "Avoid excessive touching, pressure, massaging, manipulate injection sites for 24 hours post procedure. Avoid dental procedures for 30 days post filler treatment.",
+      "Avoid any active ingredients and/or makeup on injection sites for 24 hours post procedure.",
+      "Maintain clean technique of all items to be placed near injection sites, such as sanitizing your phone, and using clean towels and pillowcases for 24 hours post procedure.",
+      "May apply a clean, sanitized cool compress for 15 minutes each hours while awake to reduce swelling.",
+      "May use acetaminophen (Tylenol) if you experience any mild tenderness or discomfort as long as you have no contraindications for use.",
+      "Depending on dermal filler type and area treated longevity of filler may vary, patient metabolism also plays a factor.",
+    ],
+    notes: [
+      "Please get in touch with our office right away if you experience any of the following signs: Dusky or white coloring of the injection sites, mottling or odd bruising, excruciating pain or rising agony, redness, increasing warmth or coolness to the touch, excruciating swelling, itching, blisters, difficulty swallowing or smiling, fever or chills, and lace-like patterns on the skin. If you notice onset of any of these symptoms, call our office immediately at 877-756-4286 to speak with a provider.",
+    ],
+  },
+  {
+    treatment: "Microneedling",
+    serviceSlug: "microneedling",
+    pre: [
+      "For optimal results, and reducing the risk of bleeding or bruising at injection sites. It is important to avoid blood-thinning medications such as Aspirin, and Ibuprofen. This also includes supplements such as Fish oil, Vitamin E, Vitamin A, Flax Oil, Gingko Biloba, Garlic, St. John's Wort and Omega 3 for at least three days before your scheduled procedure unless otherwise directed by your provider. If you have a cardiovascular history, please check with your Cardiology team prior to stopping use of aspirin.",
+      "Avoid alcohol for 24-48 hours before treatment.",
+      "Stop use of all topical acids including but not limited to (alpha, beta hydroxy, and glycolic acids). Stop use Retin-A, retinoids, topical antibiotics, exfoliants, hydroquinone 4 days prior to treatment.",
+      "If you have active acne over area to be treated or active infection please contact office to reschedule.",
+      "Inform your provider if you have a history of cold sores and/or HSV-1 (Perioral Herpes) in order to receive antiviral therapy prior to treatment such as (Valtrex).",
+      "Ensure your face or area treated is clean from make-up, sunscreen, and any products including perfume and moisturizer.",
+      "Topical numbing cream will be applied 30 minutes prior to treatment, disclose any allergies to provider prior to application.",
+      "Avoid any procedures over treatment area two weeks prior to appointment including but not limited to chemical peels, waxing, and laser treatments.",
+      "Avoid sun exposure, tanning beds, self-tanning products for three days prior to treatment.",
+      "Bring a hat day of procedure to wear after your treatment to avoid excessive sun exposure.",
+      "For best results, microneedling is recommended in a series of 3-5 treatments with a 4-6 week interval. May add-on PRP/PRF or exosomes to treatments.",
+    ],
+    post: [
+      "Avoid active ingredients over treated area for at least 7 days post treatment and/or until skin has healed.",
+      "Avoid picking, exfoliating, and shaving. May cause scarring if skin is not allowed to heal appropriately.",
+      "No chemical peels, laser treatments, or waxing, for 7 days post procedure.",
+      "No sweating, exercising, sauna, hot tub, or excessive steam exposure until skin is fully healed 3-7 days approximately.",
+      "May use acetaminophen (Tylenol) if you experience any mild tenderness or discomfort as long as you have no contraindications for use.",
+      "Review post care skincare regimen with provider if you have any questions.",
+      "For best results, microneedling is recommended in a series of 3-5 treatments with a 4-6 week interval. May add-on PRP/PRF or exosomes to treatments.",
+      "Expect redness similar to a sunburn.",
+      "Use a gentle cleanser and hydrating products.",
+      "Don't expose yourself to direct sunlight, and use sunscreen when necessary.",
+      "Avoid make-up for 24 hours.",
+    ],
+  },
+  {
+    treatment: "Platelet Rich Plasma (PRP) / Exosomes",
+    serviceSlug: "prp-exosomes",
+    pre: [
+      "Inform your provider if you have a history of cold sores and/or HSV-1 (Perioral Herpes) in order to receive antiviral therapy prior to treatment such as (Valtrex).",
+      "For optimal results, and reducing the risk of bleeding or bruising at injection sites. It is important to avoid blood-thinning medications such as Aspirin, and Ibuprofen. This also includes supplements such as Fish oil, Vitamin E, Vitamin A, Flax Oil, Gingko Biloba, Garlic, St. John's Wort and Omega 3 for at least three days before your scheduled procedure unless otherwise directed by your provider. If you have a cardiovascular history, please check with your Cardiology team prior to stopping use of aspirin.",
+      "Avoid alcohol for 24-48 hours before treatment.",
+      "Ensure your face or area treated is clean from make-up, sunscreen, and any products including perfume and moisturizer",
+      "Maintain proper nutrition and hydration (4-6 glasses of water daily, for three days prior to treatment). Ensure you have adequate nutrition prior to treatment.",
+    ],
+    post: [
+      "No sweating, exercising, sauna, hot tub, or excessive steam exposure for 24 hours post treatment.",
+      "Do not wash or expose treated area to water for 12 hours post treatment.",
+      "Do not take NSAIDs for pain/discomfort.",
+      "Depending on where the PRP was used, specific instructions can vary. Generally, avoid strenuous activity and direct sun exposure.",
+      "For facial treatments, avoid make-up for 24 hours.",
+      "Use gentle skincare products and avoid exfoliants until healing is complete.",
+    ],
+    notes: [
+      "PRP can be used \"topically\" or injected into the dermis depending on treatment selected.",
+      "Inflammation is key to efficient PRP treatments and stimulates healing and tissue regeneration.",
+    ],
+  },
+  {
+    treatment: "Chemical Peels",
+    serviceSlug: "chemical-peels",
+    pre: [
+      "Stop using retinol or other exfoliating products 5-7 days before treatment.",
+      "Avoid waxing, electrolysis, or other depilatory methods a week before.",
+    ],
+    post: [
+      "Your skin may peel or flake, which is normal. Do not pick or peel it off manually.",
+      "Use a gentle cleanser.",
+      "Avoid sun exposure and always use sunscreen.",
+      "Do not use any strong skincare products until your skin has fully healed.",
+    ],
+    notes: [
+      "Always consult with the procedure professional to ensure you have the most appropriate and updated care instructions.",
+    ],
+  },
+  {
+    treatment: "PDO Threads",
+    serviceSlug: "pdo-threads",
+    pre: [
+      "Avoid blood-thinning medications or supplements for about one week prior.",
+      "Ensure your face is clean and free from make-up and skincare products.",
+    ],
+    post: [
+      "Avoid rubbing or massaging the treated area.",
+      "Sleep on your back.",
+      "Limit facial expressions for a few days.",
+      "Avoid direct sun exposure.",
+    ],
+    notes: [
+      "Always consult with the procedure professional to ensure you have the most appropriate and updated care instructions.",
+    ],
+  },
+];

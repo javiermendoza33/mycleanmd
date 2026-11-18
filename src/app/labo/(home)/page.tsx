@@ -1,23 +1,22 @@
 import Link from "next/link";
 import Gate from "./Gate";
 import { Footer } from "@/components/labo/Chrome";
-import { CLINIC, CONCERNS, FIRST_VISIT, GROUP_NOTE, GROUPS, HEALTHIE, LASER_SPECS, PRACTICE, PROGRAMS, TREATMENTS } from "@/labo/content";
-
-const GROUP_KEYS = ["laser", "injectables", "skin"] as const;
+import { BookCta, LocationCard, PartnerLogos, SectionHead, ServiceCard, TestimonialCard } from "@/components/labo/Clinic";
+import { CLINIC, HEALTHIE, LASER_SPECS, NAV, PRACTICE, PROGRAMS } from "@/labo/content";
+import { services } from "@/labo/clinic/services";
+import { testimonials } from "@/labo/clinic/testimonials";
+import { CLINIC_SITE } from "@/labo/clinic/site";
 
 /**
- * thelabomethod.com homepage — CLINIC FIRST (Oct 26 2026).
+ * thelabomethod.com homepage — the clinic site, Nov 18 2026.
  *
- * Javier: "Now that you know what we will be offering with laser, let's create a
- * better, more premium site" → "one brand, clinic first" + "placeholders for now"
- * + "Seattle-based clinic, address to come". The in-person laser clinic leads;
- * the telehealth programs (and their eligibility gate, still the primary
- * element of that section) follow as the second line of the practice.
- *
- * Same White Room system (labo.css): Inter + Plex Mono, single light theme,
- * Ember accent. Photos are labelled placeholder frames (.ph) — no stock in the
- * clinic sections. Prices are Seattle-comp placeholders until Monika confirms
- * them (content.ts blocking item #5); the street address is not published.
+ * Javier: "make TLM like the site was with same content and photos" — the
+ * Skin Haven Cosmetic Clinic homepage (video hero, the services grid, Mónika's
+ * welcome, testimonials, the two locations, the partner strip, the phone-first
+ * booking band) rebuilt on the emerald/gold system, with the clinic's two lines
+ * that the old site did not have — the Candela laser and the telehealth
+ * programs — kept as sections lower down. Content and photos come from the
+ * old site verbatim (content/wp in the skinhaven repo); only the brand changed.
  */
 const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
 
@@ -28,113 +27,104 @@ const TELE = [
   { slug: PROGRAMS[3].slug, name: "Hormone therapy for women", note: "Perimenopause and menopause care that takes symptoms seriously." },
 ];
 
-/** Fitzpatrick I–VI and which wavelength reaches them safely — the clinic's signature row. */
+/** Fitzpatrick I–VI and which wavelength reaches them safely — the laser section's signature row. */
 const SKIN = ["#F6E3D4", "#EDCDB3", "#D9AE8A", "#B98463", "#8A5A3E", "#5A3826"];
 
-/** A photo frame. With `src` it shows a STOCK stand-in (Unsplash licence, free for commercial use — Oct 26 2026,
- *  Javier: "add some stock photos… I can replace them later"); without it, a labelled placeholder. Replace the
- *  files in public/labo/clinic-*.jpg (same names and aspect ratios) and drop the "Stock ·" captions. */
-function Ph({ label, ratio, className, src, alt, pos }: { label: string; ratio?: string; className?: string; src?: string; alt?: string; pos?: string }) {
-  return (
-    <figure className={`ph ${src ? "has-img" : ""} ${className ?? ""}`} style={ratio ? { aspectRatio: ratio } : undefined}>
-      {src && <img src={src} alt={alt ?? ""} style={pos ? { objectPosition: pos } : undefined} loading={className === "hero-ph" ? "eager" : "lazy"} />}
-      {!src && <span>{`Photo · ${label}`}</span>}   {/* Oct 26 2026: no caption on stock stand-ins (Javier: "remove the stock message near photos") */}
-    </figure>
-  );
-}
-
 export default function LaboHome() {
+  const s = CLINIC_SITE;
   return (
     <>
       <header className="site">
         <div className="wrap bar">
           <a className="brand" href="#top">{PRACTICE.name}</a>
           <nav className="main" aria-label="Sections">
-            <Link href="/treatments#group-laser">Laser</Link>
-            <Link href="/treatments#group-injectables">Injectables</Link>
-            <Link href="/treatments#group-skin">Skin</Link>
-            <a href="#visit">First visit</a>
-            <a href="#telehealth">Telehealth</a>
+            {NAV.map((l) => <Link key={l.href} href={l.href}>{l.label}</Link>)}
           </nav>
-          <Link className="btn btn-primary btn-sm" href="/contact">Request a consultation</Link>
+          <Link className="btn btn-primary btn-sm" href="/booking">Book now</Link>
         </div>
       </header>
 
       <main id="top">
-        {/* ── HERO ─────────────────────────────────────────────────────── */}
-        {/* Oct 26 2026 (Javier: "more style like faithtexting.com with gradient images that blend"): the photo sits behind
-            the whole hero and washes to white under the copy; a soft fade carries it into the next section. */}
-        <section className="chero blend">
+        {/* ── HERO — the old site's looping clinic video under the emerald wash ── */}
+        <section className="vhero">
+          <video autoPlay muted loop playsInline poster="/labo/img/hero-poster.png" aria-hidden="true">
+            <source src="/labo/img/hero.mp4" type="video/mp4" />
+          </video>
           <div className="wrap">
-            <span className="kicker">Laser &amp; aesthetics clinic · {CLINIC.city} · {CLINIC.status}</span>
-            <h1>Aesthetic care, practiced like medicine.</h1>
-            <p className="sub">Laser, Botox, fillers, Sculptra and microneedling. Every plan starts with an exam by a nurse practitioner.</p>
+            <span className="kicker">Medical spa · Seattle &amp; Ruston, Washington</span>
+            <h1>Your skincare &amp; wellness <em>haven</em> in Washington</h1>
+            <p className="sub">Achieve your short- and long-term skincare and wellness goals with modern, science-based treatments, from Botox® and Dysport® to fillers, chemical peels, laser, IV/IM therapy and more. Optimal skin health and wellness is a journey, and we&rsquo;re ready to be your guide (and beauty besties)!</p>
             <div className="acts">
-              <Link className="btn btn-primary" href="/contact">Request a consultation</Link>
-              <Link className="more" href="/treatments">See every treatment</Link>
+              <Link className="btn btn-primary" href="/booking">Book now</Link>
+              <Link className="more" href="/services">Explore all services</Link>
             </div>
-            <ul className="trust">
-              <li>Exam before every first treatment</li>
-              <li>Every skin type, I to VI</li>
-              <li>Written plan and price up front</li>
-            </ul>
+            <p className="led">Led by <Link href="/about">Mónika Jáuregui, DNP, CANS, FNP-C</Link>, Certified Aesthetic Nurse Specialist</p>
           </div>
         </section>
 
-        {/* ── TREATMENTS — editorial numbered rows ─────────────────────── */}
-        <section id="treatments">
+        {/* ── SERVICES ─────────────────────────────────────────────────── */}
+        <section id="services">
           <div className="wrap">
-            <div className="headline2">
-              <span className="kicker">Laser · Injectables · Skin</span>
-              <h2>What we treat.</h2>
-            </div>
-            {/* Oct 26 2026: browse by concern, then the menu grouped by category (SkinSpirit / LaserAway pattern). */}
-            <nav className="concerns" aria-label="Browse by concern">
-              <span className="mono">By concern</span>
-              {CONCERNS.map((c) => <Link key={c.slug} href={`/treatments#${c.slug}`}>{c.label}</Link>)}
-            </nav>
-            {GROUP_KEYS.map((g) => (
-              <div className="txgroup" key={g}>
-                <div className="txghead"><h3>{GROUPS[g]}</h3><span className="mono">{GROUP_NOTE[g]}</span></div>
-                <ol className="txlist">
-                  {TREATMENTS.filter((t) => t.group === g).map((t) => (
-                    <li key={t.slug}>
-                      <Link href={`/treatments#${t.slug}`} className="tx">
-                        <span className="n mono">{String(TREATMENTS.indexOf(t) + 1).padStart(2, "0")}</span>
-                        <span className="nm"><b>{t.name}</b><em>{t.short}</em></span>
-                        <span className="meta mono">{t.sessions}</span>
-                        <span className="pr mono">from {t.from}<small>{t.unit}</small></span>
-                        <span className="go" aria-hidden="true">›</span>
-                      </Link>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            ))}
-            <p className="note">Starting prices. Your exact price is confirmed in writing at your consultation, with the total for the full plan.</p>
+            <SectionHead eyebrow="Injectables · Skincare · Laser · Wellness" title="Find the right service for you" lede="Because every one of our clients is different and requires a customized approach, we tailor every treatment to your skin type, lifestyle and desired results." />
+            <div className="cards">{services.map((x) => <ServiceCard key={x.slug} service={x} />)}</div>
           </div>
         </section>
 
-        {/* ── THE LASER — skin-type row + specs ────────────────────────── */}
-        <section id="laser" className="grey">
+        {/* ── ABOUT — Mónika's welcome ─────────────────────────────────── */}
+        <section className="grey">
+          <div className="wrap split narrow">
+            <div>
+              <div className="frame"><img src="/labo/img/about/founder.webp" alt="Mónika Jáuregui, founder of The Labo Method" loading="lazy" /></div>
+            </div>
+            <div className="prose">
+              <span className="kicker">Meet your new guide &amp; beauty bestie</span>
+              <h2 style={{ marginTop: 15 }}>¡Hola! Mónika Jáuregui here.</h2>
+              <p style={{ marginTop: 22 }}>We&rsquo;re a woman- and minority-owned and operated clinic offering effective, evidence-based aesthetic treatments to help you achieve excellent skin health and overall better wellness. With our medically innovative services that deliver actual results, you&rsquo;ll find greater confidence and feel more empowered to take on the day.</p>
+              <p>At {PRACTICE.name}, we prioritize helping you look like you on your best day. Our cosmetic clinic is dedicated to attainable beauty, focused on what&rsquo;s already beautiful about you.</p>
+              <div className="acts">
+                <Link className="btn btn-primary" href="/about">Our story</Link>
+                <img className="sig" src="/labo/img/about/signature.png" alt="Mónika Jáuregui's signature" style={{ marginTop: 0 }} />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── TESTIMONIALS ─────────────────────────────────────────────── */}
+        <section id="testimonials">
+          <div className="wrap">
+            <SectionHead eyebrow="Testimonials" title="Kind words from happy, refreshed patients" />
+            <div className="quotes">{testimonials.map((t) => <TestimonialCard key={t.author} t={t} />)}</div>
+            <p className="centre"><Link className="more" href="/testimonials">Read all testimonials</Link></p>
+          </div>
+        </section>
+
+        {/* ── LOCATIONS ────────────────────────────────────────────────── */}
+        <section id="locations" className="grey">
+          <div className="wrap">
+            <SectionHead eyebrow="Two Washington locations" title="Visit us in South Lake Union or Ruston" lede={`Open Monday through Friday, 10:00 am – 6:00 pm. Weekends by appointment only. Text or call ${s.phoneDisplay}.`} />
+            <div className="locs">{s.locations.map((loc) => <LocationCard key={loc.id} location={loc} />)}</div>
+          </div>
+        </section>
+
+        {/* ── THE LASER — the clinic's new line ────────────────────────── */}
+        <section id="laser">
           <div className="wrap">
             <div className="laser">
               <div>
-                <span className="kicker">The laser</span>
+                <span className="kicker">The laser · {CLINIC.device}</span>
                 <h2 style={{ marginTop: 15 }}>One platform. Two wavelengths. Chosen for your skin.</h2>
                 <p className="sub" style={{ marginTop: 18 }}>Most clinics own one laser and treat everyone with it. Ours carries two, because the wavelength that is right for fair skin is the wrong one for deep skin.</p>
+                <div className="acts" style={{ display: "flex", gap: 18, marginTop: 26, flexWrap: "wrap" }}>
+                  <Link className="btn btn-primary" href="/treatments">See laser treatments</Link>
+                </div>
               </div>
-              <Ph label="GentleMax Pro Plus" ratio="4/5" src="/labo/clinic-laser.jpg" alt="Laser hair removal on a leg, the handpiece held against the skin" />
+              <div className="frame" style={{ aspectRatio: "4/5" }}><img src="/labo/img/services/lasers.jpg" alt="Woman with smooth, glowing skin after a laser skin treatment" loading="lazy" /></div>
             </div>
-
-            <div className="skinrow" aria-label="Wavelength by skin type">
+            <div className="skinrow" aria-label="Wavelength by skin type" style={{ background: "var(--canvas)" }}>
               <div className="skhead"><h4>Which wavelength, for which skin</h4><span className="kicker">Fitzpatrick scale</span></div>
               <div className="sk">
                 {SKIN.map((c, i) => (
-                  <div className="cell" key={c}>
-                    <i style={{ background: c }} />
-                    <span className="mono">{["I", "II", "III", "IV", "V", "VI"][i]}</span>
-                  </div>
+                  <div className="cell" key={c}><i style={{ background: c }} /><span className="mono">{["I", "II", "III", "IV", "V", "VI"][i]}</span></div>
                 ))}
               </div>
               <div className="bands">
@@ -142,87 +132,31 @@ export default function LaboHome() {
                 <div className="band1064"><span className="mono">1064 nm Nd:YAG</span><small>every skin type · deeper tones · veins · nails</small></div>
               </div>
             </div>
-
-            <ul className="defs specs">
-              {LASER_SPECS.map((s) => (
-                <li key={s.k}><span className="dt">{s.k}</span><span className="dd">{s.v}</span></li>
-              ))}
+            <ul className="defs specs" style={{ background: "var(--canvas)" }}>
+              {LASER_SPECS.map((x) => <li key={x.k}><span className="dt">{x.k}</span><span className="dd">{x.v}</span></li>)}
             </ul>
           </div>
         </section>
 
-        {/* ── FIRST VISIT ──────────────────────────────────────────────── */}
-        <section id="visit">
+        {/* ── PARTNERS ─────────────────────────────────────────────────── */}
+        <section className="grey" style={{ paddingBlock: 80 }}>
           <div className="wrap">
-            <div className="headline2">
-              <span className="kicker">Your first visit</span>
-              <h2>Nothing is treated before you are examined.</h2>
-            </div>
-            <div>
-              {FIRST_VISIT.map((s) => (
-                <div className="hlrow" key={s.n}>
-                  <span className="n">{s.n}</span>
-                  <div><h3>{s.h}</h3><span className="meta">{s.meta}</span></div>
-                  <div className="bd"><p>{s.p}</p></div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ── CLINICIAN ────────────────────────────────────────────────── */}
-        <section className="grey">
-          <div className="wrap clin">
-            <Ph label="Monika, in the clinic" ratio="4/5" className="portrait" src="/labo/clinic-clinician.jpg" alt="A clinician talking a patient through her plan in a bright treatment room" />
-            <div>
-              <span className="kicker">Your clinician</span>
-              <blockquote>A laser is a medical device. It should be used like one.</blockquote>
-              <p className="sub">Laser settings, injection plans and every protocol are set by a nurse practitioner who examines you first and follows your skin through the whole course.</p>
-              <ul className="creds">
-                <li><b>Clinician</b><span>{PRACTICE.provider}</span></li>
-                <li><b>Licensure</b><span>Nurse practitioner, Washington</span></li>
-                <li><b>Laser</b><span>{CLINIC.device}</span></li>
-                <li><b>Injectables</b><span>Botox, hyaluronic fillers, Sculptra</span></li>
-                <li><b>Approach</b><span>Exam first, test spot, written plan, adjust every visit</span></li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        {/* ── THE CLINIC ───────────────────────────────────────────────── */}
-        <section id="clinic" className="cblend">
-          <i className="tint" aria-hidden="true" />
-          <div className="wrap">
-            <div className="visit2">
-              <div>
-                <span className="kicker">The clinic</span>
-                <h2 style={{ marginTop: 15 }}>{CLINIC.city.split(",")[0]}. {CLINIC.status}.</h2>
-                <ul className="defs" style={{ marginTop: 26 }}>
-                  <li><span className="dt">Where</span><span className="dd">{CLINIC.address ?? <>{CLINIC.city}<br /><span style={{ color: "var(--muted)" }}>Address announced soon</span></>}</span></li>
-                  <li><span className="dt">Hours</span><span className="dd">{CLINIC.hoursNote}</span></li>
-                  <li><span className="dt">Contact</span><span className="dd"><a href={`mailto:${PRACTICE.email}`}>{PRACTICE.email}</a></span></li>
-                </ul>
-                <div className="acts" style={{ justifyContent: "flex-start", marginTop: 26 }}>
-                  <Link className="btn btn-primary" href="/contact">Join the opening list</Link>
-                </div>
-              </div>
-            </div>
+            <SectionHead eyebrow="Our partners" title="Trusted brands, real results" />
+            <PartnerLogos />
           </div>
         </section>
 
         {/* ── TELEHEALTH — the practice's second line, gate kept ───────── */}
-        <section id="telehealth" className="grey">
+        <section id="telehealth">
           <div className="wrap">
             <div className="headline2">
               <span className="kicker">Also from {PRACTICE.name} · by video</span>
-              <h2>Hormone and metabolic care, for Washington.</h2>
+              <h2>Hormone and metabolic care, by telehealth.</h2>
               <p className="sub" style={{ marginTop: 17, maxWidth: "52ch" }}>The same clinician, the same standard: a full lab panel before anything is prescribed.</p>
             </div>
-            <div className="tele">
+            <div className="tele" style={{ background: "var(--canvas)" }}>
               {TELE.map((t) => (
-                <Link className="trow" key={t.slug} href={`/programs/${t.slug}`}>
-                  <b>{t.name}</b><span>{t.note}</span><i aria-hidden="true">›</i>
-                </Link>
+                <Link className="trow" key={t.slug} href={`/programs/${t.slug}`}><b>{t.name}</b><span>{t.note}</span><i aria-hidden="true">›</i></Link>
               ))}
             </div>
             <Gate />
@@ -230,18 +164,7 @@ export default function LaboHome() {
           </div>
         </section>
 
-        {/* ── CLOSE ────────────────────────────────────────────────────── */}
-        <section className="close lblend">
-          <i className="tint" aria-hidden="true" />
-          <div className="wrap">
-            <h2>Start with a consultation.</h2>
-            <p className="sub" style={{ margin: "20px auto 0", maxWidth: "44ch" }}>Thirty minutes, an exam, a test spot and a written plan with the full price. No pressure to book the course.</p>
-            <div className="acts">
-              <Link className="btn btn-primary" href="/contact">Request a consultation</Link>
-              <Link className="btn btn-ghost" href="/treatments">See treatments</Link>
-            </div>
-          </div>
-        </section>
+        <BookCta />
       </main>
 
       <Footer />

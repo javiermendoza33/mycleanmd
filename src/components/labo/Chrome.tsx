@@ -2,18 +2,18 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { NAV, PROGRAMS, PRACTICE, HEALTHIE, TREATMENTS, CLINIC } from "@/labo/content";
+import { NAV, PROGRAMS, PRACTICE, HEALTHIE, TREATMENTS, FOOTER_DISCLAIMER } from "@/labo/content";
+import { services } from "@/labo/clinic/services";
+import { CLINIC_SITE } from "@/labo/clinic/site";
 
 /**
- * Header and footer for The Labo Method inner pages — the White Room system.
+ * Header and footer for The Labo Method inner pages.
  *
- * The prototype's header carries in-page anchors and the homepage keeps that
- * inline (port it, don't reinterpret it); these are the same bar and footer
- * with real routes for the pages that live off the homepage. Like the
- * prototype, the nav simply hides on small screens — the footer is the full
- * site map, which is also how the reference design navigates on mobile.
+ * Nov 18 2026: the clinic site's navigation (Services · Laser · About · Patient
+ * Care · Testimonials · Blog · Contact, Book Now) replaces the telehealth-first
+ * bar; the footer is the full site map, which is also how the site navigates on
+ * phones (the main nav hides under 880px by design).
  */
-
 const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
 
 export function Header() {
@@ -21,79 +21,70 @@ export function Header() {
   return (
     <header className="site">
       <div className="wrap bar">
-        <Link className="brand" href="/" aria-label={`${PRACTICE.name} — home`}>
-          {PRACTICE.name}
-        </Link>
+        <Link className="brand" href="/" aria-label={`${PRACTICE.name} — home`}>{PRACTICE.name}</Link>
         <nav className="main" aria-label="Primary">
-          <Link href="/treatments" className={pathname.startsWith("/treatments") ? "on" : undefined}>
-            Treatments
-          </Link>
-          <Link href="/#telehealth" className={pathname.startsWith("/programs") ? "on" : undefined}>
-            Telehealth
-          </Link>
           {NAV.map((l) => (
-            <Link key={l.href} href={l.href} className={pathname === l.href ? "on" : undefined}>
-              {l.label}
-            </Link>
+            <Link key={l.href} href={l.href} className={pathname === l.href || pathname.startsWith(l.href + "/") ? "on" : undefined}>{l.label}</Link>
           ))}
         </nav>
-        <Link className="btn btn-primary btn-sm" href="/contact">Request a consultation</Link>
+        <Link className="btn btn-primary btn-sm" href="/booking">Book now</Link>
       </div>
     </header>
   );
 }
 
-/** The homepage prototype's footer, shared by every page. */
 export function Footer() {
+  const s = CLINIC_SITE;
   return (
     <footer className="site">
       <div className="wrap">
         <div className="fnav fnav4">
           <div>
-            <h5>The clinic · {CLINIC.city.split(",")[0]}</h5>
+            <h5>Explore</h5>
             <ul>
-              {TREATMENTS.map((t) => (
-                <li key={t.slug}><Link href={`/treatments#${t.slug}`}>{t.name}</Link></li>
-              ))}
-              <li><Link href="/treatments">All treatments</Link></li>
+              <li><Link href="/">Home</Link></li>
+              {NAV.map((l) => <li key={l.href}><Link href={l.href}>{l.label}</Link></li>)}
+              <li><Link href="/booking">Book now</Link></li>
+              <li><a href={s.shopUrl} {...ext}>Shop skincare ↗</a></li>
+              <li><a href={s.queenBeeUrl} {...ext}>Queen Bee Spa ↗</a></li>
             </ul>
           </div>
           <div>
-            <h5>Telehealth programs</h5>
+            <h5>Treatments</h5>
             <ul>
-              {PROGRAMS.map((p) => (
-                <li key={p.slug}><Link href={`/programs/${p.slug}`}>{p.name}</Link></li>
-              ))}
+              {services.map((t) => <li key={t.slug}><Link href={t.comingSoon ? "/services" : t.href ?? `/services/${t.slug}`}>{t.name}</Link></li>)}
+              {TREATMENTS.filter((t) => t.group === "laser").map((t) => <li key={t.slug}><Link href={`/treatments#${t.slug}`}>{t.name}</Link></li>)}
             </ul>
           </div>
           <div>
-            <h5>Practice</h5>
+            <h5>Telehealth</h5>
             <ul>
-              <li><Link href="/about">About the provider</Link></li>
-              <li><Link href="/pricing">Pricing</Link></li>
+              {PROGRAMS.map((p) => <li key={p.slug}><Link href={`/programs/${p.slug}`}>{p.name}</Link></li>)}
               <li><Link href="/how-it-works">How it works</Link></li>
+              <li><Link href="/pricing">Pricing</Link></li>
               <li><Link href="/faq">FAQ</Link></li>
-              <li><Link href="/contact">Contact</Link></li>
-              <li><a href={`mailto:${PRACTICE.email}`}>{PRACTICE.email}</a></li>
               <li><a href={HEALTHIE.login} {...ext}>Patient login</a></li>
             </ul>
           </div>
           <div>
-            <h5>Legal</h5>
+            <h5>Visit us</h5>
             <ul>
-              {/* NPP, privacy policy and terms do not exist yet (handoff §10) — /legal carries the disclaimers until they do */}
-              <li><Link href="/legal">Notice of Privacy Practices</Link></li>
-              <li><Link href="/legal">Privacy policy</Link></li>
-              <li><Link href="/legal">Terms of service</Link></li>
-              <li><Link href="/legal">Disclaimers &amp; notices</Link></li>
+              {s.locations.map((loc) => (
+                <li key={loc.id}>
+                  <a href={loc.mapUrl} {...ext}><b style={{ color: "var(--ink)", fontWeight: 600 }}>{loc.name}</b><br />{loc.address1}<br />{loc.address2}</a>
+                  <span style={{ display: "block", marginTop: 3, color: "var(--accent)", fontSize: ".66rem", letterSpacing: ".1em", textTransform: "uppercase" }}>{loc.contactNote}</span>
+                </li>
+              ))}
+              <li><a href={s.tel}>{s.phoneDisplay}</a></li>
+              <li><a href={`mailto:${PRACTICE.email}`}>{PRACTICE.email}</a></li>
+              {s.hours.map((h) => <li key={h.days}>{h.days}: {h.time}</li>)}
+              <li><a href={s.instagram} {...ext}>Instagram ↗</a></li>
             </ul>
           </div>
         </div>
         <div className="legal">
-          <p>In-clinic laser, injectable and skin treatments are provided in {CLINIC.city} after an examination by a licensed nurse practitioner; results vary and a test spot is performed before treatment.</p>
-          <p>This website is for general information and is not medical advice. A patient relationship begins only after intake, a completed clinical evaluation and a documented visit. Clinical services are provided by a nurse practitioner licensed in Washington; patients must be physically located in Washington at the time of each visit.</p>
-          <p>Some medications prescribed through this practice are compounded by state-licensed pharmacies and are not reviewed or approved by the FDA. Certain peptides are prescribed for uses that are not FDA-approved; evidence quality varies by agent. Testosterone is a Schedule III controlled substance. Individual results vary and no outcome is guaranteed.</p>
-          <p>Email and web forms are not secure channels. Do not send clinical information through them. If this is an emergency, call 911.</p>
+          <p>© {new Date().getFullYear()} {PRACTICE.name}. All rights reserved. · <Link href="/privacy-policy">Privacy policy</Link> · <Link href="/legal">Legal</Link></p>
+          <p>{FOOTER_DISCLAIMER}</p>
         </div>
       </div>
     </footer>

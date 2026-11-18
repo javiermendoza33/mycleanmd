@@ -72,10 +72,13 @@ export const HEALTHIE = {
 } as const;
 
 export const NAV = [
-  { label: "How it works", href: "/how-it-works" },
-  { label: "Pricing", href: "/pricing" },
+  // Nov 18 2026: the clinic site's navigation (Javier: "make TLM like the site was").
+  { label: "Services", href: "/services" },
+  { label: "Laser", href: "/treatments" },
   { label: "About", href: "/about" },
-  { label: "FAQ", href: "/faq" },
+  { label: "Patient Care", href: "/patient-care" },
+  { label: "Testimonials", href: "/testimonials" },
+  { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ] as const;
 
@@ -378,9 +381,9 @@ export const ABOUT = {
   /** Handoff open item #11: captions for slides 2 and 3 were inferred from the
    *  images and are unconfirmed. Kept, since they are descriptive not clinical. */
   slides: [
-    { src: "/labo/slide-1.jpg", pos: "50% 20%", caption: "Monika Jauregui, DNP, NP-C." },
-    { src: "/labo/slide-2.jpg", pos: "50% 32%", caption: "San Juan Islands, Washington." },
-    { src: "/labo/slide-3.jpg", pos: "50% 45%", caption: "Cold water swim off Alki Beach, Seattle." },
+    { src: "/labo/img/about/founder.webp", pos: "50% 20%", caption: "Mónika Jáuregui, DNP, CANS, FNP-C." },
+    { src: "/labo/img/about/founder-2.webp", pos: "50% 25%", caption: "In the clinic." },
+    { src: "/labo/img/about/clinic.jpg", pos: "50% 50%", caption: "The treatment studio, South Lake Union." },
   ],
 };
 
