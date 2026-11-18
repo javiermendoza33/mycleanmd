@@ -7,6 +7,7 @@ import { CLINIC, HEALTHIE, LASER_SPECS, NAV, PRACTICE, PROGRAMS } from "@/labo/c
 import { services } from "@/labo/clinic/services";
 import { testimonials } from "@/labo/clinic/testimonials";
 import { CLINIC_SITE } from "@/labo/clinic/site";
+import MobileNav from "@/components/labo/MobileNav";
 
 /**
  * thelabomethod.com homepage — the clinic site, Nov 18 2026.
@@ -42,6 +43,7 @@ export default function LaboHome() {
             {NAV.map((l) => <Link key={l.href} href={l.href}>{l.label}</Link>)}
           </nav>
           <Link className="btn btn-primary btn-sm" href="/booking">Book now</Link>
+        <MobileNav />
         </div>
       </header>
 

@@ -650,3 +650,12 @@
 [data-labo] .hoursrow span:last-child{color:var(--ink)}
 [data-labo] .embed{display:block;width:100%;border:0;border-radius:var(--radius-card);background:#fff}
 [data-labo] .embed.book{height:1150px}
+
+/* phone menu (Nov 18 2026) */
+[data-labo] .mnav-btn{display:none;font:inherit;font-size:1.25rem;line-height:1;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;align-items:center;justify-content:center;flex:none}
+@media (max-width:880px){[data-labo] .mnav-btn{display:inline-flex}}
+[data-labo] .mnav{position:fixed;left:0;right:0;top:64px;bottom:0;z-index:59;background:var(--paper);padding:28px 22px 40px;display:flex;flex-direction:column;gap:6px;overflow:auto}
+@media (max-width:560px){[data-labo] .mnav{top:58px}}
+[data-labo] .mnav>a:not(.btn){font-size:1.5rem;font-weight:600;letter-spacing:-.025em;text-decoration:none;padding:12px 0;border-bottom:1px solid var(--hair);color:var(--ink)}
+[data-labo] .mnav>.btn{margin-top:22px;align-self:flex-start}
+[data-labo] .mnav .note a{color:var(--accent);text-decoration:none}

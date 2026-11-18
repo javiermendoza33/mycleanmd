@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { NAV, PROGRAMS, PRACTICE, HEALTHIE, TREATMENTS, FOOTER_DISCLAIMER } from "@/labo/content";
 import { services } from "@/labo/clinic/services";
 import { CLINIC_SITE } from "@/labo/clinic/site";
+import MobileNav from "@/components/labo/MobileNav";
 
 /**
  * Header and footer for The Labo Method inner pages.
@@ -28,6 +29,7 @@ export function Header() {
           ))}
         </nav>
         <Link className="btn btn-primary btn-sm" href="/booking">Book now</Link>
+        <MobileNav />
       </div>
     </header>
   );
