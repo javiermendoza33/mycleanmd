@@ -6,13 +6,15 @@ import { useEffect, useState } from "react";
  *  over it once it can play, so a refresh never flashes from one picture to another (Javier, Nov 18 2026). */
 export default function HeroVideo() {
   const [ready, setReady] = useState(false);
-  const [allow, setAllow] = useState(false);
-  // Phones and data-saver connections get the poster only (Core Web Vitals: no 5 MB download on mobile).
+  const [src, setSrc] = useState<string | null>(null);
+  // Nov 18 2026 (Javier: "make the mobile version with the video movement of swimmer as well"): phones play it too, from a
+  // lighter 960px encode (hero-mobile.mp4, ~1/3 the bytes). Only data-saver and reduced-motion users keep the still poster.
   useEffect(() => {
     const nav = navigator as Navigator & { connection?: { saveData?: boolean } };
-    setAllow(window.matchMedia("(min-width: 761px)").matches && !nav.connection?.saveData);
+    if (nav.connection?.saveData || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    setSrc(window.matchMedia("(max-width: 760px)").matches ? "/labo/img/hero-mobile.mp4" : "/labo/img/hero.mp4");
   }, []);
-  if (!allow) return null;
+  if (!src) return null;
   return (
     <video
       className={ready ? "on" : undefined}
@@ -22,7 +24,7 @@ export default function HeroVideo() {
       onCanPlay={() => setReady(true)}
       onPlaying={() => setReady(true)}
     >
-      <source src="/labo/img/hero.mp4" type="video/mp4" />
+      <source src={src} type="video/mp4" />
     </video>
   );
 }
