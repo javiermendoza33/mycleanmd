@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Faq from "@/components/labo/Faq";
-import { CLINIC, GROUP_NOTE, GROUPS, LASER_FAQ, TREATMENTS } from "@/labo/content";
+import { CLINIC, GROUP_NOTE, GROUPS, LASER_FAQ, TREATMENTS, GATE_ROBOTS } from "@/labo/content";
 
 const GROUP_KEYS = ["laser", "injectables", "skin"] as const;
 
@@ -8,6 +8,7 @@ export const metadata = {
   title: "Treatments · laser, Botox, fillers, Sculptra, microneedling · Seattle",
   description: `Laser hair removal, sun spots, spider veins, skin rejuvenation and nail treatment on the ${CLINIC.device}, plus Botox, dermal fillers, Sculptra and microneedling in Seattle. Every plan starts with an exam by a nurse practitioner.`,
   alternates: { canonical: "/treatments" },
+  ...GATE_ROBOTS,
 };
 
 /** FAQPage structured data for the laser questions. */

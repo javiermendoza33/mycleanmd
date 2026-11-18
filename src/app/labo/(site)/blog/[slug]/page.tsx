@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPost, posts } from "@/labo/clinic/posts";
 import { BookCta } from "@/components/labo/Clinic";
+import { PRACTICE } from "@/labo/content";
 
 export const dynamicParams = false;
 export function generateStaticParams() { return posts.map((p) => ({ slug: p.slug })); }
@@ -20,8 +21,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) notFound();
+  const base = `https://${PRACTICE.domain}`;
+  const jsonLd = { "@context": "https://schema.org", "@type": "BlogPosting", headline: post.title, description: post.excerpt, datePublished: post.date, dateModified: post.date, image: `${base}${post.image.src}`, url: `${base}/blog/${post.slug}`, mainEntityOfPage: `${base}/blog/${post.slug}`,
+    author: { "@type": "Person", name: "Mónika Jáuregui, DNP, CANS, FNP-C", url: `${base}/about` }, publisher: { "@type": "Organization", name: PRACTICE.name, url: base } };
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <article>
         <header className="pageh" style={{ paddingBottom: 0 }}>
           <div className="wrap posthead">

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { availableServices, getService, services } from "@/labo/clinic/services";
 import { careInstructions } from "@/labo/clinic/patient-care";
 import { Acc, BookCta, Rich, ServiceCard } from "@/components/labo/Clinic";
+import { PRACTICE } from "@/labo/content";
 
 export const dynamicParams = false;
 export function generateStaticParams() { return availableServices.map((s) => ({ slug: s.slug })); }
@@ -22,8 +23,17 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   const hasCare = careInstructions.some((c) => c.serviceSlug === service.slug);
   const related = services.filter((s) => s.slug !== service.slug && !s.comingSoon).slice(0, 3);
 
+  const base = `https://${PRACTICE.domain}`;
+  const jsonLd = [
+    { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Services", item: `${base}/services` },
+      { "@type": "ListItem", position: 2, name: service.name, item: `${base}/services/${service.slug}` }] },
+    { "@context": "https://schema.org", "@type": "MedicalProcedure", name: service.name, description: service.seo.description, url: `${base}/services/${service.slug}`, image: `${base}${service.image.src}`, provider: { "@id": `${base}/#clinic` } },
+    ...(service.faqs.length ? [{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: service.faqs.map((f) => ({ "@type": "Question", name: f.question, acceptedAnswer: { "@type": "Answer", text: f.answer.map((a) => a.replace(/^- /, "")).join(" ") } })) }] : []),
+  ];
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <section className="pageh" style={{ paddingBottom: 0 }}>
         <div className="wrap split">
           <div>

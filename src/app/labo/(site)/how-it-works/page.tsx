@@ -1,10 +1,11 @@
 import { ClosingCTA, Eyebrow, PageHero } from "@/components/labo/Sections";
-import { HOW_LONG, INCLUDED } from "@/labo/content";
+import { HOW_LONG, INCLUDED, GATE_ROBOTS } from "@/labo/content";
 
 export const metadata = {
   title: "How it works",
   description: "Intake, labs, a video visit, then treatment. Four steps, and none of them are a questionnaire that prescribes itself.",
   alternates: { canonical: "/how-it-works" },
+  ...GATE_ROBOTS,
 };
 
 export default function HowItWorks() {

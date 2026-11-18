@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { PROGRAMS, PRACTICE } from "@/labo/content";
+import { PROGRAMS, PRACTICE, LAUNCH_READY, isGated } from "@/labo/content";
 import { availableServices } from "@/labo/clinic/services";
 import { posts } from "@/labo/clinic/posts";
 
@@ -30,5 +30,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { p: "/contact", priority: 0.6 },
     { p: "/legal", priority: 0.2 },
   ];
-  return paths.map(({ p, priority }) => ({ url: `${BASE}${p}`, lastModified: AT, changeFrequency: "monthly" as const, priority }));
+  return paths.filter(({ p }) => LAUNCH_READY || !isGated(p)).map(({ p, priority }) => ({ url: `${BASE}${p}`, lastModified: AT, changeFrequency: "monthly" as const, priority }));
 }

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Eyebrow } from "@/components/labo/Sections";
-import { PROGRAMS, getProgram } from "@/labo/content";
+import { PROGRAMS, getProgram, GATE_ROBOTS } from "@/labo/content";
 
 export function generateStaticParams() {
   return PROGRAMS.map((p) => ({ slug: p.slug }));
@@ -12,7 +12,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const p = getProgram((await params).slug);
   if (!p) return { title: "Not found" };
-  return { title: `Join · ${p.name}`, alternates: { canonical: `/join/${p.slug}` } };
+  return { title: `Join · ${p.name}`, ...GATE_ROBOTS, alternates: { canonical: `/join/${p.slug}` } };
 }
 
 export default async function JoinProgramPage(

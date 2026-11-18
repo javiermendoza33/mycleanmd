@@ -1,10 +1,11 @@
 import { PageHero } from "@/components/labo/Sections";
-import { LEGAL } from "@/labo/content";
+import { LEGAL, GATE_ROBOTS } from "@/labo/content";
 
 export const metadata = {
   title: "Disclaimers & notices",
   description: "Scope of licensure, telehealth consent, compounded medications, controlled substances and privacy notices for The Labo Method.",
   alternates: { canonical: "/legal" },
+  ...GATE_ROBOTS,
   robots: { index: true, follow: true },
 };
 

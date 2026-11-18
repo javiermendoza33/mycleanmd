@@ -88,7 +88,8 @@ export async function submitContact(
       </div>`,
     });
     if (error) throw new Error(error.message);
-  } catch {
+  } catch (e) {
+    console.error("[labo contact] send failed:", e instanceof Error ? e.message : e, { from: FROM, to: TO });
     return {
       status: "error",
       message: `Message could not be sent. Please email ${PRACTICE.email} directly.`,

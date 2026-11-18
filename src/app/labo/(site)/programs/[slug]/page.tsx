@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Eyebrow, ClosingCTA } from "@/components/labo/Sections";
-import { PROGRAMS, getProgram, HEALTHIE } from "@/labo/content";
+import { PROGRAMS, getProgram, HEALTHIE, GATE_ROBOTS } from "@/labo/content";
 
 /** One template, four content objects — exactly as the handoff specifies. */
 export function generateStaticParams() {
@@ -18,6 +18,7 @@ export async function generateMetadata(
     title: p.name,
     description: p.lede,
     alternates: { canonical: `/programs/${p.slug}` },
+    ...GATE_ROBOTS,
     openGraph: { title: p.name, description: p.lede },
   };
 }

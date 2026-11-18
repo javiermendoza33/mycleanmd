@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import LaboAnalytics from "@/components/labo/Analytics";
 import { Inter, IBM_Plex_Mono } from "next/font/google";
-import { PRACTICE, AVAILABILITY, LAUNCH_READY } from "@/labo/content";
+import { PRACTICE, AVAILABILITY, LAUNCH_READY, CLINIC_INDEX } from "@/labo/content";
+import { CLINIC_SITE } from "@/labo/clinic/site";
+import { services } from "@/labo/clinic/services";
 import "./labo.css";
 
 /**
@@ -30,49 +32,59 @@ const plexMono = IBM_Plex_Mono({
   variable: "--font-plex-mono",
   display: "swap",
 });
+const TITLE = `Medical Spa in Seattle & Ruston, WA — Botox, Fillers, Laser, Sculptra`;
 const DESCRIPTION =
-  `Laser and aesthetics clinic in Seattle: laser hair removal for every skin type, sun spots, spider veins, skin rejuvenation, Botox, dermal fillers, Sculptra and microneedling, led by a nurse practitioner. Plus telehealth hormone and metabolic care for residents of ${AVAILABILITY}.`;
+  `The Labo Method is a medical spa in Seattle (South Lake Union) and Ruston, WA, led by Mónika Jáuregui, DNP, CANS, FNP-C: Botox and Dysport, dermal fillers, Sculptra, microneedling, PRP and exosomes, PDO threads, chemical peels, IV therapy, medical weight loss and laser on the Candela GentleMax Pro Plus.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(`https://${PRACTICE.domain}`),
   title: {
     template: `%s | ${PRACTICE.name}`,
-    default: `${PRACTICE.name} — Laser & Aesthetics, Seattle`,
+    default: `${TITLE} | ${PRACTICE.name}`,
   },
   description: DESCRIPTION,
   alternates: { canonical: "/" },
-  // Blocking items in content.ts must clear before this is indexed.
-  robots: LAUNCH_READY ? undefined : { index: false, follow: false },
+  // Nov 18 2026: the clinic pages are indexable (CLINIC_INDEX); the gated telehealth pages set their own noindex.
+  robots: CLINIC_INDEX || LAUNCH_READY ? undefined : { index: false, follow: false },
   openGraph: {
     type: "website",
     siteName: PRACTICE.name,
     locale: "en_US",
-    title: `${PRACTICE.name} — Laser & Aesthetics, Seattle`,
+    title: `${TITLE} | ${PRACTICE.name}`,
     description: DESCRIPTION,
+    images: [{ url: "/labo/img/misc/cta-bg.jpg", width: 2000, height: 1334, alt: "The Labo Method, Seattle" }],
   },
+  twitter: { card: "summary_large_image" },
 };
 
-/** MedicalBusiness structured data — handoff open item #9. */
+/** MedicalBusiness structured data for the clinic — two locations, phone, hours, services, the clinician. */
+const hours = { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "10:00", closes: "18:00" };
+const place = (loc: (typeof CLINIC_SITE.locations)[number]) => ({
+  "@type": "MedicalBusiness",
+  name: `${PRACTICE.name} — ${loc.name}`,
+  address: { "@type": "PostalAddress", streetAddress: loc.address1, addressLocality: loc.cityLabel, addressRegion: "WA", postalCode: loc.address2.match(/\d{5}/)?.[0], addressCountry: "US" },
+  telephone: `+1-${CLINIC_SITE.phoneNumber}`,
+  hasMap: loc.mapUrl,
+  openingHoursSpecification: hours,
+});
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "MedicalBusiness",
+  "@id": `https://${PRACTICE.domain}/#clinic`,
   name: PRACTICE.name,
   url: `https://${PRACTICE.domain}`,
   email: PRACTICE.email,
+  telephone: `+1-${CLINIC_SITE.phoneNumber}`,
   description: DESCRIPTION,
-  medicalSpecialty: "Endocrinology",
-  areaServed: AVAILABILITY.split(" and ").map((name) => ({ "@type": "State", name })),
-  availableService: [
-    { "@type": "MedicalTherapy", name: "GLP-1 Weight Management" },
-    { "@type": "MedicalTherapy", name: "Peptide Therapy" },
-    { "@type": "MedicalTherapy", name: "Testosterone Replacement Therapy" },
-    { "@type": "MedicalTherapy", name: "Menopausal Hormone Therapy" },
-  ],
-  employee: {
-    "@type": "Person",
-    name: PRACTICE.provider,
-    jobTitle: "Family Nurse Practitioner",
-  },
+  image: `https://${PRACTICE.domain}/labo/img/misc/cta-bg.jpg`,
+  priceRange: "$$",
+  address: place(CLINIC_SITE.locations[0]).address,
+  openingHoursSpecification: hours,
+  sameAs: [CLINIC_SITE.instagram],
+  areaServed: [{ "@type": "City", name: "Seattle" }, { "@type": "City", name: "Ruston" }, { "@type": "City", name: "Tacoma" }, { "@type": "State", name: "Washington" }],
+  location: CLINIC_SITE.locations.map(place),
+  availableService: services.map((x) => ({ "@type": "MedicalProcedure", name: x.name, url: `https://${PRACTICE.domain}${x.href ?? `/services/${x.slug}`}` })),
+  founder: { "@type": "Person", name: "Mónika Jáuregui, DNP, CANS, FNP-C", jobTitle: "Family Nurse Practitioner, Certified Aesthetic Nurse Specialist", url: `https://${PRACTICE.domain}/about` },
 };
 
 export default function LaboLayout({ children }: { children: React.ReactNode }) {

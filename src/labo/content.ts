@@ -39,6 +39,20 @@
  */
 export const LAUNCH_READY = false;
 
+/**
+ * Nov 18 2026 — SPLIT GATE (Javier: "we do need to work on seo plan with indexing").
+ * The clinic pages (home, services, about, contact, booking, patient care, testimonials, blog, privacy) carry
+ * copy that has been public on skinhavenclinic.com for years, so they are indexable now. The telehealth
+ * programs, pricing, how-it-works, join, legal and FAQ pages — and /treatments with its placeholder laser
+ * prices — stay noindex until LAUNCH_READY flips. GATED is the single list that drives the per-page robots
+ * meta, /robots.txt and the sitemap.
+ */
+export const CLINIC_INDEX = true;
+export const GATED = ["/programs", "/pricing", "/how-it-works", "/join", "/legal", "/faq", "/treatments"] as const;
+export const isGated = (path: string) => GATED.some((g) => path === g || path.startsWith(g + "/"));
+/** Spread into a gated page's metadata: `...GATE_ROBOTS` */
+export const GATE_ROBOTS = LAUNCH_READY ? {} : { robots: { index: false, follow: true } };
+
 // Nov 6 2026 (Javier: "she is a doctor and can prescribe in WA and CA") → restored.
 // Oct 26 2026 (Javier: "take out all things California for now") had set this to Washington only.
 export const AVAILABILITY = "California and Washington";

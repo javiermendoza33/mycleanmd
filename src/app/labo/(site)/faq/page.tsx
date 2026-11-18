@@ -1,11 +1,12 @@
 import { PageHero } from "@/components/labo/Sections";
 import Faq from "@/components/labo/Faq";
-import { FAQ, HEALTHIE } from "@/labo/content";
+import { FAQ, HEALTHIE, GATE_ROBOTS } from "@/labo/content";
 
 export const metadata = {
   title: "FAQ",
   description: "Licensure, insurance, using labs you already have, how fast you can start, who prescribes, and how to cancel.",
   alternates: { canonical: "/faq" },
+  ...GATE_ROBOTS,
 };
 
 /** FAQPage structured data — these are the questions people search. */

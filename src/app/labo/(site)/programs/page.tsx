@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Eyebrow } from "@/components/labo/Sections";
-import { PROGRAMS, AVAILABILITY } from "@/labo/content";
+import { PROGRAMS, AVAILABILITY, GATE_ROBOTS } from "@/labo/content";
 
 export const metadata: Metadata = {
   title: "Programs",
   description: `Telehealth hormone and metabolic programs for residents of ${AVAILABILITY}.`,
   alternates: { canonical: "/programs" },
+  ...GATE_ROBOTS,
 };
 
 export default function ProgramsIndexPage() {

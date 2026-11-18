@@ -1,10 +1,11 @@
 import { ClosingCTA, PageHero } from "@/components/labo/Sections";
-import { PROGRAMS, EXTRA_PRICING, PRICING_FOOTNOTE, HEALTHIE } from "@/labo/content";
+import { PROGRAMS, EXTRA_PRICING, PRICING_FOOTNOTE, HEALTHIE, GATE_ROBOTS } from "@/labo/content";
 
 export const metadata = {
   title: "Pricing",
   description: "One monthly fee. Medication, visits and messaging included. GLP-1 $299, peptides $249, testosterone $199, hormone therapy for women $199.",
   alternates: { canonical: "/pricing" },
+  ...GATE_ROBOTS,
 };
 
 export default function Pricing() {
