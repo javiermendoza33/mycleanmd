@@ -71,4 +71,5 @@ create table if not exists public.labo_provider_settings (
   timezone     text not null default 'America/Los_Angeles',
   updated_at   timestamptz default now()
 );
+alter table public.labo_provider_settings enable row level security;
 insert into public.labo_provider_settings (id) values (1) on conflict (id) do nothing;

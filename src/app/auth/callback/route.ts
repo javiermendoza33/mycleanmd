@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import type { NextRequest } from 'next/server'
+import { isProviderEmail } from '@/lib/labo/provider'
 
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url)
@@ -66,6 +67,11 @@ export async function GET(request: NextRequest) {
       if (!profile?.full_name && providerName && !wantedRole) {
         await supabase.from('profiles')
           .upsert({ id: data.user.id, full_name: providerName, email: data.user.email, role })
+      }
+      // thelabomethod.com has its own two homes (Nov 6 2026); MyCleanMD's dashboards 404 on that host.
+      if (/(^|\.)thelabomethod\.com$/.test(new URL(origin).hostname)) {
+        const { data: { user: u } } = await supabase.auth.getUser()
+        return NextResponse.redirect(`${origin}${isProviderEmail(u?.email) ? '/provider' : '/portal'}`)
       }
       if (role === 'doctor') return NextResponse.redirect(`${origin}/doctor/dashboard`)
       if (role === 'admin') return NextResponse.redirect(`${origin}/admin/dashboard`)
