@@ -24,7 +24,10 @@ export interface ContactState {
 }
 
 const TO = process.env.LABO_CONTACT_EMAIL ?? "javier.mendoza@upm.ai";
-const FROM = `${PRACTICE.name} <onboarding@resend.dev>`;
+// Nov 18 2026: onboarding@resend.dev can only deliver to the Resend account owner's own address, which is why the
+// live form failed for everyone. Until thelabomethod.com is verified in Resend (dashboard → Domains → the DKIM/SPF
+// records at GoDaddy), send from the already-verified mycleantext.com domain. LABO_CONTACT_FROM overrides.
+const FROM = process.env.LABO_CONTACT_FROM ?? `${PRACTICE.name} <support@mycleantext.com>`;
 
 const esc = (s: string) =>
   s.replace(/[&<>"']/g, (c) =>
