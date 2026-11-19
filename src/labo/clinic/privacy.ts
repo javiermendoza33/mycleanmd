@@ -34,6 +34,13 @@ export const privacySections: LegalSection[] = [
     ],
   },
   {
+    heading: "Mobile information and text messages",
+    paragraphs: [
+      "If you give us your mobile number and tick the text-message box on our website, intake form or a text you send us, we may send you appointment confirmations and reminders, pre- and post-treatment care instructions, replies to your booking texts and occasional news about treatments and offers — about 1–4 messages a month, more around an appointment. Message and data rates may apply. Reply STOP to any message to cancel or HELP for help. Consent to text messages is never a condition of booking, buying or receiving treatment.",
+      "Your mobile number and your text-message consent are never sold, rented or shared with third parties or affiliates for their marketing or promotional purposes. They are shared only with the vendors that deliver our messages, and only to deliver them. The full program terms are at thelabomethod.com/sms.",
+    ],
+  },
+  {
     heading: "4. Your Consent",
     paragraphs: [
       "By providing your personal information to us and giving your consent to receive email/SMS communication, you acknowledge and consent to the collection, use, and disclosure of your personal information as described in this Privacy Policy.",

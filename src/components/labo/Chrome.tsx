@@ -85,7 +85,7 @@ export function Footer() {
           </div>
         </div>
         <div className="legal">
-          <p>© {new Date().getFullYear()} {PRACTICE.name}. All rights reserved. · <Link href="/privacy-policy">Privacy policy</Link> · <Link href="/legal">Legal</Link></p>
+          <p>© {new Date().getFullYear()} {PRACTICE.name}. All rights reserved. · <Link href="/privacy-policy">Privacy policy</Link> · <Link href="/legal">Legal</Link> · <Link href="/sms">SMS terms</Link></p>
           <p>{FOOTER_DISCLAIMER}</p>
         </div>
       </div>

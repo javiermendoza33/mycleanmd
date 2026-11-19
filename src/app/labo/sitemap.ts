@@ -28,6 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...PROGRAMS.map((x) => ({ p: `/programs/${x.slug}`, priority: 0.6 })),
     { p: "/faq", priority: 0.5 },
     { p: "/contact", priority: 0.6 },
+    { p: "/sms", priority: 0.4 },
     { p: "/legal", priority: 0.2 },
   ];
   return paths.filter(({ p }) => LAUNCH_READY || !isGated(p)).map(({ p, priority }) => ({ url: `${BASE}${p}`, lastModified: AT, changeFrequency: "monthly" as const, priority }));

@@ -669,3 +669,8 @@
    (the #CC8865 / #995532 midtones in cta-bg, clinic.jpg, testimonials.jpg; 5.6:1 on white). The portals keep Apple blue. */
 [data-labo] [data-clinic]{--accent:#9A5636;--accent-rgb:154,86,54;--accent-tint:rgba(154,86,54,.10);
   background:radial-gradient(90% 60% at 85% -10%,rgba(var(--accent-rgb),.10),transparent 60%),var(--paper);min-height:100vh}
+
+/* SMS opt-in consent row (Nov 18 2026): the box is unchecked by default — never pre-tick it */
+[data-labo] .consent{display:flex;gap:12px;align-items:flex-start;font-size:.88rem;line-height:1.5;color:var(--graphite);margin-top:6px;cursor:pointer}
+[data-labo] .consent input{flex:none;margin-top:4px;width:18px;height:18px;accent-color:var(--accent)}
+[data-labo] .consent a{text-decoration:underline}
