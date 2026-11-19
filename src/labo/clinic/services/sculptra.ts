@@ -48,11 +48,11 @@ export const service: Service = {
   ],
   image: {
     src: "/labo/img/services/sculptra.jpg",
-    alt: "Sculptra biostimulator injectable treatment at The Labo Method in Seattle, WA",
+    alt: "Sculptra biostimulator injectable treatment at The Labo Clinic in Seattle, WA",
   },
   seo: {
     title: "Sculptra Treatment in Seattle, WA | Facial Volume Loss",
     description:
-      "The Labo Method offers Sculptra to stimulate collagen production, address facial volume loss, and improve skin quality in Seattle, WA. Book now!",
+      "The Labo Clinic offers Sculptra to stimulate collagen production, address facial volume loss, and improve skin quality in Seattle, WA. Book now!",
   },
 };

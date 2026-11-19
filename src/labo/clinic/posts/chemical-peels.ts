@@ -8,27 +8,27 @@ export const post: Post = {
   date: "2023-12-11",
   image: {
     src: "/labo/img/services/chemical-peels.jpg",
-    alt: "Chemical peel treatment at The Labo Method in Seattle, WA",
+    alt: "Chemical peel treatment at The Labo Clinic in Seattle, WA",
   },
   body: [
     {
       paragraphs: [
-        "In the quest for luminous and youthful skin, the transformative potential of chemical peels has become a beacon of hope for individuals seeking effective and targeted skincare solutions. The Labo Method, a distinguished name in aesthetic care, unfolds a world of possibilities through its expertly crafted chemical peel treatments.",
-        "This article delves into the diverse skin concerns that the skilled application of chemical peels can effectively address. From tackling hyperpigmentation and acne-related issues to renewing skin texture and promoting overall rejuvenation, the expertise at The Labo Method unveils the potential of chemical peels in achieving a refreshed and revitalized complexion. Join us on this exploration as we uncover the artistry behind chemical peels and their ability to reveal the radiant beauty within.",
+        "In the quest for luminous and youthful skin, the transformative potential of chemical peels has become a beacon of hope for individuals seeking effective and targeted skincare solutions. The Labo Clinic, a distinguished name in aesthetic care, unfolds a world of possibilities through its expertly crafted chemical peel treatments.",
+        "This article delves into the diverse skin concerns that the skilled application of chemical peels can effectively address. From tackling hyperpigmentation and acne-related issues to renewing skin texture and promoting overall rejuvenation, the expertise at The Labo Clinic unveils the potential of chemical peels in achieving a refreshed and revitalized complexion. Join us on this exploration as we uncover the artistry behind chemical peels and their ability to reveal the radiant beauty within.",
       ],
     },
     {
       heading:
-        "Addressing Diverse Skin Concerns with Chemical Peels at The Labo Method",
+        "Addressing Diverse Skin Concerns with Chemical Peels at The Labo Clinic",
       paragraphs: [
-        "Chemical peels have emerged as a versatile and transformative solution in pursuing radiant and rejuvenated skin. The Labo Method, a leading name in aesthetic care, offers a range of chemical peel treatments designed to address a spectrum of skin concerns. In this article, we will explore the diverse array of skin issues that can be effectively targeted and resolved through the expert application of chemical peels.",
-        "From addressing pigmentation and acne scars to promoting overall skin renewal, The Labo Method unfolds the possibilities of achieving a refreshed and revitalized complexion.",
+        "Chemical peels have emerged as a versatile and transformative solution in pursuing radiant and rejuvenated skin. The Labo Clinic, a leading name in aesthetic care, offers a range of chemical peel treatments designed to address a spectrum of skin concerns. In this article, we will explore the diverse array of skin issues that can be effectively targeted and resolved through the expert application of chemical peels.",
+        "From addressing pigmentation and acne scars to promoting overall skin renewal, The Labo Clinic unfolds the possibilities of achieving a refreshed and revitalized complexion.",
       ],
     },
     {
       heading: "Hyperpigmentation",
       paragraphs: [
-        "Hyperpigmentation is a common concern, often leaving individuals seeking effective and transformative solutions. Enter the realm of chemical peels, a skincare artistry wielded by experts at The Labo Method. In this section, we embark on a journey dedicated to unraveling the intricacies of Hyperpigmentation.",
+        "Hyperpigmentation is a common concern, often leaving individuals seeking effective and transformative solutions. Enter the realm of chemical peels, a skincare artistry wielded by experts at The Labo Clinic. In this section, we embark on a journey dedicated to unraveling the intricacies of Hyperpigmentation.",
         "As we delve into the expertise behind chemical peels, we'll discover how these treatments emerge as powerful allies in pursuing a radiant complexion, diminishing the effects of sun damage, melasma, and uneven skin tone. Join us as we uncover the transformative potential of chemical peels in bringing forth a luminous resurgence to the skin's natural radiance.",
       ],
     },
@@ -99,21 +99,21 @@ export const post: Post = {
       ],
     },
     {
-      heading: "Elevating Confidence: Why Choose The Labo Method?",
+      heading: "Elevating Confidence: Why Choose The Labo Clinic?",
       paragraphs: [
-        "Discover a haven where expertise meets elegance—The Labo Method. Elevate your confidence with our team of skilled professionals, offering comprehensive services, cutting-edge technologies, and a client-centric approach. Choose us for personalized treatment plans, a commitment to safety, and a holistic journey toward radiant beauty—your confidence, our expertise—unveiling your natural allure.",
+        "Discover a haven where expertise meets elegance—The Labo Clinic. Elevate your confidence with our team of skilled professionals, offering comprehensive services, cutting-edge technologies, and a client-centric approach. Choose us for personalized treatment plans, a commitment to safety, and a holistic journey toward radiant beauty—your confidence, our expertise—unveiling your natural allure.",
       ],
     },
     {
       heading: "1. Expertise and Experience:",
       paragraphs: [
-        "The Labo Method boasts a team of experienced professionals dedicated to the artistry of skincare. Our experts, equipped with extensive knowledge and hands-on experience, strive to deliver exceptional results tailored to individual needs.",
+        "The Labo Clinic boasts a team of experienced professionals dedicated to the artistry of skincare. Our experts, equipped with extensive knowledge and hands-on experience, strive to deliver exceptional results tailored to individual needs.",
       ],
     },
     {
       heading: "2. Comprehensive Services:",
       paragraphs: [
-        "As a premier destination for aesthetic care, The Labo Method offers a wide array of comprehensive services. Our offerings cater to diverse skincare needs under one trusted roof, from advanced chemical peel treatments to personalized skincare regimens.",
+        "As a premier destination for aesthetic care, The Labo Clinic offers a wide array of comprehensive services. Our offerings cater to diverse skincare needs under one trusted roof, from advanced chemical peel treatments to personalized skincare regimens.",
       ],
     },
     {
@@ -125,21 +125,21 @@ export const post: Post = {
     {
       heading: "4. Personalized Treatment Plans:",
       paragraphs: [
-        "Understanding that each individual's skin is unique, The Labo Method emphasizes personalized treatment plans. Our tailored approach considers specific concerns and goals, ensuring that every client receives a customized and effective skincare regimen.",
+        "Understanding that each individual's skin is unique, The Labo Clinic emphasizes personalized treatment plans. Our tailored approach considers specific concerns and goals, ensuring that every client receives a customized and effective skincare regimen.",
       ],
     },
     {
       heading: "5. Holistic Approach to Beauty:",
       paragraphs: [
-        "Beyond surface-level enhancements, The Labo Method embraces a holistic approach to beauty. We recognize the interconnectedness of physical, mental, and emotional well-being, fostering a comprehensive journey toward self-confidence and radiance.",
+        "Beyond surface-level enhancements, The Labo Clinic embraces a holistic approach to beauty. We recognize the interconnectedness of physical, mental, and emotional well-being, fostering a comprehensive journey toward self-confidence and radiance.",
       ],
     },
     {
       heading:
-        "Revitalize Your Radiance with Precision and Care at The Labo Method Today!",
+        "Revitalize Your Radiance with Precision and Care at The Labo Clinic Today!",
       paragraphs: [
-        "In the realm of skincare, The Labo Method emerges as a sanctuary where the artistry of chemical peels goes beyond expectations. Addressing a spectrum of skin concerns with precision and expertise, from hyperpigmentation and acne-related challenges to renewing skin texture and achieving overall rejuvenation, our clinic offers a versatile and transformative solution.",
-        "Experience the possibilities at The Labo Method, where the journey to radiant, refreshed skin is not just a destination but a personalized experience. With a commitment to unveiling your natural beauty, our team combines skillful care and expertise to elevate your confidence and renew your radiance.",
+        "In the realm of skincare, The Labo Clinic emerges as a sanctuary where the artistry of chemical peels goes beyond expectations. Addressing a spectrum of skin concerns with precision and expertise, from hyperpigmentation and acne-related challenges to renewing skin texture and achieving overall rejuvenation, our clinic offers a versatile and transformative solution.",
+        "Experience the possibilities at The Labo Clinic, where the journey to radiant, refreshed skin is not just a destination but a personalized experience. With a commitment to unveiling your natural beauty, our team combines skillful care and expertise to elevate your confidence and renew your radiance.",
       ],
     },
   ],

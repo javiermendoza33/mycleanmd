@@ -5,7 +5,7 @@ import { PageHero } from "@/components/labo/Sections";
 
 export const metadata = {
   title: "Blog",
-  description: "Skincare and wellness insights from The Labo Method in Seattle, WA — Botox, fillers, IV therapy, chemical peels and more.",
+  description: "Skincare and wellness insights from The Labo Clinic in Seattle, WA — Botox, fillers, IV therapy, chemical peels and more.",
   alternates: { canonical: "/blog" },
 };
 

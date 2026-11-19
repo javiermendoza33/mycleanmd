@@ -8,7 +8,7 @@ import { CLINIC_SITE } from "@/labo/clinic/site";
 import MobileNav from "@/components/labo/MobileNav";
 
 /**
- * Header and footer for The Labo Method inner pages.
+ * Header and footer for The Labo Clinic inner pages.
  *
  * Nov 18 2026: the clinic site's navigation (Services · Laser · About · Patient
  * Care · Testimonials · Blog · Contact, Book Now) replaces the telehealth-first

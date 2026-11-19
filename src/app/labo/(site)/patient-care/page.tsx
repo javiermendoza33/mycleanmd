@@ -6,7 +6,7 @@ import { PageHero } from "@/components/labo/Sections";
 
 export const metadata = {
   title: "Pre & post-treatment instructions",
-  description: "Pre- and post-treatment instructions from The Labo Method for Botox and Dysport, dermal fillers, Sculptra, microneedling, PRP, PDO threads, chemical peels and more.",
+  description: "Pre- and post-treatment instructions from The Labo Clinic for Botox and Dysport, dermal fillers, Sculptra, microneedling, PRP, PDO threads, chemical peels and more.",
   alternates: { canonical: "/patient-care" },
 };
 

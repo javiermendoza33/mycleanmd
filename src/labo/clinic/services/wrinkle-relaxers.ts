@@ -59,11 +59,11 @@ export const service: Service = {
   ],
   image: {
     src: "/labo/img/services/wrinkle-relaxers.jpg",
-    alt: "Provider administering a wrinkle relaxer injection to a patient's face at The Labo Method",
+    alt: "Provider administering a wrinkle relaxer injection to a patient's face at The Labo Clinic",
   },
   seo: {
     title: "Botox, Dysport and Wrinkle Relaxers Treatment in Seattle WA",
     description:
-      "The Labo Method offer wrinkle relaxers, Botox and Dysport, for fine lines, wrinkles, crow's feet, and more in Seattle WA. Book your treatment now!",
+      "The Labo Clinic offer wrinkle relaxers, Botox and Dysport, for fine lines, wrinkles, crow's feet, and more in Seattle WA. Book your treatment now!",
   },
 };

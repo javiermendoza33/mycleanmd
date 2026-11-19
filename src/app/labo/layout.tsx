@@ -7,7 +7,7 @@ import { services } from "@/labo/clinic/services";
 import "./labo.css";
 
 /**
- * The Labo Method lives under /labo/* in the file tree but is served at the
+ * The Labo Clinic lives under /labo/* in the file tree but is served at the
  * ROOT of thelabomethod.com — src/proxy.ts rewrites by hostname, so this app
  * can host two brands without either one's URLs carrying a prefix.
  *
@@ -34,7 +34,7 @@ const plexMono = IBM_Plex_Mono({
 });
 const TITLE = `Medical Spa in Seattle, WA — Botox, Fillers, Laser, Sculptra`;
 const DESCRIPTION =
-  `The Labo Method is a medical spa in Seattle (South Lake Union), WA, led by Mónika Jáuregui, DNP, CANS, FNP-C: Botox and Dysport, dermal fillers, Sculptra, microneedling, PRP and exosomes, PDO threads, chemical peels, IV therapy, medical weight loss and laser on the Candela GentleMax Pro Plus.`;
+  `The Labo Clinic is a medical spa in Seattle (South Lake Union), WA, led by Mónika Jáuregui, DNP, CANS, FNP-C: Botox and Dysport, dermal fillers, Sculptra, microneedling, PRP and exosomes, PDO threads, chemical peels, IV therapy, medical weight loss and laser on the Candela GentleMax Pro Plus.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(`https://${PRACTICE.domain}`),
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     title: `${TITLE} | ${PRACTICE.name}`,
     description: DESCRIPTION,
-    images: [{ url: "/labo/img/misc/cta-bg.jpg", width: 2000, height: 1334, alt: "The Labo Method, Seattle" }],
+    images: [{ url: "/labo/img/misc/cta-bg.jpg", width: 2000, height: 1334, alt: "The Labo Clinic, Seattle" }],
   },
   twitter: { card: "summary_large_image" },
 };

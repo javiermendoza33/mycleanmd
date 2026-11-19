@@ -8,7 +8,7 @@ export const post: Post = {
   date: "2023-11-13",
   image: {
     src: "/labo/img/services/wellness-iv-therapy.jpg",
-    alt: "IV therapy treatment at The Labo Method",
+    alt: "IV therapy treatment at The Labo Clinic",
   },
   body: [
     {
@@ -105,7 +105,7 @@ export const post: Post = {
     {
       heading: "The Bottom Line",
       paragraphs: [
-        "IV therapy holds promise as a potential remedy for those battling stress and fatigue. The Labo Method, renowned for its cutting-edge treatments and dedication to holistic wellness, now offers IV therapy as part of its comprehensive range of services. For a revitalizing defense against fatigue, consider diving into IV therapy with guidance from The Labo Method, ensuring choices are anchored in informed discernment and tailored insights.",
+        "IV therapy holds promise as a potential remedy for those battling stress and fatigue. The Labo Clinic, renowned for its cutting-edge treatments and dedication to holistic wellness, now offers IV therapy as part of its comprehensive range of services. For a revitalizing defense against fatigue, consider diving into IV therapy with guidance from The Labo Clinic, ensuring choices are anchored in informed discernment and tailored insights.",
       ],
     },
   ],

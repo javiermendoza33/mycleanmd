@@ -59,11 +59,11 @@ export const service: Service = {
   ],
   image: {
     src: "/labo/img/services/prp-exosomes.jpg",
-    alt: "Provider performing a PRP facial rejuvenation treatment on a patient at The Labo Method",
+    alt: "Provider performing a PRP facial rejuvenation treatment on a patient at The Labo Clinic",
   },
   seo: {
     title: "PRP Therapies and Exosomes Treatment in Seattle, WA",
     description:
-      "The Labo Method offers PRP Therapies and Exosomes to improve skin texture, address fine lines, wrinkles, and more in Seattle, WA. Call Us!",
+      "The Labo Clinic offers PRP Therapies and Exosomes to improve skin texture, address fine lines, wrinkles, and more in Seattle, WA. Call Us!",
   },
 };

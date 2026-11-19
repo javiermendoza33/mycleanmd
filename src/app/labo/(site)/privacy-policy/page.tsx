@@ -3,7 +3,7 @@ import { PageHero } from "@/components/labo/Sections";
 
 export const metadata = {
   title: "Privacy policy",
-  description: "Privacy policy for The Labo Method.",
+  description: "Privacy policy for The Labo Clinic.",
   alternates: { canonical: "/privacy-policy" },
   robots: { index: false, follow: true },
 };

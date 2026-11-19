@@ -8,13 +8,13 @@ export const post: Post = {
   date: "2023-10-27",
   image: {
     src: "/labo/img/services/wrinkle-relaxers.jpg",
-    alt: "Wrinkle relaxer injection treatment at The Labo Method in Seattle, WA",
+    alt: "Wrinkle relaxer injection treatment at The Labo Clinic in Seattle, WA",
   },
   body: [
     {
       paragraphs: [
         "To maintain youthful and radiant skin, the world of cosmetic treatments offers a spectrum of possibilities. Among the most popular and effective wrinkle relaxers are Botox® and Dysport®. These treatments have revolutionized the anti-aging industry, providing individuals with non-invasive solutions to combat fine lines and wrinkles.",
-        "But when choosing between these two powerhouse injectables, how do you decide which is right? This comprehensive guide is brought to you by The Labo Method; we will explore the key differences, benefits, and considerations of Botox® and Dysport® to help you make an informed decision on your path to smoother, more youthful skin.",
+        "But when choosing between these two powerhouse injectables, how do you decide which is right? This comprehensive guide is brought to you by The Labo Clinic; we will explore the key differences, benefits, and considerations of Botox® and Dysport® to help you make an informed decision on your path to smoother, more youthful skin.",
       ],
     },
     {
@@ -89,15 +89,15 @@ export const post: Post = {
     {
       heading: "Choosing the Right Wrinkle Relaxer for You",
       paragraphs: [
-        "When deciding between Botox® and Dysport®, it ultimately comes down to your individual preferences, goals, and how your body responds to the treatment. Consulting with a skilled and experienced practitioner, like those at The Labo Method, is essential. They will assess your unique needs and guide you towards the most suitable option to achieve your desired outcome.",
+        "When deciding between Botox® and Dysport®, it ultimately comes down to your individual preferences, goals, and how your body responds to the treatment. Consulting with a skilled and experienced practitioner, like those at The Labo Clinic, is essential. They will assess your unique needs and guide you towards the most suitable option to achieve your desired outcome.",
       ],
     },
     {
       heading:
-        "Your Path to Timeless Beauty Starts at The Labo Method Today!",
+        "Your Path to Timeless Beauty Starts at The Labo Clinic Today!",
       paragraphs: [
-        "Botox® and Dysport® are powerful tools in the battle against aging, offering remarkable results with minimal downtime. The choice between them depends on your specific requirements and expectations. At The Labo Method, our team of experts is dedicated to helping you make informed decisions to achieve timeless beauty. Whether you opt for Botox® or Dysport®, rest assured that you're in the hands of professionals who prioritize your satisfaction and well-being.",
-        "Embark on your journey to smoother, more youthful skin by visiting The Labo Method. Explore the possibilities of Botox® and Dysport®, and discover the path to renewed confidence and radiance.",
+        "Botox® and Dysport® are powerful tools in the battle against aging, offering remarkable results with minimal downtime. The choice between them depends on your specific requirements and expectations. At The Labo Clinic, our team of experts is dedicated to helping you make informed decisions to achieve timeless beauty. Whether you opt for Botox® or Dysport®, rest assured that you're in the hands of professionals who prioritize your satisfaction and well-being.",
+        "Embark on your journey to smoother, more youthful skin by visiting The Labo Clinic. Explore the possibilities of Botox® and Dysport®, and discover the path to renewed confidence and radiance.",
       ],
     },
   ],

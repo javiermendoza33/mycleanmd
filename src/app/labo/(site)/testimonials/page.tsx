@@ -4,7 +4,7 @@ import { PageHero } from "@/components/labo/Sections";
 
 export const metadata = {
   title: "Testimonials",
-  description: "What patients say about Mónika Jáuregui and The Labo Method in Seattle, WA.",
+  description: "What patients say about Mónika Jáuregui and The Labo Clinic in Seattle, WA.",
   alternates: { canonical: "/testimonials" },
 };
 

@@ -58,9 +58,9 @@ export const GATE_ROBOTS = LAUNCH_READY ? {} : { robots: { index: false, follow:
 export const AVAILABILITY = "California and Washington";
 
 export const PRACTICE = {
-  name: "The Labo Method",
-  subline: "Hormone & Longevity Medicine",
-  footerSubline: "Longevity & Hormone Medicine",
+  name: "The Labo Clinic",
+  subline: "Injectables, Skincare & Wellness",
+  footerSubline: "Injectables, Skincare & Wellness",
   domain: "thelabomethod.com",
   provider: "Monika Jauregui, DNP, NP-C",
   email: "hello@thelabomethod.com",

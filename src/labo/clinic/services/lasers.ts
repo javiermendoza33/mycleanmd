@@ -1,6 +1,6 @@
 import type { Service } from "../types";
 
-/** The laser line is real at The Labo Method (Candela GentleMax Pro Plus) — the card sends people to /treatments. */
+/** The laser line is real at The Labo Clinic (Candela GentleMax Pro Plus) — the card sends people to /treatments. */
 export const service: Service = {
   slug: "lasers",
   name: "Laser Treatments",
@@ -17,8 +17,8 @@ export const service: Service = {
   },
   href: "/treatments",
   seo: {
-    title: "Laser Treatments in Seattle, WA | The Labo Method",
+    title: "Laser Treatments in Seattle, WA | The Labo Clinic",
     description:
-      "Laser hair removal, sun spots, spider veins and skin rejuvenation on the Candela GentleMax Pro Plus at The Labo Method in Seattle.",
+      "Laser hair removal, sun spots, spider veins and skin rejuvenation on the Candela GentleMax Pro Plus at The Labo Clinic in Seattle.",
   },
 };

@@ -68,10 +68,10 @@ export const service: Service = {
   ],
   image: {
     src: "/labo/img/services/wellness-iv-therapy.jpg",
-    alt: "Client receiving an IV therapy wellness infusion at The Labo Method",
+    alt: "Client receiving an IV therapy wellness infusion at The Labo Clinic",
   },
   seo: {
-    title: "Wellness (IV/IM Therapy) | The Labo Method",
+    title: "Wellness (IV/IM Therapy) | The Labo Clinic",
     description:
       "IV Therapy and Vitamin Shots Give your body the essential nutrients and hydration it needs. Reduce stress and fatigue in Seattle, WA. Book now!",
   },

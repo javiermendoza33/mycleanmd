@@ -17,7 +17,7 @@ export const service: Service = {
       question: "What are medical-grade chemical peels?",
       answer: [
         "There is no such thing as bad skin—only good skin waiting to be revealed. Whether you suffer from melasma, acne, or fine lines, to name a few, we have a skin peel for you.",
-        "Advanced cosmetic treatments such as medical-grade skin peels entail applying a solution to the skin in order to exfoliate and rejuvenate it. These peels use higher concentrations of active ingredients than over-the-counter peels, allowing for more effective removal of dead skin cells, improving skin texture, reducing signs of aging, and addressing specific skin concerns. At The Labo Method, we offer Cosmelan® and VI Peel®.",
+        "Advanced cosmetic treatments such as medical-grade skin peels entail applying a solution to the skin in order to exfoliate and rejuvenate it. These peels use higher concentrations of active ingredients than over-the-counter peels, allowing for more effective removal of dead skin cells, improving skin texture, reducing signs of aging, and addressing specific skin concerns. At The Labo Clinic, we offer Cosmelan® and VI Peel®.",
         "(Bonus: these services can help maintain your injectable treatment results!)",
       ],
     },
@@ -69,7 +69,7 @@ export const service: Service = {
   ],
   image: {
     src: "/labo/img/services/chemical-peels.jpg",
-    alt: "Chemical peel treatment being applied to a client's face at The Labo Method",
+    alt: "Chemical peel treatment being applied to a client's face at The Labo Clinic",
   },
   seo: {
     title: "Best Chemical Peels in Seattle, WA | Improve Skin's Texture",

@@ -51,6 +51,6 @@ export const service: Service = {
   seo: {
     title: "Medical Weight Loss in Seattle, WA | Semaglutide Injections",
     description:
-      "The Labo Method offers personalized weight loss treatments, including Semaglutide injections and effective weight management programs in Seattle, WA. Call Us!",
+      "The Labo Clinic offers personalized weight loss treatments, including Semaglutide injections and effective weight management programs in Seattle, WA. Call Us!",
   },
 };

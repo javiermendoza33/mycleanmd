@@ -4,11 +4,11 @@ export const post: Post = {
   slug: "iv-therapy-vitamin-shots-5-benefits-you-need-to-know",
   title: "IV Therapy & Vitamin Shots – 5 Benefits You Need to Know",
   excerpt:
-    "Revitalize your wellness with IV therapy & vitamin shots in Seattle, WA, offered by The Labo Method. Experience tailored treatments for rejuvenation and vitality.",
+    "Revitalize your wellness with IV therapy & vitamin shots in Seattle, WA, offered by The Labo Clinic. Experience tailored treatments for rejuvenation and vitality.",
   date: "2024-03-14",
   image: {
     src: "/labo/img/services/wellness-iv-therapy.jpg",
-    alt: "IV therapy and vitamin shots at The Labo Method",
+    alt: "IV therapy and vitamin shots at The Labo Clinic",
   },
   body: [
     {
@@ -54,9 +54,9 @@ export const post: Post = {
       ],
     },
     {
-      heading: "Our IV Therapy & Vitamin Shots at The Labo Method in Seattle, Wa",
+      heading: "Our IV Therapy & Vitamin Shots at The Labo Clinic in Seattle, Wa",
       paragraphs: [
-        "At The Labo Method, we offer more than just surface-level care. Dive deeper into wellness with our IV Therapy & Vitamin Shots, designed to replenish your body's essential nutrients and hydration.",
+        "At The Labo Clinic, we offer more than just surface-level care. Dive deeper into wellness with our IV Therapy & Vitamin Shots, designed to replenish your body's essential nutrients and hydration.",
         "It's an invitation to reduce stress, combat fatigue, and embrace a fuller sense of well-being through direct nutrient infusion.",
       ],
     },
@@ -90,7 +90,7 @@ export const post: Post = {
       paragraphs: [
         "Before any treatment, our experienced nurses conduct a thorough assessment to ensure the chosen IV infusion or vitamin shot suits your health profile and goals.",
         "They'll discuss potential allergies, recommend the appropriate number of sessions, and provide all the information you need to maximize the benefits of your treatment.",
-        "So, go on a journey to enhanced wellness with The Labo Method's IV Therapy & Vitamin Shots. It's time to give your body the nourishment it deserves, with rapid hydration and nutrient delivery that revitalizes from within.",
+        "So, go on a journey to enhanced wellness with The Labo Clinic's IV Therapy & Vitamin Shots. It's time to give your body the nourishment it deserves, with rapid hydration and nutrient delivery that revitalizes from within.",
         "Schedule your treatment today and step into a world of improved health and vitality.",
       ],
     },
@@ -99,7 +99,7 @@ export const post: Post = {
       paragraphs: [
         "Personalization of wellness treatments is a growing trend in healthcare. Personalized medicine, including tailored IV therapy and vitamin shots, represents a shift towards more individualized healthcare strategies.",
         "This approach considers genetic, environmental, and lifestyle factors, allowing practitioners to recommend treatments that are uniquely suited to each individual's health profile.",
-        "By leveraging detailed health assessments and sometimes even genetic testing, clinics like The Labo Method can design IV therapy and vitamin shot regimens that align perfectly with your body's specific needs, optimizing the potential benefits.",
+        "By leveraging detailed health assessments and sometimes even genetic testing, clinics like The Labo Clinic can design IV therapy and vitamin shot regimens that align perfectly with your body's specific needs, optimizing the potential benefits.",
         "Again, feel free to talk with us and let us discuss a happy and healthy lifestyle for yourself!",
       ],
     },
@@ -108,14 +108,14 @@ export const post: Post = {
       paragraphs: [
         "IV therapy and vitamin shots offer unique benefits, making them a valuable addition to any wellness routine.",
         "By providing direct nutrient absorption, enhanced hydration, immune support, increased energy levels, and customization to individual needs, these treatments can play a crucial role in maintaining and improving overall health.",
-        "If you're interested in experiencing the benefits of IV therapy and vitamin shots, consider consulting with a healthcare provider to discuss how these treatments can be match to support your health and wellness goals. Book an appointment with us here at The Labo Method for support.",
+        "If you're interested in experiencing the benefits of IV therapy and vitamin shots, consider consulting with a healthcare provider to discuss how these treatments can be match to support your health and wellness goals. Book an appointment with us here at The Labo Clinic for support.",
         "You can take significant strides towards achieving and maintaining optimal health with the right approach. We also have other services and treatments like Chemical Peels and PDO Threads.",
       ],
     },
   ],
   seo: {
-    title: "IV Therapy | Vitamin Shots in Seattle, WA | The Labo Method",
+    title: "IV Therapy | Vitamin Shots in Seattle, WA | The Labo Clinic",
     description:
-      "Revitalize your wellness with IV therapy & vitamin shots in Seattle, WA, offered by The Labo Method. Experience tailored treatments for rejuvenation and vitality.",
+      "Revitalize your wellness with IV therapy & vitamin shots in Seattle, WA, offered by The Labo Clinic. Experience tailored treatments for rejuvenation and vitality.",
   },
 };

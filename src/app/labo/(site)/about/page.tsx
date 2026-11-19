@@ -5,7 +5,7 @@ import { ABOUT, PRACTICE } from "@/labo/content";
 
 export const metadata = {
   title: "About",
-  description: "About The Labo Method in Seattle, WA, founded by Mónika Jáuregui, a board-certified nurse practitioner and certified aesthetic nurse specialist, providing effective aesthetic services for skin health and wellness.",
+  description: "About The Labo Clinic in Seattle, WA, founded by Mónika Jáuregui, a board-certified nurse practitioner and certified aesthetic nurse specialist, providing effective aesthetic services for skin health and wellness.",
   alternates: { canonical: "/about" },
 };
 
@@ -41,7 +41,7 @@ export default function About() {
       <section>
         <div className="wrap split narrow">
           <div>
-            <div className="frame"><img src="/labo/img/about/founder.webp" alt="Mónika Jáuregui, founder of The Labo Method" /></div>
+            <div className="frame"><img src="/labo/img/about/founder.webp" alt="Mónika Jáuregui, founder of The Labo Clinic" /></div>
             <img className="sig" src="/labo/img/about/signature.png" alt="Mónika Jáuregui's signature" />
             <p className="byline">Mónika Jáuregui, DNP, CANS, FNP-C<small>Founder · Certified Aesthetic Nurse Specialist · Board-certified family nurse practitioner</small></p>
           </div>

@@ -8,7 +8,7 @@ export const post: Post = {
   date: "2024-01-02",
   image: {
     src: "/labo/img/services/medical-weight-loss.jpg",
-    alt: "Medical Weight Loss by The Labo Method in Seattle WA",
+    alt: "Medical Weight Loss by The Labo Clinic in Seattle WA",
   },
   body: [
     {

@@ -5,8 +5,8 @@ export const privacyUpdated = "October 01, 2023";
 export const privacySections: LegalSection[] = [
   {
     paragraphs: [
-      "The Labo Method Privacy Policy – as of October 01, 2023",
-      "Thank you for visiting our website and considering our services at The Labo Method. Protecting your privacy is important to us. This Privacy Policy explains how we collect, use, disclose, and safeguard your personal information in relation to the services we provide.",
+      "The Labo Clinic Privacy Policy – as of October 01, 2023",
+      "Thank you for visiting our website and considering our services at The Labo Clinic. Protecting your privacy is important to us. This Privacy Policy explains how we collect, use, disclose, and safeguard your personal information in relation to the services we provide.",
       "Our Privacy Policy is very simple. What you transmit to us will remain private and will stay with us. This includes both the data you input as well as your personal data, such as your email address, name, address, credit card information, and all other information we receive from you.",
     ],
   },
@@ -61,7 +61,7 @@ export const privacySections: LegalSection[] = [
   {
     heading: "7. Contact Us",
     paragraphs: [
-      "The Labo Method",
+      "The Labo Clinic",
       "Email: hello@thelabomethod.com",
       "Phone: 877-SKN-HAVN",
       "Address: 910 Lenora Street Suite #152, Seattle, WA 98121",

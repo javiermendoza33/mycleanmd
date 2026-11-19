@@ -76,7 +76,7 @@ export default function LaboHome() {
         <section className="grey">
           <div className="wrap split narrow">
             <div>
-              <div className="frame"><img src="/labo/img/about/founder.webp" alt="Mónika Jáuregui, founder of The Labo Method" loading="lazy" /></div>
+              <div className="frame"><img src="/labo/img/about/founder.webp" alt="Mónika Jáuregui, founder of The Labo Clinic" loading="lazy" /></div>
             </div>
             <div className="prose">
               <span className="kicker">Meet your new guide &amp; beauty bestie</span>

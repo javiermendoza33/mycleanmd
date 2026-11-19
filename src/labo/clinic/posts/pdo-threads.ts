@@ -8,7 +8,7 @@ export const post: Post = {
   date: "2023-10-09",
   image: {
     src: "/labo/img/services/pdo-threads.webp",
-    alt: "PDO thread facial rejuvenation treatment at The Labo Method in Seattle, WA",
+    alt: "PDO thread facial rejuvenation treatment at The Labo Clinic in Seattle, WA",
   },
   body: [
     {
@@ -111,7 +111,7 @@ export const post: Post = {
     {
       heading: "The Bottom Line",
       paragraphs: [
-        "PDO threads, with their dual promise of immediate lift and prolonged collagen stimulation, have firmly positioned themselves as the future of non-surgical facial rejuvenation. At The Labo Method, we proudly offer PDO thread treatments as part of our comprehensive range of aesthetic services. Contact us today to experience the transformative touch of our specialized PDO thread treatments – a rejuvenation journey awaits you!",
+        "PDO threads, with their dual promise of immediate lift and prolonged collagen stimulation, have firmly positioned themselves as the future of non-surgical facial rejuvenation. At The Labo Clinic, we proudly offer PDO thread treatments as part of our comprehensive range of aesthetic services. Contact us today to experience the transformative touch of our specialized PDO thread treatments – a rejuvenation journey awaits you!",
       ],
     },
   ],

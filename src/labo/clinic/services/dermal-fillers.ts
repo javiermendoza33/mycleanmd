@@ -74,7 +74,7 @@ export const service: Service = {
     {
       question: "Can you dissolve the filler I already have?",
       answer: [
-        "Were you treated somewhere other than The Labo Method and unhappy with your results? We can also dissolve filler by injecting hyaluronidase, a naturally occurring type of protein in the body. This treatment takes 15-30 minutes.",
+        "Were you treated somewhere other than The Labo Clinic and unhappy with your results? We can also dissolve filler by injecting hyaluronidase, a naturally occurring type of protein in the body. This treatment takes 15-30 minutes.",
       ],
     },
     {
@@ -93,7 +93,7 @@ export const service: Service = {
   ],
   image: {
     src: "/labo/img/services/dermal-fillers.jpg",
-    alt: "A patient receiving a dermal filler injection at The Labo Method",
+    alt: "A patient receiving a dermal filler injection at The Labo Clinic",
   },
   seo: {
     title: "Dermal Fillers in Seattle, WA | Restore Facial Volume Loss",

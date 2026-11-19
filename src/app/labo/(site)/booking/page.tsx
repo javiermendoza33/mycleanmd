@@ -5,7 +5,7 @@ import { PageHero } from "@/components/labo/Sections";
 
 export const metadata = {
   title: "Book your appointment",
-  description: "Book your appointment at The Labo Method in Seattle, WA. Schedule online, or text 877-756-4286.",
+  description: "Book your appointment at The Labo Clinic in Seattle, WA. Schedule online, or text 877-756-4286.",
   alternates: { canonical: "/booking" },
 };
 

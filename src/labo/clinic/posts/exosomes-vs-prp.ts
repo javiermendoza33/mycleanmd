@@ -8,7 +8,7 @@ export const post: Post = {
   date: "2024-02-06",
   image: {
     src: "/labo/img/services/prp-exosomes.jpg",
-    alt: "Exosomes vs PRP regenerative therapy at The Labo Method",
+    alt: "Exosomes vs PRP regenerative therapy at The Labo Clinic",
   },
   body: [
     {
@@ -79,7 +79,7 @@ export const post: Post = {
       ],
     },
     {
-      heading: "Our PRP/Exosomes Approach at The Labo Method",
+      heading: "Our PRP/Exosomes Approach at The Labo Clinic",
       paragraphs: [
         "Platelet-rich plasma (PRP) and exosomes are pioneering regenerative medicine and aesthetic treatments.",
         "Their versatility extends to various areas, offering healing, rejuvenation, and improved appearance and function. Let's explore some common areas and issues that PRP and exosomes can effectively address:",
@@ -115,7 +115,7 @@ export const post: Post = {
     {
       heading: "Book Your Treatment Today!",
       paragraphs: [
-        "Book an appointment with us here at The Labo Method to learn more about the potential benefits of exosome therapy and how it can address your unique concerns. Discover the power of exosomes in rejuvenating and healing your body, and embark on a journey towards enhanced well-being and vitality. Your future self will thank you for it.",
+        "Book an appointment with us here at The Labo Clinic to learn more about the potential benefits of exosome therapy and how it can address your unique concerns. Discover the power of exosomes in rejuvenating and healing your body, and embark on a journey towards enhanced well-being and vitality. Your future self will thank you for it.",
       ],
     },
   ],

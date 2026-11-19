@@ -4,7 +4,7 @@ import { PageHero } from "@/components/labo/Sections";
 
 export const metadata = {
   title: "Services · Botox, fillers, Sculptra, microneedling, peels, IV therapy · Seattle",
-  description: "The Labo Method offers medspa services in Seattle, WA: Botox and Dysport, dermal fillers, Sculptra, microneedling, PRP and exosomes, PDO threads, chemical peels, IV therapy, medical weight loss and laser treatments.",
+  description: "The Labo Clinic offers medspa services in Seattle, WA: Botox and Dysport, dermal fillers, Sculptra, microneedling, PRP and exosomes, PDO threads, chemical peels, IV therapy, medical weight loss and laser treatments.",
   alternates: { canonical: "/services" },
 };
 

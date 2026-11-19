@@ -16,7 +16,7 @@ export const service: Service = {
       question: "What is microneedling?",
       answer: [
         "Microneedling has rapidly gained traction as one of our most sought-after skin treatments and for good reason. Despite its name suggesting a minimal approach, the outcomes are anything but minor. This procedure offers a significant reduction in the appearance of wrinkles and fine lines. Beyond these benefits, patients also report a marked enhancement in their skin's overall texture. Furthermore, microneedling has shown remarkable efficacy in addressing various skin concerns, including acne scarring, sagging skin, enlarged pores, brown spots, stretch marks, and various pigment irregularities.",
-        "At The Labo Method, we prioritize both safety and efficacy in our treatments. That's why we have chosen to use the SkinPen® for our microneedling procedures. This particular device stands out in the industry, having received clearance from the FDA. Moreover, it has been subjected to rigorous clinical testing, ensuring its effectiveness in delivering the desired results for our clients.",
+        "At The Labo Clinic, we prioritize both safety and efficacy in our treatments. That's why we have chosen to use the SkinPen® for our microneedling procedures. This particular device stands out in the industry, having received clearance from the FDA. Moreover, it has been subjected to rigorous clinical testing, ensuring its effectiveness in delivering the desired results for our clients.",
       ],
     },
     {
@@ -37,7 +37,7 @@ export const service: Service = {
   ],
   image: {
     src: "/labo/img/services/microneedling.jpg",
-    alt: "SkinPen® microneedling treatment being performed on a client's face at The Labo Method",
+    alt: "SkinPen® microneedling treatment being performed on a client's face at The Labo Clinic",
   },
   seo: {
     title: "Skinpen Microneedling in Seattle, WA | Boosts Collagen",
