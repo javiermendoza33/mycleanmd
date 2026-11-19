@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { CLINIC_SITE } from "@/labo/clinic/site";
 import Scheduler from "@/components/labo/Scheduler";
+import { getMenu } from "@/lib/labo/booking";
 import { PageHero } from "@/components/labo/Sections";
 
 export const metadata = {
@@ -10,7 +11,7 @@ export const metadata = {
 };
 
 export default async function BookingPage({ searchParams }: { searchParams: Promise<{ service?: string }> }) {
-  const s = CLINIC_SITE; const sp = await searchParams;
+  const s = CLINIC_SITE; const sp = await searchParams; const menu = await getMenu();
   return (
     <>
       <PageHero
@@ -20,7 +21,7 @@ export default async function BookingPage({ searchParams }: { searchParams: Prom
       />
       <section style={{ paddingTop: 44 }}>
         <div className="wrap">
-          <Scheduler preselect={sp.service} />
+          <Scheduler preselect={sp.service} menu={menu} />
           <p className="note" style={{ textAlign: "center" }}>Booked before on Vagaro? <a className="more" href={s.vagaroUrl} target="_blank" rel="noopener noreferrer">Manage it there ↗</a>. Prefer a human touch? <a className="more" href={s.tel}>Call</a> or <a className="more" href={s.sms}>text {s.phoneDisplay}</a> and we&rsquo;ll get you scheduled.</p>
         </div>
       </section>

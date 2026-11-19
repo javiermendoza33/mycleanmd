@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { BOOKING, CATEGORIES, INTAKE, MENU, getMenuItem, priceLabel, type Category, type MenuItem } from "@/labo/clinic/booking";
+import { BOOKING, CATEGORIES, INTAKE, priceLabel, type Category, type MenuItem } from "@/labo/clinic/booking";
 import { CLINIC_SITE } from "@/labo/clinic/site";
 import { CONSENT_TEXT } from "@/labo/clinic/sms";
 
@@ -18,7 +18,9 @@ const addMonth = (m: string, n: number) => { const [y, mo] = m.split("-").map(Nu
 const monthLabel = (m: string) => new Intl.DateTimeFormat("en-US", { timeZone: "UTC", month: "long", year: "numeric" }).format(new Date(m + "-01T12:00:00Z"));
 function monthGrid(m: string) { const [y, mo] = m.split("-").map(Number); const first = new Date(Date.UTC(y, mo - 1, 1)); const n = new Date(Date.UTC(y, mo, 0)).getUTCDate(); const cells: (string | null)[] = Array(first.getUTCDay()).fill(null); for (let d = 1; d <= n; d++) cells.push(`${m}-${String(d).padStart(2, "0")}`); return cells; }
 
-export default function Scheduler({ preselect }: { preselect?: string }) {
+export default function Scheduler({ preselect, menu }: { preselect?: string; menu: MenuItem[] }) {
+  const MENU = menu;
+  const getMenuItem = (slug: string) => MENU.find((m) => m.slug === slug);
   const [step, setStep] = useState<Step>(1);
   const [cat, setCat] = useState<Category>("Injectables");
   const [item, setItem] = useState<MenuItem | null>(null);

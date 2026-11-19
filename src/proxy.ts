@@ -50,7 +50,8 @@ export async function proxy(request: NextRequest) {
     // The provider portal (/provider*, Nov 6 2026) is gated the same way PLUS an email allowlist
     // (LABO_PROVIDER_EMAIL, comma-separated). A signed-in patient who tries it lands on their own portal.
     const isProvider = path === '/provider' || path.startsWith('/provider/')
-    if (path === '/portal' || path.startsWith('/portal/') || isProvider) {
+    const isClinic = path === '/clinic' || path.startsWith('/clinic/')   // Nov 19 2026: the clinic staff portal (roles checked in its layout)
+    if (path === '/portal' || path.startsWith('/portal/') || isProvider || isClinic) {
       let portalResponse = NextResponse.next({ request })
       const supabase = createServerClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL!,

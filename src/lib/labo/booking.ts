@@ -1,7 +1,7 @@
 import { randomBytes } from "node:crypto";
 import { Resend } from "resend";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { BOOKING, DEFAULT_HOURS, getMenuItem, priceLabel, INTAKE, type MenuItem } from "@/labo/clinic/booking";
+import { BOOKING, DEFAULT_HOURS, MENU, priceLabel, INTAKE, type MenuItem } from "@/labo/clinic/booking";
 import { CLINIC_SITE } from "@/labo/clinic/site";
 import { PRACTICE } from "@/labo/content";
 
@@ -29,6 +29,17 @@ const isDate = (s: string) => /^\d{4}-\d{2}-\d{2}$/.test(s);
 
 const missing = (e: { code?: string; message?: string } | null | undefined) => !!e && (e.code === "42P01" || /does not exist|schema cache/i.test(e.message || ""));
 
+/** The menu with the clinic portal's overrides (labo_services: name, duration, price, active) applied; hidden items dropped. */
+export async function getMenu(): Promise<MenuItem[]> {
+  try {
+    const { data, error } = await createAdminClient().from("labo_services").select("*");
+    if (error) return MENU;
+    const ov = new Map((data ?? []).map((r) => [r.slug as string, r]));
+    return MENU.map((m) => { const o = ov.get(m.slug); return o ? { ...m, name: o.name ?? m.name, min: o.duration_min ?? m.min, price: o.price == null ? m.price : Number(o.price), priceNote: o.price_note ?? m.priceNote, active: o.active !== false } : { ...m, active: true }; }).filter((m) => m.active !== false);
+  } catch { return MENU; }
+}
+export const getMenuItem = async (slug: string) => (await getMenu()).find((m) => m.slug === slug);
+
 export async function getHours(): Promise<Hours> {
   try {
     const { data } = await createAdminClient().from("labo_provider_settings").select("hours").eq("id", 1).maybeSingle();
@@ -45,6 +56,8 @@ async function busy(fromIso: string, toIso: string): Promise<Array<[number, numb
   const b = await db.from("labo_bookings").select("starts_at, ends_at").lt("starts_at", toIso).gt("ends_at", fromIso).not("status", "in", "(canceled)");
   if (b.error && !missing(b.error)) throw new Error(b.error.message);
   for (const r of b.data ?? []) out.push([+new Date(r.starts_at), +new Date(r.ends_at)]);
+  const k = await db.from("labo_blocks").select("starts_at, ends_at").lt("starts_at", toIso).gt("ends_at", fromIso);
+  if (!k.error) for (const r of k.data ?? []) out.push([+new Date(r.starts_at), +new Date(r.ends_at)]);
   const v = await db.from("labo_visits").select("scheduled_at, duration_min").gte("scheduled_at", fromIso).lt("scheduled_at", toIso).neq("status", "canceled");
   if (!v.error) for (const r of v.data ?? []) if (r.scheduled_at) { const s = +new Date(r.scheduled_at); out.push([s, s + (Number(r.duration_min) || 15) * 60_000]); }
   return out;
@@ -63,14 +76,14 @@ function dayStarts(date: string, hours: Hours, item: MenuItem, taken: Array<[num
 }
 
 export async function slotsForDay(date: string, slug: string) {
-  const item = getMenuItem(slug); if (!item || !isDate(date)) return [];
+  const item = await getMenuItem(slug); if (!item || !isDate(date)) return [];
   const [from, to] = [ptToUtc(date).toISOString(), ptToUtc(shiftDay(date, 1)).toISOString()];
   return dayStarts(date, await getHours(), item, await busy(from, to));
 }
 
 /** Which days of a month still have at least one slot — one query for the whole month. */
 export async function openDays(month: string, slug: string) {
-  const item = getMenuItem(slug); if (!item || !/^\d{4}-\d{2}$/.test(month)) return [];
+  const item = await getMenuItem(slug); if (!item || !/^\d{4}-\d{2}$/.test(month)) return [];
   const first = month + "-01", next = month.slice(0, 4) + "-" + String(+month.slice(5) + 1).padStart(2, "0") + "-01";
   const nextMonth = +month.slice(5) === 12 ? String(+month.slice(0, 4) + 1) + "-01-01" : next;
   const hours = await getHours(); const taken = await busy(ptToUtc(first).toISOString(), ptToUtc(nextMonth).toISOString());
@@ -82,7 +95,7 @@ export async function openDays(month: string, slug: string) {
 export type NewBooking = { slug: string; startsAt: string; firstName: string; lastName: string; email: string; phone: string; notes?: string; intake?: Record<string, string>; smsConsent?: boolean; policyConsent?: boolean; origin: string };
 
 export async function createBooking(b: NewBooking): Promise<{ ok: true; booking: Booking } | { ok: false; error: string; code?: string }> {
-  const item = getMenuItem(b.slug); if (!item) return { ok: false, error: "Pick a service." };
+  const item = await getMenuItem(b.slug); if (!item) return { ok: false, error: "Pick a service." };
   const first = b.firstName.trim().slice(0, 60), last = b.lastName.trim().slice(0, 60), email = b.email.trim().toLowerCase().slice(0, 120), phone = b.phone.replace(/[^\d+]/g, "").slice(0, 20);
   if (!first || !last) return { ok: false, error: "First and last name, please." };
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return { ok: false, error: "That email doesn't look right." };

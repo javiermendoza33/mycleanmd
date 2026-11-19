@@ -37,6 +37,8 @@ export interface MenuItem {
   /** the site's service page, for the "Learn more" link */
   serviceSlug?: string;
   popular?: boolean;
+  /** false = hidden from online booking (set from /clinic/services) */
+  active?: boolean;
 }
 
 export const MENU: MenuItem[] = [
