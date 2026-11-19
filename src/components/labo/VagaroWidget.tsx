@@ -44,6 +44,13 @@ export function VagaroWidget() {
         title={`Book an appointment — ${PRACTICE.name} online scheduler`}
         onLoad={() => setLoaded(true)}
       />
+      {/* Nov 19 2026 (Javier's test booking): the booking itself completes and the confirmation email arrives, but the
+          widget's post-booking "Welcome, <name>" view then spins forever inside the frame — Vagaro's customer dashboard
+          doesn't load embedded. Nothing is lost; say so, and give the way out. */}
+      <p className="vagaro-foot">
+        Booked? Your confirmation is in your email. Scheduler stuck or want to manage an appointment?{" "}
+        <a href={CLINIC_SITE.vagaroUrl} target="_blank" rel="noopener noreferrer">Open it on Vagaro ↗</a>
+      </p>
     </div>
   );
 }
