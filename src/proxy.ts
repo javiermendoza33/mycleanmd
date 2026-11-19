@@ -13,9 +13,10 @@ const GATE_COOKIE = '_gate'
  * the UNRELEASED MyCleanMD portal off the public internet; applying it here
  * would password-protect a marketing site, which is the opposite of the job.
  */
-// Nov 19 2026: sandbox.thelabomethod.com = the Vercel branch domain for `sandbox-booking` (CNAME → cname.vercel-dns.com);
-// same clinic site, same routing, so the booking sandbox can be tried on a real host before it goes to main.
-const LABO_HOSTS = ['thelabomethod.com', 'www.thelabomethod.com', 'sandbox.thelabomethod.com']
+// Nov 19 2026: labo.benthicgroup.com = the Vercel branch domain for `sandbox-booking` (benthicgroup.com is on Vercel DNS, so no
+// registrar step; Javier: "just host it on vercel… its temp anyways"). Same clinic site, same routing, noindex.
+const SANDBOX_HOST = 'labo.benthicgroup.com'
+const LABO_HOSTS = ['thelabomethod.com', 'www.thelabomethod.com', SANDBOX_HOST]
 
 export async function proxy(request: NextRequest) {
   const { pathname: path } = request.nextUrl
@@ -88,7 +89,7 @@ export async function proxy(request: NextRequest) {
     const url = request.nextUrl.clone()
     url.pathname = `/labo${path === '/' ? '' : path}`
     const rewritten = NextResponse.rewrite(url)
-    if (host === 'sandbox.thelabomethod.com') rewritten.headers.set('X-Robots-Tag', 'noindex, nofollow')   // the sandbox never gets indexed
+    if (host === SANDBOX_HOST) rewritten.headers.set('X-Robots-Tag', 'noindex, nofollow')   // the sandbox never gets indexed
     return rewritten
   }
 
