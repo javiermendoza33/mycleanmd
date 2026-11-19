@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { preconnect } from "react-dom";
 import type { ReactNode } from "react";
 import type { Service, Testimonial } from "@/labo/clinic/types";
 import { CLINIC_SITE, type ClinicLocation } from "@/labo/clinic/site";
@@ -157,7 +158,13 @@ export function BookCta() {
  * pointing straight at it is a normal cross-origin NAVIGATION, not a subresource fetch, so
  * ORB doesn't apply, and that page allows framing (no X-Frame-Options, frame-ancestors *).
  * See the comment on vagaroEmbedUrl in labo/clinic/site.ts for how to re-derive it.
+ * Nov 18 2026: Javier found it slow to load — it's Vagaro's full marketplace app (nav, cart,
+ * search), not a slim widget, so the payload itself is heavy and out of our control. The one
+ * real lever on our side is skipping the DNS/TLS/TCP setup delay: `preconnect` opens the
+ * connection to vagaro.com as soon as this component renders, in parallel with the rest of
+ * the page, instead of only starting once the browser parses the iframe's src.
  */
 export function VagaroWidget() {
-  return <iframe className="embed book" src={CLINIC_SITE.vagaroEmbedUrl} title={`Book an appointment — ${PRACTICE.name} online scheduler`} />;
+  preconnect("https://www.vagaro.com", { crossOrigin: "anonymous" });
+  return <iframe className="embed book" loading="eager" src={CLINIC_SITE.vagaroEmbedUrl} title={`Book an appointment — ${PRACTICE.name} online scheduler`} />;
 }
