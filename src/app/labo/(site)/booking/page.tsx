@@ -5,7 +5,7 @@ import { PageHero } from "@/components/labo/Sections";
 
 export const metadata = {
   title: "Book your appointment",
-  description: "Book your appointment at The Labo Method in Seattle, WA. Schedule online for South Lake Union, or text 877-756-4286 for Ruston.",
+  description: "Book your appointment at The Labo Method in Seattle, WA. Schedule online, or text 877-756-4286.",
   alternates: { canonical: "/booking" },
 };
 
@@ -16,7 +16,7 @@ export default function BookingPage() {
       <PageHero
         eyebrow="Booking"
         title="Book your appointment"
-        lede={<>Schedule online below for our South Lake Union studio. For our Ruston location, <a className="more" href={s.sms}>text us at {s.phoneDisplay}</a> and we&rsquo;ll find your perfect time.</>}
+        lede="Schedule online below, or call or text us and we&rsquo;ll find your perfect time."
       />
       <section style={{ paddingTop: 44 }}>
         <div className="wrap">

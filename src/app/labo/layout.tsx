@@ -32,9 +32,9 @@ const plexMono = IBM_Plex_Mono({
   variable: "--font-plex-mono",
   display: "swap",
 });
-const TITLE = `Medical Spa in Seattle & Ruston, WA — Botox, Fillers, Laser, Sculptra`;
+const TITLE = `Medical Spa in Seattle, WA — Botox, Fillers, Laser, Sculptra`;
 const DESCRIPTION =
-  `The Labo Method is a medical spa in Seattle (South Lake Union) and Ruston, WA, led by Mónika Jáuregui, DNP, CANS, FNP-C: Botox and Dysport, dermal fillers, Sculptra, microneedling, PRP and exosomes, PDO threads, chemical peels, IV therapy, medical weight loss and laser on the Candela GentleMax Pro Plus.`;
+  `The Labo Method is a medical spa in Seattle (South Lake Union), WA, led by Mónika Jáuregui, DNP, CANS, FNP-C: Botox and Dysport, dermal fillers, Sculptra, microneedling, PRP and exosomes, PDO threads, chemical peels, IV therapy, medical weight loss and laser on the Candela GentleMax Pro Plus.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(`https://${PRACTICE.domain}`),
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image" },
 };
 
-/** MedicalBusiness structured data for the clinic — two locations, phone, hours, services, the clinician. */
+/** MedicalBusiness structured data for the clinic — location, phone, hours, services, the clinician. */
 const hours = { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "10:00", closes: "18:00" };
 const place = (loc: (typeof CLINIC_SITE.locations)[number]) => ({
   "@type": "MedicalBusiness",
@@ -81,7 +81,7 @@ const jsonLd = {
   address: place(CLINIC_SITE.locations[0]).address,
   openingHoursSpecification: hours,
   sameAs: [CLINIC_SITE.instagram],
-  areaServed: [{ "@type": "City", name: "Seattle" }, { "@type": "City", name: "Ruston" }, { "@type": "City", name: "Tacoma" }, { "@type": "State", name: "Washington" }],
+  areaServed: [{ "@type": "City", name: "Seattle" }, { "@type": "State", name: "Washington" }],
   location: CLINIC_SITE.locations.map(place),
   availableService: services.map((x) => ({ "@type": "MedicalProcedure", name: x.name, url: `https://${PRACTICE.domain}${x.href ?? `/services/${x.slug}`}` })),
   founder: { "@type": "Person", name: "Mónika Jáuregui, DNP, CANS, FNP-C", jobTitle: "Family Nurse Practitioner, Certified Aesthetic Nurse Specialist", url: `https://${PRACTICE.domain}/about` },

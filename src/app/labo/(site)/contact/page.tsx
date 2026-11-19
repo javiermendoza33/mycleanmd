@@ -7,7 +7,7 @@ import { PRACTICE, CONTACT } from "@/labo/content";
 
 export const metadata = {
   title: "Contact",
-  description: `Contact The Labo Method in Seattle, WA. Text or phone ${CLINIC_SITE.phoneDisplay}, or email ${PRACTICE.email}. Two locations: South Lake Union and Ruston.`,
+  description: `Contact The Labo Method in Seattle, WA. Text or phone ${CLINIC_SITE.phoneDisplay}, or email ${PRACTICE.email}.`,
   alternates: { canonical: "/contact" },
 };
 

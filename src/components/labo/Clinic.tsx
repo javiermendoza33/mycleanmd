@@ -140,8 +140,8 @@ export function BookCta() {
         <p className="sub">Enjoy our one-of-a-kind treatments at {PRACTICE.name}.</p>
         <a className="tel" href={s.tel}>{s.phoneDisplay}</a>
         <div className="acts">
-          <Link href="/booking" className="btn btn-primary">Book at South Lake Union</Link>
-          <a href={s.sms} className="btn btn-ghost">Text to book at Ruston</a>
+          <Link href="/booking" className="btn btn-primary">Book online</Link>
+          <a href={s.sms} className="btn btn-ghost">Text us</a>
         </div>
       </div>
     </section>
@@ -151,7 +151,7 @@ export function BookCta() {
 /** The clinic's Vagaro scheduler. Its loader uses document.write, so it only works at parse time inside its own document. */
 export function VagaroWidget() {
   const doc = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<style>body{margin:0;font-family:system-ui,sans-serif}.vagaro{width:100%;padding:0;border:0;margin:0 auto}.vagaro>a{font-size:11px;color:#9a9a9a;text-decoration:none;margin-right:10px}</style></head>
+<style>body{margin:0;padding:12px 14px 0;font-family:system-ui,sans-serif;box-sizing:border-box}.vagaro{width:100%;padding:0;border:0;margin:0 auto}.vagaro>a{font-size:11px;color:#9a9a9a;text-decoration:none;margin-right:10px}</style></head>
 <body><div class="vagaro"><a href="https://sales.vagaro.com/" target="_blank" rel="noopener">Powered by Vagaro</a>
 <script type="text/javascript" src="${CLINIC_SITE.vagaroWidgetUrl}"><\/script></div></body></html>`;
   return <iframe className="embed book" srcDoc={doc} title={`Book an appointment — ${PRACTICE.name} online scheduler`} />;

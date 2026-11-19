@@ -53,7 +53,7 @@ export default function LaboHome() {
           <img className="poster" src="/labo/img/hero-poster.jpg" alt="" aria-hidden="true" />
           <HeroVideo />
           <div className="wrap">
-            <span className="kicker">Medical spa · Seattle &amp; Ruston, Washington</span>
+            <span className="kicker">Medical spa · Seattle, Washington</span>
             <h1>Your skincare &amp; wellness <em>haven</em> in Washington</h1>
             <p className="sub">Achieve your short- and long-term skincare and wellness goals with modern, science-based treatments, from Botox® and Dysport® to fillers, chemical peels, laser, IV/IM therapy and more. Optimal skin health and wellness is a journey, and we&rsquo;re ready to be your guide (and beauty besties)!</p>
             <div className="acts">
@@ -103,7 +103,7 @@ export default function LaboHome() {
         {/* ── LOCATIONS ────────────────────────────────────────────────── */}
         <section id="locations" className="grey">
           <div className="wrap">
-            <SectionHead eyebrow="Two Washington locations" title="Visit us in South Lake Union or Ruston" lede={`Open Monday through Friday, 10:00 am – 6:00 pm. Weekends by appointment only. Text or call ${s.phoneDisplay}.`} />
+            <SectionHead eyebrow="Our Washington location" title="Visit us in South Lake Union" lede={`Open Monday through Friday, 10:00 am – 6:00 pm. Weekends by appointment only. Text or call ${s.phoneDisplay}.`} />
             <div className="locs">{s.locations.map((loc) => <LocationCard key={loc.id} location={loc} />)}</div>
           </div>
         </section>

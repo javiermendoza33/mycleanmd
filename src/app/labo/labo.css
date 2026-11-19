@@ -545,8 +545,8 @@
 [data-labo] .quote b{display:block;font-weight:600;color:var(--ink);letter-spacing:-.018em}
 [data-labo] .quote small{font-family:var(--font-plex-mono),ui-monospace,Menlo,monospace;font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
 
-[data-labo] .locs{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:860px;margin:0 auto}
-@media (max-width:700px){[data-labo] .locs{grid-template-columns:1fr}}
+[data-labo] .locs{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,380px));justify-content:center;gap:20px;max-width:860px;margin:0 auto}
+@media (max-width:700px){[data-labo] .locs{grid-template-columns:minmax(0,380px)}}
 [data-labo] .locs.wide{max-width:none}
 [data-labo] .locs.wide>div{display:flex;flex-direction:column;gap:16px}
 [data-labo] .loc{background:var(--canvas);border-radius:var(--radius-card);padding:34px 32px;display:flex;flex-direction:column;gap:10px;height:100%}

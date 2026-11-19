@@ -35,19 +35,6 @@ export const CLINIC_SITE = {
       contactNote: "Text or phone",
       bookOnline: true,
     },
-    {
-      id: "ruston",
-      name: "Ruston",
-      cityLabel: "Ruston",
-      address1: "5013 N Pearl St B",
-      address2: "Ruston, WA 98407",
-      mapUrl: "https://maps.app.goo.gl/bieatayJr3Xhf4xQ7",
-      mapEmbed:
-        "https://maps.google.com/maps?q=5013%20N%20Pearl%20St%20B%2C%20Ruston%2C%20WA%2098407%2C%20USA&t=m&z=15&output=embed&iwloc=near",
-      note: "By appointment only.",
-      contactNote: "Text only",
-      bookOnline: false,
-    },
   ],
   vagaroWidgetUrl:
     "https://www.vagaro.com/resources/WidgetEmbeddedLoader/OZqpCJGtCZ4cT3qmV35y6JuPlXez3avV34mC2PeFJ4mC30m9cyUeJUtjP0dDxkJEvwRapWUgZawifCs7fYJEPwMc8?v=Uj4mVvhz7Z8pr6yeqwrOrYNN20RSgaH266vQGLysy67m",
