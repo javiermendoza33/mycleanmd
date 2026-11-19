@@ -148,11 +148,16 @@ export function BookCta() {
   );
 }
 
-/** The clinic's Vagaro scheduler. Its loader uses document.write, so it only works at parse time inside its own document. */
+/**
+ * The clinic's Vagaro scheduler. Nov 18 2026: this used to build a `srcDoc` iframe that
+ * injected Vagaro's own `<script src="…WidgetEmbeddedLoader…">` loader — a cross-origin
+ * SCRIPT fetch, which Chrome's Opaque Response Blocking refused on the live site in a real
+ * browser (net::ERR_BLOCKED_BY_ORB; the page showed "Powered by Vagaro" and nothing else).
+ * CLINIC_SITE.vagaroEmbedUrl is the page that loader script would have iframed anyway —
+ * pointing straight at it is a normal cross-origin NAVIGATION, not a subresource fetch, so
+ * ORB doesn't apply, and that page allows framing (no X-Frame-Options, frame-ancestors *).
+ * See the comment on vagaroEmbedUrl in labo/clinic/site.ts for how to re-derive it.
+ */
 export function VagaroWidget() {
-  const doc = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<style>body{margin:0;padding:12px 14px 0;font-family:system-ui,sans-serif;box-sizing:border-box}.vagaro{width:100%;padding:0;border:0;margin:0 auto}.vagaro>a{font-size:11px;color:#9a9a9a;text-decoration:none;margin-right:10px}</style></head>
-<body><div class="vagaro"><a href="https://sales.vagaro.com/" target="_blank" rel="noopener">Powered by Vagaro</a>
-<script type="text/javascript" src="${CLINIC_SITE.vagaroWidgetUrl}"><\/script></div></body></html>`;
-  return <iframe className="embed book" srcDoc={doc} title={`Book an appointment — ${PRACTICE.name} online scheduler`} />;
+  return <iframe className="embed book" src={CLINIC_SITE.vagaroEmbedUrl} title={`Book an appointment — ${PRACTICE.name} online scheduler`} />;
 }
