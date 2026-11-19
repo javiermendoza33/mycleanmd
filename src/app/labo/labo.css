@@ -902,12 +902,12 @@
 [data-labo] [data-clinic] .fmedia{border-left-color:rgba(255,248,242,.5)}
 @media (max-width:860px){[data-labo] [data-clinic] .fmedia{border-bottom-color:rgba(255,248,242,.5)}}
 
-/* Nov 19 2026 — Syne on the clinic pages (facile's typeface; Javier: "lets try this font as well"). Wide geometric grotesk, so the
-   negative tracking Inter needed comes off and the body size drops a notch. Mono labels stay Plex Mono. */
-[data-labo] [data-clinic]{font-family:var(--font-syne),var(--font-inter),-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;font-size:16px;letter-spacing:-.005em}
-[data-labo] [data-clinic] h1,[data-labo] [data-clinic] h2,[data-labo] [data-clinic] h3,[data-labo] [data-clinic] h4{letter-spacing:-.02em;line-height:1.02}
-[data-labo] [data-clinic] h1{letter-spacing:-.025em;font-size:clamp(2.4rem,5.4vw,4rem)}
-[data-labo] [data-clinic] h2{font-size:clamp(1.8rem,3.8vw,2.8rem)}
+/* Nov 19 2026 — the clinic display face (facile uses Syne; Javier liked it "but… something similar but not so wide" → Outfit,
+   loaded as --font-clinic in layout.tsx). Geometric at normal width: light negative tracking, body 16px. Mono labels stay Plex Mono. */
+[data-labo] [data-clinic]{font-family:var(--font-clinic),var(--font-inter),-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;font-size:16.5px;letter-spacing:-.01em}
+[data-labo] [data-clinic] h1,[data-labo] [data-clinic] h2,[data-labo] [data-clinic] h3,[data-labo] [data-clinic] h4{letter-spacing:-.025em;line-height:1.02}
+[data-labo] [data-clinic] h1{letter-spacing:-.03em;font-size:clamp(2.6rem,5.8vw,4.3rem)}
+[data-labo] [data-clinic] h2{font-size:clamp(1.9rem,4vw,3rem)}
 [data-labo] [data-clinic] .sub{letter-spacing:-.01em;font-size:clamp(1.08rem,1.8vw,1.3rem)}
 [data-labo] [data-clinic] .btn,[data-labo] [data-clinic] .addbar,[data-labo] [data-clinic] .baglink,[data-labo] [data-clinic] .chips button,[data-labo] [data-clinic] .chips .cchip{font-family:inherit}
 [data-labo] [data-clinic] .brand{letter-spacing:-.02em}
