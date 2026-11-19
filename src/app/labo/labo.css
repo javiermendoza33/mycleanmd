@@ -934,3 +934,56 @@
 [data-labo] .booked .acts{display:flex;gap:16px;align-items:center;margin-top:30px;flex-wrap:wrap}
 [data-labo] .linkbtn{background:none;border:0;font:inherit;cursor:pointer;padding:0}
 @media (max-width:600px){[data-labo] .booked{padding:30px 22px}}
+
+/* ── The clinic's own scheduler (sandbox, Nov 19 2026) ─────────────────────────────────────────────────────────── */
+[data-labo] .sched{border:1px solid var(--rule,var(--line));background:var(--canvas);border-radius:var(--radius-card);overflow:hidden}
+[data-labo] .steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--rule,var(--line))}
+[data-labo] .steps li{display:flex;align-items:center;gap:10px;padding:14px 18px;font-size:.84rem;font-weight:600;color:var(--muted);border-right:1px solid var(--hair)}
+[data-labo] .steps li:last-child{border-right:0}
+[data-labo] .steps li b{width:24px;height:24px;border-radius:50%;border:1px solid currentColor;display:inline-flex;align-items:center;justify-content:center;font-size:.72rem}
+[data-labo] .steps li.on{color:var(--ink)}[data-labo] .steps li.on b{background:var(--accent);border-color:var(--accent);color:#fff}
+[data-labo] .steps li.done{color:var(--ink);cursor:pointer}[data-labo] .steps li.done b{background:var(--ink);border-color:var(--ink);color:#fff}
+[data-labo] .sched .sv,[data-labo] .sched .dt,[data-labo] .sched .det{padding:26px 28px 30px}
+[data-labo] .sched .chips{margin-top:0}
+[data-labo] .menu{list-style:none;margin:20px 0 0;padding:0;border-top:1px solid var(--rule,var(--line))}
+[data-labo] .menu li{display:flex;justify-content:space-between;gap:22px;align-items:center;padding:18px 0;border-bottom:1px solid var(--hair)}
+[data-labo] .menu .mi{display:flex;flex-direction:column;gap:5px;min-width:0}
+[data-labo] .menu .mi b{font-weight:700;letter-spacing:-.015em;font-size:1.05rem;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+[data-labo] .menu .mi p{font-size:.9rem;color:var(--graphite)}
+[data-labo] .menu .mi .mono{font-size:.72rem;color:var(--muted);letter-spacing:.04em}
+[data-labo] .menu .mi .more{font-size:.82rem}
+[data-labo] .menu .btn-sm{flex:none}
+[data-labo] .pick{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;padding-bottom:18px;border-bottom:1px solid var(--rule,var(--line));margin-bottom:22px}
+[data-labo] .pick b{font-weight:700;font-size:1.05rem}[data-labo] .pick .mono{font-size:.74rem;color:var(--muted)}[data-labo] .pick .linkbtn{margin-left:auto;font-size:.84rem}
+[data-labo] .dt{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 36px}
+[data-labo] .dt .pick{grid-column:1/-1}
+[data-labo] .calhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+[data-labo] .calhead b{font-weight:700}
+[data-labo] .calhead button{font:inherit;width:32px;height:32px;border:1px solid var(--rule,var(--line));background:var(--paper);border-radius:6px;cursor:pointer;color:var(--ink)}
+[data-labo] .calhead button:disabled{opacity:.3;cursor:default}
+[data-labo] .dow,[data-labo] .cal .grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+[data-labo] .dow span{font-size:.64rem;letter-spacing:.1em;text-align:center;color:var(--muted);padding:4px 0}
+[data-labo] .cal .grid button{font:inherit;font-size:.9rem;aspect-ratio:1;border:1px solid var(--hair);background:var(--paper);border-radius:6px;cursor:pointer;color:var(--ink);font-weight:500}
+[data-labo] .cal .grid button:disabled{color:var(--muted);opacity:.45;cursor:default;background:transparent;border-color:transparent;text-decoration:line-through}
+[data-labo] .cal .grid button:not(:disabled):hover{border-color:var(--accent)}
+[data-labo] .cal .grid button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+[data-labo] .times{display:flex;flex-direction:column;gap:10px}
+[data-labo] .times .dl{font-weight:700;font-size:1.05rem}
+[data-labo] .slotgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px}
+[data-labo] .slotgrid button{font:inherit;font-size:.9rem;padding:10px 6px;border:1px solid var(--rule,var(--line));background:var(--paper);border-radius:6px;cursor:pointer;color:var(--ink)}
+[data-labo] .slotgrid button:hover{border-color:var(--accent)}
+[data-labo] .slotgrid button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+[data-labo] .times .btn{margin-top:auto;align-self:flex-start}
+[data-labo] .times .btn:disabled{opacity:.45;cursor:default}
+[data-labo] .det{display:flex;flex-direction:column;gap:14px;max-width:640px}
+[data-labo] .det label{display:flex;flex-direction:column;gap:6px;font-size:.86rem;font-weight:600;color:var(--ink)}
+[data-labo] .det input,[data-labo] .det textarea{font:inherit;font-size:1rem;font-weight:400;padding:11px 13px;border:1px solid var(--rule,var(--line));border-radius:6px;background:var(--paper);color:var(--ink)}
+[data-labo] .det input:focus,[data-labo] .det textarea:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+[data-labo] .det .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+[data-labo] .det h4{margin-top:12px}
+[data-labo] .det .chips.sel span,[data-labo] .det .chips.sel button{cursor:pointer;background:var(--paper);border-color:var(--rule,var(--line))}
+[data-labo] .det .chips.sel button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+[data-labo] .det .consent{flex-direction:row;font-weight:400}
+[data-labo] .det .addbar.big{margin-top:6px}
+[data-labo] .det .err,[data-labo] .err{color:var(--accent);font-size:.9rem}
+@media (max-width:760px){[data-labo] .dt{grid-template-columns:1fr}[data-labo] .sched .sv,[data-labo] .sched .dt,[data-labo] .sched .det{padding:18px 16px 24px}[data-labo] .det .two{grid-template-columns:1fr}[data-labo] .steps li{padding:12px 10px;font-size:.74rem}[data-labo] .menu li{flex-direction:column;align-items:flex-start;gap:12px}}

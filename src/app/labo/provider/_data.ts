@@ -47,3 +47,12 @@ export function intakeLabels(slug: string, answers: Record<string, unknown> | nu
 export const VISIT_LABEL: Record<string, string> = { initial: 'Initial consultation', follow_up: 'Follow-up', lab_review: 'Lab review' }
 export const STATUS_PILL: Record<string, string> = { scheduled: '', completed: 'ok', canceled: '', no_show: 'bad', pending: 'warn', approved: 'ok', denied: 'bad', active: 'ok', pending_payment: 'warn', draft: '', signed: 'ok' }
 export const SETUP = 'Database not set up yet — run supabase-labo-provider.sql in the Supabase SQL editor.'
+
+/** Clinic bookings from the site's own scheduler (sandbox, Nov 19 2026) — labo_bookings, the in-person book. */
+export type BookingRow = { id: string; service_slug: string; service_name: string; duration_min: number; starts_at: string; ends_at: string; status: string; first_name: string; last_name: string; email: string; phone: string; notes: string | null; intake: Record<string, string> | null; sms_consent: boolean; created_at: string }
+export async function loadBookings(fromIso: string, toIso: string): Promise<BookingRow[]> {
+  const { data, error } = await admin().from('labo_bookings').select('*').gte('starts_at', fromIso).lt('starts_at', toIso).order('starts_at')
+  if (error) return []
+  return (data ?? []) as BookingRow[]
+}
+export const BOOKING_PILL: Record<string, string> = { booked: 'new', confirmed: 'ok', completed: 'ok', canceled: '', no_show: 'bad' }

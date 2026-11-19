@@ -50,8 +50,8 @@ export const CLINIC_SITE = {
    * `$VagaroWidgetEmbedded(` — the second string argument is this URL.
    */
   /** The public Vagaro page (manage appointments, the customer dashboard). Nov 19 2026: the slug is still
-   *  skinhavenclinic unless Javier changes it in Business Profile → Vagaro URL; update here if he does. */
-  vagaroUrl: "https://www.vagaro.com/skinhavenclinic",
+   *  thelaboclinic since Javier renamed the business on Nov 19 2026. */
+  vagaroUrl: "https://www.vagaro.com/thelaboclinic",
   vagaroEmbedUrl:
     "https://www.vagaro.com/Users/BusinessWidget.aspx?enc=MMLjhIwJMcwFQhXLL7ifVMVDyDF3k7iXwT/nlKC08mdG4Suqm5SXne8KokQvqgxnfxm80hTAivnyTxG2sD94sq8tY/RKikJ4GvQVEzAMAbDi+ASfmynGIAQjCHGX1NSrCTXcaBM0YTAG+gkHE+8WOMqkKBj0YErydeo3dXmpwHV50bMZM4Ptq0X4fyqHX5sWDdclsIE1sz/ufh02aof7QEf5SxCRnLG+YvWv1CAfvv811CaIoM25oU9iXfHgDmwENS/IymptydJTdW8VD4ragSRUYSFTNx4NVIHFWeDhPFAkItlaUN0OrS2TjvIXwSShqnupcYKHwQeDN4V2npHPJyyDiXCWktJ7ngXmGeS56Fi2oXRKRXgwfB4zM25fTY4J6h5fG1Ak1ZWprfYwyRQ3peFlverMHUNP6pLd5V9p0ibM/eUZr8b9XKI7WTRRlQB9",
 } as const;

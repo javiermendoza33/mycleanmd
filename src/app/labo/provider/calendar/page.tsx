@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { admin, getProvider, fmtDate, fmtTime, initials } from '@/lib/labo/provider'
-import { loadEnrollments, ptDayRange, ptToUtc, shiftDay, todayPT, dateOfPT, SETUP, VISIT_LABEL, STATUS_PILL } from '../_data'
+import { loadEnrollments, ptDayRange, ptToUtc, shiftDay, todayPT, dateOfPT, SETUP, VISIT_LABEL, STATUS_PILL, loadBookings, BOOKING_PILL } from '../_data'
+import BookingStatus from '@/components/labo/provider/BookingStatus'
 import VisitScheduler from '@/components/labo/provider/VisitScheduler'
 import VisitActions from '@/components/labo/provider/VisitActions'
 import { DEFAULT_VISIT_TYPES, type Visit, type ProviderSettings } from '@/lib/labo/types'
@@ -26,6 +27,7 @@ export default async function ProviderCalendar({ searchParams }: { searchParams:
   ])
   if (dayQ.error) return <div className="setup">{/does not exist|schema cache/i.test(dayQ.error.message) ? SETUP : dayQ.error.message}</div>
   const visits = (dayQ.data ?? []) as Visit[]
+  const bookings = await loadBookings(dStart, dEnd)
   const dotDays = new Set((monthQ.data ?? []).map((v) => v.scheduled_at && dateOfPT(v.scheduled_at)))
   const vt = ((settingsQ.data as Pick<ProviderSettings, 'visit_types'> | null)?.visit_types?.length ? (settingsQ.data as ProviderSettings).visit_types : DEFAULT_VISIT_TYPES)
   const selected = visits.find((v) => v.id === sp.v) ?? visits[0] ?? null
@@ -59,7 +61,15 @@ export default async function ProviderCalendar({ searchParams }: { searchParams:
             <div><div style={{ fontSize: 24, fontWeight: 700 }}>{weekRows.filter((v) => v.status === 'no_show').length}</div><div className="tiny">no-show</div></div></div></div>
         </div>
         <div className="card" style={{ flex: 1 }}><h3>{fmtDate(ptToUtc(day, '12:00').toISOString(), { weekday: 'long', month: 'long', day: 'numeric' })}</h3>
-          <div className="col" style={{ gap: 10, marginTop: 14 }}>{visits.length === 0 && <div className="empty">No visits this day.</div>}
+          {bookings.length > 0 && <div className="col" style={{ gap: 10, marginTop: 14 }}><div className="lbl">Clinic bookings</div>
+            {bookings.map((b) => (
+              <div key={b.id} className="slot" style={b.status === 'canceled' ? { opacity: .5 } : undefined}>
+                <div className="time">{fmtTime(b.starts_at)}<span>{b.duration_min} min</span></div><div className="av s">{initials(`${b.first_name} ${b.last_name}`, b.email)}</div>
+                <div style={{ flex: 1 }}><b style={{ fontSize: 14 }}>{b.first_name} {b.last_name}</b><div className="sm muted">{b.service_name} · {b.phone} · {b.email}</div>{b.intake && <div className="sm muted">{Object.values(b.intake).filter(Boolean).slice(0, 3).join(' · ').slice(0, 140)}</div>}</div>
+                <span className={`pill ${BOOKING_PILL[b.status] ?? ''}`}>{b.status.replace('_', ' ')}</span><BookingStatus id={b.id} status={b.status} />
+              </div>))}
+          </div>}
+          <div className="col" style={{ gap: 10, marginTop: 14 }}>{visits.length === 0 && <div className="empty">No telehealth visits this day.</div>}
             {visits.map((v) => { const e = byId.get(v.enrollment_id); return (
               <Link key={v.id} href={`/provider/calendar?d=${day}&v=${v.id}`} className={`slot${selected?.id === v.id ? ' sel' : ''}`} style={v.status === 'canceled' ? { opacity: .5 } : undefined}>
                 <div className="time">{fmtTime(v.scheduled_at)}<span>{v.duration_min} min</span></div><div className="av s">{initials(e?.name, e?.profile?.email)}</div>

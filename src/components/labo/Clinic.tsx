@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import type { Service, Testimonial } from "@/labo/clinic/types";
 import { CLINIC_SITE, type ClinicLocation } from "@/labo/clinic/site";
 import { PRACTICE } from "@/labo/content";
+import { MENU } from "@/labo/clinic/booking";
 
 /**
  * Clinic-page building blocks (Nov 18 2026) — the Skin Haven site's cards,

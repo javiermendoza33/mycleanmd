@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import { PRACTICE } from '@/labo/content'
 import { admin, getProvider, fmtTime, initials } from '@/lib/labo/provider'
-import { loadEnrollments, ptDayRange, todayPT, SETUP, VISIT_LABEL } from './_data'
+import { loadEnrollments, ptDayRange, todayPT, SETUP, VISIT_LABEL, loadBookings, BOOKING_PILL } from './_data'
+import BookingStatus from '@/components/labo/provider/BookingStatus'
 import type { Visit, RequestRow, Message } from '@/lib/labo/types'
 
 export const dynamic = 'force-dynamic'
@@ -29,6 +30,7 @@ export default async function ProviderToday() {
   ])
   const tableMissing = [requestsQ.error, messagesQ.error].some((e) => e && /does not exist|schema cache/i.test(e.message))
   const visits = (visitsQ.data ?? []) as Visit[]
+  const bookings = (await loadBookings(start, end)).filter((b) => b.status !== 'canceled')
   const hasIntake = new Set((intakesQ.data ?? []).map((r) => r.enrollment_id))
   const hasVisit = new Set((anyVisitsQ.data ?? []).map((r) => r.enrollment_id))
   const intakesToReview = enrollments.filter((e) => e.status === 'active' && hasIntake.has(e.id) && !hasVisit.has(e.id))
@@ -49,6 +51,14 @@ export default async function ProviderToday() {
         <div className="card kpi"><div className="lbl">Labs to review</div><div className="v">{labs.length}</div><div className="d">{labs.length ? 'results waiting' : 'none pending'}</div></div>
         <div className="card kpi"><div className="lbl">Unread messages</div><div className="v">{unread}</div><div className="d">{unread ? 'from patients' : 'inbox clear'}</div></div>
       </div>
+      <div className="card"><h3>Clinic bookings today <span className="muted" style={{ fontWeight: 400 }}>{bookings.length} from the website</span></h3>
+        <div className="list">{bookings.length === 0 && <div className="empty">No clinic bookings today.</div>}
+          {bookings.map((b) => (
+            <div className="li" key={b.id}><div className="t">{fmtTime(b.starts_at)}</div><div className="av s">{initials(`${b.first_name} ${b.last_name}`, b.email)}</div>
+              <div className="w"><b>{b.first_name} {b.last_name}</b><span>{b.service_name} · {b.duration_min} min · {b.phone}{b.intake?.goals ? ` · “${b.intake.goals.slice(0, 60)}”` : ''}</span></div>
+              <span className={`pill ${BOOKING_PILL[b.status] ?? ''}`}>{b.status.replace('_', ' ')}</span><BookingStatus id={b.id} status={b.status} />
+            </div>))}
+        </div></div>
       <div className="row" style={{ alignItems: 'flex-start' }}>
         <div className="card" style={{ flex: 1.35 }}><h3>Today’s schedule <Link href="/provider/calendar">Open calendar ›</Link></h3>
           <div className="list">{visits.length === 0 && <div className="empty">No visits today.</div>}
