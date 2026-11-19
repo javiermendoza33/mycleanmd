@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import LaboAnalytics from "@/components/labo/Analytics";
-import { Inter, IBM_Plex_Mono } from "next/font/google";
+import { Inter, IBM_Plex_Mono, Syne } from "next/font/google";
 import { PRACTICE, AVAILABILITY, LAUNCH_READY, CLINIC_INDEX } from "@/labo/content";
 import { CLINIC_SITE } from "@/labo/clinic/site";
 import { services } from "@/labo/clinic/services";
@@ -30,6 +30,14 @@ const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
   variable: "--font-plex-mono",
+  display: "swap",
+});
+// Nov 19 2026 (Javier: "lets try this font as well" — facileskin.com's type is Syne, a free Google face): the clinic pages
+// ([data-clinic]) set it in labo.css; the portals stay on Inter.
+const syne = Syne({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-syne",
   display: "swap",
 });
 const TITLE = `Medical Spa in Seattle, WA — Botox, Fillers, Laser, Sculptra`;
@@ -89,7 +97,7 @@ const jsonLd = {
 
 export default function LaboLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div data-labo className={`${inter.variable} ${plexMono.variable}`}>
+    <div data-labo className={`${inter.variable} ${plexMono.variable} ${syne.variable}`}>
       <script type="application/ld+json"
               dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {children}

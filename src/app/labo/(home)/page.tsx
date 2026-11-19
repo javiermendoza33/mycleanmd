@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Gate from "./Gate";
 import { Footer } from "@/components/labo/Chrome";
-import HeroVideo from "@/components/labo/HeroVideo";
 import { BookCta, LocationCard, PartnerLogos, SectionHead, ServiceCard, TestimonialCard } from "@/components/labo/Clinic";
 import { CLINIC, HEALTHIE, LASER_SPECS, NAV, PRACTICE, PROGRAMS } from "@/labo/content";
 import { services } from "@/labo/clinic/services";
@@ -16,8 +15,8 @@ import { ProductCard } from "@/components/labo/shop/ProductCard";
  * thelabomethod.com homepage — the clinic storefront (Nov 19 2026).
  *
  * Javier: "Monika wanted a look and feel like facileskin.com… she wants to sell products as well. can we do
- * something now a bit different". The facile pattern: a promo bar, a split hero (type on paper, the clinic's own
- * video in a box), a value ticker, a boxed best-sellers row with full-width Add-to-bag bars, the services as a
+ * something now a bit different". The facile pattern: a promo bar, a split hero (type on the signature colour, a
+ * portrait in a box — the swimmer video came out Nov 19), a value ticker, a boxed best-sellers row with full-width Add-to-bag bars, the services as a
  * hairline grid, shop-by-concern tiles, then Mónika, reviews, the location, the laser line, partners, telehealth
  * and the booking band. Content and photos are the clinic's own (Nov 18); the shop catalog is labo/clinic/products.ts.
  */
@@ -75,8 +74,9 @@ export default function LaboHome() {
               <p className="led">Led by <Link href="/about">Mónika Jáuregui, DNP, CANS, FNP-C</Link>, Certified Aesthetic Nurse Specialist</p>
             </div>
             <div className="fmedia">
-              <img className="poster" src="/labo/img/hero-poster.jpg" alt="" aria-hidden="true" />
-              <HeroVideo />
+              {/* Nov 19 2026 (Javier: "take the highest resolution picture we have that fits and put instead of the video"):
+                  the 1877×2560 portrait from the clinic's own photo set — the sharpest file that fills the tall box. */}
+              <img className="still" src="/labo/img/about/team.jpg" alt="Woman with glowing, even skin, hand resting at her shoulder" fetchPriority="high" />
             </div>
           </div>
         </section>

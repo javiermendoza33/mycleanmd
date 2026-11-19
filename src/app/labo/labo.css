@@ -901,3 +901,26 @@
 [data-labo] [data-clinic] .fhero .btn-ghost:hover{background:rgba(255,255,255,.14)}
 [data-labo] [data-clinic] .fmedia{border-left-color:rgba(255,248,242,.5)}
 @media (max-width:860px){[data-labo] [data-clinic] .fmedia{border-bottom-color:rgba(255,248,242,.5)}}
+
+/* Nov 19 2026 — Syne on the clinic pages (facile's typeface; Javier: "lets try this font as well"). Wide geometric grotesk, so the
+   negative tracking Inter needed comes off and the body size drops a notch. Mono labels stay Plex Mono. */
+[data-labo] [data-clinic]{font-family:var(--font-syne),var(--font-inter),-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;font-size:16px;letter-spacing:-.005em}
+[data-labo] [data-clinic] h1,[data-labo] [data-clinic] h2,[data-labo] [data-clinic] h3,[data-labo] [data-clinic] h4{letter-spacing:-.02em;line-height:1.02}
+[data-labo] [data-clinic] h1{letter-spacing:-.025em;font-size:clamp(2.4rem,5.4vw,4rem)}
+[data-labo] [data-clinic] h2{font-size:clamp(1.8rem,3.8vw,2.8rem)}
+[data-labo] [data-clinic] .sub{letter-spacing:-.01em;font-size:clamp(1.08rem,1.8vw,1.3rem)}
+[data-labo] [data-clinic] .btn,[data-labo] [data-clinic] .addbar,[data-labo] [data-clinic] .baglink,[data-labo] [data-clinic] .chips button,[data-labo] [data-clinic] .chips .cchip{font-family:inherit}
+[data-labo] [data-clinic] .brand{letter-spacing:-.02em}
+[data-labo] [data-clinic] .pcard .pname{letter-spacing:-.01em}
+[data-labo] [data-clinic] .fhero h1 em{font-style:italic}
+[data-labo] [data-clinic] .fmedia .still{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 18%}
+/* Syne is wide: keep the header on one line */
+[data-labo] [data-clinic] .bar{gap:16px}
+[data-labo] [data-clinic] .brand{white-space:nowrap;font-size:1.05rem}
+[data-labo] [data-clinic] nav.main{gap:18px}
+[data-labo] [data-clinic] nav.main a{white-space:nowrap;font-size:.74rem}
+[data-labo] [data-clinic] .bar .btn,[data-labo] [data-clinic] .baglink{white-space:nowrap}
+[data-labo] [data-clinic] .btn-sm{padding:6px 13px;font-size:.78rem}
+@media (max-width:1040px){[data-labo] [data-clinic] nav.main{gap:14px}[data-labo] [data-clinic] nav.main a{font-size:.7rem}}
+@media (max-width:560px){[data-labo] [data-clinic] .brand{font-size:.95rem}[data-labo] [data-clinic] .promo{font-size:.66rem}}
+@media (max-width:430px){[data-labo] [data-clinic] .bar>.btn-sm{display:none}}   /* the sheet carries Book now; keeps ☰ on screen */
