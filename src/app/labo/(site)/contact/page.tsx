@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { PageHero } from "@/components/labo/Sections";
 import ContactForm from "@/components/labo/ContactForm";
 import { LocationCard, MapEmbed } from "@/components/labo/Clinic";
@@ -26,6 +27,11 @@ export default function Contact() {
             <div className="kvtile">
               <span className="kicker">Email</span>
               <a className="big" href={`mailto:${PRACTICE.email}`}>{PRACTICE.email}</a>
+            </div>
+            <div className="kvtile">
+              <span className="kicker">Text updates</span>
+              <Link className="big" href="/sms">Appointment reminders &amp; aftercare by text →</Link>
+              <p style={{ marginTop: 8, fontSize: ".9rem", color: "var(--muted)" }}>About 1–4 texts a month, only if you opt in. Reply STOP any time.</p>
             </div>
             <div className="kvtile">
               <span className="kicker">Working hours</span>

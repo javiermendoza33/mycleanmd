@@ -3,11 +3,14 @@
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 import { submitContact, type ContactState } from "@/app/labo/(site)/contact/actions";
+import Link from "next/link";
 import { PRACTICE } from "@/labo/content";
+import { CONSENT_TEXT } from "@/labo/clinic/sms";
 
 const FIELDS = [
   { name: "name", label: "Name", ph: "First and last", type: "text", ac: "name" },
   { name: "email", label: "Email", ph: "you@example.com", type: "email", ac: "email" },
+  { name: "mobile", label: "Mobile number (optional, for texts)", ph: "(206) 555-0100", type: "tel", ac: "tel" },
   { name: "state", label: "State of residence", ph: "Washington", type: "text", ac: "address-level1" },
   { name: "program", label: "Program of interest", ph: "GLP-1, peptides, testosterone, hormone therapy", type: "text", ac: "off" },
 ];
@@ -63,6 +66,12 @@ export default function ContactForm() {
         <textarea id="ct-message" name="message" rows={4} required
                   placeholder="What would you like to ask?" />
       </div>
+      {/* Nov 18 2026: SMS consent on the contact form too (Javier: "can we tie into contact us page?"). Unchecked by default. */}
+      <label className="consent">
+        <input type="checkbox" name="consent" value="yes" />
+        <span>{CONSENT_TEXT.replace(" See our Privacy Policy and SMS Terms.", "")} See our <Link href="/privacy-policy">Privacy Policy</Link> and <Link href="/sms">SMS Terms</Link>.</span>
+      </label>
+      <p className="note" style={{ marginTop: 0 }}>Texting is optional — leave the box unchecked and we will reply by email only.</p>
       <Send />
       <p className="note" style={{ marginTop: 0 }}>
         Or email <a href={`mailto:${PRACTICE.email}`}>{PRACTICE.email}</a> directly.

@@ -2,6 +2,8 @@
 
 import { Resend } from "resend";
 import { PRACTICE } from "@/labo/content";
+import { headers } from "next/headers";
+import { CONSENT_TEXT } from "@/labo/clinic/sms";
 
 /**
  * Contact form handler.
@@ -43,6 +45,8 @@ export async function submitContact(
   const state = get("state");
   const program = get("program");
   const message = get("message");
+  const mobile = get("mobile").replace(/[^\d]/g, "");
+  const consent = get("consent") === "yes";
 
   // Honeypot: a field positioned off-screen that only a bot fills in. Returning
   // success rather than an error means a bot learns nothing from the response.
@@ -53,6 +57,9 @@ export async function submitContact(
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return { status: "error", message: "That email address does not look right." };
+  }
+  if (consent && !/^1?\d{10}$/.test(mobile)) {
+    return { status: "error", message: "To receive texts, please enter a 10-digit US mobile number (or untick the text box)." };
   }
   if (message.length > 4000) {
     return { status: "error", message: "Please keep the message under 4,000 characters." };
@@ -70,7 +77,13 @@ export async function submitContact(
   const rows: [string, string][] = [
     ["Name", name], ["Email", email], ["State", state || "—"],
     ["Program of interest", program || "—"],
+    ["Mobile", mobile || "—"],
+    ["SMS consent", consent ? "YES — box ticked by the sender" : "No"],
   ];
+  if (consent) {   // the consent record a carrier can audit
+    const h = await headers();
+    rows.push(["Consent recorded", new Date().toISOString()], ["IP", (h.get("x-forwarded-for") ?? "").split(",")[0].trim() || "unknown"], ["Browser", h.get("user-agent") ?? "unknown"]);
+  }
 
   try {
     const { error } = await new Resend(key).emails.send({
@@ -85,6 +98,7 @@ export async function submitContact(
             <td style="padding:6px 0;font-weight:600">${esc(v)}</td></tr>`)
           .join("")}</table>
         <p style="margin-top:20px;white-space:pre-wrap">${esc(message)}</p>
+        ${consent ? `<p style="margin-top:18px;font-size:13px;color:#424245"><b>Disclosure shown next to the ticked box:</b><br>${esc(CONSENT_TEXT)}</p>` : ""}
         <p style="margin-top:26px;font-size:12px;color:#8A9791">
           Sent from the public contact form. Not a secure clinical channel —
           reply by email only for non-clinical matters.</p>
