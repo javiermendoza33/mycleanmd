@@ -674,3 +674,8 @@
 [data-labo] .consent{display:flex;gap:12px;align-items:flex-start;font-size:.88rem;line-height:1.5;color:var(--graphite);margin-top:6px;cursor:pointer}
 [data-labo] .consent input{flex:none;margin-top:4px;width:18px;height:18px;accent-color:var(--accent)}
 [data-labo] .consent a{text-decoration:underline}
+
+/* ── A touch of luxury (Nov 18 2026, Javier: "how do we add just a touch of luxury to the site") ──
+   Warm surfaces: the cool Apple grey canvas/wash/hairlines become ivory tones so the pages feel like a room, not a product.
+   (A serif for the display headings was previewed the same evening; Javier: "can we keep same font" → Inter everywhere.) */
+[data-labo] [data-clinic]{--canvas:#F7F4EF;--wash:#EFEAE2;--line:rgba(70,45,25,.13);--hair:rgba(70,45,25,.07)}
