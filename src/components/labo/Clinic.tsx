@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { preconnect } from "react-dom";
 import type { ReactNode } from "react";
 import type { Service, Testimonial } from "@/labo/clinic/types";
 import { CLINIC_SITE, type ClinicLocation } from "@/labo/clinic/site";
@@ -149,22 +148,5 @@ export function BookCta() {
   );
 }
 
-/**
- * The clinic's Vagaro scheduler. Nov 18 2026: this used to build a `srcDoc` iframe that
- * injected Vagaro's own `<script src="…WidgetEmbeddedLoader…">` loader — a cross-origin
- * SCRIPT fetch, which Chrome's Opaque Response Blocking refused on the live site in a real
- * browser (net::ERR_BLOCKED_BY_ORB; the page showed "Powered by Vagaro" and nothing else).
- * CLINIC_SITE.vagaroEmbedUrl is the page that loader script would have iframed anyway —
- * pointing straight at it is a normal cross-origin NAVIGATION, not a subresource fetch, so
- * ORB doesn't apply, and that page allows framing (no X-Frame-Options, frame-ancestors *).
- * See the comment on vagaroEmbedUrl in labo/clinic/site.ts for how to re-derive it.
- * Nov 18 2026: Javier found it slow to load — it's Vagaro's full marketplace app (nav, cart,
- * search), not a slim widget, so the payload itself is heavy and out of our control. The one
- * real lever on our side is skipping the DNS/TLS/TCP setup delay: `preconnect` opens the
- * connection to vagaro.com as soon as this component renders, in parallel with the rest of
- * the page, instead of only starting once the browser parses the iframe's src.
- */
-export function VagaroWidget() {
-  preconnect("https://www.vagaro.com", { crossOrigin: "anonymous" });
-  return <iframe className="embed book" loading="eager" src={CLINIC_SITE.vagaroEmbedUrl} title={`Book an appointment — ${PRACTICE.name} online scheduler`} />;
-}
+// VagaroWidget moved to ./VagaroWidget.tsx (Nov 18 2026) — it needs onLoad state for the
+// loading overlay, which means "use client", and the rest of this file's components don't.

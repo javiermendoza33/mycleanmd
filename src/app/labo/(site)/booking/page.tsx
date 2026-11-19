@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { CLINIC_SITE } from "@/labo/clinic/site";
-import { VagaroWidget } from "@/components/labo/Clinic";
+import { VagaroWidget } from "@/components/labo/VagaroWidget";
 import { PageHero } from "@/components/labo/Sections";
 
 export const metadata = {
