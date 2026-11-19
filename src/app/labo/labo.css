@@ -885,3 +885,19 @@
 /* storefront: card headings stay card-sized on the services index (h2 there), tiles square */
 [data-labo] [data-clinic] .card h2,[data-labo] [data-clinic] .card h3{font-size:1.1rem;letter-spacing:-.022em}
 [data-labo] [data-clinic] .kvtile,[data-labo] [data-clinic] .tile,[data-labo] [data-clinic] .notebox,[data-labo] [data-clinic] .map,[data-labo] [data-clinic] .embed,[data-labo] [data-clinic] .vagaro-loading{border-radius:6px}
+
+/* Nov 19 2026 (Javier: "can we try the body same as top bar color some orange color you made") — the hero band takes the
+   signature colour like facile's red hero: ivory type, inverted buttons, the video box keeps its ink rule. */
+[data-labo] [data-clinic] .fhero{background:var(--accent);color:#FFF8F2}
+[data-labo] [data-clinic] .fhero .kicker{color:rgba(255,248,242,.78)}
+[data-labo] [data-clinic] .fhero h1{color:#FFF8F2}
+[data-labo] [data-clinic] .fhero h1 em{color:#FFD9CC}
+[data-labo] [data-clinic] .fhero .sub{color:rgba(255,248,242,.9)}
+[data-labo] [data-clinic] .fhero .led,[data-labo] [data-clinic] .fhero .led a{color:rgba(255,248,242,.9)}
+[data-labo] [data-clinic] .fhero .led a{text-decoration-color:#FFF8F2}
+[data-labo] [data-clinic] .fhero .btn-primary{background:#FFF8F2;color:var(--accent)}
+[data-labo] [data-clinic] .fhero .btn-primary:hover{background:#FFFFFF}
+[data-labo] [data-clinic] .fhero .btn-ghost{border-color:rgba(255,248,242,.75);color:#FFF8F2}
+[data-labo] [data-clinic] .fhero .btn-ghost:hover{background:rgba(255,255,255,.14)}
+[data-labo] [data-clinic] .fmedia{border-left-color:rgba(255,248,242,.5)}
+@media (max-width:860px){[data-labo] [data-clinic] .fmedia{border-bottom-color:rgba(255,248,242,.5)}}
