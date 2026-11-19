@@ -39,7 +39,9 @@ export async function getHours(): Promise<Hours> {
 
 /** Busy intervals (UTC ms) between two instants, from both tables; a missing bookings table just means nothing booked yet. */
 async function busy(fromIso: string, toIso: string): Promise<Array<[number, number]>> {
-  const db = createAdminClient(); const out: Array<[number, number]> = [];
+  const out: Array<[number, number]> = [];
+  if (!process.env.SUPABASE_SERVICE_ROLE_KEY) { console.warn("[booking] no SUPABASE_SERVICE_ROLE_KEY — treating the book as empty (local preview)"); return out; }
+  const db = createAdminClient();
   const b = await db.from("labo_bookings").select("starts_at, ends_at").lt("starts_at", toIso).gt("ends_at", fromIso).not("status", "in", "(canceled)");
   if (b.error && !missing(b.error)) throw new Error(b.error.message);
   for (const r of b.data ?? []) out.push([+new Date(r.starts_at), +new Date(r.ends_at)]);
