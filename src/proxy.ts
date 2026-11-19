@@ -13,7 +13,9 @@ const GATE_COOKIE = '_gate'
  * the UNRELEASED MyCleanMD portal off the public internet; applying it here
  * would password-protect a marketing site, which is the opposite of the job.
  */
-const LABO_HOSTS = ['thelabomethod.com', 'www.thelabomethod.com']
+// Nov 19 2026: sandbox.thelabomethod.com = the Vercel branch domain for `sandbox-booking` (CNAME → cname.vercel-dns.com);
+// same clinic site, same routing, so the booking sandbox can be tried on a real host before it goes to main.
+const LABO_HOSTS = ['thelabomethod.com', 'www.thelabomethod.com', 'sandbox.thelabomethod.com']
 
 export async function proxy(request: NextRequest) {
   const { pathname: path } = request.nextUrl
@@ -85,7 +87,9 @@ export async function proxy(request: NextRequest) {
 
     const url = request.nextUrl.clone()
     url.pathname = `/labo${path === '/' ? '' : path}`
-    return NextResponse.rewrite(url)
+    const rewritten = NextResponse.rewrite(url)
+    if (host === 'sandbox.thelabomethod.com') rewritten.headers.set('X-Robots-Tag', 'noindex, nofollow')   // the sandbox never gets indexed
+    return rewritten
   }
 
   // Site-access gate — keeps the in-progress site off the public internet.
