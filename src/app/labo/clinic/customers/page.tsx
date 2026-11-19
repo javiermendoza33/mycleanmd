@@ -5,7 +5,7 @@ import { searchAppts, fullName } from "../_data";
 
 /** Customers are derived from bookings (grouped by email) until there is a proper customer record. */
 export default async function ClinicCustomers({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
-  await getStaff(); const sp = await searchParams; const q = (sp.q ?? "").trim().slice(0, 60);
+  if (!(await getStaff())) return null; const sp = await searchParams; const q = (sp.q ?? "").trim().slice(0, 60);
   const rows = await searchAppts(q, ""); const now = Date.now();
   const byEmail = new Map<string, { name: string; email: string; phone: string; visits: number; last: string | null; next: string | null; noShows: number }>();
   for (const a of rows) {

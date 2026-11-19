@@ -20,8 +20,8 @@ export async function getStaff(): Promise<{ user: { id: string; email: string };
   const { data: { user } } = await supabase.auth.getUser();
   if (!user?.email) return null;
   const email = user.email.toLowerCase();
-  const { data } = await createAdminClient().from("labo_staff").select("*").eq("email", email).maybeSingle();
-  const row = data as (Staff & { id: string }) | null;
+  let row: (Staff & { id: string }) | null = null;
+  try { const { data } = await createAdminClient().from("labo_staff").select("*").eq("email", email).maybeSingle(); row = data as (Staff & { id: string }) | null; } catch { row = null; }
   if (row?.active) return { user: { id: user.id, email }, staff: row };
   if (isProviderEmail(email)) return { user: { id: user.id, email }, staff: { id: row?.id ?? null, email, name: (user.user_metadata?.full_name as string) || "Admin", role: "admin", active: true, color: null } };
   return null;

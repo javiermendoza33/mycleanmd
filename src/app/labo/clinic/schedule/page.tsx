@@ -5,7 +5,7 @@ import HoursForm from "@/components/labo/clinic/HoursForm";
 import BlocksForm from "@/components/labo/clinic/BlocksForm";
 
 export default async function ClinicSchedule() {
-  const s = (await getStaff())!; const [hours, team, blocks] = await Promise.all([getHours(), listStaff(), loadBlocks(new Date().toISOString(), new Date(Date.now() + 120 * 86_400_000).toISOString())]);
+  const s = await getStaff(); if (!s) return null; const [hours, team, blocks] = await Promise.all([getHours(), listStaff(), loadBlocks(new Date().toISOString(), new Date(Date.now() + 120 * 86_400_000).toISOString())]);
   const byStaff = new Map(team.rows.map((t) => [t.id, t.name]));
   return (
     <>

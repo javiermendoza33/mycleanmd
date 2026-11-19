@@ -7,7 +7,7 @@ import NewAppointment from "@/components/labo/clinic/NewAppointment";
 import { getMenu } from "@/lib/labo/booking";
 
 export default async function ClinicCalendar({ searchParams }: { searchParams: Promise<{ d?: string; a?: string; new?: string }> }) {
-  await getStaff(); const sp = await searchParams; const day = /^\d{4}-\d{2}-\d{2}$/.test(sp.d ?? "") ? sp.d! : todayPT();
+  if (!(await getStaff())) return null; const sp = await searchParams; const day = /^\d{4}-\d{2}-\d{2}$/.test(sp.d ?? "") ? sp.d! : todayPT();
   const [y, m] = day.split("-").map(Number); const monthStart = `${day.slice(0, 7)}-01`; const nextMonth = m === 12 ? `${y + 1}-01-01` : `${y}-${String(m + 1).padStart(2, "0")}-01`;
   const [dStart, dEnd] = ptDayRange(day);
   const [{ rows: monthRows, setup }, { rows: dayRows }, blocks, menu, team] = await Promise.all([loadAppts(ptToUtc(monthStart).toISOString(), ptToUtc(nextMonth).toISOString()), loadAppts(dStart, dEnd, { includeCanceled: true }), loadBlocks(dStart, dEnd), getMenu(), listStaff()]);

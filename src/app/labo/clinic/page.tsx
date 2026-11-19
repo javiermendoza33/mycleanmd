@@ -7,7 +7,8 @@ import NewAppointment from "@/components/labo/clinic/NewAppointment";
 import { getMenu } from "@/lib/labo/booking";
 
 export default async function ClinicToday() {
-  const s = (await getStaff())!; const today = todayPT(); const [start, end] = ptDayRange(today);
+  const s = await getStaff(); if (!s) return null;   // the layout shows "Clinic team only"
+  const today = todayPT(); const [start, end] = ptDayRange(today);
   const [{ rows, setup }, week, menu, team] = await Promise.all([loadAppts(start, end), loadAppts(start, ptDayRange(shiftDay(today, 7))[0]), getMenu(), listStaff()]);
   const unconfirmed = week.rows.filter((a) => a.status === "booked");
   const next = rows.find((a) => new Date(a.starts_at) > new Date() && !["completed", "no_show"].includes(a.status));

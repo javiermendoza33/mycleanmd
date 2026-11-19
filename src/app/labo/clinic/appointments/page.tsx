@@ -5,7 +5,7 @@ import { searchAppts, dateOfPT, PILL, STATUS_LABEL, fullName } from "../_data";
 import ApptActions from "@/components/labo/clinic/ApptActions";
 
 export default async function ClinicAppointments({ searchParams }: { searchParams: Promise<{ q?: string; status?: string }> }) {
-  await getStaff(); const sp = await searchParams; const q = (sp.q ?? "").trim().slice(0, 60); const status = ["booked", "confirmed", "completed", "canceled", "no_show"].includes(sp.status ?? "") ? sp.status! : "";
+  if (!(await getStaff())) return null; const sp = await searchParams; const q = (sp.q ?? "").trim().slice(0, 60); const status = ["booked", "confirmed", "completed", "canceled", "no_show"].includes(sp.status ?? "") ? sp.status! : "";
   const rows = await searchAppts(q, status);
   return (
     <>
