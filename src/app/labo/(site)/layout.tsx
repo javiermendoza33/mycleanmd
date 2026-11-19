@@ -1,4 +1,5 @@
 import { Header, Footer } from "@/components/labo/Chrome";
+import BagDrawer from "@/components/labo/shop/BagDrawer";
 
 /**
  * Inner pages of thelabomethod.com — the White Room system with the shared
@@ -12,6 +13,7 @@ export default function LaboSiteLayout({ children }: { children: React.ReactNode
       <Header />
       <main>{children}</main>
       <Footer />
+      <BagDrawer />
     </div>
   );
 }

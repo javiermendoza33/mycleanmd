@@ -1,4 +1,7 @@
-/** Home route group wrapper — [data-clinic] carries the warm clinic accent (labo.css, Nov 18 2026); the portals stay outside it. */
+import BagDrawer from "@/components/labo/shop/BagDrawer";
+
+/** Home route group wrapper — [data-clinic] carries the clinic storefront tokens (labo.css); the portals stay outside it.
+ *  The bag drawer (Nov 19 2026) mounts here so "Add to bag" works on the home page's best-seller row. */
 export default function LaboHomeLayout({ children }: { children: React.ReactNode }) {
-  return <div data-clinic>{children}</div>;
+  return <div data-clinic>{children}<BagDrawer /></div>;
 }

@@ -6,6 +6,8 @@ import { NAV, PROGRAMS, PRACTICE, HEALTHIE, TREATMENTS, FOOTER_DISCLAIMER } from
 import { services } from "@/labo/clinic/services";
 import { CLINIC_SITE } from "@/labo/clinic/site";
 import MobileNav from "@/components/labo/MobileNav";
+import BagLink from "@/components/labo/shop/BagLink";
+import { SHOP } from "@/labo/clinic/products";
 
 /**
  * Header and footer for The Labo Clinic inner pages.
@@ -20,6 +22,8 @@ const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
 export function Header() {
   const pathname = usePathname();
   return (
+    <>
+    <div className="promo"><div className="wrap"><span>{SHOP.promo}</span><span className="sep">·</span><span>Free shipping on skincare orders over ${SHOP.freeShippingOver}</span></div></div>
     <header className="site">
       <div className="wrap bar">
         <Link className="brand" href="/" aria-label={`${PRACTICE.name} — home`}>{PRACTICE.name}</Link>
@@ -28,10 +32,12 @@ export function Header() {
             <Link key={l.href} href={l.href} className={pathname === l.href || pathname.startsWith(l.href + "/") ? "on" : undefined}>{l.label}</Link>
           ))}
         </nav>
+        <BagLink />
         <Link className="btn btn-primary btn-sm" href="/booking">Book now</Link>
         <MobileNav />
       </div>
     </header>
+    </>
   );
 }
 
@@ -47,7 +53,8 @@ export function Footer() {
               <li><Link href="/">Home</Link></li>
               {NAV.map((l) => <li key={l.href}><Link href={l.href}>{l.label}</Link></li>)}
               <li><Link href="/booking">Book now</Link></li>
-              <li><a href={s.shopUrl} {...ext}>Shop skincare ↗</a></li>
+              <li><Link href="/shop">Shop skincare</Link></li>
+              <li><a href={s.shopUrl} {...ext}>skinbetter store ↗</a></li>
               <li><a href={s.queenBeeUrl} {...ext}>Queen Bee Spa ↗</a></li>
             </ul>
           </div>

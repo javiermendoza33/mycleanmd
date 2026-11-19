@@ -29,6 +29,9 @@ export async function POST(req: NextRequest) {
 
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.Checkout.Session
+    // Nov 19 2026: shop orders (the skincare bag, /api/labo/shop/checkout) carry kind:"shop" — nothing to enrol, Stripe's own
+    // dashboard + receipt emails are the order record for now. Acknowledge and move on.
+    if (session.metadata?.kind === 'shop') return NextResponse.json({ ok: true })
     const programSlug = session.metadata?.programSlug
     const userId = session.metadata?.userId || session.client_reference_id || null
 
