@@ -926,3 +926,11 @@
 @media (max-width:430px){[data-labo] [data-clinic] .bar>.btn-sm{display:none}}   /* the sheet carries Book now; keeps ☰ on screen */
 [data-labo] .vagaro-foot{margin-top:12px;font-size:.84rem;color:var(--graphite);text-align:center}
 [data-labo] .vagaro-foot a{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+/* booking: our own confirmation once the widget reports BookingCompleted (Nov 19 2026) */
+[data-labo] .booked{border:1px solid var(--rule,var(--line));background:var(--canvas);padding:44px 40px;border-radius:var(--radius-card)}
+[data-labo] .booked h2{margin-top:14px}
+[data-labo] .booked .sub{margin-top:16px;max-width:56ch}
+[data-labo] .booked .checks{margin-top:26px;justify-content:start;max-width:none}
+[data-labo] .booked .acts{display:flex;gap:16px;align-items:center;margin-top:30px;flex-wrap:wrap}
+[data-labo] .linkbtn{background:none;border:0;font:inherit;cursor:pointer;padding:0}
+@media (max-width:600px){[data-labo] .booked{padding:30px 22px}}

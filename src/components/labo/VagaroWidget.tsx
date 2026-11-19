@@ -1,7 +1,8 @@
 "use client";
 
 import { preconnect } from "react-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 import { CLINIC_SITE } from "@/labo/clinic/site";
 import { PRACTICE } from "@/labo/content";
 
@@ -25,9 +26,56 @@ import { PRACTICE } from "@/labo/content";
  * thing we DO control: not leaving a blank white box for however long that takes — this shows
  * a branded loading state until the iframe's own document finishes loading.
  */
+/**
+ * Nov 19 2026 — Booking Widget Events (docs.vagaro.com/public/docs/introduction-widget-events): the embedded widget
+ * posts `{ eventName, timestamp, data }` to the parent with window.postMessage. We listen for the ones that matter:
+ * WidgetLoaded (drop our overlay the moment Vagaro's app is up), FormResponseSubmitted (her intake/consent form was
+ * answered inside the widget) and BookingCompleted — which is where the embed used to hang on "Welcome, <name>": the
+ * customer dashboard never loads inside a frame. Now our own confirmation takes over. Vagaro's public API has no
+ * create-appointment call (only outbound webhooks + these events), so the widget stays the booking engine.
+ */
+type WidgetEvent = { eventName?: string; timestamp?: number; data?: Record<string, unknown> };
+
 export function VagaroWidget() {
   preconnect("https://www.vagaro.com", { crossOrigin: "anonymous" });
   const [loaded, setLoaded] = useState(false);
+  const [booked, setBooked] = useState(false);
+  const [formDone, setFormDone] = useState(false);
+  const [key, setKey] = useState(0);
+  useEffect(() => {
+    const onMsg = (e: MessageEvent) => {
+      if (e.origin !== "https://www.vagaro.com") return;
+      const m = e.data as WidgetEvent;
+      if (!m || typeof m.eventName !== "string") return;
+      const n = m.eventName.toLowerCase();
+      if (process.env.NODE_ENV !== "production" || window.location.search.includes("vagaro=debug")) console.debug("[vagaro widget]", m.eventName, m.data);
+      if (n.includes("loaded")) setLoaded(true);
+      else if (n.includes("formresponsesubmitted")) setFormDone(true);
+      else if (n.includes("bookingcompleted")) { setBooked(true); window.scrollTo({ top: 0, behavior: "smooth" }); }
+    };
+    window.addEventListener("message", onMsg);
+    return () => window.removeEventListener("message", onMsg);
+  }, []);
+  if (booked) {
+    return (
+      <div className="booked">
+        <span className="kicker">You&rsquo;re booked</span>
+        <h2>See you soon.</h2>
+        <p className="sub">Your confirmation is on its way to your email, with a reminder 24 hours before your visit.{formDone ? " Your intake form is saved with the appointment." : ""}</p>
+        <ul className="checks grid">
+          <li>Arrive 10 minutes early — free 30-minute parking in the courtyard at 910 Lenora.</li>
+          <li>Skip retinol, exfoliants and alcohol the night before injectables or laser.</li>
+          <li>Questions before then? Text {CLINIC_SITE.phoneDisplay}.</li>
+        </ul>
+        <div className="acts">
+          <Link className="btn btn-primary" href="/patient-care">Pre-visit instructions</Link>
+          <Link className="btn btn-ghost" href="/shop">Shop skincare</Link>
+          <a className="more" href={CLINIC_SITE.vagaroUrl} target="_blank" rel="noopener noreferrer">Manage on Vagaro ↗</a>
+          <button type="button" className="more linkbtn" onClick={() => { setBooked(false); setFormDone(false); setLoaded(false); setKey((k) => k + 1); }}>Book another</button>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="vagaro-shell">
       {!loaded && (
@@ -37,6 +85,7 @@ export function VagaroWidget() {
         </div>
       )}
       <iframe
+        key={key}
         className="embed book"
         style={{ opacity: loaded ? 1 : 0 }}
         loading="eager"
