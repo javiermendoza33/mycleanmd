@@ -14,23 +14,38 @@ const GATE_COOKIE = '_gate'
  * would password-protect a marketing site, which is the opposite of the job.
  */
 const LABO_HOSTS = ['thelabomethod.com', 'www.thelabomethod.com']
+// The Labo Method (telehealth, white-labelled onto Healthie) is a SEPARATE
+// brand from The Labo Clinic (in-person, served at the LABO_HOSTS above) —
+// Nov 19 2026, Javier: split the two, don't reuse mycleanmd.com/MyCleanMD.
+// It lives on its own subdomain of the same domain, sharing this Vercel
+// project and this repo (src/app/labo/method/*), not a new domain to manage.
+const METHOD_HOSTS = ['method.thelabomethod.com']
 
 export async function proxy(request: NextRequest) {
   const { pathname: path } = request.nextUrl
   const host = request.headers.get('host')?.split(':')[0]?.toLowerCase() ?? ''
+  const isLabo = LABO_HOSTS.includes(host)
+  const isMethod = METHOD_HOSTS.includes(host)
 
-  if (LABO_HOSTS.includes(host)) {
-    // www → apex, so one canonical host owns the index
+  if (isLabo || isMethod) {
+    // www → apex, so one canonical host owns the index. Only applies to the
+    // Clinic host — method.thelabomethod.com has no www variant.
     if (host.startsWith('www.')) {
       const url = new URL(request.url)
       url.host = 'thelabomethod.com'
       return NextResponse.redirect(url, 308)
     }
-    // /labo/* is the internal path; asking for it directly on this host would
-    // duplicate every page at two URLs, so send it to the clean one.
-    if (path === '/labo' || path.startsWith('/labo/')) {
+    // Internal path prefix for this host: Clinic pages live at /labo/*,
+    // Method pages at /labo/method/* (so Method inherits the Clinic's own
+    // layout — fonts, [data-labo] base tokens, analytics — for free; it just
+    // never gets the [data-clinic] override, so it renders the original
+    // Apple-blue "White Room" system instead of the clinic's clay storefront).
+    const prefix = isMethod ? '/labo/method' : '/labo'
+    // Asking for the internal path directly on this host would duplicate
+    // every page at two URLs, so send it to the clean one.
+    if (path === prefix || path.startsWith(prefix + '/')) {
       const url = request.nextUrl.clone()
-      url.pathname = path.slice('/labo'.length) || '/'
+      url.pathname = path.slice(prefix.length) || '/'
       return NextResponse.redirect(url, 308)
     }
 
@@ -84,7 +99,7 @@ export async function proxy(request: NextRequest) {
     }
 
     const url = request.nextUrl.clone()
-    url.pathname = `/labo${path === '/' ? '' : path}`
+    url.pathname = `${prefix}${path === '/' ? '' : path}`
     return NextResponse.rewrite(url)
   }
 

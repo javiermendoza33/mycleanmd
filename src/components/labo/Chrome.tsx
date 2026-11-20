@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { NAV, PROGRAMS, PRACTICE, HEALTHIE, TREATMENTS, FOOTER_DISCLAIMER } from "@/labo/content";
+import { NAV, PROGRAMS, PRACTICE, HEALTHIE, TREATMENTS, FOOTER_DISCLAIMER, METHOD } from "@/labo/content";
 import { services } from "@/labo/clinic/services";
 import { CLINIC_SITE } from "@/labo/clinic/site";
 import MobileNav from "@/components/labo/MobileNav";
@@ -32,6 +32,7 @@ export function Header() {
             <Link key={l.href} href={l.href} className={pathname === l.href || pathname.startsWith(l.href + "/") ? "on" : undefined}>{l.label}</Link>
           ))}
         </nav>
+        <a className="more" href={`https://${METHOD.domain}`} style={{ fontSize: ".78rem" }}>{METHOD.name}</a>
         <BagLink />
         <Link className="btn btn-primary btn-sm" href="/booking">Book now</Link>
         <MobileNav />
@@ -66,12 +67,12 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <h5>Telehealth</h5>
+            <h5>{METHOD.name} ↗</h5>
             <ul>
-              {PROGRAMS.map((p) => <li key={p.slug}><Link href={`/programs/${p.slug}`}>{p.name}</Link></li>)}
-              <li><Link href="/how-it-works">How it works</Link></li>
-              <li><Link href="/pricing">Pricing</Link></li>
-              <li><Link href="/faq">FAQ</Link></li>
+              {PROGRAMS.map((p) => <li key={p.slug}><a href={`https://${METHOD.domain}/programs/${p.slug}`}>{p.name}</a></li>)}
+              <li><a href={`https://${METHOD.domain}/how-it-works`}>How it works</a></li>
+              <li><a href={`https://${METHOD.domain}/pricing`}>Pricing</a></li>
+              <li><a href={`https://${METHOD.domain}/faq`}>FAQ</a></li>
               <li><a href={HEALTHIE.login} {...ext}>Patient login</a></li>
             </ul>
           </div>
@@ -92,7 +93,7 @@ export function Footer() {
           </div>
         </div>
         <div className="legal">
-          <p>© {new Date().getFullYear()} {PRACTICE.name}. All rights reserved. · <Link href="/privacy-policy">Privacy policy</Link> · <Link href="/legal">Legal</Link> · <Link href="/sms">SMS terms</Link></p>
+          <p>© {new Date().getFullYear()} {PRACTICE.name}. All rights reserved. · <Link href="/privacy-policy">Privacy policy</Link> · <a href={`https://${METHOD.domain}/legal`}>Legal</a> · <Link href="/sms">SMS terms</Link></p>
           <p>{FOOTER_DISCLAIMER}</p>
         </div>
       </div>
