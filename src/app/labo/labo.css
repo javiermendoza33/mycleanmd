@@ -926,3 +926,13 @@
 @media (max-width:430px){[data-labo] [data-clinic] .bar>.btn-sm{display:none}}   /* the sheet carries Book now; keeps ☰ on screen */
 [data-labo] .vagaro-foot{margin-top:12px;font-size:.84rem;color:var(--graphite);text-align:center}
 [data-labo] .vagaro-foot a{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+
+/* ── The Labo Method (Nov 19 2026, Javier: "same feel and look as Clinic site but lets try purple instead
+   as color basse") ───────────────────────────────────────────────────────────────────────────────────
+   method.thelabomethod.com reuses the whole [data-clinic] storefront system above (paper, Outfit, hairline
+   boxed cards, the split hero) via this second attribute, [data-method] — only the signature colour changes.
+   Picked at a similar lightness/saturation to the clinic's clay (#C8432A) so it carries the same visual
+   weight, not a brighter/techier purple. */
+[data-labo] [data-clinic][data-method]{--accent:#6E3F99;--accent-rgb:110,63,153;--accent-tint:rgba(110,63,153,.09)}
+[data-labo] [data-clinic][data-method] .btn-primary:hover{background:#54307A}
+[data-labo] [data-clinic][data-method] .fmedia .still{object-position:72% 22%}

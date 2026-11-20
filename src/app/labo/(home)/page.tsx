@@ -47,7 +47,8 @@ export default function LaboHome() {
       <header className="site">
         <div className="wrap bar">
           <a className="brand" href="#top" style={{ marginRight: 0 }}>{PRACTICE.name}</a>
-          <a className="more" href={`https://${METHOD.domain}`} style={{ fontSize: ".78rem", marginRight: "auto" }}>Telehealth</a>
+          <a className="more" href={`https://${METHOD.domain}`}
+             style={{ fontFamily: "var(--font-clinic)", fontWeight: 800, letterSpacing: "-.02em", fontSize: "1.05rem", color: METHOD.accent, textDecorationColor: METHOD.accent, marginRight: "auto" }}>Telehealth</a>
           <nav className="main" aria-label="Sections">
             {NAV.map((l) => <Link key={l.href} href={l.href}>{l.label}</Link>)}
           </nav>

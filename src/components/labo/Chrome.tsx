@@ -30,7 +30,11 @@ export function Header() {
             and moved onto the Telehealth link instead, so Telehealth sits flush next to the wordmark
             (Javier's ask) and still pushes nav/Bag/Book-now to the right edge like every other header. */}
         <Link className="brand" href="/" aria-label={`${PRACTICE.name} — home`} style={{ marginRight: 0 }}>{PRACTICE.name}</Link>
-        <a className="more" href={`https://${METHOD.domain}`} style={{ fontSize: ".78rem", marginRight: "auto" }}>Telehealth</a>
+        {/* Javier: "same style font as The Labo Clinic, and maybe make it in purple" — matches .brand's
+            own cascade (Outfit, 800, tight tracking) via inline style, keeps .more's underline + "›" for
+            the nav affordance, both recoloured to Method's purple (clinic's own --accent stays clay here). */}
+        <a className="more" href={`https://${METHOD.domain}`}
+           style={{ fontFamily: "var(--font-clinic)", fontWeight: 800, letterSpacing: "-.02em", fontSize: "1.05rem", color: METHOD.accent, textDecorationColor: METHOD.accent, marginRight: "auto" }}>Telehealth</a>
         <nav className="main" aria-label="Primary">
           {NAV.map((l) => (
             <Link key={l.href} href={l.href} className={pathname === l.href || pathname.startsWith(l.href + "/") ? "on" : undefined}>{l.label}</Link>

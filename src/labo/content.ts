@@ -447,6 +447,11 @@ export const LEGAL = [
 export const METHOD = {
   name: "The Labo Method",
   domain: "method.thelabomethod.com",
+  // Keep in sync with the [data-method] --accent override in labo.css — this
+  // copy is for cross-links rendered on the CLINIC's own pages (its own
+  // [data-clinic] scope has no [data-method], so var(--accent) there is
+  // still clay; a Method-coloured mention there has to be hardcoded).
+  accent: "#6E3F99",
   tagline: "Hormone, weight and peptide care, by video.",
   email: PRACTICE.email,
 } as const;

@@ -1,16 +1,36 @@
 import Link from "next/link";
-import { PageHero, Eyebrow, ClosingCTA } from "@/components/labo/Sections";
+import { Eyebrow, ClosingCTA } from "@/components/labo/Sections";
 import { PROGRAMS, AVAILABILITY, METHOD, PRACTICE } from "@/labo/content";
 import Gate from "./Gate";
 
+/**
+ * Nov 19 2026: ported onto the Clinic's own storefront hero pattern (split
+ * hero, type left / photo right) instead of the plain White Room PageHero,
+ * per Javier's ask to give Method "the same feel and look as Clinic." Photo
+ * is `misc/cta-bg.jpg` — the library has no hormone/weight/peptide-specific
+ * shot (it's all Skin Haven's aesthetics content), so this is the closest
+ * match for photographic QUALITY (same studio-portrait bar as the clinic's
+ * own hero/about photos) rather than exact subject match.
+ */
 export default function MethodHome() {
   return (
     <>
-      <PageHero
-        eyebrow="Telehealth"
-        title={<>Hormone, weight and peptide care — <em>by video</em>.</>}
-        lede={`${METHOD.name} is the telehealth side of the practice: real labs first, a real dose plan, and a clinician actually watching. Licensed for residents of ${AVAILABILITY}.`}
-      />
+      <section className="fhero">
+        <div className="fgrid">
+          <div className="ftext">
+            <span className="kicker">Telehealth</span>
+            <h1>Hormone, weight and peptide care — <em>by video</em>.</h1>
+            <p className="sub">{METHOD.name} is the telehealth side of the practice: real labs first, a real dose plan, and a clinician actually watching. Licensed for residents of {AVAILABILITY}.</p>
+            <div className="acts">
+              <Link className="btn btn-primary" href="/programs">See programs</Link>
+              <Link className="btn btn-ghost" href="/pricing">Pricing</Link>
+            </div>
+          </div>
+          <div className="fmedia">
+            <img className="still" src="/labo/img/misc/cta-bg.jpg" alt="" aria-hidden="true" />
+          </div>
+        </div>
+      </section>
 
       <section style={{ paddingTop: 0 }}>
         <div className="wrap tight">

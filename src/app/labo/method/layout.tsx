@@ -7,10 +7,14 @@ import { METHOD, AVAILABILITY, LAUNCH_READY } from "@/labo/content";
  * Served at method.thelabomethod.com (src/proxy.ts rewrites by hostname to
  * /labo/method/*). This layout overrides the parent /labo layout's title
  * template, description and metadataBase so pages here are attributed to
- * THIS brand and THIS host, not the clinic — and it deliberately does not
- * add [data-clinic], so these pages keep the base [data-labo] tokens (Apple
- * blue) instead of the clinic's clay storefront look. Fonts, the [data-labo]
- * wrapper and analytics still come from ../layout.tsx, one level up.
+ * THIS brand and THIS host, not the clinic. Fonts, the [data-labo] wrapper
+ * and analytics come from ../layout.tsx, one level up.
+ *
+ * Nov 19 2026 (Javier: "same feel and look as Clinic site but lets try
+ * purple instead as color basse"): this now carries BOTH [data-clinic]
+ * (the whole storefront system — paper, Outfit, hairline boxed cards, the
+ * split hero) AND [data-method], which only overrides the signature colour
+ * to purple — see the [data-method] block at the end of labo.css.
  *
  * Still noindex everywhere (LAUNCH_READY false) — the pricing here is the
  * same unconfirmed placeholder flagged in content.ts, and /legal hasn't had
@@ -48,10 +52,10 @@ export const metadata: Metadata = {
 
 export default function MethodLayout({ children }: { children: React.ReactNode }) {
   return (
-    <>
+    <div data-clinic data-method>
       <MethodHeader />
       <main>{children}</main>
       <MethodFooter />
-    </>
+    </div>
   );
 }
