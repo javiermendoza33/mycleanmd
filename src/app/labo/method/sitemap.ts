@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { PROGRAMS, METHOD, LAUNCH_READY } from "@/labo/content";
+import { posts } from "@/labo/method/posts";
 
 /**
  * Served at method.thelabomethod.com/sitemap.xml — see the same note on
@@ -17,6 +18,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...PROGRAMS.map((x) => ({ p: `/programs/${x.slug}`, priority: 0.7 })),
     { p: "/pricing", priority: 0.7 },
     { p: "/how-it-works", priority: 0.6 },
+    { p: "/blog", priority: 0.6 },
+    ...posts.map((x) => ({ p: `/blog/${x.slug}`, priority: 0.5 })),
     { p: "/faq", priority: 0.5 },
     { p: "/legal", priority: 0.2 },
   ];

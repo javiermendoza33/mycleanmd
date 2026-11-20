@@ -936,3 +936,10 @@
 [data-labo] [data-clinic][data-method]{--accent:#6E3F99;--accent-rgb:110,63,153;--accent-tint:rgba(110,63,153,.09)}
 [data-labo] [data-clinic][data-method] .btn-primary:hover{background:#54307A}
 [data-labo] [data-clinic][data-method] .fmedia .still{object-position:72% 22%}
+
+/* .cards defaults to 3 columns (labo.css line ~522) — .cols4 is for a row that always has exactly
+   4 items (the Method homepage's journal teaser), so it gets its own column count at each breakpoint
+   instead of the 3-column default's 3→2→1 collapse. */
+[data-labo] .cards.cols4{grid-template-columns:repeat(4,1fr)}
+@media (max-width:1040px){[data-labo] .cards.cols4{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){[data-labo] .cards.cols4{grid-template-columns:1fr}}

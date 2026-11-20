@@ -460,6 +460,7 @@ export const METHOD_NAV = [
   { label: "Programs", href: "/programs" },
   { label: "Pricing", href: "/pricing" },
   { label: "How it works", href: "/how-it-works" },
+  { label: "Journal", href: "/blog" },
   { label: "FAQ", href: "/faq" },
 ] as const;
 
