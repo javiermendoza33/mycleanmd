@@ -68,28 +68,28 @@ function LoginInner() {
         <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', height: '100%', padding: '48px 56px' }}>
           {/* Logo */}
           <Link href="/" style={{ textDecoration: 'none', fontSize: 22, fontWeight: 700, color: '#fff' }}>
-            <em style={{ fontStyle: 'italic', fontWeight: 400, color: 'var(--teal)' }}>Care</em>MD
+            <em style={{ fontStyle: 'italic', fontWeight: 400, color: 'var(--teal)' }}>The Labo</em> Clinic
           </Link>
 
           {/* Center content */}
           <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <p style={{ fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--teal)', fontWeight: 600, marginBottom: 20 }}>
-              Telehealth, simplified
+              Seattle · South Lake Union
             </p>
             <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(36px,3.5vw,52px)', fontWeight: 400, lineHeight: 1.15, letterSpacing: -1.5, color: '#fff', marginBottom: 32 }}>
-              Your doctor is<br />
-              <em style={{ fontStyle: 'italic', color: 'var(--teal)' }}>one click</em> away.
+              Skin that looks like<br />
+              <em style={{ fontStyle: 'italic', color: 'var(--teal)' }}>you</em>, on your best day.
             </h2>
             <p style={{ fontSize: 16, lineHeight: 1.65, color: 'var(--muted)', maxWidth: 360 }}>
-              Board-certified physicians available today — no waiting rooms, no commute, no hassle.
+              Nurse practitioner-led injectables, skincare, laser and wellness — in the clinic, or by video.
             </p>
 
             {/* Trust items */}
             <div style={{ marginTop: 48, display: 'flex', flexDirection: 'column', gap: 16 }}>
               {[
-                ['✓', 'Licensed physicians in all 50 states'],
-                ['✓', 'HIPAA-secure video visits'],
-                ['✓', 'Same-day appointments available'],
+                ['✓', 'Led by Mónika Jáuregui, DNP, CANS, FNP-C'],
+                ['✓', 'HIPAA-secure records and video visits'],
+                ['✓', 'Book online in about a minute'],
               ].map(([check, text]) => (
                 <div key={text} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                   <span style={{ width: 22, height: 22, borderRadius: '50%', border: '1.5px solid var(--teal)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, color: 'var(--teal)', flexShrink: 0 }}>{check}</span>
@@ -101,7 +101,7 @@ function LoginInner() {
 
           {/* Bottom */}
           <p style={{ fontSize: 12, color: 'var(--muted)', position: 'relative', zIndex: 1 }}>
-            © 2026 CareMD · HIPAA Compliant · 256-bit Encrypted
+            © 2026 The Labo Clinic · HIPAA Compliant · 256-bit Encrypted
           </p>
         </div>
       </div>

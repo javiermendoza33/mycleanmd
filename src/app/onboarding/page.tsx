@@ -203,8 +203,8 @@ export default function OnboardingPage() {
               {/* SMS opt-ins */}
               <div style={{ marginTop: 28, display: 'flex', flexDirection: 'column', gap: 16 }}>
                 {[
-                  { val: smsUpdates, set: setSmsUpdates, label: 'I agree to receive order and account updates via SMS from CareMD.' },
-                  { val: smsPromo,   set: setSmsPromo,   label: 'I agree to receive promotional messages via SMS from CareMD.' },
+                  { val: smsUpdates, set: setSmsUpdates, label: 'I agree to receive order and account updates via SMS from The Labo Clinic.' },
+                  { val: smsPromo,   set: setSmsPromo,   label: 'I agree to receive promotional messages via SMS from The Labo Clinic.' },
                 ].map((item, i) => (
                   <button key={i} onClick={() => item.set(!item.val)}
                     style={{ display: 'flex', alignItems: 'flex-start', gap: 14, background: 'none', border: 'none', cursor: 'pointer', padding: 0, textAlign: 'left' }}>

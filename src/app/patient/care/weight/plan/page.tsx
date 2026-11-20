@@ -57,7 +57,7 @@ export default function WeightPlanPage() {
 
         {/* Headline */}
         <h1 style={{ fontSize: 28, fontWeight: 800, color: FOREST, lineHeight: 1.25, marginBottom: 26, letterSpacing: -0.5 }}>
-          Join a community of members who have transformed their health with CareMD.
+          Join a community of members who have transformed their health with The Labo Clinic.
         </h1>
 
         {/* Feature checklist */}

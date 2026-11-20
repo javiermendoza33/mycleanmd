@@ -11,15 +11,15 @@
  */
 export const BRAND = {
   /** Full name, for metadata, legal lines and prose */
-  name: 'MyCleanMD',
+  name: 'The Labo Clinic',   // Nov 19 2026 (Javier: "CareMD and MyCleanMD should always read TheLaboClinic")
   /** Small uppercase line above the wordmark */
-  prefix: 'My',
+  prefix: 'The',
   /** Italic, teal half of the wordmark */
-  nameItalic: 'Clean',
+  nameItalic: 'Labo',
   /** Bold, ink half of the wordmark */
-  nameBold: 'MD',
-  tagline: 'Medical weight loss with GLP-1 prescriptions, delivered to your door.',
-  title: 'MyCleanMD — Telehealth Portal',
+  nameBold: 'Clinic',
+  tagline: 'Injectables, skincare, laser and wellness in Seattle — and care by video.',
+  title: 'The Labo Clinic — Portal',
   domain: 'mycleanmd.com',
 } as const
 

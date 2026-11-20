@@ -74,7 +74,7 @@ function patientHtml(name: string, careType: string, answers: Record<string, unk
         <tr><td style="padding:24px 40px;border-top:1px solid #F3F4F6;">
           <p style="margin:0;font-size:12px;color:#9CA3AF;line-height:1.6;">
             Questions? Reply to this email or message your care team from the portal.<br>
-            CareMD · Not for emergencies — call 911 for life-threatening conditions.
+            The Labo Clinic · Not for emergencies — call 911 for life-threatening conditions.
           </p>
         </td></tr>
 
@@ -139,7 +139,7 @@ function adminHtml(patientName: string, patientEmail: string, careType: string, 
         </td></tr>
 
         <tr><td style="padding:20px 40px;border-top:1px solid #F3F4F6;">
-          <p style="margin:0;font-size:12px;color:#9CA3AF;">CareMD Admin Alerts · xeebihealth.vercel.app</p>
+          <p style="margin:0;font-size:12px;color:#9CA3AF;">The Labo Clinic · Admin alerts</p>
         </td></tr>
 
       </table>

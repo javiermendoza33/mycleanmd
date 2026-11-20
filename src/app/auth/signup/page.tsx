@@ -56,7 +56,7 @@ function SignupInner() {
       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '48px 64px', background: 'var(--sidebar-bg)', borderRight: '1px solid var(--divider)' }}>
         {/* Logo */}
         <Link href="/" style={{ textDecoration: 'none', fontSize: 22, fontWeight: 700, color: '#fff', marginBottom: 64, display: 'block' }}>
-          <em style={{ fontStyle: 'italic', fontWeight: 400, color: 'var(--teal)' }}>Care</em>MD
+          <em style={{ fontStyle: 'italic', fontWeight: 400, color: 'var(--teal)' }}>The Labo</em> Clinic
         </Link>
 
         <p style={{ fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--teal)', fontWeight: 600, marginBottom: 20 }}>
@@ -86,7 +86,7 @@ function SignupInner() {
           ))}
         </div>
 
-        <p style={{ marginTop: 64, fontSize: 12, color: 'var(--muted)' }}>© 2026 CareMD · HIPAA Compliant</p>
+        <p style={{ marginTop: 64, fontSize: 12, color: 'var(--muted)' }}>© 2026 The Labo Clinic · HIPAA Compliant</p>
       </div>
 
       {/* RIGHT — Form */}

@@ -539,14 +539,14 @@ export default function WeightIntakePage() {
               <p style={{ fontSize: 14, color: NAVY, lineHeight: 1.7, marginBottom: 10, fontStyle: 'italic' }}>
                 &ldquo;I felt heard and supported every step of the way. Down 27 lbs in 5 months.&rdquo;
               </p>
-              <span style={{ fontSize: 13, fontWeight: 600, color: MUTED }}>— Kristina F., CareMD member</span>
+              <span style={{ fontSize: 13, fontWeight: 600, color: MUTED }}>— Kristina F., The Labo Clinic member</span>
             </div>
 
             {/* How membership works */}
             <h2 style={{ fontSize: 15, fontWeight: 700, color: NAVY, marginBottom: 14 }}>How the membership works</h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 40 }}>
               {[
-                { icon: '🩺', title: 'CareMD Membership', sub: 'Provider visits and unlimited messaging' },
+                { icon: '🩺', title: 'The Labo Clinic Membership', sub: 'Provider visits and unlimited messaging' },
                 { icon: '💊', title: 'Medication orders', sub: 'Billed separately; approval required' },
               ].map(item => (
                 <div key={item.title} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '16px 20px', border: `1px solid ${BORDER}`, borderRadius: 14 }}>
