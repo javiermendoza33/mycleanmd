@@ -46,11 +46,11 @@ export default function LaboHome() {
       <div className="promo"><div className="wrap"><span>{SHOP.promo}</span><span className="sep">·</span><span>Free shipping on skincare orders over ${SHOP.freeShippingOver}</span></div></div>
       <header className="site">
         <div className="wrap bar">
-          <a className="brand" href="#top">{PRACTICE.name}</a>
+          <a className="brand" href="#top" style={{ marginRight: 0 }}>{PRACTICE.name}</a>
+          <a className="more" href={`https://${METHOD.domain}`} style={{ fontSize: ".78rem", marginRight: "auto" }}>Telehealth</a>
           <nav className="main" aria-label="Sections">
             {NAV.map((l) => <Link key={l.href} href={l.href}>{l.label}</Link>)}
           </nav>
-          <a className="more" href={`https://${METHOD.domain}`} style={{ fontSize: ".78rem" }}>{METHOD.name}</a>
           <BagLink />
           <Link className="btn btn-primary btn-sm" href="/booking">Book now</Link>
           <MobileNav />

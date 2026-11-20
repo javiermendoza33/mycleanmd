@@ -26,13 +26,16 @@ export function Header() {
     <div className="promo"><div className="wrap"><span>{SHOP.promo}</span><span className="sep">·</span><span>Free shipping on skincare orders over ${SHOP.freeShippingOver}</span></div></div>
     <header className="site">
       <div className="wrap bar">
-        <Link className="brand" href="/" aria-label={`${PRACTICE.name} — home`}>{PRACTICE.name}</Link>
+        {/* .brand's own CSS has margin-right:auto (pushes the rest of the row right) — cancelled here
+            and moved onto the Telehealth link instead, so Telehealth sits flush next to the wordmark
+            (Javier's ask) and still pushes nav/Bag/Book-now to the right edge like every other header. */}
+        <Link className="brand" href="/" aria-label={`${PRACTICE.name} — home`} style={{ marginRight: 0 }}>{PRACTICE.name}</Link>
+        <a className="more" href={`https://${METHOD.domain}`} style={{ fontSize: ".78rem", marginRight: "auto" }}>Telehealth</a>
         <nav className="main" aria-label="Primary">
           {NAV.map((l) => (
             <Link key={l.href} href={l.href} className={pathname === l.href || pathname.startsWith(l.href + "/") ? "on" : undefined}>{l.label}</Link>
           ))}
         </nav>
-        <a className="more" href={`https://${METHOD.domain}`} style={{ fontSize: ".78rem" }}>{METHOD.name}</a>
         <BagLink />
         <Link className="btn btn-primary btn-sm" href="/booking">Book now</Link>
         <MobileNav />
