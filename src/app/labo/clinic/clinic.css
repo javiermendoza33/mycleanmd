@@ -1,0 +1,35 @@
+/* The clinic portal skin (Nov 19 2026, Javier: "same with admin portal… we will start to re-brand all"): the provider
+   portal's layout with the storefront's paper, red-clay and Outfit instead of Apple grey and blue. Layered after
+   provider.css on [data-provider][data-clinicp]. */
+[data-provider][data-clinicp]{--bg:#F8F4EE;--card:#FFFFFF;--ink:#161412;--ink2:#3E3935;--mute:#7A726A;--faint:#9A9088;--line:rgba(31,27,24,.14);--blue:#C8432A;--em:#C8432A;--gold:#FFF8F2;--red:#B3261E;--chip:#F1EAE1;
+  font-family:var(--font-clinic),var(--font-inter),-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif}
+[data-provider][data-clinicp] .side{background:#FFFFFF;border-right:1px solid var(--line)}
+[data-provider][data-clinicp] .brand i{background:var(--blue);color:#FFF8F2;border-radius:6px}
+[data-provider][data-clinicp] .brand b{color:var(--blue);font-weight:800;letter-spacing:-.02em}
+[data-provider][data-clinicp] .nav a{border-radius:6px}
+[data-provider][data-clinicp] .nav a.on{background:var(--chip);color:var(--ink)}
+[data-provider][data-clinicp] .nav a .n{background:var(--blue)}
+[data-provider][data-clinicp] .av{background:linear-gradient(135deg,#E0A48F,#C8432A)}
+[data-provider][data-clinicp] .top h1{font-weight:800;letter-spacing:-.03em}
+[data-provider][data-clinicp] .btn{border-radius:6px;background:var(--blue);color:#fff}
+[data-provider][data-clinicp] .btn:hover{background:#A9341F}
+[data-provider][data-clinicp] .btn.l{background:#fff;color:var(--ink);border:1px solid var(--line)}
+[data-provider][data-clinicp] .btn.l:hover{background:var(--chip)}
+[data-provider][data-clinicp] .btn.r{background:#fff;color:var(--red);border:1px solid #E8C2BE}
+[data-provider][data-clinicp] .card{border-radius:8px;border:1px solid var(--line)}
+[data-provider][data-clinicp] .card h3 a{color:var(--blue)}
+[data-provider][data-clinicp] .kpi .v{font-weight:800;letter-spacing:-.04em}
+[data-provider][data-clinicp] .pill{border-radius:4px;letter-spacing:.02em}
+[data-provider][data-clinicp] .pill.new{background:#FDE7E2;color:#A9341F}
+[data-provider][data-clinicp] .pill.ok{background:#E3EEE7;color:#1F5A3A}
+[data-provider][data-clinicp] .in,[data-provider][data-clinicp] input.in,[data-provider][data-clinicp] textarea.in,[data-provider][data-clinicp] select.in{border-radius:6px;background:#fff}
+[data-provider][data-clinicp] .in:focus{outline:2px solid var(--blue);outline-offset:1px}
+[data-provider][data-clinicp] .slot{border-radius:8px}
+[data-provider][data-clinicp] .slot.sel{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue)}
+[data-provider][data-clinicp] .cal .d{border-radius:6px}
+[data-provider][data-clinicp] .cal .d.on{background:var(--blue)}
+[data-provider][data-clinicp] .cal .d.dot::after{background:var(--blue)}
+[data-provider][data-clinicp] .tabs{border-radius:6px;background:var(--chip)}
+[data-provider][data-clinicp] .tabs .on{border-radius:4px}
+[data-provider][data-clinicp] .setup{background:#FDE7E2;color:#A9341F;border-radius:8px;padding:12px 16px;font-size:13.5px}
+[data-provider][data-clinicp] th{color:var(--mute)}

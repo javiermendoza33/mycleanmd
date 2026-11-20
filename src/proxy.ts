@@ -44,6 +44,12 @@ export async function proxy(request: NextRequest) {
     // API routes and the auth pages live at the app root and are shared by both brands — pass them
     // through untouched, otherwise the catch-all rewrite below turns /auth/login into /labo/auth/login (404).
     // Verified Nov 6 2026: login, /api/auth/providers and /api/labo/checkout all 404'd on this host before this.
+    // Nov 19 2026: the Labo hosts get their own sign-in pages in the clinic look (src/app/labo/auth/*); the callback and
+    // everything else under /auth and /api stays the shared root app.
+    if (path === '/auth/login' || path === '/auth/signup' || path === '/auth/forgot') {
+      const url = request.nextUrl.clone(); url.pathname = `/labo${path}`
+      return NextResponse.rewrite(url)
+    }
     if (path.startsWith('/api/') || path === '/auth' || path.startsWith('/auth/')) {
       return NextResponse.next({ request })
     }
