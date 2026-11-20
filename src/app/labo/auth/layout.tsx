@@ -8,6 +8,8 @@ export default function LaboAuthLayout({ children }: { children: React.ReactNode
     <div data-clinic className="auth">
       <aside className="authside">
         <Link href="/" className="brand">{PRACTICE.name}</Link>
+        {/* Nov 19 2026 (Javier: "add high res photo from library here somewhere"): the 2000×1333 portrait from the clinic's own set, framed like the home hero. */}
+        <div className="authphoto"><img src="/labo/img/misc/services-hero.jpg" alt="" aria-hidden="true" /></div>
         <div className="authcopy">
           <span className="kicker">Seattle · South Lake Union</span>
           <h1>Skin that looks like <em>you</em>, on your best day.</h1>
