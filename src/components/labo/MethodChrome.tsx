@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { METHOD, METHOD_NAV, PROGRAMS, HEALTHIE, PRACTICE, FOOTER_DISCLAIMER } from "@/labo/content";
+import { METHOD, METHOD_NAV, PROGRAMS, HEALTHIE, PRACTICE, FOOTER_DISCLAIMER, AVAILABILITY } from "@/labo/content";
 
 /**
  * Header and footer for The Labo Method (telehealth) — a SEPARATE brand from
@@ -17,6 +17,8 @@ const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
 export function MethodHeader() {
   const pathname = usePathname();
   return (
+    <>
+    <div className="promo"><div className="wrap"><span>Licensed for {AVAILABILITY} residents</span><span className="sep">·</span><span>One monthly fee — no lock-in, cancel any month</span></div></div>
     <header className="site">
       <div className="wrap bar">
         <Link className="brand" href="/" aria-label={`${METHOD.name} — home`}>{METHOD.name}</Link>
@@ -29,6 +31,7 @@ export function MethodHeader() {
         <Link className="btn btn-primary btn-sm" href="/programs">Get started</Link>
       </div>
     </header>
+    </>
   );
 }
 
