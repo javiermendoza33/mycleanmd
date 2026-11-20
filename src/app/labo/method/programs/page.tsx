@@ -23,6 +23,9 @@ export default function ProgramsIndexPage() {
           </p>
         </div>
       </header>
+      <section style={{ paddingBlock: 0 }}>
+        <div className="wrap"><div className="band" style={{ marginTop: 44 }}><img src="/labo/img/misc/testimonials.jpg" alt="A diverse group of women standing close together" /></div></div>
+      </section>
 
       <section>
         <div className="wrap">
