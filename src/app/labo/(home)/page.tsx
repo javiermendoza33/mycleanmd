@@ -6,7 +6,7 @@ import { CLINIC, HEALTHIE, LASER_SPECS, NAV, PRACTICE, PROGRAMS } from "@/labo/c
 import { services } from "@/labo/clinic/services";
 import { testimonials } from "@/labo/clinic/testimonials";
 import { CLINIC_SITE } from "@/labo/clinic/site";
-import { bestSellers, SHOP } from "@/labo/clinic/products";
+import { bestSellers, ownLine, SHOP } from "@/labo/clinic/products";
 import MobileNav from "@/components/labo/MobileNav";
 import BagLink from "@/components/labo/shop/BagLink";
 import { ProductCard } from "@/components/labo/shop/ProductCard";
@@ -90,6 +90,14 @@ export default function LaboHome() {
             <div className="rowhead"><h2>Best sellers</h2><Link className="more" href="/shop">Shop all</Link></div>
             <div className="pgrid">{bestSellers.map((p) => <ProductCard key={p.slug} p={p} />)}</div>
             <p className="note">{SHOP.shipsTo}.{!SHOP.pricesConfirmed && " Pricing is being finalized — text us for today's price."}</p>
+          </div>
+        </section>
+
+        {/* ── OUR OWN LINE (Nov 20 2026) ───────────────────────────────── */}
+        <section className="grey" style={{ paddingBlock: 64 }}>
+          <div className="wrap">
+            <div className="rowhead"><div><span className="kicker">Made for us · The Labo Clinic skincare</span><h2 style={{ marginTop: 8 }}>Our own line.</h2></div><Link className="more" href="/shop?line=The%20Labo%20Clinic">See the line</Link></div>
+            <div className="pgrid">{ownLine.slice(0, 4).map((p) => <ProductCard key={p.slug} p={p} />)}</div>
           </div>
         </section>
 

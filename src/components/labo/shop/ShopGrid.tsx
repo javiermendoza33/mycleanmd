@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { CONCERNS, TYPES, type Concern, type Product, type ProductType } from "@/labo/clinic/products";
+import { CONCERNS, LINES, TYPES, type Concern, type Product, type ProductType } from "@/labo/clinic/products";
 import { ProductCard } from "./ProductCard";
 
 /** /shop — filter chips by type and concern (facile's Type / Concern menus, flattened to one row), then the boxed grid.
@@ -9,15 +9,22 @@ import { ProductCard } from "./ProductCard";
 export default function ShopGrid({ products }: { products: Product[] }) {
   const [type, setType] = useState<ProductType | "">("");
   const [concern, setConcern] = useState<Concern | "">("");
+  const [line, setLine] = useState<string>("");
   useEffect(() => {
     const q = new URLSearchParams(window.location.search);
-    const c = q.get("c"), t = q.get("t");
+    const c = q.get("c"), t = q.get("t"), l = q.get("line");
+    if (l && (LINES as readonly string[]).includes(l)) setLine(l);
     if (c && (CONCERNS as string[]).includes(c)) setConcern(c as Concern);
     if (t && (TYPES as string[]).includes(t)) setType(t as ProductType);
   }, []);
-  const list = products.filter((p) => (!type || p.type === type) && (!concern || p.concerns.includes(concern)));
+  const list = products.filter((p) => (!type || p.type === type) && (!concern || p.concerns.includes(concern)) && (!line || p.line === line));
   return (
     <>
+      <div className="chips" role="group" aria-label="Filter by line">
+        <span className="kicker">Line</span>
+        <button type="button" className={!line ? "on" : ""} onClick={() => setLine("")}>All</button>
+        {LINES.map((l) => <button key={l} type="button" className={line === l ? "on" : ""} onClick={() => setLine(line === l ? "" : l)}>{l === "The Labo Clinic" ? "Our own line" : l}</button>)}
+      </div>
       <div className="chips" role="group" aria-label="Filter by type">
         <span className="kicker">Type</span>
         <button type="button" className={!type ? "on" : ""} onClick={() => setType("")}>All</button>

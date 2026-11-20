@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const ALL: [string, string, string, boolean][] = [
-  ["/clinic", "◎", "Today", false], ["/clinic/calendar", "▦", "Calendar", false], ["/clinic/appointments", "☰", "Appointments", false], ["/clinic/customers", "◯", "Customers", false],
+  ["/clinic", "◎", "Today", false], ["/clinic/calendar", "▦", "Calendar", false], ["/clinic/appointments", "☰", "Appointments", false], ["/clinic/customers", "◯", "Customers", false], ["/clinic/orders", "▣", "Orders", false],
   ["/clinic/schedule", "◷", "Hours & time off", false], ["/clinic/services", "✎", "Services & prices", true], ["/clinic/team", "⚙", "Team", true],
 ];
 export default function ClinicNav({ admin }: { admin: boolean }) {

@@ -33,6 +33,8 @@ export interface Product {
   actives: string[];
   bestSeller?: boolean;
   image?: { src: string; alt: string };
+  /** The clinic's own private-label line (Selfnamed-made, dropshipped under the clinic's name) */
+  own?: boolean;
 }
 
 export const SHOP = {
@@ -50,6 +52,34 @@ export const CONCERNS: Concern[] = ["Acne", "Aging", "Dryness", "Sensitive", "Pi
 export const TYPES: ProductType[] = ["Cleanser", "Exfoliant", "Serum", "Moisturizer", "Sunscreen", "Eyes"];
 
 export const products: Product[] = [
+  // ── The Labo Clinic's own line (Nov 20 2026, Javier: "working on white label for Labo… selfnamed.com") ──────────────
+  // Private-label formulas from Selfnamed (made in the EU, US orders ship from Charlotte NC in 2–5 days, no minimum,
+  // dropshipped one unit at a time). Names, prices and copy are placeholders until Monika picks her formulas from the
+  // sample set; photos come from Selfnamed's packshot mockups once the labels are designed.
+  { slug: "labo-vitamin-c-serum", name: "Vitamin C Glow Serum", line: "The Labo Clinic", lineShort: "Labo", own: true,
+    type: "Serum", concerns: ["Pigment", "Aging"], form: "bottle", tone: "#F2E3D5", label: "Vitamin C Glow", size: "1 oz · 30 mL", price: 58, bestSeller: true,
+    tagline: "Our own daily brightener.", blurb: "A stabilized vitamin C serum made for us, to even tone and bring back the glow between treatments. Light enough for every morning, under sunscreen.",
+    how: ["Every morning on clean skin", "Three to four drops over the face and neck", "Follow with moisturizer and sunscreen"], actives: ["Vitamin C", "Hyaluronic acid", "Vitamin E"] },
+  { slug: "labo-hydrating-serum", name: "Deep Hydration Serum", line: "The Labo Clinic", lineShort: "Labo", own: true,
+    type: "Serum", concerns: ["Dryness", "Sensitive"], form: "bottle", tone: "#D9E6E9", label: "Deep Hydration", size: "1 oz · 30 mL", price: 52,
+    tagline: "Multi-weight hyaluronic acid, our formula.", blurb: "Three weights of hyaluronic acid pull water into every layer of the skin. The serum we recommend after laser and peels, when skin needs calm hydration more than anything.",
+    how: ["Morning and night on damp skin", "Press in, don't rub", "Seal with moisturizer"], actives: ["Hyaluronic acid ×3", "Panthenol", "Aloe"] },
+  { slug: "labo-retinal-night", name: "Retinol-Alternative Night Serum", line: "The Labo Clinic", lineShort: "Labo", own: true,
+    type: "Serum", concerns: ["Aging", "Acne"], form: "bottle", tone: "#CFC6D8", label: "Night Renewal", size: "1 oz · 30 mL", price: 64,
+    tagline: "Bakuchiol smoothing, without the peel.", blurb: "A plant-based retinol alternative for fine lines, texture and breakouts, gentle enough for nightly use and for skin that can't tolerate retinoids.",
+    how: ["Nightly on clean skin", "Two to three drops", "Moisturizer on top; sunscreen in the morning"], actives: ["Bakuchiol", "Niacinamide", "Squalane"] },
+  { slug: "labo-gentle-cleanser", name: "Gentle Daily Cleanser", line: "The Labo Clinic", lineShort: "Labo", own: true,
+    type: "Cleanser", concerns: ["Sensitive", "Dryness"], form: "tube", tone: "#E6EEE8", label: "Daily Cleanser", size: "5 oz · 150 mL", price: 34,
+    tagline: "The first step of every routine we write.", blurb: "A low-foam, fragrance-free cleanser that removes sunscreen and the day without stripping. Safe the morning after treatments.",
+    how: ["Morning and night", "Massage over damp skin, rinse", "Pat dry"], actives: ["Glycerin", "Oat extract", "Chamomile"] },
+  { slug: "labo-mineral-spf", name: "Everyday Mineral SPF 30", line: "The Labo Clinic", lineShort: "Labo", own: true,
+    type: "Sunscreen", concerns: ["Pigment", "Aging", "Sensitive"], form: "tube", tone: "#EFE2CF", label: "Mineral SPF 30", size: "1.7 oz · 50 mL", price: 42, bestSeller: true,
+    tagline: "The sunscreen we actually wear.", blurb: "Zinc-based broad-spectrum protection with a sheer finish, made for us. The non-negotiable step after any pigment, laser or retinoid plan.",
+    how: ["Every morning, last step", "Reapply every two hours outdoors"], actives: ["Zinc oxide", "Vitamin E", "Green tea"] },
+  { slug: "labo-peptide-eye", name: "Peptide Eye Cream", line: "The Labo Clinic", lineShort: "Labo", own: true,
+    type: "Eyes", concerns: ["Aging", "Dryness"], form: "jar", tone: "#E8D6D0", label: "Peptide Eye", size: "0.5 oz · 15 mL", price: 46,
+    tagline: "Peptides and caffeine for tired eyes.", blurb: "A light eye cream for fine lines, puffiness and the under-eye crepiness that shows up first.",
+    how: ["Morning and night", "A rice-grain amount patted around the orbital bone"], actives: ["Peptides", "Caffeine", "Hyaluronic acid"] },
   {
     slug: "skinbetter-alto-advanced", name: "Alto Advanced Defense and Repair Serum", line: "skinbetter science", lineShort: "skinbetter",
     type: "Serum", concerns: ["Aging", "Pigment"], form: "bottle", tone: "#D9C7B2", label: "Alto Advanced", size: "1 oz · 30 mL", price: 180, bestSeller: true,
@@ -149,5 +179,7 @@ export const products: Product[] = [
 ];
 
 export const bestSellers = products.filter((p) => p.bestSeller);
+export const ownLine = products.filter((p) => p.own);
+export const LINES = ["The Labo Clinic", "skinbetter science", "Alastin Skincare", "SkinMedica"] as const;
 export const getProduct = (slug: string) => products.find((p) => p.slug === slug);
 export const money = (n: number) => `$${n.toFixed(n % 1 ? 2 : 0)}`;

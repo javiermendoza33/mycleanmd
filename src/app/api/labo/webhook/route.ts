@@ -31,7 +31,26 @@ export async function POST(req: NextRequest) {
     const session = event.data.object as Stripe.Checkout.Session
     // Nov 19 2026: shop orders (the skincare bag, /api/labo/shop/checkout) carry kind:"shop" — nothing to enrol, Stripe's own
     // dashboard + receipt emails are the order record for now. Acknowledge and move on.
-    if (session.metadata?.kind === 'shop') return NextResponse.json({ ok: true })
+    if (session.metadata?.kind === 'shop') {
+      // Nov 20 2026: record the shop order for the clinic team (/clinic/orders); own-line items are then placed with Selfnamed.
+      try {
+        const items = await stripe.checkout.sessions.listLineItems(session.id, { limit: 100, expand: ['data.price.product'] })
+        const lines = items.data.map((li) => { const prod = li.price?.product as Stripe.Product | string | null; const meta = prod && typeof prod === 'object' ? prod.metadata : {}; return { slug: meta?.slug ?? '', name: li.description ?? '', qty: li.quantity ?? 1, unit: (li.price?.unit_amount ?? 0) / 100, own: String(meta?.slug ?? '').startsWith('labo-') } })
+        // Stripe moved shipping_details under collected_information in newer API versions; read either.
+        const sx = session as unknown as { collected_information?: { shipping_details?: { name?: string; address?: Record<string, string> } }; shipping_details?: { name?: string; address?: Record<string, string> } }
+        const ship = sx.collected_information?.shipping_details ?? sx.shipping_details ?? session.customer_details
+        const pickup = (session.shipping_cost?.amount_total ?? 0) === 0 && /pick/i.test(String((session as unknown as { shipping_cost?: { shipping_rate?: { display_name?: string } } }).shipping_cost?.shipping_rate?.display_name ?? ''))
+        const { error } = await createAdminClient().from('labo_orders').upsert({
+          stripe_session_id: session.id, stripe_payment_id: typeof session.payment_intent === 'string' ? session.payment_intent : session.payment_intent?.id ?? null,
+          status: 'paid', fulfillment: pickup ? 'pickup' : 'ship',
+          name: ship?.name ?? session.customer_details?.name ?? null, email: session.customer_details?.email ?? null, phone: session.customer_details?.phone ?? null,
+          ship_to: ship?.address ?? null, items: lines,
+          subtotal: (session.amount_subtotal ?? 0) / 100, shipping: (session.shipping_cost?.amount_total ?? 0) / 100, tax: (session.total_details?.amount_tax ?? 0) / 100, total: (session.amount_total ?? 0) / 100, currency: session.currency ?? 'usd',
+        }, { onConflict: 'stripe_session_id' })
+        if (error) console.error('labo_orders upsert error:', error)
+      } catch (e) { console.error('shop order record failed:', e) }
+      return NextResponse.json({ ok: true })
+    }
     const programSlug = session.metadata?.programSlug
     const userId = session.metadata?.userId || session.client_reference_id || null
 
