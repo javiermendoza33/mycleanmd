@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Eyebrow, ClosingCTA } from "@/components/labo/Sections";
 import { PROGRAMS, AVAILABILITY, METHOD, PRACTICE } from "@/labo/content";
 import { posts } from "@/labo/method/posts";
+import HeroVideo from "@/components/labo/HeroVideo";
 import Gate from "./Gate";
 
 /** The 4 program-evidence articles, one per program, in program order — the
@@ -17,11 +18,14 @@ const JOURNAL_TEASER = [
 /**
  * Nov 19 2026: ported onto the Clinic's own storefront hero pattern (split
  * hero, type left / photo right) instead of the plain White Room PageHero,
- * per Javier's ask to give Method "the same feel and look as Clinic." Photo
- * is `misc/cta-bg.jpg` — the library has no hormone/weight/peptide-specific
- * shot (it's all Skin Haven's aesthetics content), so this is the closest
- * match for photographic QUALITY (same studio-portrait bar as the clinic's
- * own hero/about photos) rather than exact subject match.
+ * per Javier's ask to give Method "the same feel and look as Clinic."
+ * Nov 20 2026: the still photo (misc/cta-bg.jpg, a generic skincare shot —
+ * the library has no hormone/weight/peptide content) was swapped for a real
+ * clip Javier supplied (iStock-1396059447, an active woman jogging) — a much
+ * closer match for a hormone/weight/energy program than a static beauty
+ * portrait. Re-encoded to web H.264 (desktop 1280w ~2.2Mbps, mobile 720w
+ * ~520kbps, no audio) via `HeroVideo`, same fade-in-over-its-own-first-frame
+ * pattern as the Clinic's own hero.
  */
 export default function MethodHome() {
   return (
@@ -38,7 +42,11 @@ export default function MethodHome() {
             </div>
           </div>
           <div className="fmedia">
-            <img className="still" src="/labo/img/misc/cta-bg.jpg" alt="" aria-hidden="true" />
+            <HeroVideo
+              desktopSrc="/labo/img/method/hero.mp4"
+              mobileSrc="/labo/img/method/hero-mobile.mp4"
+              poster="/labo/img/method/hero-poster.jpg"
+            />
           </div>
         </div>
       </section>

@@ -1052,6 +1052,8 @@
 [data-labo] [data-clinic][data-method] .fhero .btn-ghost:hover{background:rgba(44,53,57,.08)}
 [data-labo] [data-clinic][data-method] .fhero .btn-primary{background:#2C3539;color:#FFFFFF}
 [data-labo] [data-clinic][data-method] .fhero .btn-primary:hover{background:#20262A}
+[data-labo] [data-clinic][data-method] .fmedia{border-left-color:rgba(44,53,57,.35)}
+@media (max-width:860px){[data-labo] [data-clinic][data-method] .fmedia{border-bottom-color:rgba(44,53,57,.35)}}
 
 /* .cards defaults to 3 columns (labo.css line ~522) — .cols4 is for a row that always has exactly
    4 items (the Method homepage's journal teaser), so it gets its own column count at each breakpoint
