@@ -46,7 +46,7 @@ export default function TreatmentsPage() {
       <section className="pageh">
         <div className="wrap">
           <span className="kicker">Laser &amp; aesthetics · {CLINIC.city}</span>
-          <h1>Treatments.</h1>
+          <h1>Treatments</h1>
           <p className="sub">Laser on the {CLINIC.device}, injectables and skin treatments. Each begins with a consultation and an exam.</p>
           {GROUP_KEYS.map((g) => (
             <nav className="txjump" aria-label={GROUPS[g]} key={g}>
