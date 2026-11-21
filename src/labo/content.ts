@@ -378,7 +378,7 @@ export const ABOUT = {
    *  practice accepts patients. See the licensure note at the top of the file. */
   credentials: [
     { label: "Credential", value: "DNP, MSN, PHN, NP-C — Family Nurse Practitioner" },
-    { label: "Licensure", value: "Washington" },
+    { label: "Licensure", value: "Washington, plus 10 additional states" },
     { label: "Doctorate", value: "Doctor of Nursing Practice, Aspen University, 2025" },
     { label: "Graduate", value: "MSN, Family Nurse Practitioner, Cal State Long Beach, 2014" },
     { label: "Certification", value: "American Academy of Nurse Practitioners, cert. F0415015" },
