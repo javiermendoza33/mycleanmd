@@ -1054,6 +1054,13 @@
 [data-labo] [data-clinic][data-method] .fhero .btn-primary:hover{background:#20262A}
 [data-labo] [data-clinic][data-method] .fmedia{border-left-color:rgba(44,53,57,.35)}
 @media (max-width:860px){[data-labo] [data-clinic][data-method] .fmedia{border-bottom-color:rgba(44,53,57,.35)}}
+/* Nov 20 2026, Javier: "i think it should be all the way to the end" — the Clinic keeps its hero photo
+   "boxed" inside the shared .fgrid's 1240px container on purpose (facile pattern), but Method's video should
+   bleed to the real right edge of the window. Desktop only (min-width above the stacked-layout breakpoint at
+   860px) — mobile keeps the Clinic's existing centered/boxed .fgrid untouched. */
+@media (min-width:861px){
+  [data-labo] [data-clinic][data-method] .fhero .fgrid{max-width:none;padding-inline:0;padding-left:max(22px,calc((100vw - 1240px)/2 + 22px))}
+}
 
 /* .cards defaults to 3 columns (labo.css line ~522) — .cols4 is for a row that always has exactly
    4 items (the Method homepage's journal teaser), so it gets its own column count at each breakpoint
