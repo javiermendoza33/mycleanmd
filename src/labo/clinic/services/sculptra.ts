@@ -46,11 +46,11 @@ export const service: Service = {
       ],
     },
   ],
-  // Nov 21 2026: was services/sculptra.jpg, the same photo used for the hero band on the
-  // /services index page (Monika: "duplicate photo... just pick from library") — swapped to
-  // an existing library photo not shown elsewhere on this page.
+  // Nov 21 2026: was services/sculptra.jpg (the same photo as the /services index hero band —
+  // Monika flagged the duplicate), briefly misc/cta-bg.jpg, now Javier's own supplied photo
+  // (iStock-1297633362), saved under its own filename so it never collides with the hero band.
   image: {
-    src: "/labo/img/misc/cta-bg.jpg",
+    src: "/labo/img/services/sculptra-card.jpg",
     alt: "Glowing, lifted skin after a Sculptra treatment at The Labo Clinic in Seattle, WA",
   },
   seo: {
