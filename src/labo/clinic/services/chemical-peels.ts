@@ -67,9 +67,10 @@ export const service: Service = {
       ],
     },
   ],
+  // Nov 21 2026: Javier's own supplied photo (iStock-1254805878), replacing the stock clay-mask image.
   image: {
-    src: "/labo/img/services/chemical-peels.jpg",
-    alt: "Chemical peel treatment being applied to a client's face at The Labo Clinic",
+    src: "/labo/img/services/chemical-peels-card.jpg",
+    alt: "Glowing, refreshed skin after a chemical peel treatment at The Labo Clinic in Seattle, WA",
   },
   seo: {
     title: "Best Chemical Peels in Seattle, WA | Improve Skin's Texture",
