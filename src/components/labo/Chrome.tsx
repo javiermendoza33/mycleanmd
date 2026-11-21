@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { NAV, PROGRAMS, PRACTICE, HEALTHIE, TREATMENTS, FOOTER_DISCLAIMER } from "@/labo/content";
+import { NAV, PROGRAMS, PRACTICE, HEALTHIE, TREATMENTS, FOOTER_DISCLAIMER, METHOD } from "@/labo/content";
 import { services } from "@/labo/clinic/services";
 import { CLINIC_SITE } from "@/labo/clinic/site";
 import MobileNav from "@/components/labo/MobileNav";
@@ -26,7 +26,15 @@ export function Header() {
     <div className="promo"><div className="wrap"><span>{SHOP.promo}</span><span className="sep">·</span><span>Free shipping on skincare orders over ${SHOP.freeShippingOver}</span></div></div>
     <header className="site">
       <div className="wrap bar">
-        <Link className="brand" href="/" aria-label={`${PRACTICE.name} — home`}>{PRACTICE.name}</Link>
+        {/* .brand's own CSS has margin-right:auto (pushes the rest of the row right) — cancelled here
+            and moved onto the Telehealth link instead, so Telehealth sits flush next to the wordmark
+            (Javier's ask) and still pushes nav/Bag/Book-now to the right edge like every other header. */}
+        <Link className="brand" href="/" aria-label={`${PRACTICE.name} — home`} style={{ marginRight: 0 }}>{PRACTICE.name}</Link>
+        {/* Javier: "same style font as The Labo Clinic, and maybe make it in purple" — matches .brand's
+            own cascade (Outfit, 800, tight tracking) via inline style, keeps .more's underline + "›" for
+            the nav affordance, both recoloured to Method's purple (clinic's own --accent stays clay here). */}
+        <a className="more" href={`https://${METHOD.domain}`}
+           style={{ fontFamily: "var(--font-clinic)", fontWeight: 800, letterSpacing: "-.02em", fontSize: "1.05rem", color: METHOD.accent, textDecorationColor: METHOD.accent, marginRight: "auto" }}>Telehealth</a>
         <nav className="main" aria-label="Primary">
           {NAV.map((l) => (
             <Link key={l.href} href={l.href} className={pathname === l.href || pathname.startsWith(l.href + "/") ? "on" : undefined}>{l.label}</Link>
@@ -66,12 +74,12 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <h5>Telehealth</h5>
+            <h5>{METHOD.name} ↗</h5>
             <ul>
-              {PROGRAMS.map((p) => <li key={p.slug}><Link href={`/programs/${p.slug}`}>{p.name}</Link></li>)}
-              <li><Link href="/how-it-works">How it works</Link></li>
-              <li><Link href="/pricing">Pricing</Link></li>
-              <li><Link href="/faq">FAQ</Link></li>
+              {PROGRAMS.map((p) => <li key={p.slug}><a href={`https://${METHOD.domain}/programs/${p.slug}`}>{p.name}</a></li>)}
+              <li><a href={`https://${METHOD.domain}/how-it-works`}>How it works</a></li>
+              <li><a href={`https://${METHOD.domain}/pricing`}>Pricing</a></li>
+              <li><a href={`https://${METHOD.domain}/faq`}>FAQ</a></li>
               <li><a href={HEALTHIE.login} {...ext}>Patient login</a></li>
             </ul>
           </div>
@@ -92,7 +100,7 @@ export function Footer() {
           </div>
         </div>
         <div className="legal">
-          <p>© {new Date().getFullYear()} {PRACTICE.name}. All rights reserved. · <Link href="/privacy-policy">Privacy policy</Link> · <Link href="/legal">Legal</Link> · <Link href="/sms">SMS terms</Link></p>
+          <p>© {new Date().getFullYear()} {PRACTICE.name}. All rights reserved. · <Link href="/privacy-policy">Privacy policy</Link> · <a href={`https://${METHOD.domain}/legal`}>Legal</a> · <Link href="/sms">SMS terms</Link></p>
           <p>{FOOTER_DISCLAIMER}</p>
         </div>
       </div>

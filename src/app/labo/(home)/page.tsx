@@ -1,8 +1,7 @@
 import Link from "next/link";
-import Gate from "./Gate";
 import { Footer } from "@/components/labo/Chrome";
 import { BookCta, LocationCard, PartnerLogos, SectionHead, ServiceCard, TestimonialCard } from "@/components/labo/Clinic";
-import { CLINIC, HEALTHIE, LASER_SPECS, NAV, PRACTICE, PROGRAMS } from "@/labo/content";
+import { CLINIC, LASER_SPECS, NAV, PRACTICE, PROGRAMS, METHOD } from "@/labo/content";
 import { services } from "@/labo/clinic/services";
 import { testimonials } from "@/labo/clinic/testimonials";
 import { CLINIC_SITE } from "@/labo/clinic/site";
@@ -20,8 +19,6 @@ import { ProductCard } from "@/components/labo/shop/ProductCard";
  * hairline grid, shop-by-concern tiles, then Mónika, reviews, the location, the laser line, partners, telehealth
  * and the booking band. Content and photos are the clinic's own (Nov 18); the shop catalog is labo/clinic/products.ts.
  */
-const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
-
 const TELE = [
   { slug: PROGRAMS[0].slug, name: "GLP-1 weight management", note: "Semaglutide or tirzepatide, dosed against your metabolic panel." },
   { slug: PROGRAMS[1].slug, name: "Peptide therapy", note: "Recovery and repair protocols, cycled and re-tested." },
@@ -49,7 +46,9 @@ export default function LaboHome() {
       <div className="promo"><div className="wrap"><span>{SHOP.promo}</span><span className="sep">·</span><span>Free shipping on skincare orders over ${SHOP.freeShippingOver}</span></div></div>
       <header className="site">
         <div className="wrap bar">
-          <a className="brand" href="#top">{PRACTICE.name}</a>
+          <a className="brand" href="#top" style={{ marginRight: 0 }}>{PRACTICE.name}</a>
+          <a className="more" href={`https://${METHOD.domain}`}
+             style={{ fontFamily: "var(--font-clinic)", fontWeight: 800, letterSpacing: "-.02em", fontSize: "1.05rem", color: METHOD.accent, textDecorationColor: METHOD.accent, marginRight: "auto" }}>Telehealth</a>
           <nav className="main" aria-label="Sections">
             {NAV.map((l) => <Link key={l.href} href={l.href}>{l.label}</Link>)}
           </nav>
@@ -193,21 +192,25 @@ export default function LaboHome() {
           </div>
         </section>
 
-        {/* ── TELEHEALTH — the practice's second line, gate kept ───────── */}
+        {/* ── TELEHEALTH — Nov 19 2026: split into its own brand, "The Labo
+             Method" (Javier: "a differnt model for Telehealth... Called The
+             Labo Method"). This is now just a teaser; the actual programs,
+             pricing and the eligibility gate live at method.thelabomethod.com. */}
         <section id="telehealth" className="grey">
           <div className="wrap">
             <div className="headline2">
-              <span className="kicker">Also from {PRACTICE.name} · by video</span>
+              <span className="kicker">{METHOD.name} · by video</span>
               <h2>Hormone and metabolic care, by telehealth.</h2>
-              <p className="sub" style={{ marginTop: 17, maxWidth: "52ch" }}>The same clinician, the same standard: a full lab panel before anything is prescribed.</p>
+              <p className="sub" style={{ marginTop: 17, maxWidth: "52ch" }}>The same clinician, the same standard: a full lab panel before anything is prescribed. {METHOD.name} is the telehealth side of the practice.</p>
             </div>
             <div className="tele" style={{ background: "var(--paper)" }}>
               {TELE.map((t) => (
-                <Link className="trow" key={t.slug} href={`/programs/${t.slug}`}><b>{t.name}</b><span>{t.note}</span><i aria-hidden="true">›</i></Link>
+                <a className="trow" key={t.slug} href={`https://${METHOD.domain}/programs/${t.slug}`}><b>{t.name}</b><span>{t.note}</span><i aria-hidden="true">›</i></a>
               ))}
             </div>
-            <Gate />
-            <p className="note" style={{ textAlign: "center" }}>Already a patient? <a className="more" href={HEALTHIE.login} {...ext}>Patient login</a></p>
+            <div style={{ textAlign: "center", marginTop: 30 }}>
+              <a className="btn btn-primary" href={`https://${METHOD.domain}`}>Visit {METHOD.name} ↗</a>
+            </div>
           </div>
         </section>
 

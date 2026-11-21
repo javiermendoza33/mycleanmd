@@ -48,7 +48,11 @@ export const LAUNCH_READY = false;
  * meta, /robots.txt and the sitemap.
  */
 export const CLINIC_INDEX = true;
-export const GATED = ["/programs", "/pricing", "/how-it-works", "/join", "/legal", "/faq", "/treatments"] as const;
+// Nov 19 2026: the telehealth paths (programs/pricing/how-it-works/join/legal/faq)
+// moved off this host entirely, onto method.thelabomethod.com — see METHOD below
+// and src/app/labo/method/*. Only /treatments (the clinic's own laser menu,
+// placeholder prices) is still gated on THIS host.
+export const GATED = ["/treatments"] as const;
 export const isGated = (path: string) => GATED.some((g) => path === g || path.startsWith(g + "/"));
 /** Spread into a gated page's metadata: `...GATE_ROBOTS` */
 export const GATE_ROBOTS = LAUNCH_READY ? {} : { robots: { index: false, follow: true } };
@@ -430,6 +434,35 @@ export const LEGAL = [
   { title: "Privacy", body: "Protected health information is handled in accordance with HIPAA and is stored in a HIPAA-compliant electronic health record. Email and web forms are not secure channels; do not send clinical information through them. A full privacy policy prepared by counsel will be published here before launch." },
   { title: "Emergencies", body: "This practice does not provide emergency care. If you are experiencing a medical emergency, call 911 or go to the nearest emergency department. For mental health crises, call or text 988." },
 ];
+
+/**
+ * Nov 19 2026 — THE LABO METHOD, split out as its own brand (Javier: "The Labo
+ * Clinic, which we are building now... in-store... The Labo Method... white
+ * label solution for Telehealth via Healthie"). It is its own subdomain of
+ * the same registered domain — method.thelabomethod.com, src/proxy.ts rewrites
+ * it to src/app/labo/method/* — reusing PROGRAMS/HEALTHIE/FAQ/LEGAL above
+ * rather than a new domain or the separate mycleanmd.com app (explicitly
+ * ruled out: "i dont want to use MyCleanMD").
+ */
+export const METHOD = {
+  name: "The Labo Method",
+  domain: "method.thelabomethod.com",
+  // Keep in sync with the [data-method] --accent override in labo.css — this
+  // copy is for cross-links rendered on the CLINIC's own pages (its own
+  // [data-clinic] scope has no [data-method], so var(--accent) there is
+  // still clay; a Method-coloured mention there has to be hardcoded).
+  accent: "#6E3F99",
+  tagline: "Hormone, weight and peptide care, by video.",
+  email: PRACTICE.email,
+} as const;
+
+export const METHOD_NAV = [
+  { label: "Programs", href: "/programs" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "How it works", href: "/how-it-works" },
+  { label: "Journal", href: "/blog" },
+  { label: "FAQ", href: "/faq" },
+] as const;
 
 export const FOOTER_BLURB = `Telehealth hormone, peptide and metabolic care for residents of ${AVAILABILITY}.`;
 export const FOOTER_DISCLAIMER = `Clinical services provided by a nurse practitioner licensed in ${AVAILABILITY}. This website does not provide medical advice.`;

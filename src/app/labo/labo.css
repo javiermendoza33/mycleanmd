@@ -1022,3 +1022,20 @@
 @media (max-width:820px){[data-labo] .authphoto{display:none}}
 [data-labo] [data-clinic] .chips .cchip.own{background:var(--accent);color:#fff;border-color:var(--accent)}
 [data-clinic] .addbar.soon,[data-clinic] .addbar.soon:hover{background:transparent;color:var(--muted,#8a8a8a);border-style:dashed;cursor:default;opacity:.85}
+
+/* ── The Labo Method (Nov 19 2026, Javier: "same feel and look as Clinic site but lets try purple instead
+   as color basse") ───────────────────────────────────────────────────────────────────────────────────
+   method.thelabomethod.com reuses the whole [data-clinic] storefront system above (paper, Outfit, hairline
+   boxed cards, the split hero) via this second attribute, [data-method] — only the signature colour changes.
+   Picked at a similar lightness/saturation to the clinic's clay (#C8432A) so it carries the same visual
+   weight, not a brighter/techier purple. */
+[data-labo] [data-clinic][data-method]{--accent:#6E3F99;--accent-rgb:110,63,153;--accent-tint:rgba(110,63,153,.09)}
+[data-labo] [data-clinic][data-method] .btn-primary:hover{background:#54307A}
+[data-labo] [data-clinic][data-method] .fmedia .still{object-position:72% 22%}
+
+/* .cards defaults to 3 columns (labo.css line ~522) — .cols4 is for a row that always has exactly
+   4 items (the Method homepage's journal teaser), so it gets its own column count at each breakpoint
+   instead of the 3-column default's 3→2→1 collapse. */
+[data-labo] .cards.cols4{grid-template-columns:repeat(4,1fr)}
+@media (max-width:1040px){[data-labo] .cards.cols4{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){[data-labo] .cards.cols4{grid-template-columns:1fr}}
