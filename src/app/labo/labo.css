@@ -236,7 +236,7 @@
    (Clinic: services/testimonials/blog/patient-care/contact/booking/sms/privacy; Method:
    blog/pricing/how-it-works/faq/legal), so trimming it here shrinks the hero on all of them. */
 [data-labo] .pageh{padding-block:48px 0}
-[data-labo] .pageh h1{font-size:clamp(2rem,4vw,2.9rem);letter-spacing:-.03em;margin-top:10px}
+[data-labo] .pageh h1{font-size:clamp(1.8rem,3.6vw,2.6rem);letter-spacing:-.03em;margin-top:10px}
 [data-labo] .pageh .sub{margin-top:12px;max-width:58ch}
 @media (max-width:760px){[data-labo] .pageh{padding-block:34px 0}}
 
@@ -516,9 +516,12 @@
 [data-labo] .vhero + section{background:var(--paper)}
 @media (max-width:760px){[data-labo] .vhero{padding-block:72px 110px;min-height:0}[data-labo] .vhero::before{background:linear-gradient(180deg,rgba(255,255,255,.92) 0%,rgba(255,255,255,.7) 60%,rgba(255,255,255,.55) 100%)}}
 
-[data-labo] .sechead{text-align:center;max-width:720px;margin:0 auto 44px}
+/* Nov 21 2026 (Javier: "all should be set the same way... all the way to the left instead of
+   centered") — left-aligned by default now, matching PageHero; .left is a redundant no-op kept
+   so existing `left` props still work. */
+[data-labo] .sechead{text-align:left;max-width:720px;margin:0 0 44px}
 [data-labo] .sechead h2{margin-top:15px}
-[data-labo] .sechead .sub{margin:16px auto 0;max-width:56ch}
+[data-labo] .sechead .sub{margin:16px 0 0;max-width:56ch}
 [data-labo] .sechead.left{text-align:left;margin-inline:0}
 [data-labo] .sechead.left .sub{margin-inline:0}
 [data-labo] .centre{text-align:center;margin-top:36px}
@@ -702,7 +705,7 @@
   background:var(--paper);color:var(--ink)}
 [data-labo] [data-clinic] h1,[data-labo] [data-clinic] h2{font-weight:800;letter-spacing:-.04em}
 [data-labo] [data-clinic] h1{font-size:clamp(2.5rem,5.8vw,4.3rem)}
-[data-labo] [data-clinic] h2{font-size:clamp(1.9rem,4vw,3rem)}
+[data-labo] [data-clinic] h2{font-size:clamp(1.7rem,3.6vw,2.7rem)}
 [data-labo] [data-clinic] section{padding-block:84px}
 @media (max-width:760px){[data-labo] [data-clinic] section{padding-block:56px}}
 [data-labo] [data-clinic] .btn{border-radius:6px;font-weight:600;letter-spacing:-.01em}
@@ -936,7 +939,7 @@
 [data-labo] [data-clinic]{font-family:var(--font-clinic),var(--font-inter),-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;font-size:16.5px;letter-spacing:-.01em}
 [data-labo] [data-clinic] h1,[data-labo] [data-clinic] h2,[data-labo] [data-clinic] h3,[data-labo] [data-clinic] h4{letter-spacing:-.025em;line-height:1.02}
 [data-labo] [data-clinic] h1{letter-spacing:-.03em;font-size:clamp(2.6rem,5.8vw,4.3rem)}
-[data-labo] [data-clinic] h2{font-size:clamp(1.9rem,4vw,3rem)}
+[data-labo] [data-clinic] h2{font-size:clamp(1.7rem,3.6vw,2.7rem)}
 [data-labo] [data-clinic] .sub{letter-spacing:-.01em;font-size:clamp(1.08rem,1.8vw,1.3rem)}
 [data-labo] [data-clinic] .btn,[data-labo] [data-clinic] .addbar,[data-labo] [data-clinic] .baglink,[data-labo] [data-clinic] .chips button,[data-labo] [data-clinic] .chips .cchip{font-family:inherit}
 [data-labo] [data-clinic] .brand{letter-spacing:-.02em}
