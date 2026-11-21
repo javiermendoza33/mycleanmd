@@ -46,6 +46,11 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                 <Link href="/booking" className="btn btn-primary">Book this treatment</Link>
                 {hasCare && <Link href="/patient-care" className="btn btn-ghost">Pre &amp; post care</Link>}
               </div>
+              {service.telehealthHref && (
+                <p className="sub" style={{ marginTop: 18 }}>
+                  Prefer not to come in? <a href={service.telehealthHref} target="_blank" rel="noopener noreferrer">{service.name} is also available by video through The Labo Method ↗</a>
+                </p>
+              )}
             </div>
           </div>
           <div className="frame sq"><img src={service.image.src} alt={service.image.alt} /></div>

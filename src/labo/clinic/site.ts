@@ -15,7 +15,6 @@ export const CLINIC_SITE = {
   email: PRACTICE.email,
   instagram: "https://www.instagram.com/skinhavenclinic.com/",
   shopUrl: "https://connect.skinbetter.com/skinhavenclinic",
-  queenBeeUrl: "https://www.queenbeesalonspa.com/",
   promo: "New patients receive $20 off their first aesthetic treatment",
   hours: [
     { days: "Monday – Friday", time: "10:00 am – 6:00 pm" },

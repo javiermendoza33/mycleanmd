@@ -582,9 +582,9 @@ export const TREATMENTS: Treatment[] = [
     name: "Botox & neurotoxins",
     short: "Softens frown lines, forehead lines and crow's feet.",
     treats: ["Frown lines", "Forehead lines", "Crow's feet", "Lip flip", "Jawline / masseter"],
-    wavelength: "Botox®, Dysport® or Xeomin®, dosed by the unit",
+    wavelength: "Botox® or Dysport®, dosed by the unit",
     sessions: "Results in 7 to 14 days, lasting about 3 to 4 months",
-    from: "$13", unit: " / unit",
+    from: "$16", unit: " / unit",
     body: [
       "A neurotoxin relaxes the small muscles that fold the skin into lines. Dosed well, you still look like you on a good day: rested, not frozen.",
       "We price by the unit, map the dose at your consultation, and see you at two weeks to check the result and adjust if needed.",

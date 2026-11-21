@@ -63,7 +63,6 @@ export function Footer() {
               <li><Link href="/booking">Book now</Link></li>
               <li><Link href="/shop">Shop skincare</Link></li>
               <li><a href={s.shopUrl} {...ext}>skinbetter store ↗</a></li>
-              <li><a href={s.queenBeeUrl} {...ext}>Queen Bee Spa ↗</a></li>
             </ul>
           </div>
           <div>
