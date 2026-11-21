@@ -65,7 +65,7 @@ export default function LaboHome() {
             <div className="ftext">
               <span className="kicker">Medical spa · Seattle, Where South Lake Union meets Eastlake</span>
               <h1>Skin that looks like <em>you</em>, on your best day.</h1>
-              <p className="sub">Nurse practitioner-led injectables, laser, peels and medical-grade skincare. Modern, evidence-based, and tailored to your skin, your lifestyle and the results you actually want.</p>
+              <p className="sub">A nurse practitioner&ndash;founded aesthetic clinic offering modern, evidence-based injectables, lasers, chemical peels, and medical-grade skincare&mdash;tailored to your skin, your lifestyle, and the results you actually want.</p>
               <div className="acts">
                 <Link className="btn btn-primary" href="/booking">Book a visit</Link>
                 <Link className="btn btn-ghost" href="/shop">Shop skincare</Link>
