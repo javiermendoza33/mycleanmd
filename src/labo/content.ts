@@ -384,14 +384,6 @@ export const ABOUT = {
     { label: "Certification", value: "American Academy of Nurse Practitioners, cert. F0415015" },
     { label: "Languages", value: "English, Spanish" },
   ],
-  history: [
-    { dates: "2020 –", role: "Nurse Practitioner", org: "CVS Health MinuteClinic", desc: "Clinical oversight for COVID-19 testing across retail, mobile and telemedicine settings." },
-    { dates: "2020", role: "Nurse Practitioner", org: "Kate Somerville Skin Health Experts", desc: "Bicoastal dermatology and aesthetic practice. Protocol development, injector training, NYC clinic opening." },
-    { dates: "2019", role: "Nurse Practitioner", org: "Westcoast Wound and Skincare", desc: "Direct patient care alongside hospice and home health agencies." },
-    { dates: "2016 – 2018", role: "Clinical Transplant Coordinator", org: "Cedars-Sinai Medical Center", desc: "Liver transplant team. Referral through post-transplant care, inpatient and outpatient." },
-    { dates: "2015 – 2016", role: "Surgical Nurse Practitioner", org: "Providence Saint Joseph Medical Center", desc: "Pre- and post-operative care. Managed the Bariatric Wellness Center." },
-    { dates: "2011 – 2015", role: "Clinical Nurse II", org: "Cedars-Sinai Medical Center", desc: "Neuroscience and medical-surgical ICU. Brawerman Nursing Institute residency alumna." },
-  ],
   practice: [
     { title: "Labs before prescriptions", body: "Nothing is prescribed off a questionnaire. If I do not have numbers, I do not have a plan, and neither do you." },
     { title: "One clinician", body: "You see me. Not a rotating panel, not a chatbot. Your history stays in one head and one chart." },
