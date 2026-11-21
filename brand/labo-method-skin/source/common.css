@@ -1,0 +1,12 @@
+@font-face{font-family:"Bebas Neue";src:url(fonts/BebasNeue-Regular.ttf) format("truetype");font-weight:400}
+@font-face{font-family:Montserrat;src:url(fonts/Montserrat.ttf) format("truetype");font-weight:100 900}
+:root{--ink:#2C3539;--sage:#8F9A94;--taupe:#A8A199;--white:#FFFFFF;--paper:#F3F1ED;--line:rgba(44,53,57,.35)}
+*{box-sizing:border-box}html,body{margin:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-family:Montserrat,Helvetica,Arial,sans-serif;color:var(--ink)}
+.bebas{font-family:"Bebas Neue",Impact,sans-serif;letter-spacing:.03em}
+.cap{font-size:9pt;letter-spacing:.3em;text-transform:uppercase;font-weight:500}
+.hair{border:1px solid var(--line)}
+.grid-lbl{display:grid;border:1.5px solid var(--ink)}
+.grid-lbl>div{padding:6px 8px;border-right:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);font-size:7pt;line-height:1.25;font-weight:500}
+.page{page-break-after:always;overflow:hidden;position:relative}
+.page:last-child{page-break-after:auto}

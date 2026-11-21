@@ -1,0 +1,35 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="common.css"><style>
+@page{size:Letter;margin:0}
+.page{width:8.5in;height:11in;background:#FFFFFF;padding:.6in .7in}
+h1{font-family:"Bebas Neue";font-weight:400;font-size:22pt;letter-spacing:.04em;margin:0}
+.lede{font-size:8.5pt;color:#5C6669;margin:4pt 0 14pt;line-height:1.5}
+.row{display:flex;gap:.35in;flex-wrap:wrap;align-items:flex-start}
+.lbl{position:relative;background:#fff;border:1px dashed #B9B5AE;padding:.22in .2in;display:flex;flex-direction:column;align-items:center;gap:.14in}
+.lbl.tp{background:#A8A199}.lbl.sg{background:#8F9A94}
+.lbl img{width:70%}
+.dim{position:absolute;left:0;right:0;bottom:-16pt;text-align:center;font-size:6.5pt;letter-spacing:.12em;text-transform:uppercase;color:#5C6669}
+.grid-lbl{width:100%;grid-template-columns:.42in 1fr}
+.grid-lbl .n{font-family:"Bebas Neue";font-size:16pt;line-height:1;letter-spacing:.02em;display:flex;align-items:center;justify-content:center}
+.grid-lbl .cat{text-align:right;letter-spacing:.14em;text-transform:uppercase;font-size:6.5pt;display:flex;align-items:center;justify-content:flex-end}
+.grid-lbl .nm{grid-column:1/-1;font-size:8pt;font-weight:700;letter-spacing:.01em;text-transform:uppercase}
+.grid-lbl .act{grid-column:1/-1;font-size:5.5pt;letter-spacing:.06em;text-transform:uppercase;line-height:1.5;color:#2C3539}
+.grid-lbl .vb{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;padding:0}
+.grid-lbl .vol{font-size:6.5pt;padding:6px 8px;flex:1;border-right:1.5px solid #2C3539;align-self:stretch;display:flex;align-items:center}
+.grid-lbl .bat{font-size:6pt;letter-spacing:.06em;text-transform:uppercase;padding:6px 8px;display:flex;flex-direction:column;justify-content:center;text-align:right}
+.grid-lbl .bat b{font-size:8pt;letter-spacing:.02em;margin-top:1px}
+.grid-lbl>div:last-child{border-bottom:0}.grid-lbl>.cat,.grid-lbl>.nm,.grid-lbl>.act,.grid-lbl>.vb{border-right:0}
+.spec{font-size:7.5pt;line-height:1.6;color:#2C3539;margin-top:.3in}
+.spec b{display:block;font-size:7pt;letter-spacing:.14em;text-transform:uppercase;color:#5C6669;margin-bottom:3pt}
+</style></head><body>
+<div class="page">
+  <h1>Packaging label system</h1>
+  <div class="lede">Front panels at print scale (100%). Every product carries the stacked wordmark, then a numbered grid: index · category / name / actives / volume · batch. Hairline 0.5 pt (1.5 px at 300 dpi scales here), ink #2C3539 on white, taupe or sage stock. Replace dimensions with the supplier's die line; keep the grid proportions.</div>
+  <div class="row">
+    <div class="lbl" style="width:2.4in;height:3.4in"><img src="out/logo/labo-method-skin-stacked.svg"><div class="grid-lbl"><div class="n">01</div><div class="cat">Cleansing</div><div class="nm">Gentle Foaming Cleanser</div><div class="act">Active ingredients<br>Glycerin · Oat extract · Chamomile</div><div class="vb"><div class="vol">300 mL · 10.1 fl oz</div><div class="bat">Batch no.<b>L26-01</b></div></div></div><div class="dim">Cleanser · 2.4 × 3.4 in (61 × 86 mm)</div></div>
+    <div class="lbl tp" style="width:1.9in;height:3.1in"><img src="out/logo/labo-method-skin-stacked.svg"><div class="grid-lbl" style="background:rgba(255,255,255,.0)"><div class="n">02</div><div class="cat">Serum</div><div class="nm">Barrier Recovery Serum</div><div class="act">Active ingredients<br>Hyaluronic acid ×3 · Panthenol</div><div class="vb"><div class="vol">30 mL · 1.0 fl oz</div><div class="bat">Batch no.<b>L26-02</b></div></div></div><div class="dim">Dropper 30 mL box · 1.9 × 3.1 in (48 × 79 mm)</div></div>
+    <div class="lbl" style="width:2.6in;height:2.6in"><img src="out/logo/labo-method-skin-primary.svg" style="width:82%"><div class="grid-lbl" style="grid-template-columns:.42in 1fr"><div class="n">03</div><div class="cat">Cream</div><div class="nm">Reactive Hydrating Cream</div><div class="act">Active ingredients<br>Ceramides · Squalane · Niacinamide</div><div class="vb"><div class="vol">50 mL · 1.7 fl oz</div><div class="bat">Batch no.<b>L26-03</b></div></div></div><div class="dim">Jar 50 mL box · 2.6 × 2.6 in (66 × 66 mm)</div></div>
+    <div class="lbl sg" style="width:1.6in;height:3.5in;justify-content:center"><img src="out/logo/labo-method-skin-stacked-white.svg" style="width:72%"><div class="dim" style="color:#2C3539">Tube 50 mL · front · 1.6 × 3.5 in (41 × 89 mm)</div></div>
+  </div>
+  <div class="spec"><b>Rules</b>Wordmark width = 70% of panel width (82% for the horizontal lockup). Grid sits on the bottom third. Index numbers in Bebas Neue; everything else Montserrat Medium / Bold. Category words: Cleansing · Serum · Cream · Balm · Sun. Volume always metric first, then fl. oz. Batch "L" + year + product index.</div>
+</div>
+</body></html>

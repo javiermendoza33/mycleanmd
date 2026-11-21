@@ -1,0 +1,13 @@
+/* The Labo Method Skin — design tokens (v1, Nov 2026) */
+:root{
+  --lms-ink:#2C3539; --lms-sage:#8F9A94; --lms-taupe:#A8A199; --lms-white:#FFFFFF; --lms-paper:#F3F1ED;
+  --lms-ink-70:rgba(44,53,57,.7); --lms-line:rgba(44,53,57,.35); --lms-hair:rgba(44,53,57,.15);
+  --lms-font-display:"Bebas Neue",Impact,sans-serif; --lms-font-body:Montserrat,Helvetica,Arial,sans-serif;
+  --lms-track-display:.03em; --lms-track-caps:.3em;
+  --lms-display-1:56px; --lms-display-2:40px; --lms-display-3:32px; --lms-h2:24px; --lms-h3:18px; --lms-body:16px; --lms-small:13px; --lms-caps:11px;
+  --lms-radius:0px; --lms-space-1:8px; --lms-space-2:16px; --lms-space-3:24px; --lms-space-4:40px; --lms-space-5:64px;
+}
+.lms-display{font-family:var(--lms-font-display);letter-spacing:var(--lms-track-display);font-weight:400;line-height:.95;text-transform:uppercase}
+.lms-caps{font-family:var(--lms-font-body);font-weight:500;font-size:var(--lms-caps);letter-spacing:var(--lms-track-caps);text-transform:uppercase}
+.lms-body{font-family:var(--lms-font-body);font-size:var(--lms-body);line-height:1.6;color:var(--lms-ink)}
+.lms-grid{display:grid;border:1.5px solid var(--lms-ink)}.lms-grid>*{padding:6px 8px;border-right:1.5px solid var(--lms-ink);border-bottom:1.5px solid var(--lms-ink)}
