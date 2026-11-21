@@ -1060,6 +1060,15 @@
    860px) — mobile keeps the Clinic's existing centered/boxed .fgrid untouched. */
 @media (min-width:861px){
   [data-labo] [data-clinic][data-method] .fhero .fgrid{max-width:none;padding-inline:0;padding-left:max(22px,calc((100vw - 1240px)/2 + 22px))}
+  /* Javier: "blend or gradient transition to the left side, make it a bit more cinematic" — the hard
+     border between the sage text panel and the video reads flat now that the video bleeds edge-to-edge.
+     A soft Sage-to-transparent wash over the video's left edge (fixed px, not %, so it stays a constant
+     width whatever the panel's actual size is) replaces the 1px rule. */
+  [data-labo] [data-clinic][data-method] .fmedia{border-left:0}
+  [data-labo] [data-clinic][data-method] .fmedia::before{
+    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:linear-gradient(to right,#8F9A94 0%,rgba(143,154,148,.55) 10%,rgba(143,154,148,0) 320px);
+  }
 }
 
 /* .cards defaults to 3 columns (labo.css line ~522) — .cols4 is for a row that always has exactly
