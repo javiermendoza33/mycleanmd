@@ -882,6 +882,31 @@
 [data-labo] [data-clinic] .bagalt .btn{align-self:flex-start}
 [data-labo] [data-clinic] .cont{background:none;border:0;font:inherit;cursor:pointer;align-self:center;font-size:.85rem}
 
+/* Site search (Nov 21 2026, Javier: "add a search field… for a particular product or service") — icon-only
+   trigger (costs no header width where the nav already wraps at 1440) opens a top-anchored overlay. */
+[data-labo] [data-clinic] .search-btn{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:none;color:var(--ink);cursor:pointer;flex:none;padding:0}
+[data-labo] [data-clinic] .search-btn:hover{background:var(--canvas)}
+[data-labo] [data-clinic] .searchwrap{position:fixed;inset:0;z-index:95}
+[data-labo] [data-clinic] .searchbg{position:absolute;inset:0;background:rgba(31,27,24,.45)}
+[data-labo] [data-clinic] .searchpanel{position:absolute;left:50%;top:84px;transform:translateX(-50%);width:min(600px,calc(100% - 32px));max-height:calc(100vh - 120px);background:var(--paper);border-radius:10px;box-shadow:0 20px 60px rgba(31,27,24,.28);display:flex;flex-direction:column;overflow:hidden;animation:searchin .2s ease}
+@keyframes searchin{from{opacity:0;transform:translate(-50%,-8px)}}
+@media (prefers-reduced-motion:reduce){[data-labo] [data-clinic] .searchpanel{animation:none}}
+@media (max-width:560px){[data-labo] [data-clinic] .searchpanel{top:64px}}
+[data-labo] [data-clinic] .searchbar{display:flex;align-items:center;gap:10px;padding:16px 18px;border-bottom:1px solid var(--rule);flex:none}
+[data-labo] [data-clinic] .searchbar svg{color:var(--muted);flex:none}
+[data-labo] [data-clinic] .searchbar input{flex:1;border:0;outline:none;background:none;font:inherit;font-size:1rem;color:var(--ink)}
+[data-labo] [data-clinic] .searchbar input::placeholder{color:var(--muted)}
+[data-labo] [data-clinic] .searchbar .x{font:inherit;background:none;border:1px solid var(--rule);border-radius:50%;width:30px;height:30px;cursor:pointer;color:var(--ink);flex:none}
+[data-labo] [data-clinic] .searchresults{list-style:none;margin:0;padding:6px;overflow:auto}
+[data-labo] [data-clinic] .searchresults li+li{border-top:1px solid var(--hair)}
+[data-labo] [data-clinic] .searchresults a{display:block;padding:12px 12px;border-radius:6px;text-decoration:none;color:var(--ink)}
+[data-labo] [data-clinic] .searchresults a:hover{background:var(--canvas)}
+[data-labo] [data-clinic] .searchresults .srkind{display:block;font-size:.64rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
+[data-labo] [data-clinic] .searchresults b{display:inline;font-weight:700;letter-spacing:-.015em}
+[data-labo] [data-clinic] .searchresults .srsub{font-size:.8rem;color:var(--muted);margin-left:8px}
+[data-labo] [data-clinic] .searchresults p{margin:3px 0 0;font-size:.86rem;color:var(--graphite)}
+[data-labo] [data-clinic] .searchempty{padding:14px 12px}
+
 /* storefront: card headings stay card-sized on the services index (h2 there), tiles square */
 [data-labo] [data-clinic] .card h2,[data-labo] [data-clinic] .card h3{font-size:1.1rem;letter-spacing:-.022em}
 [data-labo] [data-clinic] .kvtile,[data-labo] [data-clinic] .tile,[data-labo] [data-clinic] .notebox,[data-labo] [data-clinic] .map,[data-labo] [data-clinic] .embed,[data-labo] [data-clinic] .vagaro-loading{border-radius:6px}

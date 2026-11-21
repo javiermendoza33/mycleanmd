@@ -8,6 +8,7 @@ import { CLINIC_SITE } from "@/labo/clinic/site";
 import { bestSellers, ownLine, SHOP } from "@/labo/clinic/products";
 import MobileNav from "@/components/labo/MobileNav";
 import BagLink from "@/components/labo/shop/BagLink";
+import SearchButton from "@/components/labo/search/SearchButton";
 import { ProductCard } from "@/components/labo/shop/ProductCard";
 
 /**
@@ -52,6 +53,7 @@ export default function LaboHome() {
           <nav className="main" aria-label="Sections">
             {NAV.map((l) => <Link key={l.href} href={l.href}>{l.label}</Link>)}
           </nav>
+          <SearchButton />
           <BagLink />
           <Link className="btn btn-primary btn-sm" href="/booking">Book now</Link>
           <MobileNav />
