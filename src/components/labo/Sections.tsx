@@ -13,7 +13,10 @@ export function PageHero({
 }: { eyebrow: string; title: ReactNode; lede?: ReactNode }) {
   return (
     <header className="pageh">
-      <div className="wrap tight">
+      {/* Nov 21 2026 (Javier: headers "not well balanced... all the left not centered"): was `.wrap.tight`,
+          a 700px column centered inside the 1020px site width, so the text started ~160px right of the
+          nav's brand and the photo band below. Full .wrap now; the h1/.sub cap their own line length. */}
+      <div className="wrap">
         <Eyebrow>{eyebrow}</Eyebrow>
         <h1>{title}</h1>
         {lede && <p className="sub">{lede}</p>}

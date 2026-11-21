@@ -18,7 +18,7 @@ export default function BookingPage() {
         title="Book your appointment"
         lede="Schedule online below, or call or text us and we&rsquo;ll find your perfect time."
       />
-      <section style={{ paddingTop: 44 }}>
+      <section style={{ paddingTop: 36 }}>
         <div className="wrap">
           <VagaroWidget />
           <p className="note" style={{ textAlign: "center" }}>Prefer a human touch? <a className="more" href={s.tel}>Call</a> or <a className="more" href={s.sms}>text {s.phoneDisplay}</a> and we&rsquo;ll get you scheduled.</p>

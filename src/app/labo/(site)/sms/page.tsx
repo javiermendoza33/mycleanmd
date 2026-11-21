@@ -33,7 +33,7 @@ export default function SmsPage() {
       <PageHero eyebrow="Text messaging" title={<>Text updates.</>}
         lede="Appointment reminders, aftercare instructions and replies to your booking texts — about 1–4 texts a month, only if you ask for them." />
 
-      <section style={{ paddingTop: 48 }}>
+      <section style={{ paddingTop: 36 }}>
         <div className="wrap ct">
           <div className="kvtiles">
             {FACTS.map(([k, v]) => (

@@ -16,9 +16,9 @@ export default function BlogPage() {
     <>
       <PageHero eyebrow="The journal" title="Skincare & wellness insights" />
       <section style={{ paddingBlock: 0 }}>
-        <div className="wrap"><div className="band" style={{ marginTop: 44 }}><img src="/labo/img/misc/blog.jpg" alt="Close-up of a woman with fresh, glowing skin" /></div></div>
+        <div className="wrap"><div className="band" style={{ marginTop: 28 }}><img src="/labo/img/misc/blog.jpg" alt="Close-up of a woman with fresh, glowing skin" /></div></div>
       </section>
-      <section style={{ paddingTop: 48 }}>
+      <section style={{ paddingTop: 36 }}>
         <div className="wrap">
           <div className="cards">
             {posts.map((p) => (
