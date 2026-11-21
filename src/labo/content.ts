@@ -381,7 +381,7 @@ export const ABOUT = {
     { label: "Licensure", value: "Washington, plus 10 additional states" },
     { label: "Doctorate", value: "Doctor of Nursing Practice" },
     { label: "Graduate", value: "MSN, Family Nurse Practitioner" },
-    { label: "Certification", value: "American Academy of Nurse Practitioners, cert. F0415015" },
+    { label: "Board Certification", value: "American Academy of Nurse Practitioners" },
     { label: "Languages", value: "English, Spanish" },
   ],
   practice: [
