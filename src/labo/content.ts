@@ -372,15 +372,15 @@ export const ABOUT = {
   bio: [
     "I began my career in critical care at Cedars-Sinai Medical Center, first on a gastrointestinal medical-surgical telemetry unit and then in the neuroscience and medical-surgical intensive care units. Four years at the bedside in the ICU teaches you to read a patient's numbers carefully and to notice when something is off before it becomes urgent. That habit is the foundation of how I practice now.",
     "As a nurse practitioner I have worked in surgical care at Providence Saint Joseph, where I managed the Bariatric Wellness Center, and as a clinical transplant coordinator on the liver transplant team at Cedars-Sinai, carrying patients through referral, evaluation, waitlist and recovery. Later I practiced in dermatology and aesthetic medicine bicoastally with Kate Somerville Skin Health Experts, where I built and managed clinical protocols and trained incoming injectors, and I established clinical oversight for COVID-19 testing sites with CVS MinuteClinic.",
-    "Telehealth has been part of every one of those roles, which is why I am comfortable building a practice around it. I completed my Doctorate in Nursing Practice in 2025, hold a Master of Science as a Family Nurse Practitioner, and I see patients in English and Spanish.",
+    "Telehealth has been part of every one of those roles, which is why I am comfortable building a practice around it. I completed my Doctorate in Nursing Practice, hold a Master of Science as a Family Nurse Practitioner, and I see patients in English and Spanish.",
   ],
   /** Licences HELD, from the provider's CV — a different claim from where the
    *  practice accepts patients. See the licensure note at the top of the file. */
   credentials: [
     { label: "Credential", value: "DNP, MSN, PHN, NP-C — Family Nurse Practitioner" },
     { label: "Licensure", value: "Washington, plus 10 additional states" },
-    { label: "Doctorate", value: "Doctor of Nursing Practice, 2025" },
-    { label: "Graduate", value: "MSN, Family Nurse Practitioner, 2014" },
+    { label: "Doctorate", value: "Doctor of Nursing Practice" },
+    { label: "Graduate", value: "MSN, Family Nurse Practitioner" },
     { label: "Certification", value: "American Academy of Nurse Practitioners, cert. F0415015" },
     { label: "Languages", value: "English, Spanish" },
   ],
