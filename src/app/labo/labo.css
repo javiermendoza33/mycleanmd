@@ -236,7 +236,14 @@
    (Clinic: services/testimonials/blog/patient-care/contact/booking/sms/privacy; Method:
    blog/pricing/how-it-works/faq/legal), so trimming it here shrinks the hero on all of them. */
 [data-labo] .pageh{padding-block:36px 0}
-[data-labo] .pageh h1{font-size:clamp(1.7rem,3.2vw,2.3rem);letter-spacing:-.03em;margin-top:8px;max-width:26ch}
+/* /treatments' hero is a <section class="pageh"> (the others are <header>), so the clinic's general
+   `[data-clinic] section{padding-block:84px}` out-specifies the rule above — this wins it back. */
+[data-labo] [data-clinic] section.pageh{padding-block:36px 0}
+/* Nov 21 2026: the clinic's general `[data-labo] [data-clinic] h1` (declared later, equal specificity) had been
+   overriding this — measured live at 68.8px/4.3rem despite the clamp below. The second selector adds
+   [data-clinic] so this rule wins on the clinic's subpages regardless of order. 3.3rem max = the cumulative
+   target of Javier's three "smaller" asks (10% + "a tad" + 10%) against the 4.3rem that was actually showing. */
+[data-labo] .pageh h1,[data-labo] [data-clinic] .pageh h1{font-size:clamp(2rem,4.2vw,3.3rem);letter-spacing:-.03em;margin-top:8px;max-width:26ch}
 [data-labo] .pageh .sub{margin-top:10px;max-width:58ch}
 @media (max-width:760px){[data-labo] .pageh{padding-block:28px 0}}
 
