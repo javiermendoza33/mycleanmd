@@ -13,7 +13,7 @@ export default function ServicesPage() {
     <>
       <PageHero
         eyebrow="Treatments"
-        title="Injectables, skincare & wellness services in Seattle"
+        title="Injectables, skincare & wellness treatments in Seattle"
         lede="Because every one of our clients is different and requires a customized approach, we tailor every treatment to your skin type, lifestyle and desired results."
       />
       <section style={{ paddingBlock: 0 }}>

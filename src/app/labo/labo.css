@@ -230,11 +230,15 @@
    Everything below reuses the tokens and shapes above: kicker eyebrows, canvas
    cards at --radius-card, hairline-separated rows, mono for data and labels. */
 
-/* page hero: the .tight column the homepage already uses for section heads */
-[data-labo] .pageh{padding-block:84px 0}
-[data-labo] .pageh h1{font-size:clamp(2.3rem,5.4vw,3.8rem);letter-spacing:-.033em;margin-top:15px}
-[data-labo] .pageh .sub{margin-top:18px;max-width:58ch}
-@media (max-width:760px){[data-labo] .pageh{padding-block:56px 0}}
+/* page hero: the .tight column the homepage already uses for section heads.
+   Nov 21 2026 (Javier: "adjust and re-balance this header so it wont take so much space…
+   so people can be deeper in the page when they click on it") — shared by every inner page
+   (Clinic: services/testimonials/blog/patient-care/contact/booking/sms/privacy; Method:
+   blog/pricing/how-it-works/faq/legal), so trimming it here shrinks the hero on all of them. */
+[data-labo] .pageh{padding-block:48px 0}
+[data-labo] .pageh h1{font-size:clamp(2rem,4vw,2.9rem);letter-spacing:-.03em;margin-top:10px}
+[data-labo] .pageh .sub{margin-top:12px;max-width:58ch}
+@media (max-width:760px){[data-labo] .pageh{padding-block:34px 0}}
 
 /* header nav active state */
 [data-labo] nav.main a.on{color:var(--ink)}
