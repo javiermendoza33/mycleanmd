@@ -1063,11 +1063,23 @@
   /* Javier: "blend or gradient transition to the left side, make it a bit more cinematic" — the hard
      border between the sage text panel and the video reads flat now that the video bleeds edge-to-edge.
      A soft Sage-to-transparent wash over the video's left edge (fixed px, not %, so it stays a constant
-     width whatever the panel's actual size is) replaces the 1px rule. */
+     width whatever the panel's actual size is) replaces the 1px rule. Kept the colour Sage — it's the same
+     tone as the panel right next to it, so the blend reads as one continuous surface, not an effect. Round
+     two (Javier: "smoother transition"): the first cut jumped 100%→55% opacity in its first 10%, which read
+     as a visible step; this is a smoothstep-style curve (seven stops easing out across 420px) instead of a
+     single linear ramp, so there's no point where the falloff rate visibly changes. */
   [data-labo] [data-clinic][data-method] .fmedia{border-left:0}
   [data-labo] [data-clinic][data-method] .fmedia::before{
     content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
-    background:linear-gradient(to right,#8F9A94 0%,rgba(143,154,148,.55) 10%,rgba(143,154,148,0) 320px);
+    background:linear-gradient(to right,
+      #8F9A94 0,
+      rgba(143,154,148,.94) 70px,
+      rgba(143,154,148,.8) 140px,
+      rgba(143,154,148,.58) 210px,
+      rgba(143,154,148,.36) 280px,
+      rgba(143,154,148,.17) 350px,
+      rgba(143,154,148,.05) 400px,
+      rgba(143,154,148,0) 420px);
   }
 }
 
