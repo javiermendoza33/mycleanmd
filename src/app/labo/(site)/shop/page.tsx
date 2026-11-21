@@ -5,7 +5,7 @@ import ShopGrid from "@/components/labo/shop/ShopGrid";
 
 export const metadata = {
   title: "Shop medical-grade skincare",
-  description: "skinbetter science, Alastin and SkinMedica skincare curated by The Labo Clinic — serums, retinoids, mineral sunscreen and cleansers, shipped in the US or picked up in South Lake Union, Seattle.",
+  description: "skinbetter science, Alastin and SkinMedica skincare curated by The Labo Clinic — serums, retinoids, mineral sunscreen and cleansers, shipped in the US or picked up in Eastlake, Seattle.",
   alternates: { canonical: "/shop" },
 };
 
@@ -30,7 +30,7 @@ export default function ShopPage() {
       <section className="grey" style={{ paddingBlock: 70 }}>
         <div className="wrap values">
           <div><b>Chosen, not stocked</b><p>Every product here is one we&rsquo;ve tested ourselves and use in-clinic or send home after a treatment.</p></div>
-          <div><b>Free shipping over ${SHOP.freeShippingOver}</b><p>US shipping in 3–7 business days, or free pick-up at the clinic in South Lake Union.</p></div>
+          <div><b>Free shipping over ${SHOP.freeShippingOver}</b><p>US shipping in 3–7 business days, or free pick-up at the clinic in Eastlake.</p></div>
           <div><b>Ask before you buy</b><p>Not sure what your skin needs? Text us a photo and a line about your goals — we&rsquo;ll point you to two products, not ten.</p></div>
         </div>
       </section>

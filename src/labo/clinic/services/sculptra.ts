@@ -46,9 +46,12 @@ export const service: Service = {
       ],
     },
   ],
+  // Nov 21 2026: was services/sculptra.jpg, the same photo used for the hero band on the
+  // /services index page (Monika: "duplicate photo... just pick from library") — swapped to
+  // an existing library photo not shown elsewhere on this page.
   image: {
-    src: "/labo/img/services/sculptra.jpg",
-    alt: "Sculptra biostimulator injectable treatment at The Labo Clinic in Seattle, WA",
+    src: "/labo/img/misc/cta-bg.jpg",
+    alt: "Glowing, lifted skin after a Sculptra treatment at The Labo Clinic in Seattle, WA",
   },
   seo: {
     title: "Sculptra Treatment in Seattle, WA | Facial Volume Loss",

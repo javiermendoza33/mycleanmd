@@ -63,8 +63,8 @@ export const privacySections: LegalSection[] = [
     paragraphs: [
       "The Labo Clinic",
       "Email: hello@thelabomethod.com",
-      "Phone: 877-SKN-HAVN",
-      "Address: 910 Lenora Street Suite #152, Seattle, WA 98121",
+      "Phone: 877-756-4286",
+      "Address: 1512 Eastlake Ave E, Seattle, WA 98102",
       "By using our services and providing us with your information, you agree to the terms of this Privacy Policy.",
       "Last Updated: 30-10-2023",
     ],

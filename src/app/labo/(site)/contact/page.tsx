@@ -53,7 +53,7 @@ export default function Contact() {
             {s.locations.map((loc) => (
               <div key={loc.id}>
                 <LocationCard location={loc} />
-                <p className="note" style={{ marginTop: 0 }}>{loc.note}</p>
+                {loc.note && <p className="note" style={{ marginTop: 0 }}>{loc.note}</p>}
                 <MapEmbed src={loc.mapEmbed} title={`Map — ${PRACTICE.name} ${loc.name}`} />
               </div>
             ))}

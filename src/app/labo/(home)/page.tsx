@@ -29,7 +29,7 @@ const TELE = [
 /** Fitzpatrick I–VI and which wavelength reaches them safely — the laser section's signature row. */
 const SKIN = ["#F6E3D4", "#EDCDB3", "#D9AE8A", "#B98463", "#8A5A3E", "#5A3826"];
 
-const STRIP = ["Nurse practitioner-led", "Medical-grade skincare", "Botox® · Dysport® · fillers", "Candela GentleMax Pro Plus laser", "South Lake Union, Seattle", SHOP.promo, "Free skincare shipping over $" + SHOP.freeShippingOver];
+const STRIP = ["Nurse practitioner-led", "Medical-grade skincare", "Botox® · Dysport® · fillers", "Candela GentleMax Pro Plus laser", "Eastlake, Seattle", SHOP.promo, "Free skincare shipping over $" + SHOP.freeShippingOver];
 
 const CONCERN_TILES = [
   { c: "Acne", t: "Breakouts & congestion" },
@@ -63,7 +63,7 @@ export default function LaboHome() {
         <section className="fhero">
           <div className="fgrid">
             <div className="ftext">
-              <span className="kicker">Medical spa · Seattle, South Lake Union</span>
+              <span className="kicker">Medical spa · Seattle, Eastlake</span>
               <h1>Skin that looks like <em>you</em>, on your best day.</h1>
               <p className="sub">Nurse practitioner-led injectables, laser, peels and medical-grade skincare. Modern, evidence-based, and tailored to your skin, your lifestyle and the results you actually want.</p>
               <div className="acts">
@@ -147,7 +147,7 @@ export default function LaboHome() {
         {/* ── LOCATIONS ────────────────────────────────────────────────── */}
         <section id="locations">
           <div className="wrap">
-            <SectionHead eyebrow="Come see us IRL" title="Visit us in South Lake Union" lede={`Open Monday through Friday, 10:00 am – 6:00 pm. Weekends by appointment only. Text or call ${s.phoneDisplay}.`} />
+            <SectionHead eyebrow="Come see us IRL" title="Visit us in Eastlake" lede={`Open Monday through Friday, 10:00 am – 6:00 pm. Weekends by appointment only. Text or call ${s.phoneDisplay}.`} />
             <div className="locs">{s.locations.map((loc) => <LocationCard key={loc.id} location={loc} />)}</div>
           </div>
         </section>

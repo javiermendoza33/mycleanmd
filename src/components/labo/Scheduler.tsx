@@ -58,7 +58,7 @@ export default function Scheduler({ preselect, menu }: { preselect?: string; men
         <h2>See you {fmtLong(done.starts_at)}.</h2>
         <p className="sub">{item.name} · {item.min} min · {priceLabel(item)}. Your confirmation is on its way to {f.email}, with a reminder before your visit.</p>
         <ul className="checks grid">
-          <li>Arrive 10 minutes early — free 30-minute parking in the courtyard at 910 Lenora.</li>
+          <li>Arrive 10 minutes early.</li>
           <li>Skip retinol, exfoliants and alcohol the night before injectables or laser.</li>
           <li>Need to change it? Use the link in your email, or text {CLINIC_SITE.phoneDisplay}.</li>
         </ul>

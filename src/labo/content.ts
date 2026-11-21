@@ -402,7 +402,7 @@ export const ABOUT = {
   slides: [
     { src: "/labo/img/about/founder.webp", pos: "50% 20%", caption: "Mónika Jáuregui, DNP, CANS, FNP-C." },
     { src: "/labo/img/about/founder-2.webp", pos: "50% 25%", caption: "In the clinic." },
-    { src: "/labo/img/about/clinic.jpg", pos: "50% 50%", caption: "The treatment studio, South Lake Union." },
+    { src: "/labo/img/about/clinic.jpg", pos: "50% 50%", caption: "The treatment studio, Eastlake." },
   ],
 };
 
