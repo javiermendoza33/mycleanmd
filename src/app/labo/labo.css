@@ -1051,6 +1051,13 @@
 [data-labo] [data-clinic][data-method] .fhero .btn-ghost:hover{background:rgba(255,255,255,.14)}
 [data-labo] [data-clinic][data-method] .fhero .btn-primary{background:#FFFFFF;color:var(--accent)}
 [data-labo] [data-clinic][data-method] .fhero .btn-primary:hover{background:#F2F3F2}
+/* the eligibility gate is the homepage's one real "main card" — try it in solid Sage instead of the
+   barely-tinted canvas every other card uses, per Javier: "lets try sage for the main card" */
+[data-labo] [data-clinic][data-method] .gate{background:#8F9A94}
+[data-labo] [data-clinic][data-method] .gate .gh p{color:rgba(44,53,57,.78)}
+[data-labo] [data-clinic][data-method] .gate .field>label{color:rgba(44,53,57,.78)}
+[data-labo] [data-clinic][data-method] .gate .res.warn{background:#FFFFFF}
+[data-labo] [data-clinic][data-method] .gate .res{border-top-color:rgba(44,53,57,.18)}
 
 /* .cards defaults to 3 columns (labo.css line ~522) — .cols4 is for a row that always has exactly
    4 items (the Method homepage's journal teaser), so it gets its own column count at each breakpoint
