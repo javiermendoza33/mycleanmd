@@ -29,7 +29,7 @@ const TELE = [
 /** Fitzpatrick I–VI and which wavelength reaches them safely — the laser section's signature row. */
 const SKIN = ["#F6E3D4", "#EDCDB3", "#D9AE8A", "#B98463", "#8A5A3E", "#5A3826"];
 
-const STRIP = ["Nurse practitioner-led", "Medical-grade skincare", "Botox® · Dysport® · fillers", "Candela GentleMax Pro Plus laser", "Where South Lake Union meets Eastlake, Seattle", SHOP.promo, "Free skincare shipping over $" + SHOP.freeShippingOver];
+const STRIP = ["Nurse practitioner-led", "Medical-Grade skincare", "Botox® · Dysport®", "Dermal Fillers", "Candela GentleMax Pro Plus Laser", "Where South Lake Union meets Eastlake, Seattle", SHOP.promo, "Free skincare shipping over $" + SHOP.freeShippingOver];
 
 const CONCERN_TILES = [
   { c: "Acne", t: "Breakouts & congestion" },
