@@ -15,7 +15,7 @@ export default function ShopPage() {
       <section className="shophero">
         <div className="wrap">
           <span className="kicker">The shop · medical-grade skincare</span>
-          <h1>Skincare we&rsquo;d put on our own faces.</h1>
+          <h1>Skincare vetted by our providers&mdash;and trusted in our own daily routines.</h1>
           <p className="sub">Our own line, made for us, plus the clinic brands we use in the treatment room. Curated by us, with a routine that fits yours — no 12-step anything unless you want it, no judgement here.</p>
           <div className="chips tiles" aria-label="Shop by concern">
             <Link href="/shop?line=The%20Labo%20Clinic" className="cchip own">Our own line</Link>
