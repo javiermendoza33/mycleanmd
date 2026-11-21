@@ -1026,12 +1026,31 @@
 /* ── The Labo Method (Nov 19 2026, Javier: "same feel and look as Clinic site but lets try purple instead
    as color basse") ───────────────────────────────────────────────────────────────────────────────────
    method.thelabomethod.com reuses the whole [data-clinic] storefront system above (paper, Outfit, hairline
-   boxed cards, the split hero) via this second attribute, [data-method] — only the signature colour changes.
-   Picked at a similar lightness/saturation to the clinic's clay (#C8432A) so it carries the same visual
-   weight, not a brighter/techier purple. */
-[data-labo] [data-clinic][data-method]{--accent:#6E3F99;--accent-rgb:110,63,153;--accent-tint:rgba(110,63,153,.09)}
-[data-labo] [data-clinic][data-method] .btn-primary:hover{background:#54307A}
+   boxed cards, the split hero) via this second attribute, [data-method] — only the signature colour changes. */
+/* Nov 20 2026, Javier: "use this color palate on the site" — the real The Labo Method Skin brand kit
+   (Labo-Method-Skin-Brand-Guide.pdf): four colours only — Ink #2C3539 (type, rules, CTAs), Sage #8F9A94
+   (secondary panels), Taupe #A8A199 (backgrounds, surface only — fails text contrast, never used as text),
+   White #FFFFFF (the page). Replaces the purple. Every value below is either an exact swatch or an alpha
+   tint of one — no fifth colour, same rule the guide itself states. */
+[data-labo] [data-clinic][data-method]{
+  --paper:#FFFFFF;--canvas:#F2F3F2;--wash:#EAECEA;--ink:#2C3539;--graphite:rgba(44,53,57,.72);--muted:rgba(44,53,57,.52);
+  --accent:#2C3539;--accent-rgb:44,53,57;--accent-tint:rgba(44,53,57,.07);
+  --rule:#2C3539;--line:rgba(44,53,57,.18);--hair:rgba(44,53,57,.08)}
+[data-labo] [data-clinic][data-method] .btn-primary:hover{background:#20262A}
 [data-labo] [data-clinic][data-method] .fmedia .still{object-position:72% 22%}
+/* the shared .fhero band (labo.css ~891) hardcodes a warm cream/peach (#FFF8F2/#FFD9CC) tuned for the
+   Clinic's orange hero — a 5th colour the brand guide explicitly rules out. Method's ink hero uses plain
+   white instead, matching the guide's own "white on ink" pairing. */
+[data-labo] [data-clinic][data-method] .fhero{color:#FFFFFF}
+[data-labo] [data-clinic][data-method] .fhero .kicker{color:rgba(255,255,255,.78)}
+[data-labo] [data-clinic][data-method] .fhero h1,[data-labo] [data-clinic][data-method] .fhero h1 em{color:#FFFFFF}
+[data-labo] [data-clinic][data-method] .fhero .sub{color:rgba(255,255,255,.88)}
+[data-labo] [data-clinic][data-method] .fhero .led,[data-labo] [data-clinic][data-method] .fhero .led a{color:rgba(255,255,255,.88)}
+[data-labo] [data-clinic][data-method] .fhero .led a{text-decoration-color:#FFFFFF}
+[data-labo] [data-clinic][data-method] .fhero .btn-ghost{border-color:rgba(255,255,255,.75);color:#FFFFFF}
+[data-labo] [data-clinic][data-method] .fhero .btn-ghost:hover{background:rgba(255,255,255,.14)}
+[data-labo] [data-clinic][data-method] .fhero .btn-primary{background:#FFFFFF;color:var(--accent)}
+[data-labo] [data-clinic][data-method] .fhero .btn-primary:hover{background:#F2F3F2}
 
 /* .cards defaults to 3 columns (labo.css line ~522) — .cols4 is for a row that always has exactly
    4 items (the Method homepage's journal teaser), so it gets its own column count at each breakpoint
