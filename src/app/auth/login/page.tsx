@@ -74,7 +74,7 @@ function LoginInner() {
           {/* Center content */}
           <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <p style={{ fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--teal)', fontWeight: 600, marginBottom: 20 }}>
-              Seattle · Eastlake
+              Seattle · Where South Lake Union meets Eastlake
             </p>
             <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(36px,3.5vw,52px)', fontWeight: 400, lineHeight: 1.15, letterSpacing: -1.5, color: '#fff', marginBottom: 32 }}>
               Skin that looks like<br />

@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
     shipping_address_collection: { allowed_countries: ["US"] },
     shipping_options: [
       { shipping_rate_data: { type: "fixed_amount", display_name: shipping ? "Standard shipping" : "Free shipping", fixed_amount: { amount: shipping * 100, currency: SHOP.currency }, delivery_estimate: { minimum: { unit: "business_day", value: 3 }, maximum: { unit: "business_day", value: 7 } } } },
-      { shipping_rate_data: { type: "fixed_amount", display_name: "Pick up in Eastlake", fixed_amount: { amount: 0, currency: SHOP.currency } } },
+      { shipping_rate_data: { type: "fixed_amount", display_name: "Pick up where South Lake Union meets Eastlake", fixed_amount: { amount: 0, currency: SHOP.currency } } },
     ],
     phone_number_collection: { enabled: true },
     metadata: { kind: "shop", items: lines.map((l) => `${l.qty}x ${l.p.slug}`).join(", ").slice(0, 480) },

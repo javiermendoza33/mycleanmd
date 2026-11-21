@@ -16,14 +16,14 @@ export const CLINIC_SITE = {
   instagram: "https://www.instagram.com/skinhavenclinic.com/",
   shopUrl: "https://connect.skinbetter.com/skinhavenclinic",
   promo: "New patients receive $20 off their first aesthetic treatment",
+  // Nov 21 2026, Javier: "for now its appointment only even weekdays" — no fixed hours yet.
   hours: [
-    { days: "Monday – Friday", time: "10:00 am – 6:00 pm" },
-    { days: "Saturday – Sunday", time: "By appointment only" },
+    { days: "Monday – Sunday", time: "By appointment only" },
   ],
   locations: [
     {
       id: "eastlake",
-      name: "Eastlake",
+      name: "Where South Lake Union meets Eastlake",
       cityLabel: "Seattle",
       address1: "1512 Eastlake Ave E",
       address2: "Seattle, WA 98102",

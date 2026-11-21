@@ -43,7 +43,7 @@ const clinicFont = Outfit({
 });
 const TITLE = `Medical Spa in Seattle, WA — Botox, Fillers, Laser, Sculptra`;
 const DESCRIPTION =
-  `The Labo Clinic is a medical spa in Seattle (Eastlake), WA, led by Mónika Jáuregui, DNP, CANS, FNP-C: Botox and Dysport, dermal fillers, Sculptra, microneedling, PRP and exosomes, PDO threads, chemical peels, IV therapy, medical weight loss and laser on the Candela GentleMax Pro Plus.`;
+  `The Labo Clinic is a medical spa in Seattle (where South Lake Union meets Eastlake), WA, led by Mónika Jáuregui, DNP, CANS, FNP-C: Botox and Dysport, dermal fillers, Sculptra, microneedling, PRP and exosomes, PDO threads, chemical peels, IV therapy, medical weight loss and laser on the Candela GentleMax Pro Plus.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(`https://${PRACTICE.domain}`),
@@ -66,15 +66,15 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image" },
 };
 
-/** MedicalBusiness structured data for the clinic — location, phone, hours, services, the clinician. */
-const hours = { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "10:00", closes: "18:00" };
+/** MedicalBusiness structured data for the clinic — location, phone, services, the clinician.
+ *  Nov 21 2026: no openingHoursSpecification for now (Javier: "for now its appointment only even
+ *  weekdays") — publishing fixed hours here would be wrong when every day is by-appointment-only. */
 const place = (loc: (typeof CLINIC_SITE.locations)[number]) => ({
   "@type": "MedicalBusiness",
   name: `${PRACTICE.name} — ${loc.name}`,
   address: { "@type": "PostalAddress", streetAddress: loc.address1, addressLocality: loc.cityLabel, addressRegion: "WA", postalCode: loc.address2.match(/\d{5}/)?.[0], addressCountry: "US" },
   telephone: `+1-${CLINIC_SITE.phoneNumber}`,
   hasMap: loc.mapUrl,
-  openingHoursSpecification: hours,
 });
 const jsonLd = {
   "@context": "https://schema.org",
@@ -88,7 +88,6 @@ const jsonLd = {
   image: `https://${PRACTICE.domain}/labo/img/misc/cta-bg.jpg`,
   priceRange: "$$",
   address: place(CLINIC_SITE.locations[0]).address,
-  openingHoursSpecification: hours,
   sameAs: [CLINIC_SITE.instagram],
   areaServed: [{ "@type": "City", name: "Seattle" }, { "@type": "State", name: "Washington" }],
   location: CLINIC_SITE.locations.map(place),

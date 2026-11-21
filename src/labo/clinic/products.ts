@@ -47,7 +47,7 @@ export const SHOP = {
   promo: CLINIC_SITE.promo,
   /** The line's own authorized store — kept as the alternative while online checkout is being set up. */
   skinbetterStore: CLINIC_SITE.shopUrl,
-  shipsTo: "Ships within the US · pick up in Eastlake is free",
+  shipsTo: "Ships within the US · pick up where South Lake Union meets Eastlake is free",
 } as const;
 
 export const CONCERNS: Concern[] = ["Acne", "Aging", "Dryness", "Sensitive", "Pigment"];
