@@ -70,7 +70,6 @@ export default function LaboHome() {
                 <Link className="btn btn-primary" href="/booking">Book a visit</Link>
                 <Link className="btn btn-ghost" href="/shop">Shop skincare</Link>
               </div>
-              <p className="led">Led by <Link href="/about">Mónika Jáuregui, DNP, CANS, FNP-C</Link>, Certified Aesthetic Nurse Specialist</p>
             </div>
             <div className="fmedia">
               {/* Nov 19 2026 (Javier: "take the highest resolution picture we have that fits and put instead of the video"):
