@@ -4,6 +4,22 @@ import { CLINIC, GROUP_NOTE, GROUPS, LASER_FAQ, TREATMENTS, GATE_ROBOTS } from "
 
 const GROUP_KEYS = ["laser", "injectables", "skin"] as const;
 
+/** Nov 21 2026 (Javier: "add photos of the process or units inside this page"). The laser group gets a
+ *  three-step process strip (consult → room → laser on skin) from the clinic's own photo set rather than
+ *  the single laser shot repeated five times; the injectable/skin treatments reuse their service photos.
+ *  No photo of the GentleMax Pro Plus unit exists yet — add it here as a 4th strip entry when it arrives. */
+const LASER_PROCESS = [
+  { src: "/labo/clinic-clinician.jpg", alt: "A nurse practitioner talking a patient through her plan before treatment", caption: "01 · Consultation and exam", pos: "50% 35%" },
+  { src: "/labo/clinic-room.jpg", alt: "The clinic's white treatment room", caption: "02 · The treatment room", pos: "50% 55%" },
+  { src: "/labo/clinic-laser.jpg", alt: "Laser hair removal in progress on a patient's leg", caption: "03 · The laser, with cooling before every pulse", pos: "50% 70%" },
+];
+const TREATMENT_PHOTO: Record<string, { src: string; alt: string }> = {
+  botox: { src: "/labo/img/services/wrinkle-relaxers.jpg", alt: "Provider administering a wrinkle relaxer injection" },
+  "dermal-fillers": { src: "/labo/img/services/dermal-fillers.jpg", alt: "A patient receiving a dermal filler injection" },
+  sculptra: { src: "/labo/img/services/sculptra-card.jpg", alt: "Glowing, lifted skin after a Sculptra treatment" },
+  microneedling: { src: "/labo/img/services/microneedling.jpg", alt: "SkinPen microneedling treatment in progress" },
+};
+
 export const metadata = {
   title: "Treatments · laser, Botox, fillers, Sculptra, microneedling · Seattle",
   description: `Laser hair removal, sun spots, spider veins, skin rejuvenation and nail treatment on the ${CLINIC.device}, plus Botox, dermal fillers, Sculptra and microneedling in Seattle. Every plan starts with an exam by a nurse practitioner.`,
@@ -46,12 +62,25 @@ export default function TreatmentsPage() {
           {GROUP_KEYS.map((g) => (
             <div key={g} id={`group-${g}`} className="txgsec">
               <div className="txghead"><h3>{GROUPS[g]}</h3><span className="mono">{GROUP_NOTE[g]}</span></div>
+              {g === "laser" && (
+                <div className="txphotos">
+                  {LASER_PROCESS.map((p) => (
+                    <figure key={p.src}>
+                      <div className="frame"><img src={p.src} alt={p.alt} loading="lazy" style={{ objectPosition: p.pos }} /></div>
+                      <figcaption className="mono">{p.caption}</figcaption>
+                    </figure>
+                  ))}
+                </div>
+              )}
           {TREATMENTS.filter((t) => t.group === g).map((t) => (
             <article className="txsec" id={t.slug} key={t.slug}>
               <div>
                 <span className="kicker">{String(TREATMENTS.indexOf(t) + 1).padStart(2, "0")} · {t.skin}</span>
                 <h2 style={{ marginTop: 14 }}>{t.name}</h2>
                 <ul className="chips" style={{ marginTop: 18 }}>{t.treats.map((x) => <li key={x}>{x}</li>)}</ul>
+                {TREATMENT_PHOTO[t.slug] && (
+                  <div className="frame txfig"><img src={TREATMENT_PHOTO[t.slug].src} alt={TREATMENT_PHOTO[t.slug].alt} loading="lazy" /></div>
+                )}
               </div>
               <div className="bd">
                 {t.body.map((p) => <p key={p.slice(0, 24)}>{p}</p>)}

@@ -391,6 +391,16 @@
 [data-labo] .txsec h2{font-size:clamp(1.9rem,3.6vw,2.6rem)}
 [data-labo] .txsec .bd p{font-size:1.02rem;color:var(--graphite);letter-spacing:-.015em}
 [data-labo] .txsec .bd p+p{margin-top:14px}
+/* Nov 21 2026 — photos on /treatments: a 3-up process strip under the Laser group head, and a per-treatment
+   photo under the chips for the injectable/skin sections (Javier: "photos of the process or units"). */
+[data-labo] .txphotos{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:26px 0 10px}
+[data-labo] .txphotos figure{margin:0}
+[data-labo] .txphotos .frame{aspect-ratio:4/3}
+/* the global figcaption is an overlay pill (position:absolute, dark background — see line ~97); these sit
+   as plain labels under the photo instead */
+[data-labo] .txphotos figcaption{position:static;background:none;padding:0;border-radius:0;backdrop-filter:none;margin-top:10px;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+@media (max-width:760px){[data-labo] .txphotos{grid-template-columns:1fr;gap:16px}}
+[data-labo] .txsec .frame.txfig{aspect-ratio:4/3;margin-top:22px;max-width:380px}
 [data-labo] .txjump{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
 [data-labo] .txjump a{font-size:.86rem;padding:8px 15px;border-radius:980px;background:var(--canvas);color:var(--graphite);text-decoration:none}
 [data-labo] .txjump a:hover{background:var(--wash);color:var(--ink)}
