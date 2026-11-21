@@ -1039,25 +1039,19 @@
 [data-labo] [data-clinic][data-method] .btn-primary:hover{background:#20262A}
 [data-labo] [data-clinic][data-method] .fmedia .still{object-position:72% 22%}
 /* the shared .fhero band (labo.css ~891) hardcodes a warm cream/peach (#FFF8F2/#FFD9CC) tuned for the
-   Clinic's orange hero — a 5th colour the brand guide explicitly rules out. Method's ink hero uses plain
-   white instead, matching the guide's own "white on ink" pairing. */
-[data-labo] [data-clinic][data-method] .fhero{color:#FFFFFF}
-[data-labo] [data-clinic][data-method] .fhero .kicker{color:rgba(255,255,255,.78)}
-[data-labo] [data-clinic][data-method] .fhero h1,[data-labo] [data-clinic][data-method] .fhero h1 em{color:#FFFFFF}
-[data-labo] [data-clinic][data-method] .fhero .sub{color:rgba(255,255,255,.88)}
-[data-labo] [data-clinic][data-method] .fhero .led,[data-labo] [data-clinic][data-method] .fhero .led a{color:rgba(255,255,255,.88)}
-[data-labo] [data-clinic][data-method] .fhero .led a{text-decoration-color:#FFFFFF}
-[data-labo] [data-clinic][data-method] .fhero .btn-ghost{border-color:rgba(255,255,255,.75);color:#FFFFFF}
-[data-labo] [data-clinic][data-method] .fhero .btn-ghost:hover{background:rgba(255,255,255,.14)}
-[data-labo] [data-clinic][data-method] .fhero .btn-primary{background:#FFFFFF;color:var(--accent)}
-[data-labo] [data-clinic][data-method] .fhero .btn-primary:hover{background:#F2F3F2}
-/* the eligibility gate is the homepage's one real "main card" — try it in solid Sage instead of the
-   barely-tinted canvas every other card uses, per Javier: "lets try sage for the main card" */
-[data-labo] [data-clinic][data-method] .gate{background:#8F9A94}
-[data-labo] [data-clinic][data-method] .gate .gh p{color:rgba(44,53,57,.78)}
-[data-labo] [data-clinic][data-method] .gate .field>label{color:rgba(44,53,57,.78)}
-[data-labo] [data-clinic][data-method] .gate .res.warn{background:#FFFFFF}
-[data-labo] [data-clinic][data-method] .gate .res{border-top-color:rgba(44,53,57,.18)}
+   Clinic's orange hero — a 5th colour the brand guide explicitly rules out. Nov 20 2026, Javier:
+   "sage on the main part where the photo is" — the hero (where the model photo sits) goes Sage, with Ink
+   text, the exact pairing the brand guide measures at 4.9:1 (white-on-sage isn't a documented text combo). */
+[data-labo] [data-clinic][data-method] .fhero{background:#8F9A94;color:#2C3539}
+[data-labo] [data-clinic][data-method] .fhero .kicker{color:rgba(44,53,57,.75)}
+[data-labo] [data-clinic][data-method] .fhero h1,[data-labo] [data-clinic][data-method] .fhero h1 em{color:#2C3539}
+[data-labo] [data-clinic][data-method] .fhero .sub{color:rgba(44,53,57,.82)}
+[data-labo] [data-clinic][data-method] .fhero .led,[data-labo] [data-clinic][data-method] .fhero .led a{color:rgba(44,53,57,.82)}
+[data-labo] [data-clinic][data-method] .fhero .led a{text-decoration-color:#2C3539}
+[data-labo] [data-clinic][data-method] .fhero .btn-ghost{border-color:rgba(44,53,57,.55);color:#2C3539}
+[data-labo] [data-clinic][data-method] .fhero .btn-ghost:hover{background:rgba(44,53,57,.08)}
+[data-labo] [data-clinic][data-method] .fhero .btn-primary{background:#2C3539;color:#FFFFFF}
+[data-labo] [data-clinic][data-method] .fhero .btn-primary:hover{background:#20262A}
 
 /* .cards defaults to 3 columns (labo.css line ~522) — .cols4 is for a row that always has exactly
    4 items (the Method homepage's journal teaser), so it gets its own column count at each breakpoint
