@@ -1021,3 +1021,4 @@
 [data-labo] .authcopy{margin:0;max-width:30ch}
 @media (max-width:820px){[data-labo] .authphoto{display:none}}
 [data-labo] [data-clinic] .chips .cchip.own{background:var(--accent);color:#fff;border-color:var(--accent)}
+[data-clinic] .addbar.soon,[data-clinic] .addbar.soon:hover{background:transparent;color:var(--muted,#8a8a8a);border-style:dashed;cursor:default;opacity:.85}

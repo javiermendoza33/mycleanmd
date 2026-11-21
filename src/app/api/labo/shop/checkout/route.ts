@@ -20,6 +20,8 @@ export async function POST(req: NextRequest) {
     .filter((l): l is { p: NonNullable<typeof l.p>; qty: number } => !!l.p && l.qty > 0)
     .slice(0, 30);
   if (!lines.length) return NextResponse.json({ ok: false, error: "Your bag is empty." }, { status: 400 });
+  const notYet = lines.filter((l) => l.p.soon);
+  if (notYet.length) return NextResponse.json({ ok: false, error: `${notYet.map((l) => l.p.name).join(", ")} ${notYet.length === 1 ? "is" : "are"} coming soon and can't be ordered yet.` }, { status: 400 });
 
   const subtotal = lines.reduce((s, l) => s + l.p.price * l.qty, 0);
   const shipping = subtotal >= SHOP.freeShippingOver ? 0 : SHOP.flatShipping;
