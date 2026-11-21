@@ -12,7 +12,7 @@ export default function ServicesPage() {
   return (
     <>
       <PageHero
-        eyebrow="Services"
+        eyebrow="Treatments"
         title="Injectables, skincare & wellness services in Seattle"
         lede="Because every one of our clients is different and requires a customized approach, we tailor every treatment to your skin type, lifestyle and desired results."
       />

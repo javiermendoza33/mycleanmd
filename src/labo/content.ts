@@ -91,7 +91,7 @@ export const HEALTHIE = {
 
 export const NAV = [
   // Nov 18 2026: the clinic site's navigation (Javier: "make TLM like the site was").
-  { label: "Services", href: "/services" },
+  { label: "Treatments", href: "/services" },
   { label: "Shop", href: "/shop" },   // Nov 19 2026: the skincare shop
   { label: "Laser", href: "/treatments" },
   { label: "About", href: "/about" },

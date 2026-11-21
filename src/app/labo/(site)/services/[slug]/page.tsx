@@ -26,7 +26,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   const base = `https://${PRACTICE.domain}`;
   const jsonLd = [
     { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Services", item: `${base}/services` },
+      { "@type": "ListItem", position: 1, name: "Treatments", item: `${base}/services` },
       { "@type": "ListItem", position: 2, name: service.name, item: `${base}/services/${service.slug}` }] },
     { "@context": "https://schema.org", "@type": "MedicalProcedure", name: service.name, description: service.seo.description, url: `${base}/services/${service.slug}`, image: `${base}${service.image.src}`, provider: { "@id": `${base}/#clinic` } },
     ...(service.faqs.length ? [{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: service.faqs.map((f) => ({ "@type": "Question", name: f.question, acceptedAnswer: { "@type": "Answer", text: f.answer.map((a) => a.replace(/^- /, "")).join(" ") } })) }] : []),
@@ -37,7 +37,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       <section className="pageh" style={{ paddingBottom: 0 }}>
         <div className="wrap split">
           <div>
-            <nav className="crumb" aria-label="Breadcrumb"><Link href="/services">Services</Link> / <b>{service.name}</b></nav>
+            <nav className="crumb" aria-label="Breadcrumb"><Link href="/services">Treatments</Link> / <b>{service.name}</b></nav>
             <h1 style={{ marginTop: 16 }}>{service.name}</h1>
             {service.brand && <span className="kicker" style={{ display: "block", marginTop: 12 }}>{service.brand}</span>}
             <div className="prose" style={{ marginTop: 22 }}>
