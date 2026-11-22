@@ -3,6 +3,7 @@ import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import type { NextRequest } from 'next/server'
 import { isProviderEmail } from '@/lib/labo/provider'
+import { createAdminClient } from '@/lib/supabase/admin'
 
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url)
@@ -68,10 +69,17 @@ export async function GET(request: NextRequest) {
         await supabase.from('profiles')
           .upsert({ id: data.user.id, full_name: providerName, email: data.user.email, role })
       }
-      // thelabomethod.com has its own two homes (Nov 6 2026); MyCleanMD's dashboards 404 on that host.
-      if (/(^|\.)thelabomethod\.com$/.test(new URL(origin).hostname)) {
-        const { data: { user: u } } = await supabase.auth.getUser()
-        return NextResponse.redirect(`${origin}${isProviderEmail(u?.email) ? '/provider' : '/portal'}`)
+      // thelabomethod.com has its own homes (Nov 6 2026); MyCleanMD's dashboards 404 on that host.
+      // Nov 21 2026 (Javier: "i want the bounce gone and just go right to CRM we are building"): honor a safe
+      // ?next= from the sign-up/invite link, otherwise clinic staff and the provider land on /clinic (the clinic
+      // portal), patients on /portal. The sandbox host counts as a Labo host too.
+      if (/(^|\.)thelabomethod\.com$|^labo\.benthicgroup\.com$/.test(new URL(origin).hostname)) {
+        const next = searchParams.get('next')
+        if (next && next.startsWith('/') && !next.startsWith('//')) return NextResponse.redirect(`${origin}${next}`)
+        const email = data.user.email?.toLowerCase()
+        let staff = false
+        if (email) { try { const { data: row } = await createAdminClient().from('labo_staff').select('id').eq('email', email).eq('active', true).maybeSingle(); staff = !!row } catch { staff = false } }
+        return NextResponse.redirect(`${origin}${staff || isProviderEmail(email) ? '/clinic' : '/portal'}`)
       }
       if (role === 'doctor') return NextResponse.redirect(`${origin}/doctor/dashboard`)
       if (role === 'admin') return NextResponse.redirect(`${origin}/admin/dashboard`)

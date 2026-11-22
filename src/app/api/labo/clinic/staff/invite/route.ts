@@ -25,11 +25,11 @@ export async function POST(req: NextRequest) {
   <h1 style="font-size:22px;margin:0 0 14px">Hi ${esc(first)}, you've been added as ${roleLabel}.</h1>
   <p>${esc(by)} added you to the ${esc(PRACTICE.name)} portal — the calendar, appointments, customers, orders and the skin-quiz answers all live there. Three steps:</p>
   <ol style="padding-left:20px">
-    <li style="margin:8px 0"><b>Create your sign-in</b> at <a href="${origin}/auth/signup" style="color:#C8432A">${origin}/auth/signup</a> using <b>this exact email</b> — <b>${esc(row.email)}</b> — and a password of your choice. (Already have one with this email? Just sign in.)</li>
-    <li style="margin:8px 0">If a confirmation email arrives, click its link, then go to <a href="${origin}/auth/login" style="color:#C8432A">${origin}/auth/login</a>.</li>
+    <li style="margin:8px 0"><b>Create your sign-in</b> at <a href="${origin}/auth/signup?redirect=%2Fclinic" style="color:#C8432A">${origin}/auth/signup</a> using <b>this exact email</b> — <b>${esc(row.email)}</b> — and a password of your choice. (Already have one with this email? Just sign in.)</li>
+    <li style="margin:8px 0">If a confirmation email arrives, click its link, then go to <a href="${origin}/auth/login?redirect=%2Fclinic" style="color:#C8432A">${origin}/auth/login</a>.</li>
     <li style="margin:8px 0">Open <a href="${origin}/clinic" style="color:#C8432A">${origin}/clinic</a>. ${row.role === "admin" ? "As an admin you also see Services &amp; prices and Team." : "You'll see Today, Calendar, Appointments, Customers and Hours &amp; time off."}</li>
   </ol>
-  <p style="margin-top:18px"><a href="${origin}/auth/signup" style="display:inline-block;background:#C8432A;color:#fff;text-decoration:none;padding:12px 18px;border-radius:6px;font-weight:600">Create my sign-in</a></p>
+  <p style="margin-top:18px"><a href="${origin}/auth/signup?redirect=%2Fclinic" style="display:inline-block;background:#C8432A;color:#fff;text-decoration:none;padding:12px 18px;border-radius:6px;font-weight:600">Create my sign-in</a></p>
   <p style="font-size:13px;color:#7A726A;margin-top:22px">Access is tied to ${esc(row.email)}; signing up with a different address won't open the portal. Reply to this email if anything doesn't work.</p>
 </div>`;
   try {
