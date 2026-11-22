@@ -5,7 +5,7 @@
 One table-based, inline-styled layout (paper #F6F8FA, clay #1E6B7B, system sans — web fonts are unreliable in mail)
 rendered into one HTML file per Auth template. The Supabase project is shared with MyCleanMD, so the brand name is a
 Go-template conditional on the sign-up metadata: the Labo sign-up page sends `brand: "labo"` in `options.data`, and
-the template reads `{{ .Data.brand }}` — Nov 22 2026: the DEFAULT is The Labo Clinic (the live business); only accounts tagged brand="mycleanmd" get MyCleanMD, because older Labo accounts (Javier, Monika) predate the tag. Variables Supabase fills: {{ .ConfirmationURL }}, {{ .Email }}, {{ .SiteURL }}.
+the template reads `{{ .Data.brand }}` — Nov 22 2026: the DEFAULT is The Labo Clinic (the live business); only accounts tagged brand="mycleanmd" get MyCleanMD, because older Labo accounts (Javier, Monika) predate the tag. Variables Supabase fills: {{ .ConfirmationURL }}, {{ .TokenHash }}, {{ .Token }}, {{ .Email }}. Nov 22 2026: Labo links carry {{ .TokenHash }} to OUR /auth/reset and /auth/confirm pages — opening the page consumes nothing; verifyOtp runs on the person's click, in whatever browser they use. Chrome preloading / mail scanners had been burning Supabase's one-shot verify links.
 
     python3 supabase/email-templates/build.py        # writes confirm-signup.html, reset-password.html, magic-link.html
 
@@ -17,6 +17,9 @@ BRAND = '{{ if eq .Data.brand "mycleanmd" }}MyCleanMD{{ else }}The Labo Clinic{{
 SITE = '{{ if eq .Data.brand "mycleanmd" }}mycleanmd.com{{ else }}thelaboclinic.com{{ end }}'
 SITE_URL = '{{ if eq .Data.brand "mycleanmd" }}https://mycleanmd.com{{ else }}https://thelaboclinic.com{{ end }}'
 ADDRESS = '{{ if eq .Data.brand "mycleanmd" }}Telehealth for Washington residents{{ else }}1512 Eastlake Ave E, Seattle, WA 98102 · 877-756-4286{{ end }}'
+
+def labo_url(path, kind):
+    return '{{ if eq .Data.brand "mycleanmd" }}{{ .ConfirmationURL }}{{ else }}https://thelaboclinic.com' + path + '?token_hash={{ .TokenHash }}&type=' + kind + '{{ end }}'
 
 LAYOUT = """<!doctype html>
 <html lang="en">
@@ -38,10 +41,10 @@ LAYOUT = """<!doctype html>
         <h1 style="margin:0 0 14px;font-size:26px;line-height:1.2;letter-spacing:-.02em;font-weight:800;color:#132238;">__HEADLINE__</h1>
         <p style="margin:0 0 22px;font-size:16px;line-height:1.55;color:#3C495B;">__BODY__</p>
         <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td style="border-radius:6px;background:#1E6B7B;">
-          <a href="{{ .ConfirmationURL }}" style="display:inline-block;padding:14px 24px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:16px;font-weight:700;color:#FFFFFF;text-decoration:none;border-radius:6px;">__CTA__</a>
+          <a href="__ACTION__" style="display:inline-block;padding:14px 24px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:16px;font-weight:700;color:#FFFFFF;text-decoration:none;border-radius:6px;">__CTA__</a>
         </td></tr></table>
         <p style="margin:22px 0 0;font-size:13px;line-height:1.55;color:#858D99;">__AFTER__</p>
-        <p style="margin:18px 0 0;font-size:12px;line-height:1.5;color:#858D99;word-break:break-all;">If the button doesn't work, copy this link into your browser:<br><a href="{{ .ConfirmationURL }}" style="color:#1E6B7B;">{{ .ConfirmationURL }}</a></p>
+        <p style="margin:18px 0 0;font-size:12px;line-height:1.5;color:#858D99;word-break:break-all;">If the button doesn't work, copy this link into your browser:<br><a href="__ACTION__" style="color:#1E6B7B;">__ACTION__</a></p>
       </td></tr>
       <tr><td style="padding:22px 6px 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:12px;line-height:1.6;color:#858D99;">
         __BRAND__ · __ADDRESS__<br>
@@ -56,21 +59,21 @@ LAYOUT = """<!doctype html>
 
 TEMPLATES = {
     "confirm-signup": dict(
-        subject="Confirm your email — " + BRAND,
+        subject="Confirm your email — " + BRAND, ACTION=labo_url("/auth/confirm", "signup"),
         TITLE="Confirm your email", PREVIEW="One tap to open your member portal.",
         KICKER="Welcome", HEADLINE="Confirm your email to open your portal.",
         BODY="Thanks for joining __BRAND__. Confirm this address and your private portal opens — your visits, your plan, messages and requests in one place.",
         CTA="Confirm my email", AFTER="The link is good for a limited time. Didn't create an account? Ignore this email.",
     ),
     "reset-password": dict(
-        subject="Reset your password — " + BRAND,
+        subject="Reset your password — " + BRAND, ACTION=labo_url("/auth/reset", "recovery"),
         TITLE="Reset your password", PREVIEW="Choose a new password for your portal.",
         KICKER="Account", HEADLINE="Let's set a new password.",
         BODY="We received a request to reset the password for your __BRAND__ account. Use the button to choose a new one.",
         CTA="Choose a new password", AFTER='Or open <a href="__SITE_URL__/auth/reset" style="color:#1E6B7B;">__SITE__/auth/reset</a> and enter this code: <b style="font-size:16px;letter-spacing:.12em;color:#132238;">{{ .Token }}</b> (it works from any device, once). If you didn\'t ask for this, you can ignore it — your password stays as it is.',
     ),
     "magic-link": dict(
-        subject="Your sign-in link — " + BRAND,
+        subject="Your sign-in link — " + BRAND, ACTION=labo_url("/auth/confirm", "magiclink"),
         TITLE="Your sign-in link", PREVIEW="Tap to sign in to your portal.",
         KICKER="Sign in", HEADLINE="Here's your sign-in link.",
         BODY="Tap the button to sign in to your __BRAND__ portal. No password needed.",
