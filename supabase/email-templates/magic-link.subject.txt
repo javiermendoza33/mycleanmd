@@ -1,0 +1,1 @@
+Your sign-in link — {{ if eq .Data.brand "labo" }}The Labo Clinic{{ else }}MyCleanMD{{ end }}

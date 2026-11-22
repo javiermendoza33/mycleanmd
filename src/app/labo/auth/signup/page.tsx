@@ -12,7 +12,7 @@ function SignupInner() {
     e.preventDefault(); setBusy(true); setError("");
     const supabase = createClient();
     const redirect = params.get("redirect"); const next = redirect && redirect.startsWith("/") && !redirect.startsWith("//") ? redirect : "/portal";
-    const { data, error } = await supabase.auth.signUp({ email: email.trim(), password, options: { data: { full_name: name.trim(), role: "patient" }, emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}` } });
+    const { data, error } = await supabase.auth.signUp({ email: email.trim(), password, options: { data: { full_name: name.trim(), role: "patient", brand: "labo" }, emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}` } });
     if (error) { setError(error.message); setBusy(false); return; }
     if (data.user) await supabase.from("profiles").upsert({ id: data.user.id, full_name: name.trim(), role: "patient", email: email.trim() });
     if (!data.session) { setCheck(true); setBusy(false); return; }   // email confirmation on → tell them to check their inbox
