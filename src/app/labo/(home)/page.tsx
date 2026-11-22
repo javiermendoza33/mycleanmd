@@ -141,6 +141,28 @@ export default function LaboHome() {
           </div>
         </section>
 
+        {/* ── MEMBERS (Nov 21 2026, Javier: "sign up to be a member feature… advertise why people should join") ── */}
+        <section id="members" className="memband">
+          <div className="wrap">
+            <div>
+              <span className="kicker">Members · free to join</span>
+              <h2>Your clinic, in your pocket.</h2>
+              <p className="sub">A free member account opens your private portal — every visit, your treatment plan, messages to the clinic and requests from your phone. One minute to set up.</p>
+              <div className="acts">
+                <Link className="btn btn-primary rowbtn" href="/auth/signup?redirect=%2Fportal">Join free ›</Link>
+                <Link className="btn btn-ghost" href="/membership">Why join</Link>
+              </div>
+            </div>
+            <ul>
+              <li>Visits, plan and medications in one place</li>
+              <li>Message the clinic between visits</li>
+              <li>Refills and product requests from your phone</li>
+              <li>Member offers and new treatments first</li>
+              <li>Same login for in-clinic care and telehealth</li>
+            </ul>
+          </div>
+        </section>
+
         {/* ── TESTIMONIALS ─────────────────────────────────────────────── */}
         <section id="testimonials" className="grey">
           <div className="wrap">

@@ -23,6 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { p: "/booking", priority: 0.9 },
     { p: "/about", priority: 0.8 },
     { p: "/patient-care", priority: 0.7 },
+    { p: "/membership", priority: 0.8 },
     { p: "/testimonials", priority: 0.6 },
     { p: "/blog", priority: 0.6 },
     ...posts.map((x) => ({ p: `/blog/${x.slug}`, priority: 0.5 })),

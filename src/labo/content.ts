@@ -98,6 +98,7 @@ export const NAV = [
   { label: "Patient Care", href: "/patient-care" },
   { label: "Testimonials", href: "/testimonials" },
   { label: "Blog", href: "/blog" },
+  { label: "Members", href: "/membership" },   // Nov 21 2026: the free portal account, sold on /membership
   { label: "Contact", href: "/contact" },
 ] as const;
 

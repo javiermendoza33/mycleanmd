@@ -5,18 +5,24 @@ import { loadAppts, ptDayRange, todayPT, shiftDay, PILL, STATUS_LABEL, SETUP, fu
 import ApptActions from "@/components/labo/clinic/ApptActions";
 import NewAppointment from "@/components/labo/clinic/NewAppointment";
 import { getMenu } from "@/lib/labo/booking";
+import { createAdminClient } from "@/lib/supabase/admin";
+
+/** Members (Nov 21 2026) = portal accounts with role patient; 0 when the profiles table or the service key is missing. */
+async function countMembers(): Promise<number> {
+  try { const { count } = await createAdminClient().from("profiles").select("id", { count: "exact", head: true }).eq("role", "patient"); return count ?? 0; } catch { return 0; }
+}
 
 export default async function ClinicToday() {
   const s = await getStaff(); if (!s) return null;   // the layout shows "Clinic team only"
   const today = todayPT(); const [start, end] = ptDayRange(today);
-  const [{ rows, setup }, week, menu, team] = await Promise.all([loadAppts(start, end), loadAppts(start, ptDayRange(shiftDay(today, 7))[0]), getMenu(), listStaff()]);
+  const [{ rows, setup }, week, menu, team, members] = await Promise.all([loadAppts(start, end), loadAppts(start, ptDayRange(shiftDay(today, 7))[0]), getMenu(), listStaff(), countMembers()]);
   const unconfirmed = week.rows.filter((a) => a.status === "booked");
   const next = rows.find((a) => new Date(a.starts_at) > new Date() && !["completed", "no_show"].includes(a.status));
   const hour = Number(new Intl.DateTimeFormat("en-US", { timeZone: "America/Los_Angeles", hour: "numeric", hourCycle: "h23" }).format(new Date()));
   const dateLine = new Intl.DateTimeFormat("en-US", { timeZone: "America/Los_Angeles", weekday: "long", month: "long", day: "numeric" }).format(new Date());
   return (
     <>
-      <div className="top"><div><h1>{hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening"}, {s.staff.name.split(" ")[0]}</h1><p>{dateLine} · {rows.length} appointment{rows.length === 1 ? "" : "s"} today</p></div><NewAppointment menu={menu.map((m) => ({ slug: m.slug, name: m.name, min: m.min }))} team={team.rows.filter((t) => t.active).map((t) => ({ id: t.id!, name: t.name }))} /></div>
+      <div className="top"><div><h1>{hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening"}, {s.staff.name.split(" ")[0]}</h1><p>{dateLine} · {rows.length} appointment{rows.length === 1 ? "" : "s"} today · <Link href="/clinic/members">{members} member{members === 1 ? "" : "s"}</Link></p></div><NewAppointment menu={menu.map((m) => ({ slug: m.slug, name: m.name, min: m.min }))} team={team.rows.filter((t) => t.active).map((t) => ({ id: t.id!, name: t.name }))} /></div>
       {setup && <div className="setup">{SETUP}</div>}
       <div className="kpis">
         <div className="card kpi"><div className="lbl">Today</div><div className="v">{rows.length}</div><div className="d">{next ? `next at ${fmtTime(next.starts_at)}` : rows.length ? "all done" : "nothing booked"}</div></div>
