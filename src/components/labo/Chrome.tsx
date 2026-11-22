@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { NAV, PROGRAMS, PRACTICE, HEALTHIE, TREATMENTS, FOOTER_DISCLAIMER, METHOD } from "@/labo/content";
+import { NAV, TELE_LINK, PROGRAMS, PRACTICE, HEALTHIE, TREATMENTS, FOOTER_DISCLAIMER, METHOD } from "@/labo/content";
 import { services } from "@/labo/clinic/services";
 import { CLINIC_SITE } from "@/labo/clinic/site";
 import MobileNav from "@/components/labo/MobileNav";
+import { TelePill, TeleBand } from "@/components/labo/TeleCallout";
 import BagLink from "@/components/labo/shop/BagLink";
 import SearchButton from "@/components/labo/search/SearchButton";
 import { SHOP } from "@/labo/clinic/products";
@@ -27,19 +28,16 @@ export function Header() {
     <div className="promo"><div className="wrap"><span>{SHOP.promo}</span></div></div>
     <header className="site">
       <div className="wrap bar">
-        {/* .brand's own CSS has margin-right:auto (pushes the rest of the row right) — cancelled here
-            and moved onto the Telehealth link instead, so Telehealth sits flush next to the wordmark
-            (Javier's ask) and still pushes nav/Bag/Book-now to the right edge like every other header. */}
-        <Link className="brand" href="/" aria-label={`${PRACTICE.name} — home`} style={{ marginRight: 0 }}>{PRACTICE.name}</Link>
-        {/* Javier: "same style font as The Labo Clinic, and maybe make it in purple" — matches .brand's
-            own cascade (Outfit, 800, tight tracking) via inline style, keeps .more's underline + "›" for
-            the nav affordance, both recoloured to Method's purple (clinic's own --accent stays clay here). */}
-        <a className="more" href={`https://${METHOD.domain}`}
-           style={{ fontFamily: "var(--font-clinic)", fontWeight: 800, letterSpacing: "-.02em", fontSize: "1.05rem", color: METHOD.accent, textDecorationColor: METHOD.accent, marginRight: "auto" }}>Telehealth</a>
+        <Link className="brand" href="/" aria-label={`${PRACTICE.name} — home`}>{PRACTICE.name}</Link>
+        {/* Nov 21 2026: the purple "Telehealth ›" beside the wordmark became the weight-loss & peptides pill
+            (TeleCallout.tsx); the plain Telehealth link moved into the menu (TELE_LINK) and the band below the
+            header carries the call-out on phones and tablets. */}
+        <TelePill />
         <nav className="main" aria-label="Primary">
           {NAV.map((l) => (
             <Link key={l.href} href={l.href} className={pathname === l.href || pathname.startsWith(l.href + "/") ? "on" : undefined}>{l.label}</Link>
           ))}
+          <a className="telelink" href={TELE_LINK.href}>{TELE_LINK.label}</a>
         </nav>
         <SearchButton />
         <BagLink />
@@ -47,6 +45,7 @@ export function Header() {
         <MobileNav />
       </div>
     </header>
+    <TeleBand />
     </>
   );
 }

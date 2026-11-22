@@ -448,6 +448,10 @@ export const METHOD = {
   email: PRACTICE.email,
 } as const;
 
+/** The plain "Telehealth" menu entry (Nov 21 2026) — appended after NAV in the desktop nav and the phone sheet; the
+ *  header's eye-catcher is TeleCallout.tsx. Kept out of NAV so the footer's Explore column doesn't double it. */
+export const TELE_LINK = { label: "Telehealth", href: `https://${METHOD.domain}` } as const;
+
 export const METHOD_NAV = [
   { label: "Programs", href: "/programs" },
   { label: "Pricing", href: "/pricing" },

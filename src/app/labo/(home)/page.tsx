@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Footer } from "@/components/labo/Chrome";
 import { BookCta, LocationCard, PartnerLogos, SectionHead, ServiceCard, TestimonialCard } from "@/components/labo/Clinic";
-import { CLINIC, LASER_SPECS, NAV, PRACTICE, PROGRAMS, METHOD } from "@/labo/content";
+import { CLINIC, LASER_SPECS, NAV, TELE_LINK, PRACTICE, PROGRAMS, METHOD } from "@/labo/content";
 import { services } from "@/labo/clinic/services";
 import { testimonials } from "@/labo/clinic/testimonials";
 import { CLINIC_SITE } from "@/labo/clinic/site";
@@ -11,6 +11,7 @@ import { bestSellers, SHOP } from "@/labo/clinic/products";
 const HOME_PICKS = [...bestSellers.filter((p) => p.partner === "alastin").slice(0, 2), ...bestSellers.filter((p) => p.partner === "skinbetter").slice(0, 2)];
 import QuizTabs from "@/components/labo/shop/QuizTabs";
 import MobileNav from "@/components/labo/MobileNav";
+import { TelePill, TeleBand } from "@/components/labo/TeleCallout";
 import BagLink from "@/components/labo/shop/BagLink";
 import SearchButton from "@/components/labo/search/SearchButton";
 import { ProductCard } from "@/components/labo/shop/ProductCard";
@@ -34,7 +35,7 @@ const TELE = [
 /** Fitzpatrick I–VI and which wavelength reaches them safely — the laser section's signature row. */
 const SKIN = ["#F6E3D4", "#EDCDB3", "#D9AE8A", "#B98463", "#8A5A3E", "#5A3826"];
 
-const STRIP = ["Nurse practitioner-led", "Medical-Grade skincare", "Botox® · Dysport®", "Dermal Fillers", "Candela GentleMax Pro Plus Laser", "Where South Lake Union meets Eastlake, Seattle", SHOP.promo, "Free skincare shipping over $" + SHOP.freeShippingOver];
+const STRIP = ["Nurse practitioner-led", "Medical-Grade skincare", "Botox® · Dysport®", "Dermal Fillers", "Candela GentleMax Pro Plus Laser", "Where South Lake Union meets Eastlake, Seattle", SHOP.promo];
 
 const CONCERN_TILES = [
   { c: "Acne", t: "Breakouts & congestion" },
@@ -51,11 +52,11 @@ export default function LaboHome() {
       <div className="promo"><div className="wrap"><span>{SHOP.promo}</span></div></div>
       <header className="site">
         <div className="wrap bar">
-          <a className="brand" href="#top" style={{ marginRight: 0 }}>{PRACTICE.name}</a>
-          <a className="more" href={`https://${METHOD.domain}`}
-             style={{ fontFamily: "var(--font-clinic)", fontWeight: 800, letterSpacing: "-.02em", fontSize: "1.05rem", color: METHOD.accent, textDecorationColor: METHOD.accent, marginRight: "auto" }}>Telehealth</a>
+          <a className="brand" href="#top">{PRACTICE.name}</a>
+          <TelePill />
           <nav className="main" aria-label="Sections">
             {NAV.map((l) => <Link key={l.href} href={l.href}>{l.label}</Link>)}
+            <a className="telelink" href={TELE_LINK.href}>{TELE_LINK.label}</a>
           </nav>
           <SearchButton />
           <BagLink />
@@ -63,6 +64,7 @@ export default function LaboHome() {
           <MobileNav />
         </div>
       </header>
+      <TeleBand />
 
       <main id="top">
         {/* ── HERO — type on paper, the clinic's video in a box ─────────── */}

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
-import { NAV } from "@/labo/content";
+import { NAV, TELE_LINK } from "@/labo/content";
 import { CLINIC_SITE } from "@/labo/clinic/site";
 import { openBag } from "@/components/labo/shop/bag";
 import { openSearch } from "@/components/labo/search/search-state";
@@ -30,6 +30,7 @@ export default function MobileNav() {
         <nav id="mnav" className="mnav" aria-label="Menu" style={{ top }}>
           <Link href="/" onClick={() => setOpen(false)}>Home</Link>
           {NAV.map((l) => <Link key={l.href} href={l.href} onClick={() => setOpen(false)}>{l.label}</Link>)}
+          <a className="telelink" href={TELE_LINK.href}>{TELE_LINK.label} <small>weight loss &amp; peptides, by video</small></a>
           <button type="button" className="mbag" onClick={() => { setOpen(false); openSearch(); }}>Search</button>
           <button type="button" className="mbag" onClick={() => { setOpen(false); openBag(); }}>Your bag</button>
           <Link className="btn btn-primary" href="/booking" onClick={() => setOpen(false)}>Book now</Link>
