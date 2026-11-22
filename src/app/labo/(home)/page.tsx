@@ -99,7 +99,7 @@ export default function LaboHome() {
         {/* ── OUR OWN LINE (Nov 20 2026) ───────────────────────────────── */}
         <section className="grey" style={{ paddingBlock: 64 }}>
           <div className="wrap">
-            <div className="rowhead"><div><span className="kicker">The shop · ALASTIN Skincare® &amp; skinbetter science®</span><h2 style={{ marginTop: 8 }}>Medical-grade skincare</h2></div><Link className="more" href="/shop">Shop all</Link></div>
+            <div className="rowhead"><div><span className="kicker">The shop · ALASTIN Skincare® &amp; skinbetter science®</span><h2 style={{ marginTop: 8 }}>Medical-Grade Skincare</h2></div><Link className="more" href="/shop">Shop all</Link></div>
             <div className="pgrid">{HOME_PICKS.map((p) => <ProductCard key={p.slug} p={p} />)}</div>
           </div>
         </section>
