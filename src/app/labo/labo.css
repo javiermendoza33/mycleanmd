@@ -776,8 +776,8 @@ html,body{overflow-x:clip}
 }
 
 /* value ticker */
-/* Nov 22 2026 (Javier): the ticker is navy with white type — a hard break between the hero and the quiz. */
-[data-labo] [data-clinic] .strip{background:var(--ink);color:#FFFFFF;border-bottom:0;overflow:hidden}
+/* Nov 22 2026 (Javier): the ticker is the teal accent ("the blue in you") with white type — a hard break between the hero and the quiz. */
+[data-labo] [data-clinic] .strip{background:var(--accent);color:#FFFFFF;border-bottom:0;overflow:hidden}
 [data-labo] [data-clinic] .strip .track{display:flex;width:max-content;animation:labostrip 48s linear infinite}
 [data-labo] [data-clinic] .strip span{padding:11px 34px;font-size:.78rem;font-weight:500;white-space:nowrap;border-right:1px solid rgba(255,255,255,.18)}
 @keyframes labostrip{to{transform:translateX(-50%)}}
