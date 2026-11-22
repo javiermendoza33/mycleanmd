@@ -86,7 +86,7 @@ export default function LaboHome() {
         <div className="strip" aria-hidden="true"><div className="track">{[...STRIP, ...STRIP].map((x, i) => <span key={i}>{x}</span>)}</div></div>
 
         {/* ── SKIN QUIZ (Nov 21 2026 — replaced the Best sellers row, Javier: "i like this idea of take our quiz") ── */}
-        <section id="shop" style={{ paddingBottom: 0 }}>
+        <section id="shop">
           <div className="wrap">
             <div className="rowhead"><div><span className="kicker">Find your routine</span><h2 style={{ marginTop: 8 }}>Not sure where to start? Take the skin quiz</h2></div><Link className="more" href="/shop">Shop all</Link></div>
             <SkinQuiz />
