@@ -984,8 +984,10 @@ html,body{overflow-x:clip}
 [data-labo] [data-clinic] .fhero .btn-primary:hover{background:#FFFFFF}
 [data-labo] [data-clinic] .fhero .btn-ghost{border-color:rgba(255,248,242,.75);color:#FFF8F2}
 [data-labo] [data-clinic] .fhero .btn-ghost:hover{background:rgba(255,255,255,.14)}
-[data-labo] [data-clinic] .fmedia{border-left-color:rgba(255,248,242,.5)}
-@media (max-width:860px){[data-labo] [data-clinic] .fmedia{border-bottom-color:rgba(255,248,242,.5)}}
+/* Nov 21 2026 (Javier: "remove the vertical white line between photo and header"): no hairline between the orange
+   text block and the photo (nor under the photo on phones). Method's hero keeps its own border rules below. */
+[data-labo] [data-clinic]:not([data-method]) .fmedia{border-left:0}
+@media (max-width:860px){[data-labo] [data-clinic]:not([data-method]) .fmedia{border-bottom:0}}
 
 /* Nov 19 2026 — the clinic display face (facile uses Syne; Javier liked it "but… something similar but not so wide" → Outfit,
    loaded as --font-clinic in layout.tsx). Geometric at normal width: light negative tracking, body 16px. Mono labels stay Plex Mono. */
