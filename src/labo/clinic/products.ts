@@ -18,7 +18,7 @@ import { CLINIC_SITE } from "@/labo/clinic/site";
  * SkinMedica was removed Nov 21 2026 (Javier: "no SkinMedica") — every item is now a partner-store line. Prices are MSRP;
  * `pricesConfirmed:false` prints a "pricing being finalized" note until Mónika confirms her list.
  */
-export type ProductType = "Cleanser" | "Exfoliant" | "Serum" | "Moisturizer" | "Sunscreen" | "Eyes";
+export type ProductType = "Cleanser" | "Exfoliant" | "Serum" | "Moisturizer" | "Sunscreen" | "Eye";
 export type Concern = "Acne" | "Aging" | "Dryness" | "Sensitive" | "Pigment";
 export type Form = "bottle" | "jar" | "tube";
 
@@ -64,7 +64,7 @@ export const SHOP = {
 } as const;
 
 export const CONCERNS: Concern[] = ["Acne", "Aging", "Dryness", "Sensitive", "Pigment"];
-export const TYPES: ProductType[] = ["Cleanser", "Exfoliant", "Serum", "Moisturizer", "Sunscreen", "Eyes"];
+export const TYPES: ProductType[] = ["Cleanser", "Exfoliant", "Serum", "Moisturizer", "Sunscreen", "Eye"];
 
 const ALASTIN = "ALASTIN Skincare®";
 const cdn = (file: string) => `https://cdn.shopify.com/s/files/1/1504/4854/files/${file}`;
@@ -97,7 +97,7 @@ export const products: Product[] = [
     tagline: "Encapsulated retinol, two strengths.", blurb: "A lipid-encapsulated retinol serum that supports smoother texture, improves tone and reduces the appearance of fine lines and wrinkles. Start at 0.25, move to 0.5 when your skin is ready.",
     how: ["Nightly on clean, dry skin", "A pea-sized amount; start three nights a week", "Sunscreen every morning"], actives: ["Encapsulated retinol", "Oat extract", "Niacinamide"] },
   { slug: "alastin-restorative-eye-complex", name: "Restorative Eye Complex with TriHex Technology®", line: ALASTIN, lineShort: "ALASTIN", partner: "alastin",
-    type: "Eyes", concerns: ["Aging"], form: "bottle", tone: "#D5CFC8", label: "Restorative Eye Complex", size: "0.5 fl oz · 15 mL", price: 128,
+    type: "Eye", concerns: ["Aging"], form: "bottle", tone: "#D5CFC8", label: "Restorative Eye Complex", size: "0.5 fl oz · 15 mL", price: 128,
     image: { src: cdn("Restorative_Eye_Complex_Shadow.png?v=1758537976"), alt: "ALASTIN Restorative Eye Complex bottle" },
     tagline: "Puffiness, dark circles and the first lines.", blurb: "An award-winning anti-aging eye cream that reduces the appearance of puffiness and dark circles while smoothing fine lines and wrinkles around the eyes. Post-procedure safe.",
     how: ["Morning and night", "A rice-grain amount patted around the orbital bone"], actives: ["TriHex Technology®", "Peptides", "Caffeine"] },
@@ -159,7 +159,7 @@ export const products: Product[] = [
     how: ["Every morning as the last step", "Reapply every two hours outdoors"], actives: ["Zinc oxide", "Titanium dioxide", "Antioxidants"] },
   { slug: "skinbetter-eyemax-alpharet", name: "EyeMax AlphaRet Overnight Cream", line: "skinbetter science", lineShort: "skinbetter", partner: "skinbetter",
     image: { src: "/labo/img/shop/skinbetter/skinbetter-eyemax-alpharet.jpg", alt: "EyeMax AlphaRet Overnight Cream by skinbetter science" },
-    type: "Eyes", concerns: ["Aging"], form: "jar", tone: "#D6CBBF", label: "EyeMax", size: "15 mL", price: 135,
+    type: "Eye", concerns: ["Aging"], form: "jar", tone: "#D6CBBF", label: "EyeMax", size: "15 mL", price: 135,
     tagline: "The AlphaRet retinoid, made for under the eyes.", blurb: "A gentle retinoid eye cream for puffiness, crepiness and the first lines, for evening use.",
     how: ["Nightly", "A rice-grain amount patted around the orbital bone", "Avoid the lash line"], actives: ["AlphaRet", "Peptides", "Caffeine"] },
   { slug: "skinbetter-trio-rebalancing", name: "Trio Rebalancing Moisture Treatment", line: "skinbetter science", lineShort: "skinbetter", partner: "skinbetter",
