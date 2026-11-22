@@ -25,6 +25,11 @@ const DESCRIPTION = `${METHOD.tagline} Real labs first, a real dose plan, a clin
 
 export const metadata: Metadata = {
   metadataBase: new URL(`https://${METHOD.domain}`),
+  icons: {
+    icon: [{ url: "/labo/method-favicon/icon-32.png", sizes: "32x32", type: "image/png" }, { url: "/labo/method-favicon/icon-192.png", sizes: "192x192", type: "image/png" }, { url: "/labo/method-favicon/icon-512.png", sizes: "512x512", type: "image/png" }],
+    shortcut: "/labo/method-favicon/favicon.ico",
+    apple: "/labo/method-favicon/apple-touch-icon.png",
+  },
   title: {
     template: `%s | ${METHOD.name}`,
     // `absolute`, not `default`: a layout's own `default` title is still an

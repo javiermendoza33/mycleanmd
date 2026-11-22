@@ -47,6 +47,13 @@ const DESCRIPTION =
 
 export const metadata: Metadata = {
   metadataBase: new URL(`https://${PRACTICE.domain}`),
+  // Nov 22 2026 (Javier: "create favicon on both domains"): navy mark with a teal dot for the clinic; the Method layout
+  // overrides with its own (slate + sage). Files in public/labo/favicon — rendered by a PIL script, see CLAUDE.md.
+  icons: {
+    icon: [{ url: "/labo/favicon/icon-32.png", sizes: "32x32", type: "image/png" }, { url: "/labo/favicon/icon-192.png", sizes: "192x192", type: "image/png" }, { url: "/labo/favicon/icon-512.png", sizes: "512x512", type: "image/png" }],
+    shortcut: "/labo/favicon/favicon.ico",
+    apple: "/labo/favicon/apple-touch-icon.png",
+  },
   title: {
     template: `%s | ${PRACTICE.name}`,
     default: `${TITLE} | ${PRACTICE.name}`,
