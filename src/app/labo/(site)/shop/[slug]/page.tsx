@@ -27,7 +27,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     <>
       <section className="pdp">
         <div className="wrap">
-          <p className="crumb"><Link href="/shop">Shop</Link> / <Link href={`/shop?t=${p.type}`}>{p.type}s</Link> / <b>{p.name}</b></p>
+          <p className="crumb"><Link href="/shop">Shop</Link> / <Link href={`/shop?t=${p.type}`}>{p.type === "Eye" ? "Eye" : `${p.type}s`}</Link> / <b>{p.name}</b></p>
           <div className="pdpgrid">
             <div className="pdpimg"><Packshot p={p} /></div>
             <div className="pdpinfo">
