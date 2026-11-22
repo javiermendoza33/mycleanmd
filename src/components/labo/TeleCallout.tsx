@@ -18,7 +18,7 @@ export function TelePill() {
   return (
     <a className="teleco" href={HREF} aria-label="Interested in weight loss and peptides? Open The Labo Method telehealth">
       <i aria-hidden="true" />
-      <span>Weight loss &amp; peptides?</span>
+      <span>Weight Loss &amp; Peptides?</span>
       <b>Click here ›</b>
     </a>
   );
@@ -28,7 +28,7 @@ export function TeleBand() {
   return (
     <a className="teleband" href={HREF} aria-label="Interested in weight loss and peptides? Open The Labo Method telehealth">
       <span className="wrap">
-        <span className="t">Interested in weight loss &amp; peptides?</span>
+        <span className="t">Interested in Weight Loss &amp; Peptides?</span>
         <b>Click here ›</b>
       </span>
     </a>
