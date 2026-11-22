@@ -1197,3 +1197,6 @@ html,body{overflow-x:clip}
 [data-labo] [data-clinic] .mnav>a.telelink{color:#6E3F99}
 [data-labo] [data-clinic] .mnav>a.telelink small{display:block;font-size:.78rem;font-weight:500;color:#6E3F99;opacity:.8;letter-spacing:0;line-height:1.3;margin-top:2px}
 @media (prefers-reduced-motion:reduce){[data-labo] [data-clinic] .teleco i{animation:none}}
+/* Row-head CTA (Nov 21 2026, Javier: "orange style button a bit bigger for more focus" on the shop row's Shop all). */
+[data-labo] [data-clinic] .rowhead .rowbtn{font-size:1.04rem;padding:14px 26px;white-space:nowrap;flex:none}
+@media (max-width:560px){[data-labo] [data-clinic] .rowhead .rowbtn{font-size:.96rem;padding:12px 20px}}
