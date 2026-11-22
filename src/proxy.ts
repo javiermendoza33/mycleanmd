@@ -55,7 +55,7 @@ export async function proxy(request: NextRequest) {
     if (isMethod) {
       const first = '/' + (path.split('/')[1] ?? '')
       const clinicBlog = path.startsWith('/blog/') && CLINIC_BLOG_SLUGS.has(path.split('/')[2] ?? '')
-      const portalish = ['/portal', '/clinic', '/provider'].includes(first) || path === '/auth/login' || path === '/auth/signup' || path === '/auth/forgot'
+      const portalish = ['/portal', '/clinic', '/provider'].includes(first) || path === '/auth/login' || path === '/auth/signup' || path === '/auth/forgot' || path === '/auth/reset'
       if (CLINIC_ONLY_PATHS.includes(first.slice(1)) || clinicBlog || portalish) {
         const url = new URL(request.url); url.host = CLINIC_HOST
         return NextResponse.redirect(url, 308)
@@ -84,7 +84,7 @@ export async function proxy(request: NextRequest) {
     // Verified Nov 6 2026: login, /api/auth/providers and /api/labo/checkout all 404'd on this host before this.
     // Nov 19 2026: the Labo hosts get their own sign-in pages in the clinic look (src/app/labo/auth/*); the callback and
     // everything else under /auth and /api stays the shared root app.
-    if (path === '/auth/login' || path === '/auth/signup' || path === '/auth/forgot') {
+    if (path === '/auth/login' || path === '/auth/signup' || path === '/auth/forgot' || path === '/auth/reset') {
       const url = request.nextUrl.clone(); url.pathname = `/labo${path}`
       return NextResponse.rewrite(url)
     }

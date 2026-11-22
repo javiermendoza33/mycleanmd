@@ -13,7 +13,7 @@ async function laboHome(): Promise<string> {
 function LoginInner() {
   const router = useRouter(); const params = useSearchParams();
   const [email, setEmail] = useState(""); const [password, setPassword] = useState(""); const [show, setShow] = useState(false); const [error, setError] = useState(""); const [busy, setBusy] = useState(false);
-  useEffect(() => { if (params.get("error") === "oauth_failed") setError("That sign-in did not complete. Please try again."); }, [params]);
+  useEffect(() => { if (params.get("error") === "oauth_failed") setError("That link didn't complete — email links work once and expire quickly. Sign in, or request a new link with \"Forgot it?\"."); }, [params]);
   async function submit(e: React.FormEvent) {
     e.preventDefault(); setBusy(true); setError("");
     const { error } = await createClient().auth.signInWithPassword({ email: email.trim(), password });

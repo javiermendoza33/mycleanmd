@@ -8,7 +8,7 @@ export default function LaboForgot() {
   const [email, setEmail] = useState(""); const [sent, setSent] = useState(false); const [error, setError] = useState(""); const [busy, setBusy] = useState(false);
   async function submit(e: React.FormEvent) {
     e.preventDefault(); setBusy(true); setError("");
-    const { error } = await createClient().auth.resetPasswordForEmail(email.trim(), { redirectTo: `${window.location.origin}/auth/callback` });
+    const { error } = await createClient().auth.resetPasswordForEmail(email.trim(), { redirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent("/auth/reset")}` });
     if (error) { setError(error.message); setBusy(false); return; } setSent(true); setBusy(false);
   }
   if (sent) return <div className="authcard"><span className="kicker">Sent</span><h2>Check your email.</h2><p className="authsub">If there&rsquo;s an account for {email}, a reset link is on its way. <Link href="/auth/login">Back to sign in</Link></p></div>;
