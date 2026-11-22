@@ -9,7 +9,7 @@ import { isProviderEmail } from "@/lib/labo/provider";
  * existing Supabase email/password pages; a staff row with that email is what grants access.
  */
 export type Role = "admin" | "staff";
-export type Staff = { id: string | null; email: string; name: string; role: Role; active: boolean; color: string | null };
+export type Staff = { id: string | null; email: string; name: string; role: Role; active: boolean; color: string | null; invited_at?: string | null };
 export type Block = { id: string; staff_id: string | null; starts_at: string; ends_at: string; reason: string | null; created_by: string | null };
 export type ServiceOverride = { slug: string; name: string | null; duration_min: number | null; price: number | null; price_note: string | null; active: boolean };
 

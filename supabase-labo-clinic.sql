@@ -37,3 +37,6 @@ alter table public.labo_bookings
 alter table public.labo_staff    enable row level security;
 alter table public.labo_blocks   enable row level security;
 alter table public.labo_services enable row level security;
+
+-- Nov 21 2026: "Send invite" on /clinic/team stamps the last sign-up email (applied via the Supabase MCP connector).
+alter table public.labo_staff add column if not exists invited_at timestamptz;
