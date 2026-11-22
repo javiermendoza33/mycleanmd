@@ -6,7 +6,7 @@ import { services } from "@/labo/clinic/services";
 import { testimonials } from "@/labo/clinic/testimonials";
 import { CLINIC_SITE } from "@/labo/clinic/site";
 import { ownLine, SHOP } from "@/labo/clinic/products";
-import SkinQuiz from "@/components/labo/shop/SkinQuiz";
+import QuizTabs from "@/components/labo/shop/QuizTabs";
 import MobileNav from "@/components/labo/MobileNav";
 import BagLink from "@/components/labo/shop/BagLink";
 import SearchButton from "@/components/labo/search/SearchButton";
@@ -89,7 +89,7 @@ export default function LaboHome() {
         <section id="shop">
           <div className="wrap">
             <div className="rowhead"><div><span className="kicker">Find your routine</span><h2 style={{ marginTop: 8 }}>Not sure where to start? Take the skin quiz</h2></div><Link className="more" href="/shop">Shop all</Link></div>
-            <SkinQuiz />
+            <QuizTabs />
           </div>
         </section>
 

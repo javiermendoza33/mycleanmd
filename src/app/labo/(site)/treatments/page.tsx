@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Faq from "@/components/labo/Faq";
+import TreatmentQuiz from "@/components/labo/shop/TreatmentQuiz";
 import { CLINIC, GROUP_NOTE, GROUPS, LASER_FAQ, TREATMENTS, GATE_ROBOTS } from "@/labo/content";
 
 const GROUP_KEYS = ["laser", "injectables", "skin"] as const;
@@ -95,6 +96,14 @@ export default function TreatmentsPage() {
             </div>
           ))}
           <p className="note">Starting prices; per unit, syringe, vial or session as shown. Prices are per session and confirmed in writing at your consultation, with the total for the full course.</p>
+        </div>
+      </section>
+
+      {/* Nov 21 2026 — the treatment finder from Javier's blueprint PDF, also on the home page's quiz card. */}
+      <section className="grey" style={{ paddingBlock: 64 }}>
+        <div className="wrap">
+          <div className="rowhead"><div><span className="kicker">Find your treatment</span><h2 style={{ marginTop: 8 }}>Not sure which treatment fits? Five quick questions</h2></div></div>
+          <TreatmentQuiz />
         </div>
       </section>
 

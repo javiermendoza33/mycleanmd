@@ -787,6 +787,17 @@
 [data-labo] [data-clinic] .quiz .qnav{display:flex;align-items:center;flex-wrap:wrap;gap:16px;margin-top:22px}
 [data-labo] [data-clinic] .quiz .btn[disabled]{opacity:.45;cursor:not-allowed}
 [data-labo] [data-clinic] .quiz .cont{align-self:auto}
+/* two finders in one card (Nov 21 2026): segmented tabs above the card, treatment result rows, safety banners */
+[data-labo] [data-clinic] .quiztabs{display:flex;gap:8px;margin-bottom:14px}
+[data-labo] [data-clinic] .quiztabs button{font:inherit;font-size:.82rem;font-weight:600;padding:9px 16px;border:1px solid var(--rule);border-radius:999px;background:var(--paper);color:var(--ink);cursor:pointer}
+[data-labo] [data-clinic] .quiztabs button.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+[data-labo] [data-clinic] .txrecs{list-style:none;margin:18px 0 0;padding:0;border-top:1px solid var(--rule)}
+[data-labo] [data-clinic] .txrecs li{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid var(--hair)}
+[data-labo] [data-clinic] .txrecs li>div{display:flex;flex-direction:column;gap:3px}
+[data-labo] [data-clinic] .txrecs b{font-size:1.05rem;letter-spacing:-.015em}
+[data-labo] [data-clinic] .txrecs .mono{font-size:.72rem;color:var(--muted)}
+[data-labo] [data-clinic] .txrecs .more,[data-labo] [data-clinic] .quiz .qhead .cont{white-space:nowrap;flex:none}
+[data-labo] [data-clinic] .qbanner{margin:14px 0 0;padding:10px 14px;border-left:3px solid var(--accent);background:var(--wash);font-size:.92rem;color:var(--graphite);border-radius:0 6px 6px 0}
 @media (max-width:560px){[data-labo] [data-clinic] .quiz{padding:20px 18px 22px}[data-labo] [data-clinic] .quiz .quizopts .cchip{width:100%;text-align:left}}
 [data-labo] [data-clinic] .rowhead h2{font-size:clamp(1.6rem,3vw,2.2rem)}
 [data-labo] [data-clinic] .rowhead .more{font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration-color:var(--ink)}
