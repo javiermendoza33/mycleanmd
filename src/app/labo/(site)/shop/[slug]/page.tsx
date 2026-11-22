@@ -6,6 +6,7 @@ import { Packshot } from "@/components/labo/shop/Packshot";
 import AddToBag from "@/components/labo/shop/AddToBag";
 import { ProductCard } from "@/components/labo/shop/ProductCard";
 import { BookCta } from "@/components/labo/Clinic";
+import { applyRates } from "@/lib/labo/rates";
 
 export function generateStaticParams() { return products.map((p) => ({ slug: p.slug })); }
 
@@ -16,8 +17,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
-  const p = getProduct((await params).slug);
-  if (!p) notFound();
+  const base = getProduct((await params).slug);
+  if (!base) notFound();
+  const [p] = await applyRates([base]);   // Nov 22 2026: published rate-plan price (adjustable lines only)
   const also = products.filter((x) => x.slug !== p.slug && (x.type === p.type || x.concerns.some((c) => p.concerns.includes(c)))).slice(0, 3);
   const jsonLd = {
     "@context": "https://schema.org", "@type": "Product", name: p.name, brand: { "@type": "Brand", name: p.line }, description: p.blurb,

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { CONCERNS, products, SHOP } from "@/labo/clinic/products";
 import { BookCta } from "@/components/labo/Clinic";
 import ShopGrid from "@/components/labo/shop/ShopGrid";
+import { applyRates } from "@/lib/labo/rates";
 
 export const metadata = {
   title: "Shop medical-grade skincare",
@@ -9,7 +10,8 @@ export const metadata = {
   alternates: { canonical: "/shop" },
 };
 
-export default function ShopPage() {
+export default async function ShopPage() {
+  const list = await applyRates(products);   // Nov 22 2026: published rate-plan prices (adjustable lines only)
   return (
     <>
       <section className="shophero">
@@ -26,7 +28,7 @@ export default function ShopPage() {
         </div>
       </section>
       <section className="shopgrid">
-        <div className="wrap"><ShopGrid products={products} /></div>
+        <div className="wrap"><ShopGrid products={list} /></div>
       </section>
       <section className="grey" style={{ paddingBlock: 70 }}>
         <div className="wrap values">

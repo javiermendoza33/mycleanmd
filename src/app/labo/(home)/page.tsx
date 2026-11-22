@@ -6,6 +6,7 @@ import { services } from "@/labo/clinic/services";
 import { testimonials } from "@/labo/clinic/testimonials";
 import { CLINIC_SITE } from "@/labo/clinic/site";
 import { bestSellers, SHOP } from "@/labo/clinic/products";
+import { applyRates } from "@/lib/labo/rates";
 
 /** Home shop row (Nov 21 2026, Javier: "more generic for all skincare instead of just Alastin"): two best sellers per line. */
 const HOME_PICKS = [...bestSellers.filter((p) => p.partner === "alastin").slice(0, 2), ...bestSellers.filter((p) => p.partner === "skinbetter").slice(0, 2)];
@@ -45,8 +46,9 @@ const CONCERN_TILES = [
   { c: "Pigment", t: "Dark spots & tone" },
 ];
 
-export default function LaboHome() {
+export default async function LaboHome() {
   const s = CLINIC_SITE;
+  const picks = await applyRates(HOME_PICKS);   // Nov 22 2026: published rate-plan prices (adjustable lines only)
   return (
     <>
       <div className="promo"><div className="wrap"><span>{SHOP.promo}</span></div></div>
@@ -104,7 +106,7 @@ export default function LaboHome() {
         <section className="grey" style={{ paddingBlock: 64 }}>
           <div className="wrap">
             <div className="rowhead"><div><span className="kicker">The shop · ALASTIN Skincare® &amp; skinbetter science®</span><h2 style={{ marginTop: 8 }}>Medical-Grade Skincare</h2></div><Link className="btn btn-primary rowbtn" href="/shop">Shop all ›</Link></div>
-            <div className="pgrid">{HOME_PICKS.map((p) => <ProductCard key={p.slug} p={p} />)}</div>
+            <div className="pgrid">{picks.map((p) => <ProductCard key={p.slug} p={p} />)}</div>
           </div>
         </section>
 

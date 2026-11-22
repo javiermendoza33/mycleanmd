@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { getProduct, PARTNER_NAME, SHOP } from "@/labo/clinic/products";
+import { applyRates } from "@/lib/labo/rates";
 
 /**
  * The shop's checkout (Nov 19 2026): POST { lines: [{slug, qty}] } → a Stripe Checkout Session in payment mode, priced
@@ -15,8 +16,10 @@ export async function POST(req: NextRequest) {
 
   let body: { lines?: Array<{ slug?: string; qty?: number }> } = {};
   try { body = await req.json(); } catch { /* fallthrough */ }
+  const priced = await applyRates([...(body.lines || [])].map((l) => getProduct(String(l?.slug || ""))).filter((p): p is NonNullable<typeof p> => !!p));
+  const pricedBy = new Map(priced.map((p) => [p.slug, p]));
   const lines = (body.lines || [])
-    .map((l) => ({ p: getProduct(String(l?.slug || "")), qty: Math.max(0, Math.min(10, Math.floor(Number(l?.qty) || 0))) }))
+    .map((l) => ({ p: pricedBy.get(String(l?.slug || "")), qty: Math.max(0, Math.min(10, Math.floor(Number(l?.qty) || 0))) }))
     .filter((l): l is { p: NonNullable<typeof l.p>; qty: number } => !!l.p && l.qty > 0)
     .slice(0, 30);
   if (!lines.length) return NextResponse.json({ ok: false, error: "Your bag is empty." }, { status: 400 });
