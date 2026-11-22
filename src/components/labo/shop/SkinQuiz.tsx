@@ -43,7 +43,7 @@ function recommend(skin: Skin, concern: Concern, routine: Routine): Product[] {
     (q1.concern && p.concerns.includes(q1.concern) ? 1 : 0) +
     (q1.types.includes(p.type) ? 1 : 0) +
     (p.bestSeller ? 0.5 : 0) -
-    (p.soon ? 2 : 0);   // own-line placeholders are "Coming soon" — show them only when nothing buyable fits
+    (p.soon || (p.partner && !p.buyUrl) ? 2 : 0);   // not buyable yet (coming soon, or a partner item without its link) ranks below buyable fits
   const ranked = [...products].sort((a, b) => score(b) - score(a));
   if (routine === "all") return ranked.filter((p) => p.concerns.includes(concern));
   const want = routine === "two" ? ["Serum", "Sunscreen"] : STEPS;

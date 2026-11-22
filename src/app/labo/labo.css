@@ -851,8 +851,11 @@
 
 /* drawn packshots */
 [data-labo] [data-clinic] .pshot{position:relative;aspect-ratio:1;background:var(--wash);container-type:inline-size;overflow:hidden}
-[data-labo] [data-clinic] .pshot.photo{padding:0}
-[data-labo] [data-clinic] .pshot.photo img{width:100%;height:100%;object-fit:cover;display:block}
+/* Nov 21 2026: real packshots (ALASTIN) are bottles on a plain ground — contain them with breathing room, don't crop */
+[data-labo] [data-clinic] .pshot.photo{padding:9%;background:#F4F0EA}
+[data-labo] [data-clinic] .pshot.photo img{width:100%;height:100%;object-fit:contain;display:block;mix-blend-mode:multiply}
+/* outbound partner-store button (an <a> on .addbar): centre and strip the underline like the <button> */
+[data-labo] [data-clinic] .addbar.ext{text-align:center;text-decoration:none}
 [data-labo] [data-clinic] .pshot .pbottle{position:absolute;left:32cqw;bottom:9cqw;width:36cqw;height:79cqw;background:var(--tone);border-radius:9% 9% 7% 7%/5% 5% 4% 4%;box-shadow:inset -10cqw 0 12cqw -6cqw rgba(0,0,0,.12),inset 6cqw 0 10cqw -5cqw rgba(255,255,255,.4),0 10cqw 12cqw -10cqw rgba(0,0,0,.4)}
 [data-labo] [data-clinic] .pshot .pcap{position:absolute;left:30%;right:30%;top:-7%;height:9%;background:#1E1B19;border-radius:12% 12% 6% 6%/40% 40% 20% 20%}
 [data-labo] [data-clinic] .pshot .plbl{position:absolute;left:9%;right:9%;top:30%;bottom:16%;background:rgba(255,255,255,.93);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1cqw;text-align:center;padding:4%;border-radius:1cqw}

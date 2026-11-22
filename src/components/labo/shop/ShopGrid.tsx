@@ -23,7 +23,7 @@ export default function ShopGrid({ products }: { products: Product[] }) {
       <div className="chips" role="group" aria-label="Filter by line">
         <span className="kicker">Line</span>
         <button type="button" className={!line ? "on" : ""} onClick={() => setLine("")}>All</button>
-        {LINES.map((l) => <button key={l} type="button" className={line === l ? "on" : ""} onClick={() => setLine(line === l ? "" : l)}>{l === "The Labo Clinic" ? "Our own line" : l}</button>)}
+        {LINES.map((l) => <button key={l} type="button" className={line === l ? "on" : ""} onClick={() => setLine(line === l ? "" : l)}>{l}</button>)}
       </div>
       <div className="chips" role="group" aria-label="Filter by type">
         <span className="kicker">Type</span>

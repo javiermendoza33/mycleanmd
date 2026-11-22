@@ -16,9 +16,9 @@ export default function ShopPage() {
         <div className="wrap">
           <span className="kicker">The shop · medical-grade skincare</span>
           <h1>Skincare vetted by our providers&mdash;and trusted in our own daily routines</h1>
-          <p className="sub">Our own line, made for us, plus the clinic brands we use in the treatment room. Curated by us, with a routine that fits yours — no 12-step anything unless you want it, no judgement here.</p>
+          <p className="sub">ALASTIN Skincare® anti-aging and serums, plus the clinic brands we use in the treatment room. Curated by us, with a routine that fits yours — no 12-step anything unless you want it, no judgement here.</p>
           <div className="chips tiles" aria-label="Shop by concern">
-            <Link href="/shop?line=The%20Labo%20Clinic" className="cchip own">Our own line</Link>
+            <Link href="/shop?line=ALASTIN%20Skincare%C2%AE" className="cchip own">ALASTIN Skincare®</Link>
             {CONCERNS.map((c) => <Link key={c} href={`/shop?c=${c}`} className="cchip">{c}</Link>)}
           </div>
           {!SHOP.pricesConfirmed && <p className="note">Pricing is being finalized — text us for today&rsquo;s price on any item, or buy skinbetter directly from <a href={SHOP.skinbetterStore} target="_blank" rel="noopener noreferrer">the clinic&rsquo;s authorized store ↗</a>.</p>}

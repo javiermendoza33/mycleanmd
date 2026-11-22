@@ -5,7 +5,7 @@ import { CLINIC, LASER_SPECS, NAV, PRACTICE, PROGRAMS, METHOD } from "@/labo/con
 import { services } from "@/labo/clinic/services";
 import { testimonials } from "@/labo/clinic/testimonials";
 import { CLINIC_SITE } from "@/labo/clinic/site";
-import { ownLine, SHOP } from "@/labo/clinic/products";
+import { alastinLine, SHOP } from "@/labo/clinic/products";
 import QuizTabs from "@/components/labo/shop/QuizTabs";
 import MobileNav from "@/components/labo/MobileNav";
 import BagLink from "@/components/labo/shop/BagLink";
@@ -96,8 +96,8 @@ export default function LaboHome() {
         {/* ── OUR OWN LINE (Nov 20 2026) ───────────────────────────────── */}
         <section className="grey" style={{ paddingBlock: 64 }}>
           <div className="wrap">
-            <div className="rowhead"><div><span className="kicker">Made for us · The Labo Clinic skincare</span><h2 style={{ marginTop: 8 }}>Our own line.</h2></div><Link className="more" href="/shop?line=The%20Labo%20Clinic">See the line</Link></div>
-            <div className="pgrid">{ownLine.slice(0, 4).map((p) => <ProductCard key={p.slug} p={p} />)}</div>
+            <div className="rowhead"><div><span className="kicker">Authorized partner · Anti-aging &amp; serums</span><h2 style={{ marginTop: 8 }}>ALASTIN Skincare®</h2></div><Link className="more" href="/shop?line=ALASTIN%20Skincare%C2%AE">See the line</Link></div>
+            <div className="pgrid">{alastinLine.slice(0, 4).map((p) => <ProductCard key={p.slug} p={p} />)}</div>
           </div>
         </section>
 

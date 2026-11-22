@@ -2,14 +2,21 @@ import { CLINIC_SITE } from "@/labo/clinic/site";
 
 /**
  * The shop (Nov 19 2026, Javier: "Monika wanted a look and feel like facileskin.com… she wants to sell
- * products as well"). Retail skincare from the lines the clinic already partners with (the partner
- * strip: skinbetter science, Alastin, SkinMedica). One catalog, read by the home page's best-seller
- * row, /shop, /shop/[slug], the bag drawer and the Stripe checkout route — change a product here only.
+ * products as well"). Retail skincare from the lines the clinic partners with. One catalog, read by the
+ * home page's ALASTIN row, /shop, /shop/[slug], the bag drawer, the skin quiz and the Stripe checkout
+ * route — change a product here only.
  *
- * Prices: typical US retail for each item as a starting point; `pricesConfirmed:false` prints a
- * "pricing being finalized" note on the shop until Mónika confirms her list. Photos: none yet, so
- * every product renders a drawn packshot (Packshot.tsx) in the line's tone; drop a real photo in
- * `image` to replace it per product.
+ * Nov 21 2026 (Javier: "we will be selling these Alastin products, Anti-Ageing and Serums… remove our own
+ * brand replace with Alastin… we will add the unique links once we have them"): the Selfnamed own-line
+ * placeholders are gone. ALASTIN Skincare® items are `partner: "alastin"` — sold through the practice's
+ * ALASTIN partner storefront, never our Stripe checkout. `buyUrl` holds each product's unique partner
+ * link; until it's set the button reads "Available soon at ALASTIN Skincare®". Names, MSRP, sizes and
+ * packshots were taken from alastin.com's Anti-Aging and Serums collections on Nov 21 2026 (kits and
+ * holiday sets skipped); packshots are hotlinked from ALASTIN's CDN until the partner kit supplies files.
+ * Trademark/MAP per ALASTIN's web spec: "ALASTIN Skincare®" title case, no discounts near their buttons.
+ *
+ * Prices for the clinic-stocked lines (skinbetter, SkinMedica) are typical US retail as a starting point;
+ * `pricesConfirmed:false` prints a "pricing being finalized" note until Mónika confirms her list.
  */
 export type ProductType = "Cleanser" | "Exfoliant" | "Serum" | "Moisturizer" | "Sunscreen" | "Eyes";
 export type Concern = "Acne" | "Aging" | "Dryness" | "Sensitive" | "Pigment";
@@ -26,17 +33,21 @@ export interface Product {
   tone: string;
   label: string;
   size: string;
-  price: number; // USD
+  price: number; // USD (MSRP for partner lines)
   tagline: string;
   blurb: string;
   how: string[];
   actives: string[];
   bestSeller?: boolean;
   image?: { src: string; alt: string };
-  /** The clinic's own private-label line (Selfnamed-made, dropshipped under the clinic's name) */
+  /** Kept for historical labo_orders rows (the former Selfnamed own line); no current product sets it. */
   own?: boolean;
-  /** Shown on the shop but not purchasable yet (Nov 20 2026: the own line went live as placeholders — flip off per product once Monika's formula, price and packshot are real) */
+  /** Shown on the shop but not purchasable yet */
   soon?: boolean;
+  /** Sold through a partner's own storefront (never our Stripe checkout). */
+  partner?: "alastin";
+  /** The practice's unique partner link for this product — the card/PDP button goes here, in a new tab. */
+  buyUrl?: string;
 }
 
 export const SHOP = {
@@ -48,40 +59,74 @@ export const SHOP = {
   /** The line's own authorized store — kept as the alternative while online checkout is being set up. */
   skinbetterStore: CLINIC_SITE.shopUrl,
   shipsTo: "Ships within the US · pick up where South Lake Union meets Eastlake is free",
+  /** ALASTIN's public site — the per-product `buyUrl`s replace this once the practice has them. */
+  alastinSite: "https://alastin.com",
 } as const;
 
 export const CONCERNS: Concern[] = ["Acne", "Aging", "Dryness", "Sensitive", "Pigment"];
 export const TYPES: ProductType[] = ["Cleanser", "Exfoliant", "Serum", "Moisturizer", "Sunscreen", "Eyes"];
 
+const ALASTIN = "ALASTIN Skincare®";
+const cdn = (file: string) => `https://cdn.shopify.com/s/files/1/1504/4854/files/${file}`;
+
 export const products: Product[] = [
-  // ── The Labo Clinic's own line (Nov 20 2026, Javier: "working on white label for Labo… selfnamed.com") ──────────────
-  // Private-label formulas from Selfnamed (made in the EU, US orders ship from Charlotte NC in 2–5 days, no minimum,
-  // dropshipped one unit at a time). Names, prices and copy are placeholders until Monika picks her formulas from the
-  // sample set; photos come from Selfnamed's packshot mockups once the labels are designed.
-  { slug: "labo-vitamin-c-serum", name: "Vitamin C Glow Serum", line: "The Labo Clinic", lineShort: "Labo", own: true, soon: true,
-    type: "Serum", concerns: ["Pigment", "Aging"], form: "bottle", tone: "#F2E3D5", label: "Vitamin C Glow", size: "1 oz · 30 mL", price: 58, bestSeller: true,
-    tagline: "Our own daily brightener.", blurb: "A stabilized vitamin C serum made for us, to even tone and bring back the glow between treatments. Light enough for every morning, under sunscreen.",
-    how: ["Every morning on clean skin", "Three to four drops over the face and neck", "Follow with moisturizer and sunscreen"], actives: ["Vitamin C", "Hyaluronic acid", "Vitamin E"] },
-  { slug: "labo-hydrating-serum", name: "Deep Hydration Serum", line: "The Labo Clinic", lineShort: "Labo", own: true, soon: true,
-    type: "Serum", concerns: ["Dryness", "Sensitive"], form: "bottle", tone: "#D9E6E9", label: "Deep Hydration", size: "1 oz · 30 mL", price: 52,
-    tagline: "Multi-weight hyaluronic acid, our formula.", blurb: "Three weights of hyaluronic acid pull water into every layer of the skin. The serum we recommend after laser and peels, when skin needs calm hydration more than anything.",
-    how: ["Morning and night on damp skin", "Press in, don't rub", "Seal with moisturizer"], actives: ["Hyaluronic acid ×3", "Panthenol", "Aloe"] },
-  { slug: "labo-retinal-night", name: "Retinol-Alternative Night Serum", line: "The Labo Clinic", lineShort: "Labo", own: true, soon: true,
-    type: "Serum", concerns: ["Aging", "Acne"], form: "bottle", tone: "#CFC6D8", label: "Night Renewal", size: "1 oz · 30 mL", price: 64,
-    tagline: "Bakuchiol smoothing, without the peel.", blurb: "A plant-based retinol alternative for fine lines, texture and breakouts, gentle enough for nightly use and for skin that can't tolerate retinoids.",
-    how: ["Nightly on clean skin", "Two to three drops", "Moisturizer on top; sunscreen in the morning"], actives: ["Bakuchiol", "Niacinamide", "Squalane"] },
-  { slug: "labo-gentle-cleanser", name: "Gentle Daily Cleanser", line: "The Labo Clinic", lineShort: "Labo", own: true, soon: true,
-    type: "Cleanser", concerns: ["Sensitive", "Dryness"], form: "tube", tone: "#E6EEE8", label: "Daily Cleanser", size: "5 oz · 150 mL", price: 34,
-    tagline: "The first step of every routine we write.", blurb: "A low-foam, fragrance-free cleanser that removes sunscreen and the day without stripping. Safe the morning after treatments.",
-    how: ["Morning and night", "Massage over damp skin, rinse", "Pat dry"], actives: ["Glycerin", "Oat extract", "Chamomile"] },
-  { slug: "labo-mineral-spf", name: "Everyday Mineral SPF 30", line: "The Labo Clinic", lineShort: "Labo", own: true, soon: true,
-    type: "Sunscreen", concerns: ["Pigment", "Aging", "Sensitive"], form: "tube", tone: "#EFE2CF", label: "Mineral SPF 30", size: "1.7 oz · 50 mL", price: 42, bestSeller: true,
-    tagline: "The sunscreen we actually wear.", blurb: "Zinc-based broad-spectrum protection with a sheer finish, made for us. The non-negotiable step after any pigment, laser or retinoid plan.",
-    how: ["Every morning, last step", "Reapply every two hours outdoors"], actives: ["Zinc oxide", "Vitamin E", "Green tea"] },
-  { slug: "labo-peptide-eye", name: "Peptide Eye Cream", line: "The Labo Clinic", lineShort: "Labo", own: true, soon: true,
-    type: "Eyes", concerns: ["Aging", "Dryness"], form: "jar", tone: "#E8D6D0", label: "Peptide Eye", size: "0.5 oz · 15 mL", price: 46,
-    tagline: "Peptides and caffeine for tired eyes.", blurb: "A light eye cream for fine lines, puffiness and the under-eye crepiness that shows up first.",
-    how: ["Morning and night", "A rice-grain amount patted around the orbital bone"], actives: ["Peptides", "Caffeine", "Hyaluronic acid"] },
+  // ── ALASTIN Skincare® — Anti-Aging + Serums (Nov 21 2026) ─────────────────────────────────────────────
+  { slug: "alastin-c-radical-defense-serum", name: "C-RADICAL Defense Antioxidant Serum", line: ALASTIN, lineShort: "ALASTIN", partner: "alastin",
+    type: "Serum", concerns: ["Aging", "Pigment"], form: "bottle", tone: "#D9CBB6", label: "C-RADICAL", size: "1 fl oz · 29 mL", price: 218, bestSeller: true,
+    image: { src: cdn("C-RADICAL_Shadow.png?v=1766423168"), alt: "ALASTIN C-RADICAL Defense Antioxidant Serum bottle" },
+    tagline: "The future of vitamin C.", blurb: "A clinically proven antioxidant serum built on a novel form of vitamin C plus 14 antioxidants, to defend against environmental stressors while helping conserve the skin's elastin.",
+    how: ["Every morning on clean, dry skin", "Over the face, neck and chest", "Follow with moisturizer and sunscreen"], actives: ["Novel vitamin C", "14-antioxidant complex", "Elastin support"] },
+  { slug: "alastin-ha-immerse-serum", name: "HA (Hyaluronic Acid) IMMERSE Serum™", line: ALASTIN, lineShort: "ALASTIN", partner: "alastin",
+    type: "Serum", concerns: ["Dryness", "Sensitive"], form: "bottle", tone: "#D8E1E6", label: "HA IMMERSE", size: "1 fl oz · 29 mL", price: 134, bestSeller: true,
+    image: { src: cdn("HA_Immerse_Shadow.png?v=1765340815"), alt: "ALASTIN HA IMMERSE Serum bottle" },
+    tagline: "Instant and long-term hydration.", blurb: "A breakthrough hyaluronic-acid serum that delivers immediate hydration for smoother, more radiant skin while helping the skin amplify its own hyaluronic acid over time.",
+    how: ["Morning and night on clean skin", "Press over the face and neck", "Layer under moisturizer"], actives: ["Hyaluronic acid", "Hydration-amplifying complex"] },
+  { slug: "alastin-a-luminate-brightening-serum", name: "A-LUMINATE Brightening Serum™", line: ALASTIN, lineShort: "ALASTIN", partner: "alastin",
+    type: "Serum", concerns: ["Pigment"], form: "bottle", tone: "#E3D3C2", label: "A-LUMINATE", size: "1.7 fl oz · 50 mL", price: 198,
+    image: { src: cdn("AL_c7e16d17-3647-40b6-b728-191b5d09e0d9.png?v=1758313990"), alt: "ALASTIN A-LUMINATE Brightening Serum bottle" },
+    tagline: "Surface pigmentation, without the irritation.", blurb: "Helps reduce the appearance of surface pigmentation, minimize its recurrence and protect against future damage, in a clinically proven, non-irritating formula.",
+    how: ["Morning and night on clean skin", "Over the whole face, not just the spots", "Always with daily sunscreen"], actives: ["Brightening complex", "Pigment-recurrence support"] },
+  { slug: "alastin-restorative-skin-complex", name: "Restorative Skin Complex with TriHex+™", line: ALASTIN, lineShort: "ALASTIN", partner: "alastin",
+    type: "Serum", concerns: ["Aging"], form: "bottle", tone: "#C9CFDA", label: "Restorative Skin Complex", size: "1 fl oz · 29 mL", price: 258, bestSeller: true,
+    image: { src: cdn("RSC_PDP_bottle_1.jpg?v=1793631117"), alt: "ALASTIN Restorative Skin Complex with TriHex+ bottle" },
+    tagline: "The serum we send home after treatments.", blurb: "Visibly improves collagen- and elastin-depleted skin with the newly advanced TriHex+™ technology, targeting texture, tone, volume, hydration and elasticity. The first thing we recommend after laser, microneedling or peels.",
+    how: ["Morning and night", "One pump over the face and neck", "Layer under moisturizer and sunscreen"], actives: ["TriHex+™ peptides", "Antioxidants"] },
+  { slug: "alastin-renewal-retinol", name: "Renewal Retinol", line: ALASTIN, lineShort: "ALASTIN", partner: "alastin",
+    type: "Serum", concerns: ["Aging", "Acne"], form: "bottle", tone: "#CBC4D3", label: "Renewal Retinol", size: "1 fl oz · 29 mL · 0.25 or 0.5", price: 81,
+    image: { src: cdn("Retinol_.5.png?v=1758564937"), alt: "ALASTIN Renewal Retinol bottle" },
+    tagline: "Encapsulated retinol, two strengths.", blurb: "A lipid-encapsulated retinol serum that supports smoother texture, improves tone and reduces the appearance of fine lines and wrinkles. Start at 0.25, move to 0.5 when your skin is ready.",
+    how: ["Nightly on clean, dry skin", "A pea-sized amount; start three nights a week", "Sunscreen every morning"], actives: ["Encapsulated retinol", "Oat extract", "Niacinamide"] },
+  { slug: "alastin-restorative-eye-complex", name: "Restorative Eye Complex with TriHex Technology®", line: ALASTIN, lineShort: "ALASTIN", partner: "alastin",
+    type: "Eyes", concerns: ["Aging"], form: "bottle", tone: "#D5CFC8", label: "Restorative Eye Complex", size: "0.5 fl oz · 15 mL", price: 128,
+    image: { src: cdn("Restorative_Eye_Complex_Shadow.png?v=1758537976"), alt: "ALASTIN Restorative Eye Complex bottle" },
+    tagline: "Puffiness, dark circles and the first lines.", blurb: "An award-winning anti-aging eye cream that reduces the appearance of puffiness and dark circles while smoothing fine lines and wrinkles around the eyes. Post-procedure safe.",
+    how: ["Morning and night", "A rice-grain amount patted around the orbital bone"], actives: ["TriHex Technology®", "Peptides", "Caffeine"] },
+  { slug: "alastin-restorative-neck-complex", name: "Restorative Neck Complex with TriHex Technology®", line: ALASTIN, lineShort: "ALASTIN", partner: "alastin",
+    type: "Moisturizer", concerns: ["Aging"], form: "bottle", tone: "#D2D6DC", label: "Restorative Neck Complex", size: "2 fl oz · 59 mL", price: 158,
+    image: { src: cdn("Restoratie_Neck_Complex_Shadow.png?v=1758537832"), alt: "ALASTIN Restorative Neck Complex bottle" },
+    tagline: "Texture, pigment and lines on the neck and chest.", blurb: "A next-generation skin tightener, clinically proven to improve the appearance of texture, pigmentation and wrinkles on the neck and décolleté.",
+    how: ["Morning and night", "Smooth upward over the neck and chest"], actives: ["TriHex Technology®", "Skin-tightening peptides"] },
+  { slug: "alastin-ultra-nourishing-moisturizer", name: "Ultra Nourishing Moisturizer with TriHex Technology®", line: ALASTIN, lineShort: "ALASTIN", partner: "alastin",
+    type: "Moisturizer", concerns: ["Dryness", "Aging"], form: "jar", tone: "#E2D9CC", label: "Ultra Nourishing", size: "2 oz · 59 mL", price: 98,
+    image: { src: cdn("Ultra_Nourishing_Moisturizer_Shadow.png?v=1758537727"), alt: "ALASTIN Ultra Nourishing Moisturizer jar" },
+    tagline: "Rich hydration for dry or post-treatment skin.", blurb: "Hydrates, nourishes and soothes with linoleic acid, oat kernel, silver mushroom and TriHex Technology®. The moisturizer we reach for in winter and after laser.",
+    how: ["Morning and night, after serums", "A pea-sized amount over the face"], actives: ["TriHex Technology®", "Linoleic acid", "Oat kernel", "Silver mushroom"] },
+  { slug: "alastin-ultra-light-moisturizer", name: "Ultra Light Moisturizer with TriHex Technology®", line: ALASTIN, lineShort: "ALASTIN", partner: "alastin",
+    type: "Moisturizer", concerns: ["Acne", "Sensitive"], form: "jar", tone: "#DDE4E6", label: "Ultra Light", size: "2 oz · 59 mL", price: 98,
+    image: { src: cdn("Ultra_Light_Moisturizer_Shadow.png?v=1758537561"), alt: "ALASTIN Ultra Light Moisturizer jar" },
+    tagline: "Weightless hydration for oily or sensitive skin.", blurb: "Lightweight hydration that encourages the skin's own elastin and collagen production. The one for combination, oily and reactive skin.",
+    how: ["Morning and night, after serums", "A pea-sized amount over the face"], actives: ["TriHex Technology®", "Lightweight hydrators"] },
+  { slug: "alastin-hydratint-spf36", name: "HydraTint Pro Mineral Broad Spectrum Sunscreen SPF 36", line: ALASTIN, lineShort: "ALASTIN", partner: "alastin",
+    type: "Sunscreen", concerns: ["Aging", "Dryness", "Sensitive"], form: "tube", tone: "#E1CDB7", label: "HydraTint SPF 36", size: "1.8 fl oz · 55 mL", price: 84, bestSeller: true,
+    image: { src: cdn("Hydratint_Shadow.png?v=1758537886"), alt: "ALASTIN HydraTint Pro Mineral Sunscreen SPF 36 tube" },
+    tagline: "Tinted mineral SPF that feels like skincare.", blurb: "A lightweight, mineral, broad-spectrum tinted sunscreen that hydrates and protects from UVA/UVB while leaving a soft, glowing finish. Enough coverage to skip foundation.",
+    how: ["Every morning as the last step", "Reapply every two hours in the sun"], actives: ["Zinc oxide", "Titanium dioxide", "Hydrating peptides"] },
+  { slug: "alastin-silkshield-spf30", name: "SilkSHIELD® All Mineral Sunscreen SPF 30 with TriHex Technology®", line: ALASTIN, lineShort: "ALASTIN", partner: "alastin",
+    type: "Sunscreen", concerns: ["Sensitive", "Aging"], form: "tube", tone: "#E8E3DB", label: "SilkSHIELD SPF 30", size: "2 fl oz · 59 mL", price: 78,
+    image: { src: cdn("Silk_Shield_Shadow.png?v=1758537423"), alt: "ALASTIN SilkSHIELD All Mineral Sunscreen SPF 30 tube" },
+    tagline: "Transparent mineral protection, untinted.", blurb: "Powerful yet gentle all-mineral protection in a transparent finish, with an exclusive peptide blend that keeps working after sunset.",
+    how: ["Every morning as the last step", "Reapply every two hours outdoors"], actives: ["Zinc oxide", "TriHex Technology®", "Peptides"] },
+  // ── skinbetter science (clinic-stocked) ─────────────────────────────────────────────────────────────
   {
     slug: "skinbetter-alto-advanced", name: "Alto Advanced Defense and Repair Serum", line: "skinbetter science", lineShort: "skinbetter",
     type: "Serum", concerns: ["Aging", "Pigment"], form: "bottle", tone: "#D9C7B2", label: "Alto Advanced", size: "1 oz · 30 mL", price: 180, bestSeller: true,
@@ -130,30 +175,7 @@ export const products: Product[] = [
     how: ["Morning and night, before moisturizer", "Over the whole face, not just the spots", "Always with daily sunscreen"],
     actives: ["Brightening complex", "Niacinamide", "Antioxidants"],
   },
-  {
-    slug: "alastin-restorative-skin-complex", name: "Restorative Skin Complex", line: "Alastin Skincare", lineShort: "Alastin",
-    type: "Serum", concerns: ["Aging"], form: "bottle", tone: "#C9D3DD", label: "Restorative Skin Complex", size: "1 oz · 30 mL", price: 210, bestSeller: true,
-    tagline: "The serum we send home after treatments.",
-    blurb: "Alastin's peptide technology helps the skin clear damaged elastin and collagen and build new, healthy support. Ideal on its own, and the first thing we recommend after laser, microneedling or peels.",
-    how: ["Morning and night", "One pump over the face and neck", "Layer under moisturizer and sunscreen"],
-    actives: ["TriHex peptides", "Antioxidants", "Niacinamide"],
-  },
-  {
-    slug: "alastin-gentle-cleanser", name: "Gentle Cleanser", line: "Alastin Skincare", lineShort: "Alastin",
-    type: "Cleanser", concerns: ["Sensitive", "Dryness"], form: "tube", tone: "#DCE4EA", label: "Gentle Cleanser", size: "6 oz · 177 mL", price: 48,
-    tagline: "Self-foaming, fragrance-free, post-procedure safe.",
-    blurb: "A soft, self-foaming cleanser that removes impurities and makeup without disturbing a healing or sensitive barrier. Safe straight after in-office treatments.",
-    how: ["Morning and night", "Lather over damp skin, rinse", "Use after treatments once cleared by your provider"],
-    actives: ["Glycerin", "Sodium hyaluronate", "Oat extract"],
-  },
-  {
-    slug: "alastin-hydratint-spf36", name: "HydraTint Pro Mineral SPF 36", line: "Alastin Skincare", lineShort: "Alastin",
-    type: "Sunscreen", concerns: ["Aging", "Dryness"], form: "tube", tone: "#E1CDB7", label: "HydraTint SPF 36", size: "1.8 oz · 55 mL", price: 62,
-    tagline: "Tinted mineral SPF that feels like skincare.",
-    blurb: "A lightweight, tinted mineral sunscreen with hydrating peptides and antioxidants. Enough coverage to skip foundation on an everyday morning.",
-    how: ["Every morning as the last step", "Reapply every two hours in the sun"],
-    actives: ["Zinc oxide", "Titanium dioxide", "Peptides"],
-  },
+  // ── SkinMedica (clinic-stocked) ────────────────────────────────────────────────────────────────────
   {
     slug: "skinmedica-tns-advanced", name: "TNS Advanced+ Serum", line: "SkinMedica", lineShort: "SkinMedica",
     type: "Serum", concerns: ["Aging"], form: "bottle", tone: "#CFC4D6", label: "TNS Advanced+", size: "1 oz · 28.4 g", price: 295,
@@ -181,7 +203,9 @@ export const products: Product[] = [
 ];
 
 export const bestSellers = products.filter((p) => p.bestSeller);
-export const ownLine = products.filter((p) => p.own);
-export const LINES = ["The Labo Clinic", "skinbetter science", "Alastin Skincare", "SkinMedica"] as const;
+export const alastinLine = products.filter((p) => p.partner === "alastin");
+export const LINES = [ALASTIN, "skinbetter science", "SkinMedica"] as const;
 export const getProduct = (slug: string) => products.find((p) => p.slug === slug);
 export const money = (n: number) => `$${n.toFixed(n % 1 ? 2 : 0)}`;
+/** True when a product can't go in the bag: coming soon, or a partner item (bought on the partner's store). */
+export const notInBag = (p: Product) => !!p.soon || !!p.partner;

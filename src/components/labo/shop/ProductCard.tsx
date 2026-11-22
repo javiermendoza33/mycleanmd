@@ -14,7 +14,7 @@ export function ProductCard({ p }: { p: Product }) {
         <p>{p.tagline}</p>
         <span className="price">{money(p.price)} <small>· {p.size}</small></span>
       </div>
-      <AddToBag slug={p.slug} soon={p.soon} />
+      <AddToBag slug={p.slug} soon={p.soon} partner={p.partner} buyUrl={p.buyUrl} />
     </article>
   );
 }
