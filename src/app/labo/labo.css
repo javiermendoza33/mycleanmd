@@ -702,7 +702,7 @@ html,body{overflow-x:clip}
 /* ── Clinic accent (Nov 18 2026, Javier: "not sure about the colors black and blue… lets try changing the accents") ──
    The clinic pages ((home) + (site)) sit inside [data-clinic] and take a warm clay accent sampled from Monika's own photos
    (the #CC8865 / #995532 midtones in cta-bg, clinic.jpg, testimonials.jpg; 5.6:1 on white). The portals keep Apple blue. */
-[data-labo] [data-clinic]{--accent:#6F7A73;--accent-rgb:111,122,115;--accent-tint:rgba(111,122,115,.10);
+[data-labo] [data-clinic]{--accent:#1E6B7B;--accent-rgb:30,107,123;--accent-tint:rgba(30,107,123,.10);
   background:radial-gradient(90% 60% at 85% -10%,rgba(var(--accent-rgb),.10),transparent 60%),var(--paper);min-height:100vh}
 
 /* SMS opt-in consent row (Nov 18 2026): the box is unchecked by default — never pre-tick it */
@@ -721,12 +721,12 @@ html,body{overflow-x:clip}
    rounded cards), a promo bar, heavier Inter display type, full-width "Add to bag" bars, a drawn packshot per product
    until photos exist. Scoped to [data-clinic]; the portals keep Apple blue and the 28px cards. Inter stays (Javier, Nov 18). */
 [data-labo] [data-clinic]{
-  /* Nov 22 2026 — "Labo Skin · Sage" (Javier picked it from the rendered samples): the Labo Method Skin brand-kit
-     tones sampled from Monika's mock — ivory ground, paper surface, slate ink #2C3539, deep sage for buttons/links,
-     the sage panel as the hero surface and the full sage as the ticker. Replaces the clay #C8432A storefront accent. */
-  --paper:#F4EFEB;--canvas:#EEE6DE;--wash:#EEE6DE;--ink:#2C3539;--graphite:#505759;--muted:#909292;
-  --accent:#6F7A73;--accent-rgb:111,122,115;--accent-tint:rgba(111,122,115,.10);--on-accent:#FFFFFF;
-  --rule:#BCBBB9;--line:rgba(44,53,57,.18);--hair:rgba(44,53,57,.08);--sage:#CBCEC8;--hero:#BFC3BD;--strip:#A2ACA4;--radius-card:6px;
+  /* Nov 22 2026 — "Crisp Medical Modern" (direction 2 of the palette PDF; Javier: "i actually like that better" after
+     a full-page render — Labo Skin · Sage shipped for an hour the same morning). Cool-mist ground, mist surfaces,
+     deep-navy ink, clinical teal reserved for buttons/links/the italic "you"; hero + ticker on the surface tint. */
+  --paper:#F6F8FA;--canvas:#E6ECF2;--wash:#E6ECF2;--ink:#132238;--graphite:#3C495B;--muted:#858D99;
+  --accent:#1E6B7B;--accent-rgb:30,107,123;--accent-tint:rgba(30,107,123,.10);--on-accent:#FFFFFF;
+  --rule:#B6BCC4;--line:rgba(19,34,56,.18);--hair:rgba(19,34,56,.08);--sage:#DCE4EC;--hero:#E6ECF2;--strip:#E6ECF2;--radius-card:6px;
   background:var(--paper);color:var(--ink)}
 [data-labo] [data-clinic] h1,[data-labo] [data-clinic] h2{font-weight:800;letter-spacing:-.04em}
 [data-labo] [data-clinic] h1{font-size:clamp(2.5rem,5.8vw,4.3rem)}
@@ -984,9 +984,9 @@ html,body{overflow-x:clip}
 [data-labo] [data-clinic] .fhero .led,[data-labo] [data-clinic] .fhero .led a{color:var(--ink)}
 [data-labo] [data-clinic] .fhero .led a{text-decoration-color:var(--ink)}
 [data-labo] [data-clinic] .fhero .btn-primary{background:var(--ink);color:#FFFFFF}
-[data-labo] [data-clinic] .fhero .btn-primary:hover{background:#1F2629}
+[data-labo] [data-clinic] .fhero .btn-primary:hover{background:#0C182A}
 [data-labo] [data-clinic] .fhero .btn-ghost{border-color:var(--ink);color:var(--ink)}
-[data-labo] [data-clinic] .fhero .btn-ghost:hover{background:rgba(44,53,57,.08)}
+[data-labo] [data-clinic] .fhero .btn-ghost:hover{background:rgba(19,34,56,.08)}
 /* Nov 21 2026 (Javier: "remove the vertical white line between photo and header"): no hairline between the orange
    text block and the photo (nor under the photo on phones). Method's hero keeps its own border rules below. */
 [data-labo] [data-clinic]:not([data-method]) .fmedia{border-left:0}
@@ -1080,12 +1080,12 @@ html,body{overflow-x:clip}
 
 /* ── Sign-in pages in the clinic look (Nov 19 2026) ─────────────────────────────────────────────────────────────── */
 [data-labo] .auth{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);min-height:100vh;background:var(--paper)}
-[data-labo] .authside{background:var(--ink);color:#F4EFEB;padding:36px 44px;display:flex;flex-direction:column;gap:30px}
-[data-labo] .authside .brand{color:#F4EFEB;font-size:1.2rem;font-weight:800;letter-spacing:-.02em;text-decoration:none}
+[data-labo] .authside{background:var(--ink);color:#F6F8FA;padding:36px 44px;display:flex;flex-direction:column;gap:30px}
+[data-labo] .authside .brand{color:#F6F8FA;font-size:1.2rem;font-weight:800;letter-spacing:-.02em;text-decoration:none}
 [data-labo] .authcopy{margin:auto 0;max-width:30ch}
 [data-labo] .authcopy .kicker{color:rgba(255,248,242,.78)}
-[data-labo] .authcopy h1{margin-top:16px;font-size:clamp(2rem,4vw,3rem);color:#F4EFEB}
-[data-labo] .authcopy h1 em{color:#BFC3BD;font-style:italic}
+[data-labo] .authcopy h1{margin-top:16px;font-size:clamp(2rem,4vw,3rem);color:#F6F8FA}
+[data-labo] .authcopy h1 em{color:#7FB3C0;font-style:italic}
 [data-labo] .authcopy p{margin-top:16px;font-size:1.05rem;line-height:1.5;color:rgba(255,248,242,.88)}
 [data-labo] .authfoot{font-size:.78rem;color:rgba(255,248,242,.7)}
 [data-labo] .authmain{display:flex;align-items:center;justify-content:center;padding:48px 24px}
@@ -1182,15 +1182,15 @@ html,body{overflow-x:clip}
 
 /* ── Telehealth call-out (Nov 21 2026): the weight-loss & peptides pill beside the wordmark (wide screens) and the
       gradient band under the header (phones/tablets). Nov 22 2026: the call-out takes the site accent (sage) and the band is ink — the Method purple stays on method.thelabomethod.com. */
-[data-labo] [data-clinic] .teleco{display:inline-flex;align-items:center;gap:9px;margin-right:auto;padding:7px 13px 7px 11px;border-radius:999px;border:1px solid rgba(111,122,115,.28);background:linear-gradient(135deg,rgba(111,122,115,.11),rgba(111,122,115,.035));color:#4C2C6E;font-size:.76rem;font-weight:500;letter-spacing:-.005em;line-height:1;text-decoration:none;white-space:nowrap;box-shadow:inset 0 1px 0 rgba(255,255,255,.6);transition:background .18s,border-color .18s,transform .18s}
-[data-labo] [data-clinic] .teleco:hover{background:linear-gradient(135deg,rgba(111,122,115,.18),rgba(111,122,115,.07));border-color:rgba(111,122,115,.5);transform:translateY(-1px)}
-[data-labo] [data-clinic] .teleco i{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(111,122,115,.45);animation:telepulse 2.6s ease-out infinite}
+[data-labo] [data-clinic] .teleco{display:inline-flex;align-items:center;gap:9px;margin-right:auto;padding:7px 13px 7px 11px;border-radius:999px;border:1px solid rgba(30,107,123,.28);background:linear-gradient(135deg,rgba(30,107,123,.11),rgba(30,107,123,.035));color:#4C2C6E;font-size:.76rem;font-weight:500;letter-spacing:-.005em;line-height:1;text-decoration:none;white-space:nowrap;box-shadow:inset 0 1px 0 rgba(255,255,255,.6);transition:background .18s,border-color .18s,transform .18s}
+[data-labo] [data-clinic] .teleco:hover{background:linear-gradient(135deg,rgba(30,107,123,.18),rgba(30,107,123,.07));border-color:rgba(30,107,123,.5);transform:translateY(-1px)}
+[data-labo] [data-clinic] .teleco i{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(30,107,123,.45);animation:telepulse 2.6s ease-out infinite}
 [data-labo] [data-clinic] .teleco b{color:var(--accent);font-weight:800}
-@keyframes telepulse{0%{box-shadow:0 0 0 0 rgba(111,122,115,.45)}70%{box-shadow:0 0 0 7px rgba(111,122,115,0)}100%{box-shadow:0 0 0 0 rgba(111,122,115,0)}}
+@keyframes telepulse{0%{box-shadow:0 0 0 0 rgba(30,107,123,.45)}70%{box-shadow:0 0 0 7px rgba(30,107,123,0)}100%{box-shadow:0 0 0 0 rgba(30,107,123,0)}}
 [data-labo] [data-clinic] nav.main a.telelink{color:var(--accent);font-weight:600}
 [data-labo] [data-clinic] .teleband{display:none;text-decoration:none;color:#fff;background:var(--ink);border-bottom:1px solid rgba(255,255,255,.12)}
 [data-labo] [data-clinic] .teleband .wrap{display:flex;align-items:center;justify-content:center;gap:10px;padding:10px 16px;font-size:.8rem;letter-spacing:-.005em;line-height:1.2}
-[data-labo] [data-clinic] .teleband .t{opacity:.92;color:#F4EFEB}
+[data-labo] [data-clinic] .teleband .t{opacity:.92;color:#F6F8FA}
 [data-labo] [data-clinic] .teleband b{font-weight:800;white-space:nowrap;padding:5px 11px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22)}
 /* The clinic header bar gets a wider wrap than the page (1360 vs 1140): brand + pill + 9 links + search + bag + Book now
    need ~1270px, and under 1340px the pill hands off to the band so the bar never overflows. */
@@ -1214,7 +1214,7 @@ html,body{overflow-x:clip}
 [data-labo] [data-clinic] .memband .btn-ghost:hover{background:rgba(244,239,235,.1)}
 [data-labo] [data-clinic] .memband ul{list-style:none;margin:0;padding:0;display:grid;gap:0;border-top:1px solid rgba(244,239,235,.16)}
 [data-labo] [data-clinic] .memband li{display:flex;gap:14px;align-items:center;padding:16px 0;border-bottom:1px solid rgba(244,239,235,.16);font-size:1.02rem;color:rgba(244,239,235,.92);letter-spacing:-.01em}
-[data-labo] [data-clinic] .memband li::before{content:"✓";color:var(--paper);font-weight:800;flex:none;width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:rgba(111,122,115,.6);font-size:.85rem}
+[data-labo] [data-clinic] .memband li::before{content:"✓";color:var(--paper);font-weight:800;flex:none;width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:rgba(30,107,123,.6);font-size:.85rem}
 @media (max-width:860px){[data-labo] [data-clinic] .memband{padding-block:56px}[data-labo] [data-clinic] .memband .wrap{grid-template-columns:1fr;gap:30px}}
 [data-labo] [data-clinic] .joinhero{padding-block:0 56px}
 [data-labo] [data-clinic] .joinhero .acts,[data-labo] [data-clinic] .steps+.acts{display:flex;gap:12px;flex-wrap:wrap}
@@ -1237,6 +1237,6 @@ html,body{overflow-x:clip}
 @media (max-width:1399px){[data-labo] [data-clinic] .teleco{display:none}[data-labo] [data-clinic] .teleband{display:block}[data-labo] [data-clinic] .bar .brand{margin-right:auto}}
 @media (min-width:1400px){[data-labo] [data-clinic] .bar .brand{margin-right:0}}
 
-/* ── Patient portal (/portal) on the Labo Skin · Sage palette (Nov 22 2026, Javier: "and admin portal/client color schemes").
+/* ── Patient portal (/portal) on the Crisp Medical Modern palette (Nov 22 2026, Javier: "and admin portal/client color schemes").
       The portal layout carries data-portal; it keeps its own minimal chrome but takes the clinic's tokens + font. */
-[data-labo] [data-portal]{--paper:#F4EFEB;--canvas:#FFFFFF;--wash:#EEE6DE;--ink:#2C3539;--graphite:#505759;--muted:#909292;--line:rgba(44,53,57,.14);--hair:rgba(44,53,57,.08);--accent:#6F7A73;--accent-rgb:111,122,115;--accent-tint:rgba(111,122,115,.10);--on-accent:#FFFFFF;--radius-card:10px;font-family:var(--font-clinic),var(--font-inter),-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}
+[data-labo] [data-portal]{--paper:#F6F8FA;--canvas:#FFFFFF;--wash:#E6ECF2;--ink:#132238;--graphite:#3C495B;--muted:#858D99;--line:rgba(19,34,56,.14);--hair:rgba(19,34,56,.08);--accent:#1E6B7B;--accent-rgb:30,107,123;--accent-tint:rgba(30,107,123,.10);--on-accent:#FFFFFF;--radius-card:10px;font-family:var(--font-clinic),var(--font-inter),-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}
