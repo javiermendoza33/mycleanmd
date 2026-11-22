@@ -38,6 +38,11 @@ export async function proxy(request: NextRequest) {
   const isMethod = METHOD_HOSTS.includes(host)
 
   if (isLabo || isMethod) {
+    // Browsers that ask for the bare /favicon.ico get this host's brand mark (Nov 22 2026).
+    if (path === '/favicon.ico') {
+      const url = request.nextUrl.clone(); url.pathname = isMethod ? '/labo/method-favicon/favicon.ico' : '/labo/favicon/favicon.ico'
+      return NextResponse.rewrite(url)
+    }
     // www → apex, so one canonical host owns the index. Only applies to the
     // Clinic host — method.thelabomethod.com has no www variant.
     if (host.startsWith('www.') || host === `method.${METHOD_HOST}`) {
@@ -133,6 +138,9 @@ export async function proxy(request: NextRequest) {
     return rewritten
   }
 
+  // MyCleanMD's own favicon (public/favicon.ico) must not be gated — browsers fetch it before any login.
+  if (path === '/favicon.ico') return NextResponse.next()
+
   // Site-access gate — keeps the in-progress site off the public internet.
   // Runs before Supabase auth so an unreleased site never even reaches login.
   // Soft gate only: the token is unsigned and checked client-side, so it stops
@@ -191,5 +199,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|mp4|ico)$).*)'],   // ico added Nov 22 2026 for /labo/favicon/favicon.ico
+  matcher: ['/((?!_next/static|_next/image|.*\\.(?:svg|png|jpg|jpeg|gif|webp|mp4)$|.*/.*\\.ico$).*)'],   // Nov 22 2026: bare /favicon.ico runs through the proxy (per-host icon); nested .ico files bypass it
 }
