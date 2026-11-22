@@ -28,12 +28,12 @@ export default function ShopGrid({ products }: { products: Product[] }) {
       <div className="chips" role="group" aria-label="Filter by type">
         <span className="kicker">Type</span>
         <button type="button" className={!type ? "on" : ""} onClick={() => setType("")}>All</button>
-        {TYPES.map((t) => <button key={t} type="button" className={type === t ? "on" : ""} onClick={() => setType(type === t ? "" : t)}>{t}</button>)}
+        {TYPES.filter((t) => products.some((p) => p.type === t)).map((t) => <button key={t} type="button" className={type === t ? "on" : ""} onClick={() => setType(type === t ? "" : t)}>{t}</button>)}
       </div>
       <div className="chips" role="group" aria-label="Filter by concern">
         <span className="kicker">Concern</span>
         <button type="button" className={!concern ? "on" : ""} onClick={() => setConcern("")}>All</button>
-        {CONCERNS.map((c) => <button key={c} type="button" className={concern === c ? "on" : ""} onClick={() => setConcern(concern === c ? "" : c)}>{c}</button>)}
+        {CONCERNS.filter((c) => products.some((p) => p.concerns.includes(c))).map((c) => <button key={c} type="button" className={concern === c ? "on" : ""} onClick={() => setConcern(concern === c ? "" : c)}>{c}</button>)}
       </div>
       <p className="count mono">{list.length} product{list.length === 1 ? "" : "s"}</p>
       <div className="pgrid">{list.map((p) => <ProductCard key={p.slug} p={p} />)}</div>
