@@ -39,7 +39,7 @@ export default function RatesTable({ rows }: { rows: RateRow[] }) {
   return (
     <>
       <div className="row" style={{ justifyContent: "space-between", alignItems: "center", gap: 12, flexWrap: "wrap", marginBottom: 10 }}>
-        <div className="sm muted">{rows.length} products · {totals.n} with cost and price · average margin {avg ? `${avg.pct.toFixed(0)}%` : "—"}</div>
+        <div className="sm muted">{[...new Set(rows.map((r) => r.line))].length === 1 ? rows[0]?.line + " · " : ""}{rows.length} products · {totals.n} with cost and price · average margin {avg ? `${avg.pct.toFixed(0)}%` : "—"} · cost {fmt(totals.cost)} → retail {fmt(totals.price)} per one-of-each</div>
         <button className="btn" disabled={busy === "publish" || drafts === 0} onClick={publish}>{busy === "publish" ? "Publishing…" : drafts ? `Publish ${drafts} price change${drafts === 1 ? "" : "s"}` : "Nothing to publish"}</button>
       </div>
       <div className="card"><table><thead><tr><th>Product</th><th>Cost ($)</th><th>Online price ($)</th><th>Margin</th><th>Markup</th><th>Published</th><th></th></tr></thead><tbody>
