@@ -12,14 +12,14 @@ export default function ServicesPage() {
   return (
     <>
       <PageHero
-        eyebrow="Services"
-        title="Injectables, skincare & wellness services in Seattle"
+        eyebrow="Treatments"
+        title="Injectables, skincare & wellness treatments in Seattle"
         lede="Because every one of our clients is different and requires a customized approach, we tailor every treatment to your skin type, lifestyle and desired results."
       />
       <section style={{ paddingBlock: 0 }}>
-        <div className="wrap"><div className="band" style={{ marginTop: 44 }}><img src="/labo/img/services/sculptra.jpg" alt="Smiling woman with glowing, healthy skin" /></div></div>
+        <div className="wrap"><div className="band" style={{ marginTop: 28 }}><img src="/labo/img/services/sculptra.jpg" alt="Smiling woman with glowing, healthy skin" /></div></div>
       </section>
-      <section style={{ paddingTop: 48 }}>
+      <section style={{ paddingTop: 36 }}>
         <div className="wrap">
           <div className="cards">
             {services.map((s) => <ServiceCard key={s.slug} service={s} headingLevel="h2" />)}

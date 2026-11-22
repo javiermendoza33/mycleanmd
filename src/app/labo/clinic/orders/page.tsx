@@ -24,7 +24,7 @@ export default async function ClinicOrders({ searchParams }: { searchParams: Pro
         <div className="card" key={o.id}>
           <div className="row" style={{ justifyContent: "space-between", alignItems: "flex-start", gap: 18, flexWrap: "wrap" }}>
             <div style={{ minWidth: 220 }}><div className="lbl">{fmtDate(o.created_at, { month: "short", day: "numeric" })} · {fmtTime(o.created_at)}</div><div style={{ fontWeight: 700, marginTop: 4 }}>{o.name ?? "—"}</div><div className="sm muted">{o.email} · {o.phone ?? ""}</div>
-              <div className="sm" style={{ marginTop: 8, whiteSpace: "pre-line" }}>{o.fulfillment === "pickup" ? "Pick up in South Lake Union" : addr(o.ship_to)}</div></div>
+              <div className="sm" style={{ marginTop: 8, whiteSpace: "pre-line" }}>{o.fulfillment === "pickup" ? "Pick up where South Lake Union meets Eastlake" : addr(o.ship_to)}</div></div>
             <div style={{ flex: 1, minWidth: 260 }}><div className="lbl">Items</div>
               {o.items.map((it, i) => <div key={i} className="sm" style={{ marginTop: 4 }}>{it.qty} × {it.name} <span className="muted">${it.unit.toFixed(2)}</span>{it.own && <span className="pill em" style={{ marginLeft: 8 }}>Selfnamed</span>}</div>)}
               <div className="sm" style={{ marginTop: 8 }}>Subtotal ${o.subtotal.toFixed(2)} · Shipping ${o.shipping.toFixed(2)}{o.tax ? ` · Tax $${o.tax.toFixed(2)}` : ""} · <b>Total ${o.total.toFixed(2)}</b></div></div>

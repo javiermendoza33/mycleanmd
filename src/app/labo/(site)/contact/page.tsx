@@ -16,7 +16,7 @@ export default function Contact() {
   return (
     <>
       <PageHero eyebrow="Contact" title="Have a question? Contact us now!" lede="Our team is always eager to share our knowledge and expertise with our patients. Reach out however you like best." />
-      <section style={{ paddingTop: 48 }}>
+      <section style={{ paddingTop: 36 }}>
         <div className="wrap ct">
           <div className="kvtiles">
             <div className="kvtile">
@@ -53,7 +53,7 @@ export default function Contact() {
             {s.locations.map((loc) => (
               <div key={loc.id}>
                 <LocationCard location={loc} />
-                <p className="note" style={{ marginTop: 0 }}>{loc.note}</p>
+                {loc.note && <p className="note" style={{ marginTop: 0 }}>{loc.note}</p>}
                 <MapEmbed src={loc.mapEmbed} title={`Map — ${PRACTICE.name} ${loc.name}`} />
               </div>
             ))}

@@ -35,7 +35,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               <h1>{p.name}</h1>
               <p className="sub">{p.tagline}</p>
               <div className="pmeta"><span className="price">{money(p.price)}</span><span className="mono">{p.size}</span>{p.bestSeller && <span className="ptag inline">Best seller</span>}</div>
-              <AddToBag slug={p.slug} big />
+              <AddToBag slug={p.slug} big soon={p.soon} />
               <p className="note">{SHOP.shipsTo}. Free US shipping over {money(SHOP.freeShippingOver)}.</p>
               <div className="prose" style={{ marginTop: 28 }}><p>{p.blurb}</p></div>
               <h4 style={{ marginTop: 30 }}>How to use</h4>

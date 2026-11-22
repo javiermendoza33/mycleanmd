@@ -48,7 +48,11 @@ export const LAUNCH_READY = false;
  * meta, /robots.txt and the sitemap.
  */
 export const CLINIC_INDEX = true;
-export const GATED = ["/programs", "/pricing", "/how-it-works", "/join", "/legal", "/faq", "/treatments"] as const;
+// Nov 19 2026: the telehealth paths (programs/pricing/how-it-works/join/legal/faq)
+// moved off this host entirely, onto method.thelabomethod.com — see METHOD below
+// and src/app/labo/method/*. Only /treatments (the clinic's own laser menu,
+// placeholder prices) is still gated on THIS host.
+export const GATED = ["/treatments"] as const;
 export const isGated = (path: string) => GATED.some((g) => path === g || path.startsWith(g + "/"));
 /** Spread into a gated page's metadata: `...GATE_ROBOTS` */
 export const GATE_ROBOTS = LAUNCH_READY ? {} : { robots: { index: false, follow: true } };
@@ -87,7 +91,7 @@ export const HEALTHIE = {
 
 export const NAV = [
   // Nov 18 2026: the clinic site's navigation (Javier: "make TLM like the site was").
-  { label: "Services", href: "/services" },
+  { label: "Treatments", href: "/services" },
   { label: "Shop", href: "/shop" },   // Nov 19 2026: the skincare shop
   { label: "Laser", href: "/treatments" },
   { label: "About", href: "/about" },
@@ -368,25 +372,17 @@ export const ABOUT = {
   bio: [
     "I began my career in critical care at Cedars-Sinai Medical Center, first on a gastrointestinal medical-surgical telemetry unit and then in the neuroscience and medical-surgical intensive care units. Four years at the bedside in the ICU teaches you to read a patient's numbers carefully and to notice when something is off before it becomes urgent. That habit is the foundation of how I practice now.",
     "As a nurse practitioner I have worked in surgical care at Providence Saint Joseph, where I managed the Bariatric Wellness Center, and as a clinical transplant coordinator on the liver transplant team at Cedars-Sinai, carrying patients through referral, evaluation, waitlist and recovery. Later I practiced in dermatology and aesthetic medicine bicoastally with Kate Somerville Skin Health Experts, where I built and managed clinical protocols and trained incoming injectors, and I established clinical oversight for COVID-19 testing sites with CVS MinuteClinic.",
-    "Telehealth has been part of every one of those roles, which is why I am comfortable building a practice around it. I completed my Doctorate in Nursing Practice in 2025, hold a Master of Science as a Family Nurse Practitioner from Cal State Long Beach, and I see patients in English and Spanish.",
+    "Telehealth has been part of every one of those roles, which is why I am comfortable building a practice around it. I completed my Doctorate in Nursing Practice, hold a Master of Science as a Family Nurse Practitioner, and I see patients in English and Spanish.",
   ],
   /** Licences HELD, from the provider's CV — a different claim from where the
    *  practice accepts patients. See the licensure note at the top of the file. */
   credentials: [
     { label: "Credential", value: "DNP, MSN, PHN, NP-C — Family Nurse Practitioner" },
-    { label: "Licensure", value: "Washington" },
-    { label: "Doctorate", value: "Doctor of Nursing Practice, Aspen University, 2025" },
-    { label: "Graduate", value: "MSN, Family Nurse Practitioner, Cal State Long Beach, 2014" },
-    { label: "Certification", value: "American Academy of Nurse Practitioners, cert. F0415015" },
+    { label: "Licensure", value: "Washington, plus 10 additional states" },
+    { label: "Doctorate", value: "Doctor of Nursing Practice" },
+    { label: "Graduate", value: "MSN, Family Nurse Practitioner" },
+    { label: "Board Certification", value: "American Academy of Nurse Practitioners" },
     { label: "Languages", value: "English, Spanish" },
-  ],
-  history: [
-    { dates: "2020 –", role: "Nurse Practitioner", org: "CVS Health MinuteClinic", desc: "Clinical oversight for COVID-19 testing across retail, mobile and telemedicine settings." },
-    { dates: "2020", role: "Nurse Practitioner", org: "Kate Somerville Skin Health Experts", desc: "Bicoastal dermatology and aesthetic practice. Protocol development, injector training, NYC clinic opening." },
-    { dates: "2019", role: "Nurse Practitioner", org: "Westcoast Wound and Skincare", desc: "Direct patient care alongside hospice and home health agencies." },
-    { dates: "2016 – 2018", role: "Clinical Transplant Coordinator", org: "Cedars-Sinai Medical Center", desc: "Liver transplant team. Referral through post-transplant care, inpatient and outpatient." },
-    { dates: "2015 – 2016", role: "Surgical Nurse Practitioner", org: "Providence Saint Joseph Medical Center", desc: "Pre- and post-operative care. Managed the Bariatric Wellness Center." },
-    { dates: "2011 – 2015", role: "Clinical Nurse II", org: "Cedars-Sinai Medical Center", desc: "Neuroscience and medical-surgical ICU. Brawerman Nursing Institute residency alumna." },
   ],
   practice: [
     { title: "Labs before prescriptions", body: "Nothing is prescribed off a questionnaire. If I do not have numbers, I do not have a plan, and neither do you." },
@@ -398,7 +394,7 @@ export const ABOUT = {
   slides: [
     { src: "/labo/img/about/founder.webp", pos: "50% 20%", caption: "Mónika Jáuregui, DNP, CANS, FNP-C." },
     { src: "/labo/img/about/founder-2.webp", pos: "50% 25%", caption: "In the clinic." },
-    { src: "/labo/img/about/clinic.jpg", pos: "50% 50%", caption: "The treatment studio, South Lake Union." },
+    { src: "/labo/img/about/clinic.jpg", pos: "50% 50%", caption: "The treatment studio, where South Lake Union meets Eastlake." },
   ],
 };
 
@@ -430,6 +426,35 @@ export const LEGAL = [
   { title: "Privacy", body: "Protected health information is handled in accordance with HIPAA and is stored in a HIPAA-compliant electronic health record. Email and web forms are not secure channels; do not send clinical information through them. A full privacy policy prepared by counsel will be published here before launch." },
   { title: "Emergencies", body: "This practice does not provide emergency care. If you are experiencing a medical emergency, call 911 or go to the nearest emergency department. For mental health crises, call or text 988." },
 ];
+
+/**
+ * Nov 19 2026 — THE LABO METHOD, split out as its own brand (Javier: "The Labo
+ * Clinic, which we are building now... in-store... The Labo Method... white
+ * label solution for Telehealth via Healthie"). It is its own subdomain of
+ * the same registered domain — method.thelabomethod.com, src/proxy.ts rewrites
+ * it to src/app/labo/method/* — reusing PROGRAMS/HEALTHIE/FAQ/LEGAL above
+ * rather than a new domain or the separate mycleanmd.com app (explicitly
+ * ruled out: "i dont want to use MyCleanMD").
+ */
+export const METHOD = {
+  name: "The Labo Method",
+  domain: "method.thelabomethod.com",
+  // Keep in sync with the [data-method] --accent override in labo.css — this
+  // copy is for cross-links rendered on the CLINIC's own pages (its own
+  // [data-clinic] scope has no [data-method], so var(--accent) there is
+  // still clay; a Method-coloured mention there has to be hardcoded).
+  accent: "#6E3F99",
+  tagline: "Hormone, weight and peptide care, by video.",
+  email: PRACTICE.email,
+} as const;
+
+export const METHOD_NAV = [
+  { label: "Programs", href: "/programs" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "How it works", href: "/how-it-works" },
+  { label: "Journal", href: "/blog" },
+  { label: "FAQ", href: "/faq" },
+] as const;
 
 export const FOOTER_BLURB = `Telehealth hormone, peptide and metabolic care for residents of ${AVAILABILITY}.`;
 export const FOOTER_DISCLAIMER = `Clinical services provided by a nurse practitioner licensed in ${AVAILABILITY}. This website does not provide medical advice.`;
@@ -549,9 +574,9 @@ export const TREATMENTS: Treatment[] = [
     name: "Botox & neurotoxins",
     short: "Softens frown lines, forehead lines and crow's feet.",
     treats: ["Frown lines", "Forehead lines", "Crow's feet", "Lip flip", "Jawline / masseter"],
-    wavelength: "Botox®, Dysport® or Xeomin®, dosed by the unit",
+    wavelength: "Botox® or Dysport®, dosed by the unit",
     sessions: "Results in 7 to 14 days, lasting about 3 to 4 months",
-    from: "$13", unit: " / unit",
+    from: "$16", unit: " / unit",
     body: [
       "A neurotoxin relaxes the small muscles that fold the skin into lines. Dosed well, you still look like you on a good day: rested, not frozen.",
       "We price by the unit, map the dose at your consultation, and see you at two weeks to check the result and adjust if needed.",

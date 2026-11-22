@@ -24,6 +24,9 @@ export interface Service {
   comingSoon?: boolean;
   /** When set, the card links here instead of /services/[slug] (the laser line lives at /treatments). */
   href?: string;
+  /** When set, the detail page also offers this as a telehealth alternative (Nov 2026, Monika: cross-link
+   *  Cosmetic Rx and Medical Weight Loss to The Labo Method so patients who'd rather not come in can). */
+  telehealthHref?: string;
   seo: { title: string; description: string };
 }
 

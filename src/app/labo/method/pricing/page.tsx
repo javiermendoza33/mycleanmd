@@ -16,6 +16,9 @@ export default function Pricing() {
         title="One monthly fee. Cancel any month."
         lede="No membership on top of the program, no per-message charge, and no lock-in. Labs are billed separately and can often go through your insurance."
       />
+      <section style={{ paddingBlock: 0 }}>
+        <div className="wrap"><div className="band" style={{ marginTop: 44 }}><img src="/labo/img/about/clinic.jpg" alt="A small group talking and laughing together" /></div></div>
+      </section>
 
       <section className="grey">
         <div className="wrap">

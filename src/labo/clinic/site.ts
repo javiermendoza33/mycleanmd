@@ -15,23 +15,24 @@ export const CLINIC_SITE = {
   email: PRACTICE.email,
   instagram: "https://www.instagram.com/skinhavenclinic.com/",
   shopUrl: "https://connect.skinbetter.com/skinhavenclinic",
-  queenBeeUrl: "https://www.queenbeesalonspa.com/",
   promo: "New patients receive $20 off their first aesthetic treatment",
+  // Nov 21 2026, Javier: "for now its appointment only even weekdays" — no fixed hours yet.
   hours: [
-    { days: "Monday – Friday", time: "10:00 am – 6:00 pm" },
-    { days: "Saturday – Sunday", time: "By appointment only" },
+    { days: "Monday – Sunday", time: "By appointment only" },
   ],
   locations: [
     {
-      id: "south-lake-union",
-      name: "South Lake Union",
+      id: "eastlake",
+      name: "Where South Lake Union meets Eastlake",
       cityLabel: "Seattle",
-      address1: "910 Lenora Street, Suite #152",
-      address2: "Seattle, WA 98121",
-      mapUrl: "https://goo.gl/maps/yxReKvsQTcTbRbRb6",
+      address1: "1512 Eastlake Ave E",
+      address2: "Seattle, WA 98102",
+      mapUrl: "https://maps.google.com/maps?q=1512%20Eastlake%20Ave%20E%2C%20Seattle%2C%20WA%2098102%2C%20USA",
       mapEmbed:
-        "https://maps.google.com/maps?q=910%20Lenora%20St%20Suite%20152%2C%20Seattle%2C%20WA%2098121%2C%20USA&t=m&z=15&output=embed&iwloc=near",
-      note: "Inside Queen Bee Salon and Spa, above Whole Foods Market, near Westlake Avenue and Denny Way. Free 30-minute parking in the courtyard, or the garage below at 2200 Westlake.",
+        "https://maps.google.com/maps?q=1512%20Eastlake%20Ave%20E%2C%20Seattle%2C%20WA%2098102%2C%20USA&t=m&z=15&output=embed&iwloc=near",
+      // Landmark/parking note cleared Nov 21 2026 — the old copy named Queen Bee Salon &
+      // South Lake Union, which no longer applies at this address. Add new details when Monika has them.
+      note: "",
       contactNote: "Text or phone",
       bookOnline: true,
     },

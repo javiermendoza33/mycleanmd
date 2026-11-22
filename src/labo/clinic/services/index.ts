@@ -14,6 +14,9 @@ import { service as lasers } from "./lasers";
 export const services: Service[] = [
   wrinkleRelaxers,
   dermalFillers,
+  // Nov 21 2026 (Javier: "add this to top row in third place") — the .cards grid is 3 columns,
+  // so Laser Treatments needs to be the 3rd entry to land in the top row.
+  lasers,
   sculptra,
   microneedling,
   prpExosomes,
@@ -22,7 +25,6 @@ export const services: Service[] = [
   cosmeticRx,
   wellness,
   medicalWeightLoss,
-  lasers,
 ];
 
 export const availableServices = services.filter((s) => !s.comingSoon && !s.href);

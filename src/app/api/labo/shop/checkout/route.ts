@@ -20,6 +20,8 @@ export async function POST(req: NextRequest) {
     .filter((l): l is { p: NonNullable<typeof l.p>; qty: number } => !!l.p && l.qty > 0)
     .slice(0, 30);
   if (!lines.length) return NextResponse.json({ ok: false, error: "Your bag is empty." }, { status: 400 });
+  const notYet = lines.filter((l) => l.p.soon);
+  if (notYet.length) return NextResponse.json({ ok: false, error: `${notYet.map((l) => l.p.name).join(", ")} ${notYet.length === 1 ? "is" : "are"} coming soon and can't be ordered yet.` }, { status: 400 });
 
   const subtotal = lines.reduce((s, l) => s + l.p.price * l.qty, 0);
   const shipping = subtotal >= SHOP.freeShippingOver ? 0 : SHOP.flatShipping;
@@ -34,7 +36,7 @@ export async function POST(req: NextRequest) {
     shipping_address_collection: { allowed_countries: ["US"] },
     shipping_options: [
       { shipping_rate_data: { type: "fixed_amount", display_name: shipping ? "Standard shipping" : "Free shipping", fixed_amount: { amount: shipping * 100, currency: SHOP.currency }, delivery_estimate: { minimum: { unit: "business_day", value: 3 }, maximum: { unit: "business_day", value: 7 } } } },
-      { shipping_rate_data: { type: "fixed_amount", display_name: "Pick up in South Lake Union", fixed_amount: { amount: 0, currency: SHOP.currency } } },
+      { shipping_rate_data: { type: "fixed_amount", display_name: "Pick up where South Lake Union meets Eastlake", fixed_amount: { amount: 0, currency: SHOP.currency } } },
     ],
     phone_number_collection: { enabled: true },
     metadata: { kind: "shop", items: lines.map((l) => `${l.qty}x ${l.p.slug}`).join(", ").slice(0, 480) },

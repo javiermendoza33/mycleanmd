@@ -67,15 +67,10 @@ export default function About() {
         <div className="wrap">
           <div className="tight" style={{ marginBottom: 42 }}>
             <Eyebrow>The record</Eyebrow>
-            <h2 style={{ marginTop: 15 }}>Credentials and practice history</h2>
+            <h2 style={{ marginTop: 15 }}>Credentials</h2>
           </div>
-          <ul className="creds" style={{ marginTop: 0, marginBottom: 36 }}>
+          <ul className="creds" style={{ marginTop: 0 }}>
             {ABOUT.credentials.map((c) => <li key={c.label}><b>{c.label}</b><span>{c.value}</span></li>)}
-          </ul>
-          <ul className="defs">
-            {ABOUT.history.map((h) => (
-              <li key={h.dates + h.org}><span className="dt">{h.dates}</span><p className="dd"><b>{h.role} — {h.org}</b>{h.desc}</p></li>
-            ))}
           </ul>
         </div>
       </section>

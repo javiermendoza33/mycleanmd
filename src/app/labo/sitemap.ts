@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { PROGRAMS, PRACTICE, LAUNCH_READY, isGated } from "@/labo/content";
+import { PRACTICE, LAUNCH_READY, isGated } from "@/labo/content";
 import { availableServices } from "@/labo/clinic/services";
 import { posts } from "@/labo/clinic/posts";
 import { products } from "@/labo/clinic/products";
@@ -26,13 +26,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { p: "/testimonials", priority: 0.6 },
     { p: "/blog", priority: 0.6 },
     ...posts.map((x) => ({ p: `/blog/${x.slug}`, priority: 0.5 })),
-    { p: "/how-it-works", priority: 0.6 },
-    { p: "/pricing", priority: 0.6 },
-    ...PROGRAMS.map((x) => ({ p: `/programs/${x.slug}`, priority: 0.6 })),
-    { p: "/faq", priority: 0.5 },
     { p: "/contact", priority: 0.6 },
     { p: "/sms", priority: 0.4 },
-    { p: "/legal", priority: 0.2 },
+    // Nov 19 2026: how-it-works/pricing/programs/faq/legal moved to
+    // method.thelabomethod.com (The Labo Method, its own sitemap) — see
+    // src/app/labo/method/sitemap.ts. Nothing lives at these paths here now.
   ];
   return paths.filter(({ p }) => LAUNCH_READY || !isGated(p)).map(({ p, priority }) => ({ url: `${BASE}${p}`, lastModified: AT, changeFrequency: "monthly" as const, priority }));
 }

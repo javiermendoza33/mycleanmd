@@ -1,14 +1,15 @@
 import Link from "next/link";
-import Gate from "./Gate";
 import { Footer } from "@/components/labo/Chrome";
 import { BookCta, LocationCard, PartnerLogos, SectionHead, ServiceCard, TestimonialCard } from "@/components/labo/Clinic";
-import { CLINIC, HEALTHIE, LASER_SPECS, NAV, PRACTICE, PROGRAMS } from "@/labo/content";
+import { CLINIC, LASER_SPECS, NAV, PRACTICE, PROGRAMS, METHOD } from "@/labo/content";
 import { services } from "@/labo/clinic/services";
 import { testimonials } from "@/labo/clinic/testimonials";
 import { CLINIC_SITE } from "@/labo/clinic/site";
-import { bestSellers, ownLine, SHOP } from "@/labo/clinic/products";
+import { ownLine, SHOP } from "@/labo/clinic/products";
+import SkinQuiz from "@/components/labo/shop/SkinQuiz";
 import MobileNav from "@/components/labo/MobileNav";
 import BagLink from "@/components/labo/shop/BagLink";
+import SearchButton from "@/components/labo/search/SearchButton";
 import { ProductCard } from "@/components/labo/shop/ProductCard";
 
 /**
@@ -20,8 +21,6 @@ import { ProductCard } from "@/components/labo/shop/ProductCard";
  * hairline grid, shop-by-concern tiles, then Mónika, reviews, the location, the laser line, partners, telehealth
  * and the booking band. Content and photos are the clinic's own (Nov 18); the shop catalog is labo/clinic/products.ts.
  */
-const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
-
 const TELE = [
   { slug: PROGRAMS[0].slug, name: "GLP-1 weight management", note: "Semaglutide or tirzepatide, dosed against your metabolic panel." },
   { slug: PROGRAMS[1].slug, name: "Peptide therapy", note: "Recovery and repair protocols, cycled and re-tested." },
@@ -32,7 +31,7 @@ const TELE = [
 /** Fitzpatrick I–VI and which wavelength reaches them safely — the laser section's signature row. */
 const SKIN = ["#F6E3D4", "#EDCDB3", "#D9AE8A", "#B98463", "#8A5A3E", "#5A3826"];
 
-const STRIP = ["Nurse practitioner-led", "Medical-grade skincare", "Botox® · Dysport® · fillers", "Candela GentleMax Pro Plus laser", "South Lake Union, Seattle", SHOP.promo, "Free skincare shipping over $" + SHOP.freeShippingOver];
+const STRIP = ["Nurse practitioner-led", "Medical-Grade skincare", "Botox® · Dysport®", "Dermal Fillers", "Candela GentleMax Pro Plus Laser", "Where South Lake Union meets Eastlake, Seattle", SHOP.promo, "Free skincare shipping over $" + SHOP.freeShippingOver];
 
 const CONCERN_TILES = [
   { c: "Acne", t: "Breakouts & congestion" },
@@ -49,10 +48,13 @@ export default function LaboHome() {
       <div className="promo"><div className="wrap"><span>{SHOP.promo}</span><span className="sep">·</span><span>Free shipping on skincare orders over ${SHOP.freeShippingOver}</span></div></div>
       <header className="site">
         <div className="wrap bar">
-          <a className="brand" href="#top">{PRACTICE.name}</a>
+          <a className="brand" href="#top" style={{ marginRight: 0 }}>{PRACTICE.name}</a>
+          <a className="more" href={`https://${METHOD.domain}`}
+             style={{ fontFamily: "var(--font-clinic)", fontWeight: 800, letterSpacing: "-.02em", fontSize: "1.05rem", color: METHOD.accent, textDecorationColor: METHOD.accent, marginRight: "auto" }}>Telehealth</a>
           <nav className="main" aria-label="Sections">
             {NAV.map((l) => <Link key={l.href} href={l.href}>{l.label}</Link>)}
           </nav>
+          <SearchButton />
           <BagLink />
           <Link className="btn btn-primary btn-sm" href="/booking">Book now</Link>
           <MobileNav />
@@ -64,14 +66,13 @@ export default function LaboHome() {
         <section className="fhero">
           <div className="fgrid">
             <div className="ftext">
-              <span className="kicker">Medical spa · Seattle, South Lake Union</span>
+              <span className="kicker">Medical spa · Seattle, Where South Lake Union meets Eastlake</span>
               <h1>Skin that looks like <em>you</em>, on your best day.</h1>
-              <p className="sub">Nurse practitioner-led injectables, laser, peels and medical-grade skincare. Modern, evidence-based, and tailored to your skin, your lifestyle and the results you actually want.</p>
+              <p className="sub">A nurse practitioner&ndash;founded aesthetic clinic offering modern, evidence-based injectables, lasers, chemical peels, and medical-grade skincare&mdash;tailored to your skin, your lifestyle, and the results you actually want.</p>
               <div className="acts">
                 <Link className="btn btn-primary" href="/booking">Book a visit</Link>
                 <Link className="btn btn-ghost" href="/shop">Shop skincare</Link>
               </div>
-              <p className="led">Led by <Link href="/about">Mónika Jáuregui, DNP, CANS, FNP-C</Link>, Certified Aesthetic Nurse Specialist</p>
             </div>
             <div className="fmedia">
               {/* Nov 19 2026 (Javier: "take the highest resolution picture we have that fits and put instead of the video"):
@@ -84,12 +85,11 @@ export default function LaboHome() {
         {/* ── VALUE STRIP ───────────────────────────────────────────────── */}
         <div className="strip" aria-hidden="true"><div className="track">{[...STRIP, ...STRIP].map((x, i) => <span key={i}>{x}</span>)}</div></div>
 
-        {/* ── BEST SELLERS ──────────────────────────────────────────────── */}
-        <section id="shop" style={{ paddingBottom: 0 }}>
+        {/* ── SKIN QUIZ (Nov 21 2026 — replaced the Best sellers row, Javier: "i like this idea of take our quiz") ── */}
+        <section id="shop">
           <div className="wrap">
-            <div className="rowhead"><h2>Best sellers</h2><Link className="more" href="/shop">Shop all</Link></div>
-            <div className="pgrid">{bestSellers.map((p) => <ProductCard key={p.slug} p={p} />)}</div>
-            <p className="note">{SHOP.shipsTo}.{!SHOP.pricesConfirmed && " Pricing is being finalized — text us for today's price."}</p>
+            <div className="rowhead"><div><span className="kicker">Find your routine</span><h2 style={{ marginTop: 8 }}>Not sure where to start? Take the skin quiz</h2></div><Link className="more" href="/shop">Shop all</Link></div>
+            <SkinQuiz />
           </div>
         </section>
 
@@ -148,7 +148,7 @@ export default function LaboHome() {
         {/* ── LOCATIONS ────────────────────────────────────────────────── */}
         <section id="locations">
           <div className="wrap">
-            <SectionHead eyebrow="Come see us IRL" title="Visit us in South Lake Union" lede={`Open Monday through Friday, 10:00 am – 6:00 pm. Weekends by appointment only. Text or call ${s.phoneDisplay}.`} />
+            <SectionHead eyebrow="Come see us IRL" title="Visit us where South Lake Union meets Eastlake" lede={`By appointment only, seven days a week, for now. Text or call ${s.phoneDisplay}.`} />
             <div className="locs">{s.locations.map((loc) => <LocationCard key={loc.id} location={loc} />)}</div>
           </div>
         </section>
@@ -193,21 +193,25 @@ export default function LaboHome() {
           </div>
         </section>
 
-        {/* ── TELEHEALTH — the practice's second line, gate kept ───────── */}
+        {/* ── TELEHEALTH — Nov 19 2026: split into its own brand, "The Labo
+             Method" (Javier: "a differnt model for Telehealth... Called The
+             Labo Method"). This is now just a teaser; the actual programs,
+             pricing and the eligibility gate live at method.thelabomethod.com. */}
         <section id="telehealth" className="grey">
           <div className="wrap">
             <div className="headline2">
-              <span className="kicker">Also from {PRACTICE.name} · by video</span>
+              <span className="kicker">{METHOD.name} · by video</span>
               <h2>Hormone and metabolic care, by telehealth.</h2>
-              <p className="sub" style={{ marginTop: 17, maxWidth: "52ch" }}>The same clinician, the same standard: a full lab panel before anything is prescribed.</p>
+              <p className="sub" style={{ marginTop: 17, maxWidth: "52ch" }}>The same clinician, the same standard: a full lab panel before anything is prescribed. {METHOD.name} is the telehealth side of the practice.</p>
             </div>
             <div className="tele" style={{ background: "var(--paper)" }}>
               {TELE.map((t) => (
-                <Link className="trow" key={t.slug} href={`/programs/${t.slug}`}><b>{t.name}</b><span>{t.note}</span><i aria-hidden="true">›</i></Link>
+                <a className="trow" key={t.slug} href={`https://${METHOD.domain}/programs/${t.slug}`}><b>{t.name}</b><span>{t.note}</span><i aria-hidden="true">›</i></a>
               ))}
             </div>
-            <Gate />
-            <p className="note" style={{ textAlign: "center" }}>Already a patient? <a className="more" href={HEALTHIE.login} {...ext}>Patient login</a></p>
+            <div style={{ textAlign: "center", marginTop: 30 }}>
+              <a className="btn btn-primary" href={`https://${METHOD.domain}`}>Visit {METHOD.name} ↗</a>
+            </div>
           </div>
         </section>
 

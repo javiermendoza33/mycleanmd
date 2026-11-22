@@ -4,6 +4,14 @@ import { notFound } from "next/navigation";
 import { Eyebrow, ClosingCTA } from "@/components/labo/Sections";
 import { PROGRAMS, getProgram, HEALTHIE, GATE_ROBOTS } from "@/labo/content";
 
+/** Program slug → its matching journal article, for the cross-link below. */
+const EVIDENCE_POST: Record<string, string> = {
+  "glp-1-weight-management": "glp-1-weight-loss-what-the-evidence-shows",
+  "peptide-therapy": "peptide-therapy-what-we-know-and-dont",
+  "testosterone-for-men": "testosterone-therapy-for-men-what-to-know",
+  "hormone-therapy-for-women": "hormone-therapy-for-women-the-new-evidence",
+};
+
 /** One template, four content objects — exactly as the handoff specifies. */
 export function generateStaticParams() {
   return PROGRAMS.map((p) => ({ slug: p.slug }));
@@ -84,6 +92,7 @@ export default async function ProgramPage(
             <a className="btn btn-primary" href={HEALTHIE.book}
                target="_blank" rel="noopener noreferrer">Book a $149 consult</a>
             <Link className="btn btn-ghost" href="/faq">Read the FAQ</Link>
+            {EVIDENCE_POST[p.slug] && <Link className="more" href={`/blog/${EVIDENCE_POST[p.slug]}`} style={{ alignSelf: "center" }}>Read the evidence</Link>}
           </div>
         </div>
       </section>

@@ -63,7 +63,7 @@ export function VagaroWidget() {
         <h2>See you soon.</h2>
         <p className="sub">Your confirmation is on its way to your email, with a reminder 24 hours before your visit.{formDone ? " Your intake form is saved with the appointment." : ""}</p>
         <ul className="checks grid">
-          <li>Arrive 10 minutes early — free 30-minute parking in the courtyard at 910 Lenora.</li>
+          <li>Arrive 10 minutes early.</li>
           <li>Skip retinol, exfoliants and alcohol the night before injectables or laser.</li>
           <li>Questions before then? Text {CLINIC_SITE.phoneDisplay}.</li>
         </ul>

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { NAV } from "@/labo/content";
 import { CLINIC_SITE } from "@/labo/clinic/site";
 import { openBag } from "@/components/labo/shop/bag";
+import { openSearch } from "@/components/labo/search/search-state";
 
 /** Phone menu (Nov 18 2026, Javier: "is this mobile friendly"). The main nav hides under 880px; this
  *  button opens a sheet with the same links plus the phone line. Hidden on desktop by CSS. */
@@ -29,6 +30,7 @@ export default function MobileNav() {
         <nav id="mnav" className="mnav" aria-label="Menu" style={{ top }}>
           <Link href="/" onClick={() => setOpen(false)}>Home</Link>
           {NAV.map((l) => <Link key={l.href} href={l.href} onClick={() => setOpen(false)}>{l.label}</Link>)}
+          <button type="button" className="mbag" onClick={() => { setOpen(false); openSearch(); }}>Search</button>
           <button type="button" className="mbag" onClick={() => { setOpen(false); openBag(); }}>Your bag</button>
           <Link className="btn btn-primary" href="/booking" onClick={() => setOpen(false)}>Book now</Link>
           <p className="note">Text or call <a href={CLINIC_SITE.tel}>{CLINIC_SITE.phoneDisplay}</a></p>

@@ -2,9 +2,16 @@
 
 import { useEffect, useState } from "react";
 
-/** The home hero's looping clinic video. The poster is the video's own first frame and the video fades in
- *  over it once it can play, so a refresh never flashes from one picture to another (Javier, Nov 18 2026). */
-export default function HeroVideo() {
+type Props = { desktopSrc?: string; mobileSrc?: string; poster?: string };
+
+/** A looping hero video. The poster is the video's own first frame and the video fades in over it once it
+ *  can play, so a refresh never flashes from one picture to another (Javier, Nov 18 2026). Defaults to the
+ *  Clinic's own home-page clip; pass props to reuse this for another brand's hero (Nov 20 2026, Method). */
+export default function HeroVideo({
+  desktopSrc = "/labo/img/hero.mp4",
+  mobileSrc = "/labo/img/hero-mobile.mp4",
+  poster = "/labo/img/hero-poster.jpg",
+}: Props) {
   const [ready, setReady] = useState(false);
   const [src, setSrc] = useState<string | null>(null);
   // Nov 18 2026 (Javier: "make the mobile version with the video movement of swimmer as well"): phones play it too, from a
@@ -12,14 +19,14 @@ export default function HeroVideo() {
   useEffect(() => {
     const nav = navigator as Navigator & { connection?: { saveData?: boolean } };
     if (nav.connection?.saveData || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    setSrc(window.matchMedia("(max-width: 760px)").matches ? "/labo/img/hero-mobile.mp4" : "/labo/img/hero.mp4");
-  }, []);
+    setSrc(window.matchMedia("(max-width: 760px)").matches ? mobileSrc : desktopSrc);
+  }, [desktopSrc, mobileSrc]);
   if (!src) return null;
   return (
     <video
       className={ready ? "on" : undefined}
       autoPlay muted loop playsInline preload="auto"
-      poster="/labo/img/hero-poster.jpg"
+      poster={poster}
       aria-hidden="true"
       onCanPlay={() => setReady(true)}
       onPlaying={() => setReady(true)}
