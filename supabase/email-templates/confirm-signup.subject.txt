@@ -1,1 +1,1 @@
-Confirm your email — {{ if eq .Data.brand "labo" }}The Labo Clinic{{ else }}MyCleanMD{{ end }}
+Confirm your email — {{ if eq .Data.brand "mycleanmd" }}MyCleanMD{{ else }}The Labo Clinic{{ end }}

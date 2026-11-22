@@ -30,7 +30,7 @@ function SignupInner() {
     const supabase = createClient()
     const { data, error: signUpError } = await supabase.auth.signUp({
       email, password,
-      options: { data: { full_name: name, role } },
+      options: { data: { full_name: name, role, brand: "mycleanmd" } },   // Nov 22 2026: the Supabase email templates default to The Labo Clinic; this tag keeps MyCleanMD mail branded MyCleanMD
     })
     if (signUpError) { setError(signUpError.message); setLoading(false); return }
     if (data.user) {

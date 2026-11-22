@@ -5,7 +5,7 @@
 One table-based, inline-styled layout (paper #F6F8FA, clay #1E6B7B, system sans — web fonts are unreliable in mail)
 rendered into one HTML file per Auth template. The Supabase project is shared with MyCleanMD, so the brand name is a
 Go-template conditional on the sign-up metadata: the Labo sign-up page sends `brand: "labo"` in `options.data`, and
-the template reads `{{ .Data.brand }}`. Variables Supabase fills: {{ .ConfirmationURL }}, {{ .Email }}, {{ .SiteURL }}.
+the template reads `{{ .Data.brand }}` — Nov 22 2026: the DEFAULT is The Labo Clinic (the live business); only accounts tagged brand="mycleanmd" get MyCleanMD, because older Labo accounts (Javier, Monika) predate the tag. Variables Supabase fills: {{ .ConfirmationURL }}, {{ .Email }}, {{ .SiteURL }}.
 
     python3 supabase/email-templates/build.py        # writes confirm-signup.html, reset-password.html, magic-link.html
 
@@ -13,10 +13,10 @@ Then paste each file's contents into Supabase → Authentication → Emails → 
 """
 from pathlib import Path
 
-BRAND = '{{ if eq .Data.brand "labo" }}The Labo Clinic{{ else }}MyCleanMD{{ end }}'
-SITE = '{{ if eq .Data.brand "labo" }}thelaboclinic.com{{ else }}mycleanmd.com{{ end }}'
-SITE_URL = '{{ if eq .Data.brand "labo" }}https://thelaboclinic.com{{ else }}https://mycleanmd.com{{ end }}'
-ADDRESS = '{{ if eq .Data.brand "labo" }}1512 Eastlake Ave E, Seattle, WA 98102 · 877-756-4286{{ else }}Telehealth for Washington residents{{ end }}'
+BRAND = '{{ if eq .Data.brand "mycleanmd" }}MyCleanMD{{ else }}The Labo Clinic{{ end }}'
+SITE = '{{ if eq .Data.brand "mycleanmd" }}mycleanmd.com{{ else }}thelaboclinic.com{{ end }}'
+SITE_URL = '{{ if eq .Data.brand "mycleanmd" }}https://mycleanmd.com{{ else }}https://thelaboclinic.com{{ end }}'
+ADDRESS = '{{ if eq .Data.brand "mycleanmd" }}Telehealth for Washington residents{{ else }}1512 Eastlake Ave E, Seattle, WA 98102 · 877-756-4286{{ end }}'
 
 LAYOUT = """<!doctype html>
 <html lang="en">
