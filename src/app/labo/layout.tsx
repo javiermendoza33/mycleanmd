@@ -61,7 +61,8 @@ export const metadata: Metadata = {
     locale: "en_US",
     title: `${TITLE} | ${PRACTICE.name}`,
     description: DESCRIPTION,
-    images: [{ url: "/labo/img/misc/cta-bg.jpg", width: 2000, height: 1334, alt: "The Labo Clinic, Seattle" }],
+    // Nov 21 2026 (Javier): the link preview is the three-women photo from /about, cropped to 1200×630 in public/labo/og.jpg.
+    images: [{ url: "/labo/og.jpg", width: 1200, height: 630, alt: "The Labo Clinic, Seattle" }],
   },
   twitter: { card: "summary_large_image" },
 };
