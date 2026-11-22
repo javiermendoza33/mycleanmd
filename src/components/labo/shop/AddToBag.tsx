@@ -2,9 +2,7 @@
 
 import { useState } from "react";
 import { useBag } from "./bag";
-
-/** Partner storefront brands (Nov 21 2026): display names in each brand's own trademark casing. */
-export const PARTNER_NAME: Record<string, string> = { alastin: "ALASTIN Skincare®", skinbetter: "skinbetter science®" };
+import { PARTNER_NAME } from "@/labo/clinic/products";
 
 /** The product's buy control. Three states: partner item with its unique link → outbound button to the partner
  *  store (new tab, no discount copy near it per MAP rules); partner item without a link yet, or `soon` → disabled;

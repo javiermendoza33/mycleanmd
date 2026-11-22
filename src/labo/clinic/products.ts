@@ -201,6 +201,9 @@ export const products: Product[] = [
 export const bestSellers = products.filter((p) => p.bestSeller);
 export const alastinLine = products.filter((p) => p.partner === "alastin");
 export const LINES = [ALASTIN, "skinbetter science", "SkinMedica"] as const;
+/** Partner storefront brands in each brand's own trademark casing. Lives here (not in a "use client" file) so
+ *  server components get the real map — a client module's non-component export is a stub on the server. */
+export const PARTNER_NAME: Record<string, string> = { alastin: ALASTIN, skinbetter: "skinbetter science®" };
 export const getProduct = (slug: string) => products.find((p) => p.slug === slug);
 export const money = (n: number) => `$${n.toFixed(n % 1 ? 2 : 0)}`;
 /** True when a product can't go in the bag: coming soon, or a partner item (bought on the partner's store). */

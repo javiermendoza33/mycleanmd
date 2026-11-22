@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getProduct, money, products, SHOP } from "@/labo/clinic/products";
+import { getProduct, money, products, PARTNER_NAME, SHOP } from "@/labo/clinic/products";
 import { PRACTICE } from "@/labo/content";
 import { Packshot } from "@/components/labo/shop/Packshot";
-import AddToBag, { PARTNER_NAME } from "@/components/labo/shop/AddToBag";
+import AddToBag from "@/components/labo/shop/AddToBag";
 import { ProductCard } from "@/components/labo/shop/ProductCard";
 import { BookCta } from "@/components/labo/Clinic";
 
