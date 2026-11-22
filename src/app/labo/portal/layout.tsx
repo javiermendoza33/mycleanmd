@@ -17,7 +17,7 @@ const NAV = [
 
 export default function PortalLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div style={{ minHeight: "100vh", background: "var(--paper)", color: "var(--ink)" }}>
+    <div data-portal style={{ minHeight: "100vh", background: "var(--paper)", color: "var(--ink)" }}>
       <header
         style={{
           display: "flex", alignItems: "center", justifyContent: "space-between",
