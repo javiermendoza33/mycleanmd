@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
   if (notYet.length) return NextResponse.json({ ok: false, error: `${notYet.map((l) => l.p.name).join(", ")} ${notYet.length === 1 ? "is" : "are"} coming soon and can't be ordered yet.` }, { status: 400 });
   // Partner-store items (ALASTIN, Nov 21 2026) are bought on the partner's site, never through our checkout.
   const partnerItems = lines.filter((l) => l.p.partner);
-  if (partnerItems.length) return NextResponse.json({ ok: false, error: `${partnerItems.map((l) => l.p.name).join(", ")} ${partnerItems.length === 1 ? "is" : "are"} sold through our ALASTIN Skincare® partner store.` }, { status: 400 });
+  if (partnerItems.length) { const brand = { alastin: "ALASTIN Skincare®", skinbetter: "skinbetter science®" }[partnerItems[0].p.partner as string] ?? "partner"; return NextResponse.json({ ok: false, error: `${partnerItems.map((l) => l.p.name).join(", ")} ${partnerItems.length === 1 ? "is" : "are"} sold through our ${brand} partner store.` }, { status: 400 }); }
 
   const subtotal = lines.reduce((s, l) => s + l.p.price * l.qty, 0);
   const shipping = subtotal >= SHOP.freeShippingOver ? 0 : SHOP.flatShipping;

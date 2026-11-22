@@ -14,7 +14,7 @@ export const CLINIC_SITE = {
   sms: "sms:877-756-4286",
   email: PRACTICE.email,
   instagram: "https://www.instagram.com/skinhavenclinic.com/",
-  shopUrl: "https://connect.skinbetter.com/skinhavenclinic",
+  shopUrl: "https://www.skinbetter.com", // Nov 21 2026: was Skin Haven's connect.skinbetter.com store; Monika's own partner link replaces this
   promo: "New patients receive $20 off their first aesthetic treatment",
   // Nov 21 2026, Javier: "for now its appointment only even weekdays" — no fixed hours yet.
   hours: [

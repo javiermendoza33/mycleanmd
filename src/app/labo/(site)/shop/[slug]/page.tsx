@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { getProduct, money, products, SHOP } from "@/labo/clinic/products";
 import { PRACTICE } from "@/labo/content";
 import { Packshot } from "@/components/labo/shop/Packshot";
-import AddToBag from "@/components/labo/shop/AddToBag";
+import AddToBag, { PARTNER_NAME } from "@/components/labo/shop/AddToBag";
 import { ProductCard } from "@/components/labo/shop/ProductCard";
 import { BookCta } from "@/components/labo/Clinic";
 
@@ -36,7 +36,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               <p className="sub">{p.tagline}</p>
               <div className="pmeta"><span className="price">{money(p.price)}</span><span className="mono">{p.size}</span>{p.bestSeller && <span className="ptag inline">Best seller</span>}</div>
               <AddToBag slug={p.slug} big soon={p.soon} partner={p.partner} buyUrl={p.buyUrl} />
-              {p.partner === "alastin" && <p className="note" style={{ marginTop: 10 }}>Sold through our ALASTIN Skincare® partner store — it ships from ALASTIN, not from the clinic.</p>}
+              {p.partner && <p className="note" style={{ marginTop: 10 }}>Sold through our {PARTNER_NAME[p.partner]} partner store — it ships from them, not from the clinic.</p>}
               {!p.partner && <p className="note">{SHOP.shipsTo}. Free US shipping over {money(SHOP.freeShippingOver)}.</p>}
               <div className="prose" style={{ marginTop: 28 }}><p>{p.blurb}</p></div>
               <h4 style={{ marginTop: 30 }}>How to use</h4>

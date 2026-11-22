@@ -3,16 +3,20 @@
 import { useState } from "react";
 import { useBag } from "./bag";
 
+/** Partner storefront brands (Nov 21 2026): display names in each brand's own trademark casing. */
+export const PARTNER_NAME: Record<string, string> = { alastin: "ALASTIN Skincare®", skinbetter: "skinbetter science®" };
+
 /** The product's buy control. Three states: partner item with its unique link → outbound button to the partner
- *  store (ALASTIN, Nov 21 2026 — new tab, no discount copy near it per their MAP rules); partner item without a
- *  link yet, or `soon` → disabled; otherwise the bag. */
+ *  store (new tab, no discount copy near it per MAP rules); partner item without a link yet, or `soon` → disabled;
+ *  otherwise the bag. */
 export default function AddToBag({ slug, big, label = "Add to bag", soon, partner, buyUrl }: { slug: string; big?: boolean; label?: string; soon?: boolean; partner?: string; buyUrl?: string }) {
   const { add } = useBag();
   const [done, setDone] = useState(false);
   const cls = `addbar${big ? " big" : ""}`;
-  if (partner === "alastin") {
-    if (buyUrl) return <a className={`${cls} ext`} href={buyUrl} target="_blank" rel="noopener noreferrer">Shop at ALASTIN Skincare® ↗</a>;
-    return <button type="button" className={`${cls} soon`} disabled aria-disabled="true" title="Our ALASTIN partner store link is on its way">Available soon at ALASTIN Skincare®</button>;
+  if (partner && PARTNER_NAME[partner]) {
+    const brand = PARTNER_NAME[partner];
+    if (buyUrl) return <a className={`${cls} ext`} href={buyUrl} target="_blank" rel="noopener noreferrer">Shop at {brand} ↗</a>;
+    return <button type="button" className={`${cls} soon`} disabled aria-disabled="true" title={`Our ${brand} partner store link is on its way`}>Available soon at {brand}</button>;
   }
   if (soon) return <button type="button" className={`${cls} soon`} disabled aria-disabled="true" title="Coming soon">Coming soon</button>;
   return (
