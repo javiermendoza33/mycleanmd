@@ -900,7 +900,9 @@ html,body{overflow-x:clip}
 [data-labo] [data-clinic] .pdp{padding-block:36px 90px}
 [data-labo] [data-clinic] .pdpgrid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:22px;align-items:start}
 [data-labo] [data-clinic] .pdpimg{background:transparent;position:sticky;top:90px}
-[data-labo] [data-clinic] .pdpimg .pshot.photo{background:transparent}
+/* The photo's white matte is multiplied away, which needs a real color behind it — .pshot is its own stacking context
+   (container-type + overflow), so `transparent` left the white showing. Paper = the page, so the box vanishes. */
+[data-labo] [data-clinic] .pdpimg .pshot.photo{background:var(--paper)}
 [data-labo] [data-clinic] .pdpinfo h1{font-size:clamp(1.9rem,3.6vw,2.8rem);margin-top:10px}
 [data-labo] [data-clinic] .pdpinfo .sub{margin-top:14px;font-size:1.15rem}
 [data-labo] [data-clinic] .pdpinfo .pmeta{display:flex;gap:14px;align-items:center;margin-top:18px;flex-wrap:wrap}
