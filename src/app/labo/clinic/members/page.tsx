@@ -9,14 +9,14 @@ import { fmtDate, initials } from "@/lib/labo/provider";
  */
 export const dynamic = "force-dynamic";
 
-type Member = { id: string; name: string; email: string; joined: string | null; lastSignIn: string | null; confirmed: boolean };
+type Member = { id: string; name: string; email: string; phone: string | null; sms: boolean; joined: string | null; lastSignIn: string | null; confirmed: boolean };
 
 export default async function ClinicMembers({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
   if (!(await getStaff())) return null;
   const sp = await searchParams; const q = (sp.q ?? "").trim().toLowerCase().slice(0, 60);
   const admin = createAdminClient();
   const [{ data: profiles, error }, { rows: team }, users] = await Promise.all([
-    admin.from("profiles").select("id,email,full_name,created_at").eq("role", "patient").order("created_at", { ascending: false }).limit(2000),
+    admin.from("profiles").select("id,email,full_name,created_at,phone,sms_consent").eq("role", "patient").order("created_at", { ascending: false }).limit(2000),
     listStaff(),
     admin.auth.admin.listUsers({ page: 1, perPage: 1000 }).then((r) => r.data?.users ?? []).catch(() => []),
   ]);
@@ -24,20 +24,24 @@ export default async function ClinicMembers({ searchParams }: { searchParams: Pr
   const auth = new Map(users.map((u) => [u.id, u]));
   const all: Member[] = (profiles ?? [])
     .filter((p) => p.email && !teamEmails.has(String(p.email).toLowerCase()))
-    .map((p) => { const u = auth.get(p.id); return { id: p.id, name: p.full_name || (u?.user_metadata?.full_name as string) || "", email: String(p.email), joined: p.created_at ?? u?.created_at ?? null, lastSignIn: u?.last_sign_in_at ?? null, confirmed: !!u?.email_confirmed_at }; });
-  const list = q ? all.filter((m) => m.name.toLowerCase().includes(q) || m.email.toLowerCase().includes(q)) : all;
+    .map((p) => { const u = auth.get(p.id); return { id: p.id, name: p.full_name || (u?.user_metadata?.full_name as string) || "", email: String(p.email), phone: p.phone ?? null, sms: !!p.sms_consent, joined: p.created_at ?? u?.created_at ?? null, lastSignIn: u?.last_sign_in_at ?? null, confirmed: !!u?.email_confirmed_at }; });
+  const qd = q.replace(/\D/g, "");
+  const list = q ? all.filter((m) => m.name.toLowerCase().includes(q) || m.email.toLowerCase().includes(q) || (!!qd && (m.phone ?? "").includes(qd))) : all;
+  const optedIn = all.filter((m) => m.sms).length;
   const month = all.filter((m) => m.joined && Date.now() - new Date(m.joined).getTime() < 30 * 864e5).length;
   return (
     <>
-      <div className="top"><div><h1>Members</h1><p>{all.length} member{all.length === 1 ? "" : "s"} · {month} joined in the last 30 days · from <a href="/membership" target="_blank" rel="noopener noreferrer">thelabomethod.com/membership ↗</a></p></div></div>
+      <div className="top"><div><h1>Members</h1><p>{all.length} member{all.length === 1 ? "" : "s"} · {month} joined in the last 30 days · {optedIn} opted in to texts · from <a href="/membership" target="_blank" rel="noopener noreferrer">thelabomethod.com/membership ↗</a></p></div></div>
       {error && <div className="setup">Couldn&rsquo;t read the profiles table: {error.message}</div>}
-      <div className="card"><form className="row" style={{ gap: 10 }}><input className="in" name="q" defaultValue={sp.q ?? ""} placeholder="Search name or email" style={{ maxWidth: 340 }} /><button className="btn" type="submit">Search</button></form></div>
-      <div className="card"><table><thead><tr><th>Member</th><th>Email</th><th>Joined</th><th>Last sign-in</th><th>Status</th></tr></thead><tbody>
-        {list.length === 0 && <tr><td colSpan={5} className="muted">{q ? "No members match." : "No members yet — the Join free button on the site creates them."}</td></tr>}
+      <div className="card"><form className="row" style={{ gap: 10 }}><input className="in" name="q" defaultValue={sp.q ?? ""} placeholder="Search name, email or phone" style={{ maxWidth: 340 }} /><button className="btn" type="submit">Search</button></form></div>
+      <div className="card"><table><thead><tr><th>Member</th><th>Email</th><th>Mobile</th><th>Texts</th><th>Joined</th><th>Last sign-in</th><th>Status</th></tr></thead><tbody>
+        {list.length === 0 && <tr><td colSpan={7} className="muted">{q ? "No members match." : "No members yet — the Join free button on the site creates them."}</td></tr>}
         {list.map((m) => (
           <tr key={m.id}>
             <td><span className="row" style={{ gap: 8, alignItems: "center" }}><span className="av s">{initials(m.name, m.email)}</span><b>{m.name || "—"}</b></span></td>
             <td className="mono">{m.email}</td>
+            <td className="mono">{m.phone ? m.phone.replace(/^\+1(\d{3})(\d{3})(\d{4})$/, "($1) $2-$3") : <span className="muted">—</span>}</td>
+            <td>{m.sms ? <span className="pill ok">Opted in</span> : <span className="muted">no</span>}</td>
             <td>{m.joined ? fmtDate(m.joined) : "—"}</td>
             <td>{m.lastSignIn ? fmtDate(m.lastSignIn) : <span className="muted">never</span>}</td>
             <td><span className={`pill ${m.confirmed ? "ok" : "warn"}`}>{m.confirmed ? "Active" : "Email not confirmed"}</span></td>

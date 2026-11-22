@@ -123,3 +123,11 @@ create policy "Patients can view own prescriptions" on public.labo_prescriptions
   for select using (
     exists (select 1 from public.labo_enrollments e where e.id = enrollment_id and e.user_id = auth.uid())
   );
+
+-- Nov 22 2026 — member sign-up: optional mobile + SMS consent (applied as migration labo_profiles_phone_sms_consent).
+alter table public.profiles
+  add column if not exists phone text,
+  add column if not exists sms_consent boolean not null default false,
+  add column if not exists sms_consent_at timestamptz,
+  add column if not exists sms_consent_meta jsonb;
+-- handle_new_user() now also copies phone / sms_consent from raw_user_meta_data (see the migration for the body).

@@ -1241,3 +1241,10 @@ html,body{overflow-x:clip}
 /* ── Patient portal (/portal) on the Crisp Medical Modern palette (Nov 22 2026, Javier: "and admin portal/client color schemes").
       The portal layout carries data-portal; it keeps its own minimal chrome but takes the clinic's tokens + font. */
 [data-labo] [data-portal]{--paper:#F6F8FA;--canvas:#FFFFFF;--wash:#E6ECF2;--ink:#132238;--graphite:#3C495B;--muted:#858D99;--line:rgba(19,34,56,.14);--hair:rgba(19,34,56,.08);--accent:#1E6B7B;--accent-rgb:30,107,123;--accent-tint:rgba(30,107,123,.10);--on-accent:#FFFFFF;--radius-card:10px;font-family:var(--font-clinic),var(--font-inter),-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}
+/* Sign-up: optional mobile + SMS consent row (Nov 22 2026). The stacked .authform label would put the checkbox above
+   the text; keep the consent row horizontal, and mute the "(optional…)" hint. */
+[data-labo] .authform label .opt{font-weight:400;color:var(--muted);margin-left:4px}
+[data-labo] .authform label.consent{flex-direction:row;align-items:flex-start;font-weight:400;gap:12px;font-size:.84rem;line-height:1.5;color:var(--graphite)}
+[data-labo] .authform label.consent input{width:18px;height:18px;flex:none;margin:3px 0 0;padding:0;accent-color:var(--accent)}
+[data-labo] .authform label.consent span{flex:1;min-width:0}
+[data-labo] .authform label.consent a{color:var(--accent)}
