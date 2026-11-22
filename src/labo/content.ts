@@ -65,7 +65,7 @@ export const PRACTICE = {
   name: "The Labo Clinic",
   subline: "Injectables, Skincare & Wellness",
   footerSubline: "Injectables, Skincare & Wellness",
-  domain: "thelabomethod.com",
+  domain: "thelaboclinic.com",   // Nov 22 2026: the clinic moved to its own domain; thelabomethod.com = telehealth
   provider: "Monika Jauregui, DNP, NP-C",
   email: "hello@thelabomethod.com",
   // Handoff open item #5: the provider's personal mobile is deliberately not
@@ -439,7 +439,7 @@ export const LEGAL = [
  */
 export const METHOD = {
   name: "The Labo Method",
-  domain: "method.thelabomethod.com",
+  domain: "thelabomethod.com",   // Nov 22 2026: was method.thelabomethod.com (the proxy redirects the old subdomain)
   // Keep in sync with the [data-method] --accent override in labo.css — this
   // copy is for cross-links rendered on the CLINIC's own pages (its own
   // [data-clinic] scope has no [data-method], so var(--accent) there is

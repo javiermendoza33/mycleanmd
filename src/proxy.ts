@@ -16,13 +16,20 @@ const GATE_COOKIE = '_gate'
 // Nov 19 2026: labo.benthicgroup.com = the Vercel branch domain for `sandbox-booking` (benthicgroup.com is on Vercel DNS, so no
 // registrar step; Javier: "just host it on vercel… its temp anyways"). Same clinic site, same routing, noindex.
 const SANDBOX_HOST = 'labo.benthicgroup.com'
-const LABO_HOSTS = ['thelabomethod.com', 'www.thelabomethod.com', SANDBOX_HOST]
+// Nov 22 2026 (Javier: "we bought thelaboclinic.com which this site should point to and the telehealth point to
+// thelabomethod.com"): the clinic moved to thelaboclinic.com; thelabomethod.com is The Labo Method (telehealth) now.
+const CLINIC_HOST = 'thelaboclinic.com'
+const METHOD_HOST = 'thelabomethod.com'
+const LABO_HOSTS = [CLINIC_HOST, `www.${CLINIC_HOST}`, SANDBOX_HOST]
+// Clinic-only URLs that Google indexed on thelabomethod.com before the move — 308 them to the same path on the clinic host.
+const CLINIC_ONLY_PATHS = ['about', 'booking', 'contact', 'membership', 'patient-care', 'privacy-policy', 'services', 'shop', 'sms', 'testimonials', 'treatments']
+const CLINIC_BLOG_SLUGS = new Set(['why-exosomes-are-better-than-prp', 'concerns-can-be-addressed-with-chemical-peels', 'can-iv-therapy-help-you-reduce-stress', 'is-medical-weight-loss-right-for-you', 'botox-vs-dysport-deciphering-the-perfect', 'iv-therapy-vitamin-shots-5-benefits-you-need-to-know', 'what-are-pdo-threads-and-how-they-work-cosmetic-procedures'])
 // The Labo Method (telehealth, white-labelled onto Healthie) is a SEPARATE
 // brand from The Labo Clinic (in-person, served at the LABO_HOSTS above) —
 // Nov 19 2026, Javier: split the two, don't reuse mycleanmd.com/MyCleanMD.
 // It lives on its own subdomain of the same domain, sharing this Vercel
 // project and this repo (src/app/labo/method/*), not a new domain to manage.
-const METHOD_HOSTS = ['method.thelabomethod.com']
+const METHOD_HOSTS = [METHOD_HOST, `www.${METHOD_HOST}`, `method.${METHOD_HOST}`]   // method.* is the pre-move subdomain, redirected below
 
 export async function proxy(request: NextRequest) {
   const { pathname: path } = request.nextUrl
@@ -33,10 +40,21 @@ export async function proxy(request: NextRequest) {
   if (isLabo || isMethod) {
     // www → apex, so one canonical host owns the index. Only applies to the
     // Clinic host — method.thelabomethod.com has no www variant.
-    if (host.startsWith('www.')) {
+    if (host.startsWith('www.') || host === `method.${METHOD_HOST}`) {
       const url = new URL(request.url)
-      url.host = 'thelabomethod.com'
+      url.host = isMethod ? METHOD_HOST : CLINIC_HOST
       return NextResponse.redirect(url, 308)
+    }
+    // The clinic's old URLs on thelabomethod.com (services, shop, booking, the portals, sign-in…) live on
+    // thelaboclinic.com now; one account serves both brands, so the portal/auth pages redirect too.
+    if (isMethod) {
+      const first = '/' + (path.split('/')[1] ?? '')
+      const clinicBlog = path.startsWith('/blog/') && CLINIC_BLOG_SLUGS.has(path.split('/')[2] ?? '')
+      const portalish = ['/portal', '/clinic', '/provider'].includes(first) || path === '/auth/login' || path === '/auth/signup' || path === '/auth/forgot'
+      if (CLINIC_ONLY_PATHS.includes(first.slice(1)) || clinicBlog || portalish) {
+        const url = new URL(request.url); url.host = CLINIC_HOST
+        return NextResponse.redirect(url, 308)
+      }
     }
     // Internal path prefix for this host: Clinic pages live at /labo/*,
     // Method pages at /labo/method/* (so Method inherits the Clinic's own

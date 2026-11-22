@@ -14,8 +14,8 @@ Then paste each file's contents into Supabase → Authentication → Emails → 
 from pathlib import Path
 
 BRAND = '{{ if eq .Data.brand "labo" }}The Labo Clinic{{ else }}MyCleanMD{{ end }}'
-SITE = '{{ if eq .Data.brand "labo" }}thelabomethod.com{{ else }}mycleanmd.com{{ end }}'
-SITE_URL = '{{ if eq .Data.brand "labo" }}https://thelabomethod.com{{ else }}https://mycleanmd.com{{ end }}'
+SITE = '{{ if eq .Data.brand "labo" }}thelaboclinic.com{{ else }}mycleanmd.com{{ end }}'
+SITE_URL = '{{ if eq .Data.brand "labo" }}https://thelaboclinic.com{{ else }}https://mycleanmd.com{{ end }}'
 ADDRESS = '{{ if eq .Data.brand "labo" }}1512 Eastlake Ave E, Seattle, WA 98102 · 877-756-4286{{ else }}Telehealth for Washington residents{{ end }}'
 
 LAYOUT = """<!doctype html>

@@ -73,7 +73,7 @@ export async function GET(request: NextRequest) {
       // Nov 21 2026 (Javier: "i want the bounce gone and just go right to CRM we are building"): honor a safe
       // ?next= from the sign-up/invite link, otherwise clinic staff and the provider land on /clinic (the clinic
       // portal), patients on /portal. The sandbox host counts as a Labo host too.
-      if (/(^|\.)thelabomethod\.com$|^labo\.benthicgroup\.com$/.test(new URL(origin).hostname)) {
+      if (/(^|\.)thelaboclinic\.com$|(^|\.)thelabomethod\.com$|^labo\.benthicgroup\.com$/.test(new URL(origin).hostname)) {
         const next = searchParams.get('next')
         if (next && next.startsWith('/') && !next.startsWith('//')) return NextResponse.redirect(`${origin}${next}`)
         const email = data.user.email?.toLowerCase()

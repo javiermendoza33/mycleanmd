@@ -48,7 +48,7 @@ export const service: Service = {
     src: "/labo/img/services/medical-weight-loss.jpg",
     alt: "Hands holding fresh vegetables, fruits, and dried fruits, representing healthy eating for medical weight loss",
   },
-  telehealthHref: "https://method.thelabomethod.com/programs/glp-1-weight-management",
+  telehealthHref: "https://thelabomethod.com/programs/glp-1-weight-management",
   seo: {
     title: "Medical Weight Loss in Seattle, WA | Semaglutide Injections",
     description:

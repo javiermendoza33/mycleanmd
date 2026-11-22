@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
     recorded_at: new Date().toISOString(),
     ip: (req.headers.get("x-forwarded-for") ?? "").split(",")[0].trim() || "unknown",
     user_agent: req.headers.get("user-agent") ?? "unknown",
-    source: "member sign-up (thelabomethod.com/auth/signup)",
+    source: "member sign-up (thelaboclinic.com/auth/signup)",
     disclosure: CONSENT_TEXT,
   };
   await admin.from("profiles").update({ sms_consent_meta: meta, sms_consent_at: p.sms_consent_at ?? meta.recorded_at }).eq("id", p.id);

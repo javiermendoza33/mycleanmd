@@ -45,7 +45,7 @@ export const service: Service = {
     src: "/labo/img/services/cosmetic-rx.jpg",
     alt: "Close-up of a woman's eye with long, full lashes after Latisse and Upneeq treatment",
   },
-  telehealthHref: "https://method.thelabomethod.com",
+  telehealthHref: "https://thelabomethod.com",
   seo: {
     title: "Latisse And Upneeq in Seattle, WA | Cosmetic Services",
     description:
