@@ -54,7 +54,7 @@ export const SHOP = {
   currency: "usd",
   freeShippingOver: 75,
   flatShipping: 8,
-  pricesConfirmed: false,
+  pricesConfirmed: true,   // Nov 21 2026 (Javier: "remove this line") — partner MSRP, no "being finalized" note
   promo: CLINIC_SITE.promo,
   /** The line's own authorized store — kept as the alternative while online checkout is being set up. */
   skinbetterStore: CLINIC_SITE.shopUrl,
