@@ -1003,7 +1003,7 @@ html,body{overflow-x:clip}
 [data-labo] [data-clinic] .brand{letter-spacing:-.02em}
 [data-labo] [data-clinic] .pcard .pname{letter-spacing:-.01em}
 [data-labo] [data-clinic] .fhero h1 em{font-style:italic}
-[data-labo] [data-clinic] .fmedia .still{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 18%}
+[data-labo] [data-clinic] .fmedia .still{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%}
 /* Syne is wide: keep the header on one line */
 [data-labo] [data-clinic] .bar{gap:16px}
 [data-labo] [data-clinic] .brand{white-space:nowrap;font-size:1.05rem}

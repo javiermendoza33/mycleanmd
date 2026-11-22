@@ -82,7 +82,9 @@ export default function LaboHome() {
             <div className="fmedia">
               {/* Nov 19 2026 (Javier: "take the highest resolution picture we have that fits and put instead of the video"):
                   the 1877×2560 portrait from the clinic's own photo set — the sharpest file that fills the tall box. */}
-              <img className="still" src="/labo/img/about/team.jpg" alt="Woman with glowing, even skin, hand resting at her shoulder" fetchPriority="high" />
+              {/* Nov 22 2026 (Javier, from the hero-photo sheet: "i like this one"): the three-women photo — its blue-grey
+                  backdrop sits with the sage palette, and it's already the link-preview image. Only copy is 1253×836. */}
+              <img className="still" src="/labo/img/about/clinic.jpg" alt="Three smiling women with glowing skin, close together" fetchPriority="high" />
             </div>
           </div>
         </section>
