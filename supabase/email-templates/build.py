@@ -67,7 +67,7 @@ TEMPLATES = {
         TITLE="Reset your password", PREVIEW="Choose a new password for your portal.",
         KICKER="Account", HEADLINE="Let's set a new password.",
         BODY="We received a request to reset the password for your __BRAND__ account. Use the button to choose a new one.",
-        CTA="Choose a new password", AFTER="If you didn't ask for this, you can ignore it — your password stays as it is.",
+        CTA="Choose a new password", AFTER='Or open <a href="__SITE_URL__/auth/reset" style="color:#1E6B7B;">__SITE__/auth/reset</a> and enter this code: <b style="font-size:16px;letter-spacing:.12em;color:#132238;">{{ .Token }}</b> (it works from any device, once). If you didn\'t ask for this, you can ignore it — your password stays as it is.',
     ),
     "magic-link": dict(
         subject="Your sign-in link — " + BRAND,
