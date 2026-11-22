@@ -18,7 +18,7 @@ export default async function ClinicOrders({ searchParams }: { searchParams: Pro
     <>
       <div className="top"><div><h1>Orders</h1><p>{sp.all ? "Every order" : "Open orders"} · {rows.length} shown · <a href={sp.all ? "/clinic/orders" : "/clinic/orders?all=1"}>{sp.all ? "show open only" : "show all"}</a></p></div></div>
       {missing(error) && <div className="setup">Run supabase-labo-orders.sql in the Supabase SQL editor first.</div>}
-      <div className="card"><div className="sm muted">How it works: a paid order lands here from the website. <b>Own-line items</b> (The Labo Clinic skincare) are placed with Selfnamed by hand — copy the address, place the dropship order in their dashboard, paste their order number, mark <b>Placed</b>; when their tracking arrives, paste it and mark <b>Shipped</b>. Clinic-brand items (skinbetter, Alastin, SkinMedica) come off the shelf: pack, ship or hold for pick-up, mark Shipped or Done.</div></div>
+      <div className="card"><div className="sm muted">How it works: a paid order lands here from the website. ALASTIN and skinbetter items are sold through each brand&rsquo;s partner store and ship from them, so nothing new arrives here for those. Any older <b>own-line</b> order (The Labo Clinic skincare, placed with Selfnamed by hand): copy the address, place the dropship order in their dashboard, paste their order number, mark <b>Placed</b>; when their tracking arrives, paste it and mark <b>Shipped</b>.</div></div>
       {rows.length === 0 && !error && <div className="card"><div className="empty">No open orders.</div></div>}
       {rows.map((o) => (
         <div className="card" key={o.id}>

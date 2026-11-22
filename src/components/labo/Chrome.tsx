@@ -24,7 +24,7 @@ export function Header() {
   const pathname = usePathname();
   return (
     <>
-    <div className="promo"><div className="wrap"><span>{SHOP.promo}</span><span className="sep">·</span><span>Free shipping on skincare orders over ${SHOP.freeShippingOver}</span></div></div>
+    <div className="promo"><div className="wrap"><span>{SHOP.promo}</span></div></div>
     <header className="site">
       <div className="wrap bar">
         {/* .brand's own CSS has margin-right:auto (pushes the rest of the row right) — cancelled here

@@ -80,7 +80,6 @@ const PARTNERS = [
   { name: "Galderma", src: "/labo/img/partners/galderma.jpg" },
   { name: "SkinBetter Science", src: "/labo/img/partners/skinbetter.jpg" },
   { name: "SkinPen", src: "/labo/img/partners/skinpen.jpg" },
-  { name: "SkinMedica", src: "/labo/img/partners/skinmedica.png" },
   { name: "Latisse", src: "/labo/img/partners/latisse.png" },
   { name: "Alastin", src: "/labo/img/partners/alastin.jpg" },
   { name: "Upneeq", src: "/labo/img/partners/upneeq.jpg" },

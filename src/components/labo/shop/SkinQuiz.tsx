@@ -106,7 +106,7 @@ export default function SkinQuiz() {
           <div className="pgrid" style={{ marginTop: 20 }}>{picks.map((p) => <ProductCard key={p.slug} p={p} />)}</div>
           <div className="qnav">
             <Link className="btn btn-ghost" href={`/shop?c=${concern}`}>Everything for {Q2.find((o) => o.key === concern)!.label.toLowerCase()} ›</Link>
-            <span className="note" style={{ margin: 0 }}>{SHOP.shipsTo}.{!SHOP.pricesConfirmed && " Pricing is being finalized — text us for today's price."}</span>
+            <span className="note" style={{ margin: 0 }}>Each pick links to the brand&rsquo;s own partner store.{!SHOP.pricesConfirmed && " Pricing is being finalized — text us for today's price."}</span>
           </div>
         </>
       )}

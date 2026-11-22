@@ -15,7 +15,7 @@ import { CLINIC_SITE } from "@/labo/clinic/site";
  * holiday sets skipped); packshots are hotlinked from ALASTIN's CDN until the partner kit supplies files.
  * Trademark/MAP per ALASTIN's web spec: "ALASTIN Skincare®" title case, no discounts near their buttons.
  *
- * Prices for the clinic-stocked lines (skinbetter, SkinMedica) are typical US retail as a starting point;
+ * SkinMedica was removed Nov 21 2026 (Javier: "no SkinMedica") — every item is now a partner-store line. Prices are MSRP;
  * `pricesConfirmed:false` prints a "pricing being finalized" note until Mónika confirms her list.
  */
 export type ProductType = "Cleanser" | "Exfoliant" | "Serum" | "Moisturizer" | "Sunscreen" | "Eyes";
@@ -182,36 +182,11 @@ export const products: Product[] = [
     type: "Serum", concerns: ["Dryness", "Aging"], form: "bottle", tone: "#D8E1E6", label: "Ampra", size: "30 mL", price: 180,
     tagline: "Macro hyaluronic acid for plumpness and lift.", blurb: "A hyaluronic-acid serum built to improve plumpness, lift and texture — the hydration step for skin that has lost bounce.",
     how: ["Morning and night on damp skin", "Press in, then moisturizer"], actives: ["Macro hyaluronic acid", "Peptides"] },
-  // ── SkinMedica (clinic-stocked) ────────────────────────────────────────────────────────────────────
-  {
-    slug: "skinmedica-tns-advanced", name: "TNS Advanced+ Serum", line: "SkinMedica", lineShort: "SkinMedica",
-    type: "Serum", concerns: ["Aging"], form: "bottle", tone: "#CFC4D6", label: "TNS Advanced+", size: "1 oz · 28.4 g", price: 295,
-    tagline: "Growth factors for skin that wants to look rested.",
-    blurb: "SkinMedica's two-chamber growth-factor serum, clinically shown to improve the look of coarse wrinkles, sagging and tone. The splurge, and the one patients re-order.",
-    how: ["Morning and night", "One pump, blended from the dual chamber", "Follow with moisturizer"],
-    actives: ["TNS-MR growth factors", "Peptides", "Marine extracts"],
-  },
-  {
-    slug: "skinmedica-ha5", name: "HA5 Rejuvenating Hydrator", line: "SkinMedica", lineShort: "SkinMedica",
-    type: "Moisturizer", concerns: ["Dryness", "Aging"], form: "bottle", tone: "#BFD5E6", label: "HA5", size: "2 oz · 56.7 g", price: 178,
-    tagline: "Five forms of hyaluronic acid, instant plump.",
-    blurb: "A hydrator that smooths the look of fine lines on contact and supports the skin's own hyaluronic acid over time. Sits well under makeup and sunscreen.",
-    how: ["Morning and night, after serums", "A pea-sized amount over the face", "Layer under your moisturizer in dry months"],
-    actives: ["5 forms of hyaluronic acid", "Vitamin E", "Time-release HA"],
-  },
-  {
-    slug: "skinmedica-aha-bha-cleanser", name: "AHA/BHA Exfoliating Cleanser", line: "SkinMedica", lineShort: "SkinMedica",
-    type: "Exfoliant", concerns: ["Acne", "Pigment"], form: "tube", tone: "#D8DFD4", label: "AHA/BHA Cleanser", size: "6 oz · 177 mL", price: 49,
-    tagline: "A daily exfoliating wash for congested, uneven skin.",
-    blurb: "Alpha- and beta-hydroxy acids plus jojoba beads clear pores and lift dull surface cells, for brighter, smoother skin without a separate scrub.",
-    how: ["Morning or night, two to three times a week to start", "Massage over damp skin for 30 seconds, rinse", "Skip on retinoid nights if skin feels sensitive"],
-    actives: ["Glycolic + lactic acid", "Salicylic acid", "Jojoba esters"],
-  },
 ];
 
 export const bestSellers = products.filter((p) => p.bestSeller);
 export const alastinLine = products.filter((p) => p.partner === "alastin");
-export const LINES = [ALASTIN, "skinbetter science", "SkinMedica"] as const;
+export const LINES = [ALASTIN, "skinbetter science"] as const;
 /** Partner storefront brands in each brand's own trademark casing. Lives here (not in a "use client" file) so
  *  server components get the real map — a client module's non-component export is a stub on the server. */
 export const PARTNER_NAME: Record<string, string> = { alastin: ALASTIN, skinbetter: "skinbetter science®" };

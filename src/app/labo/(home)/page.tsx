@@ -45,7 +45,7 @@ export default function LaboHome() {
   const s = CLINIC_SITE;
   return (
     <>
-      <div className="promo"><div className="wrap"><span>{SHOP.promo}</span><span className="sep">·</span><span>Free shipping on skincare orders over ${SHOP.freeShippingOver}</span></div></div>
+      <div className="promo"><div className="wrap"><span>{SHOP.promo}</span></div></div>
       <header className="site">
         <div className="wrap bar">
           <a className="brand" href="#top" style={{ marginRight: 0 }}>{PRACTICE.name}</a>
