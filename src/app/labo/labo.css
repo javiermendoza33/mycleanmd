@@ -776,6 +776,18 @@
 
 /* row heads, boxed grids */
 [data-labo] [data-clinic] .rowhead{display:flex;justify-content:space-between;align-items:baseline;gap:20px;margin-bottom:22px}
+[data-labo] [data-clinic] .rowhead .more{white-space:nowrap;flex:none}
+/* Skin quiz (Nov 21 2026) — one bordered card; answers reuse the shop's .cchip (selected = .own, red). */
+[data-labo] [data-clinic] .quiz{border:1px solid var(--rule);border-radius:6px;background:var(--canvas);padding:26px 28px 28px}
+[data-labo] [data-clinic] .quiz .qhead{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+[data-labo] [data-clinic] .quiz .qmeta{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+[data-labo] [data-clinic] .quiz h3{font-size:clamp(1.3rem,2.4vw,1.7rem);letter-spacing:-.025em;margin-top:10px}
+[data-labo] [data-clinic] .quiz .quizopts{margin-top:18px;gap:10px}
+[data-labo] [data-clinic] .quiz .quizopts .cchip{font-size:.9rem;padding:11px 16px}
+[data-labo] [data-clinic] .quiz .qnav{display:flex;align-items:center;flex-wrap:wrap;gap:16px;margin-top:22px}
+[data-labo] [data-clinic] .quiz .btn[disabled]{opacity:.45;cursor:not-allowed}
+[data-labo] [data-clinic] .quiz .cont{align-self:auto}
+@media (max-width:560px){[data-labo] [data-clinic] .quiz{padding:20px 18px 22px}[data-labo] [data-clinic] .quiz .quizopts .cchip{width:100%;text-align:left}}
 [data-labo] [data-clinic] .rowhead h2{font-size:clamp(1.6rem,3vw,2.2rem)}
 [data-labo] [data-clinic] .rowhead .more{font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration-color:var(--ink)}
 /* Nov 21 2026 (Javier: "create some space between the service widgets") — was a boxed hairline grid

@@ -5,7 +5,8 @@ import { CLINIC, LASER_SPECS, NAV, PRACTICE, PROGRAMS, METHOD } from "@/labo/con
 import { services } from "@/labo/clinic/services";
 import { testimonials } from "@/labo/clinic/testimonials";
 import { CLINIC_SITE } from "@/labo/clinic/site";
-import { bestSellers, ownLine, SHOP } from "@/labo/clinic/products";
+import { ownLine, SHOP } from "@/labo/clinic/products";
+import SkinQuiz from "@/components/labo/shop/SkinQuiz";
 import MobileNav from "@/components/labo/MobileNav";
 import BagLink from "@/components/labo/shop/BagLink";
 import SearchButton from "@/components/labo/search/SearchButton";
@@ -84,12 +85,11 @@ export default function LaboHome() {
         {/* ── VALUE STRIP ───────────────────────────────────────────────── */}
         <div className="strip" aria-hidden="true"><div className="track">{[...STRIP, ...STRIP].map((x, i) => <span key={i}>{x}</span>)}</div></div>
 
-        {/* ── BEST SELLERS ──────────────────────────────────────────────── */}
+        {/* ── SKIN QUIZ (Nov 21 2026 — replaced the Best sellers row, Javier: "i like this idea of take our quiz") ── */}
         <section id="shop" style={{ paddingBottom: 0 }}>
           <div className="wrap">
-            <div className="rowhead"><h2>Best sellers</h2><Link className="more" href="/shop">Shop all</Link></div>
-            <div className="pgrid">{bestSellers.map((p) => <ProductCard key={p.slug} p={p} />)}</div>
-            <p className="note">{SHOP.shipsTo}.{!SHOP.pricesConfirmed && " Pricing is being finalized — text us for today's price."}</p>
+            <div className="rowhead"><div><span className="kicker">Find your routine</span><h2 style={{ marginTop: 8 }}>Not sure where to start? Take the skin quiz</h2></div><Link className="more" href="/shop">Shop all</Link></div>
+            <SkinQuiz />
           </div>
         </section>
 
