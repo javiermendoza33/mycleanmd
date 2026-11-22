@@ -1,8 +1,10 @@
 # Branded Supabase Auth emails (The Labo Clinic)
 
 Javier, Nov 21 2026: "can we brand this" — the sign-up confirmation arrived as a plain "Supabase Auth
-<noreply@mail.app.supabase.io>" message. Two settings fix it, both in the Supabase dashboard (the MCP connector
-cannot write Auth config). Project: **mycleanmd** (`hprtecdhqozcytihmqvg`, org MyCleanText).
+<noreply@mail.app.supabase.io>" message. Two settings fix it. **Both were applied on Nov 21 2026 via the Management API** (`PATCH /v1/projects/<ref>/config/auth`
+with a 7-day project-scoped access token — the MCP connector has no Auth-config tool, and the scoped token needs
+**Project Settings: Read-write** as well as Auth Config, or the write 403s with `project_admin_write`). The dashboard
+steps below are the manual equivalent for the next change. Project: **mycleanmd** (`hprtecdhqozcytihmqvg`, org MyCleanText).
 
 ## 1 · Templates (paste, ~3 minutes)
 
@@ -20,9 +22,9 @@ The brand name is a conditional on the sign-up metadata — the Labo sign-up pag
 members see **The Labo Clinic / thelabomethod.com / the Eastlake address**, and anyone who signs up on mycleanmd.com
 still sees MyCleanMD. (Same project, one template, both brands.)
 
-## 2 · Sender (custom SMTP through Resend)
+## 2 · Sender (custom SMTP through Resend) — ON since Nov 21 2026
 
-Until this is on, Supabase sends from its shared address and adds its own "Opt out" footer. **Authentication →
+Without it, Supabase sends from its shared address and adds its own "Opt out" footer. **Authentication →
 Emails → SMTP Settings → Enable Custom SMTP:**
 
 | Field | Value |
