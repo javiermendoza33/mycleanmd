@@ -41,7 +41,7 @@ const clinicFont = Outfit({
   variable: "--font-clinic",
   display: "swap",
 });
-const TITLE = `Medical Spa in Seattle, WA — Botox, Fillers, Laser, Sculptra`;
+const TITLE = `Medical Spa in Seattle, WA — Botox, Fillers, Lasers, Sculptra`;
 const DESCRIPTION =
   `The Labo Clinic is a medical spa in Seattle (where South Lake Union meets Eastlake), WA, led by Mónika Jáuregui, DNP, CANS, FNP-C: Botox and Dysport, dermal fillers, Sculptra, microneedling, PRP and exosomes, PDO threads, chemical peels, IV therapy, medical weight loss and laser on the Candela GentleMax Pro Plus.`;
 
