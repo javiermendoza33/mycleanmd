@@ -5,7 +5,10 @@ import { CLINIC, LASER_SPECS, NAV, PRACTICE, PROGRAMS, METHOD } from "@/labo/con
 import { services } from "@/labo/clinic/services";
 import { testimonials } from "@/labo/clinic/testimonials";
 import { CLINIC_SITE } from "@/labo/clinic/site";
-import { alastinLine, SHOP } from "@/labo/clinic/products";
+import { bestSellers, SHOP } from "@/labo/clinic/products";
+
+/** Home shop row (Nov 21 2026, Javier: "more generic for all skincare instead of just Alastin"): two best sellers per line. */
+const HOME_PICKS = [...bestSellers.filter((p) => p.partner === "alastin").slice(0, 2), ...bestSellers.filter((p) => p.partner === "skinbetter").slice(0, 2)];
 import QuizTabs from "@/components/labo/shop/QuizTabs";
 import MobileNav from "@/components/labo/MobileNav";
 import BagLink from "@/components/labo/shop/BagLink";
@@ -96,8 +99,8 @@ export default function LaboHome() {
         {/* ── OUR OWN LINE (Nov 20 2026) ───────────────────────────────── */}
         <section className="grey" style={{ paddingBlock: 64 }}>
           <div className="wrap">
-            <div className="rowhead"><div><span className="kicker">Authorized partner · Anti-aging &amp; serums</span><h2 style={{ marginTop: 8 }}>ALASTIN Skincare®</h2></div><Link className="more" href="/shop?line=ALASTIN%20Skincare%C2%AE">See the line</Link></div>
-            <div className="pgrid">{alastinLine.slice(0, 4).map((p) => <ProductCard key={p.slug} p={p} />)}</div>
+            <div className="rowhead"><div><span className="kicker">The shop · ALASTIN Skincare® &amp; skinbetter science®</span><h2 style={{ marginTop: 8 }}>Medical-grade skincare</h2></div><Link className="more" href="/shop">Shop all</Link></div>
+            <div className="pgrid">{HOME_PICKS.map((p) => <ProductCard key={p.slug} p={p} />)}</div>
           </div>
         </section>
 
