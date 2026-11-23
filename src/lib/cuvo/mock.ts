@@ -1,14 +1,17 @@
 import "server-only";
+import { createHash, randomBytes } from "node:crypto";
+import { createAdminClient } from "@/lib/supabase/admin";
 import type { Case, CaseStatus, Consent, CuvoClient, LabOrder, Message, Order, OrderStatus, Patient, Prescription, QuestionSet, StatusHistoryEntry, Visit, VisitSlot } from "./types";
 
 /* The sandbox, played locally (Nov 23 2026) so the sign-up → case → plan → shipping experience can be built before the
-   Cuvo test key arrives. In-memory per server instance; an "autopilot" moves a filed case through review, approval, a
-   prescription and an order on a short clock, the way PATCH /v1/test/autopilot does on the real sandbox. */
-const id = (p: string) => `${p}_${Math.random().toString(36).slice(2, 10)}${Date.now().toString(36)}`;
-const now = () => new Date().toISOString();
-type Store = { patients: Map<string, Patient>; consents: Map<string, Consent[]>; cases: Map<string, Case>; history: Map<string, StatusHistoryEntry[]>; messages: Map<string, Message[]>; rx: Map<string, Prescription[]>; orders: Map<string, Order[]>; visits: Map<string, Visit>; labs: Map<string, LabOrder[]> };
-const g = globalThis as unknown as { __cuvoMock?: Store };
-const db: Store = g.__cuvoMock ||= { patients: new Map(), consents: new Map(), cases: new Map(), history: new Map(), messages: new Map(), rx: new Map(), orders: new Map(), visits: new Map(), labs: new Map() };
+   Cuvo test key arrives. STATELESS: a case's progress is derived from the clock that starts when its care row is paid
+   (labo_care.paid_at), so every serverless instance and every deploy sees the same story — the way PATCH /v1/test/autopilot
+   moves a real sandbox case. Patient messages are kept as CRM events on the customer. */
+const id = (p: string) => `${p}_${randomBytes(6).toString("hex")}`;
+const iso = (ms: number) => new Date(ms).toISOString();
+const MED: Record<string, [string, string]> = { "glp-1-weight-management": ["Semaglutide (compounded) 2.5 mg/mL", "Inject 0.25 mg subcutaneously once weekly for 4 weeks, then step up as directed."], "testosterone-for-men": ["Testosterone cypionate 200 mg/mL", "Inject 0.5 mL intramuscularly once weekly."], "hormone-therapy-for-women": ["Estradiol patch 0.05 mg/day", "Apply one patch twice weekly; progesterone 100 mg nightly as directed."], "peptide-therapy": ["BPC-157 5 mg", "Reconstitute and inject 250 mcg subcutaneously daily, as directed."] };
+// the autopilot clock, seconds after payment
+const T = { queued: 4, in_review: 9, approved: 16, at_pharmacy: 22, shipped: 30, delivered: 45 };
 
 /** Question sets shaped like Cuvo's (`QuestionSetQuestion`): the GLP-1 and hormone intakes as placeholders until we read the real ones. */
 export const MOCK_SETS: QuestionSet[] = [
@@ -35,41 +38,41 @@ export const MOCK_SETS: QuestionSet[] = [
   ] },
 ];
 
-const push = (c: Case, status: CaseStatus, note?: string) => { c.status = status; c.updated_at = now(); db.history.get(c.id)!.push({ status, at: now(), note: note ?? null }); };
-const autopilot = (c: Case) => {   // review → approve → prescription → order → shipped → delivered on a short clock
-  const t = (ms: number, f: () => void) => setTimeout(() => { const cur = db.cases.get(c.id); if (cur && !["cancelled", "withdrawn", "declined"].includes(cur.status) && !cur.hold) f(); }, ms);
-  t(4000, () => push(c, "queued"));
-  t(9000, () => push(c, "in_review"));
-  t(16000, () => { push(c, "approved", "Reviewed by the clinician"); c.decided_at = now();
-    db.rx.set(c.id, [{ id: id("rx"), case: c.id, medication: c.requested_medications[0]?.medication_id || "as prescribed", sig: "Inject 0.25 mg subcutaneously once weekly for 4 weeks, then step up as directed.", quantity: 1, refills: 0, created_at: now() }]);
-    db.orders.set(c.id, [{ id: id("ord"), case: c.id, status: "created", updated_at: now() }]);
-    db.messages.get(c.id)!.push({ id: id("msg"), case: c.id, author: "clinician", body: "Reviewed your intake and labs. You're a good fit to start. I've sent your first month to the pharmacy; it ships cold, so keep it refrigerated when it arrives. Message me here with anything at all.", created_at: now() }); });
-  const ord = (s: OrderStatus, ms: number, extra?: Partial<Order>) => t(ms, () => { const o = db.orders.get(c.id)?.[0]; if (o) Object.assign(o, { status: s, updated_at: now() }, extra); });
-  ord("at_pharmacy", 22000); ord("shipped", 30000, { carrier: "FedEx", tracking_number: "7489 2201 0934", tracking_url: "https://www.fedex.com/fedextrack/?trknbr=748922010934" }); ord("delivered", 45000);
-};
+type CareRow = { id: string; customer_id: string; program_slug: string; cuvo_patient_id: string | null; cuvo_case_id: string; status: string; paid_at: string | null; created_at: string };
+const careByCase = async (caseId: string): Promise<CareRow> => { const { data } = await createAdminClient().from("labo_care").select("id, customer_id, program_slug, cuvo_patient_id, cuvo_case_id, status, paid_at, created_at").eq("cuvo_case_id", caseId).maybeSingle(); if (!data) throw new Error("Cuvo 404 not_found: case"); return data as CareRow; };
+const clock = (c: CareRow) => (c.paid_at ? (Date.now() - new Date(c.paid_at).getTime()) / 1000 : -1);   // seconds since payment, -1 while on hold
+const statusAt = (s: number): CaseStatus => (s < 0 ? "received" : s < T.queued ? "received" : s < T.in_review ? "queued" : s < T.approved ? "in_review" : "approved");
 
 export const mockClient: CuvoClient = {
   states: async () => [{ code: "CA", name: "California" }, { code: "WA", name: "Washington" }],
   questionSets: async () => MOCK_SETS.map(({ questions: _q, ...s }) => s),
   questionSet: async (qid) => { const s = MOCK_SETS.find(x => x.id === qid); if (!s) throw new Error("Cuvo 404 not_found: question set"); return s; },
-  createPatient: async p => { const existing = p.external_id && [...db.patients.values()].find(x => x.external_id === p.external_id); if (existing) return existing; const pat = { ...p, id: id("pat") }; db.patients.set(pat.id, pat); db.consents.set(pat.id, []); db.labs.set(pat.id, []); return pat; },
-  patient: async pid => { const p = db.patients.get(pid); if (!p) throw new Error("Cuvo 404 not_found: patient"); return p; },
-  recordConsent: async (patient, kind, version) => { const c = { id: id("cons"), patient, kind, version, accepted_at: now(), created_at: now() }; db.consents.get(patient)?.push(c); return c; },
-  fileCase: async input => {
-    const dup = input.external_id && [...db.cases.values()].find(x => x.external_id === input.external_id); if (dup) return dup;
-    const c: Case = { id: id("case"), patient: input.patient, status: "received", external_id: input.external_id ?? null, hold: !!input.hold, requested_medications: input.requested_medications, consent_ids: input.consent_ids, created_at: now(), updated_at: now() };
-    db.cases.set(c.id, c); db.history.set(c.id, [{ status: "received", at: now(), note: null }]); db.messages.set(c.id, []); if (!c.hold) autopilot(c); return c;
-  },
-  releaseHold: async cid => { const c = db.cases.get(cid); if (!c) throw new Error("Cuvo 404 not_found: case"); if (c.hold) { c.hold = false; autopilot(c); } return c; },
-  case: async cid => { const c = db.cases.get(cid); if (!c) throw new Error("Cuvo 404 not_found: case"); return c; },
-  statusHistory: async cid => db.history.get(cid) || [],
-  messages: async cid => db.messages.get(cid) || [],
-  postMessage: async (cid, body) => { const m = { id: id("msg"), case: cid, author: "patient" as const, body, created_at: now() }; db.messages.get(cid)?.push(m);
-    setTimeout(() => db.messages.get(cid)?.push({ id: id("msg"), case: cid, author: "clinician", body: "Got it — I'll take a look and get back to you shortly.", created_at: now() }), 6000); return m; },
-  prescriptions: async cid => db.rx.get(cid) || [],
-  orders: async cid => db.orders.get(cid) || [],
-  visitSlots: async () => { const out: VisitSlot[] = []; const d = new Date(); d.setDate(d.getDate() + 1); for (let day = 0; day < 5; day++) for (const h of [9, 10, 13, 15, 16]) { const s = new Date(d); s.setDate(d.getDate() + day); s.setHours(h, day % 2 ? 20 : 40, 0, 0); const e = new Date(s.getTime() + 20 * 60e3); out.push({ start: s.toISOString(), end: e.toISOString(), clinicians_free: 1 + (h % 3) }); } return out; },
-  bookVisit: async (patient, start, caseId) => { const v: Visit = { id: id("vis"), patient, case: caseId ?? null, status: "scheduled", scheduled_start: start, scheduled_end: new Date(new Date(start).getTime() + 20 * 60e3).toISOString(), audio_only: false }; db.visits.set(v.id, v); return v; },
-  joinLink: async vid => { if (!db.visits.get(vid)) throw new Error("Cuvo 404 not_found: visit"); return { url: `https://visit.cuvo.co/join/${vid}`, expires_at: new Date(Date.now() + 10 * 60e3).toISOString() }; },
-  labOrders: async patient => db.labs.get(patient) || [],
+  createPatient: async p => ({ ...p, id: `pat_${createHash("sha1").update(p.external_id || p.email || randomBytes(8).toString("hex")).digest("hex").slice(0, 16)}` }),
+  patient: async pid => { const { data } = await createAdminClient().from("labo_customers").select("first_name, last_name, email, phone, state").eq("cuvo_patient_id", pid).maybeSingle(); if (!data) throw new Error("Cuvo 404 not_found: patient"); return { id: pid, first_name: data.first_name, last_name: data.last_name, email: data.email, phone: data.phone || "", date_of_birth: "1990-01-01", sex_at_birth: "female" }; },
+  recordConsent: async (patient, kind, version) => ({ id: id("cons"), patient, kind, version, accepted_at: iso(Date.now()), created_at: iso(Date.now()) }),
+  fileCase: async input => ({ id: id("case"), patient: input.patient, status: "received", external_id: input.external_id ?? null, hold: !!input.hold, requested_medications: input.requested_medications, consent_ids: input.consent_ids, created_at: iso(Date.now()), updated_at: iso(Date.now()) }),
+  releaseHold: async cid => mockClient.case(cid),   // the caller stamps labo_care.paid_at, which is this sandbox's clock
+  case: async cid => { const c = await careByCase(cid); const s = clock(c); const med = MED[c.program_slug]?.[0] || "as prescribed";
+    return { id: cid, patient: c.cuvo_patient_id || "", status: statusAt(s), external_id: c.id, hold: s < 0, requested_medications: [{ name: med, quantity: 1, refills: 0, days_supply: 30 }], consent_ids: [], decided_at: s >= T.approved ? iso(new Date(c.paid_at!).getTime() + T.approved * 1000) : null, created_at: c.created_at, updated_at: iso(Date.now()) }; },
+  statusHistory: async cid => { const c = await careByCase(cid); const s = clock(c); const t0 = c.paid_at ? new Date(c.paid_at).getTime() : 0;
+    const out: StatusHistoryEntry[] = [{ status: "received", at: c.created_at, note: null }];
+    if (s >= T.queued) out.push({ status: "queued", at: iso(t0 + T.queued * 1000), note: null });
+    if (s >= T.in_review) out.push({ status: "in_review", at: iso(t0 + T.in_review * 1000), note: null });
+    if (s >= T.approved) out.push({ status: "approved", at: iso(t0 + T.approved * 1000), note: "Reviewed by the clinician" });
+    return out; },
+  messages: async cid => { const c = await careByCase(cid); const s = clock(c); const t0 = c.paid_at ? new Date(c.paid_at).getTime() : 0; const out: Message[] = [];
+    if (s >= T.approved) out.push({ id: `msg_${cid}_rx`, case: cid, author: "clinician", body: "Reviewed your intake and labs. You're a good fit to start. I've sent your first month to the pharmacy; it ships cold, so keep it refrigerated when it arrives. Message me here with anything at all.", created_at: iso(t0 + T.approved * 1000) });
+    const { data: ev } = await createAdminClient().from("labo_customer_events").select("id, data, at").eq("customer_id", c.customer_id).eq("kind", "message").order("at");
+    for (const e of ev || []) { const d = e.data as { case?: string; body?: string }; if (d.case !== cid || !d.body) continue; out.push({ id: e.id, case: cid, author: "patient", body: d.body, created_at: e.at });
+      if (Date.now() - new Date(e.at).getTime() > 6000) out.push({ id: e.id + "_re", case: cid, author: "clinician", body: "Got it — I'll take a look and get back to you shortly.", created_at: iso(new Date(e.at).getTime() + 6000) }); }
+    return out.sort((a, b) => a.created_at.localeCompare(b.created_at)); },
+  postMessage: async (cid, body) => { const c = await careByCase(cid); const m: Message = { id: id("msg"), case: cid, author: "patient", body, created_at: iso(Date.now()) };
+    await createAdminClient().from("labo_customer_events").insert({ customer_id: c.customer_id, brand: "method", kind: "message", title: "Message to clinician", data: { case: cid, body } }); return m; },
+  prescriptions: async cid => { const c = await careByCase(cid); const s = clock(c); if (s < T.approved) return []; const [medication, sig] = MED[c.program_slug] || ["As prescribed", ""]; return [{ id: `rx_${cid}`, case: cid, medication, sig, quantity: 1, refills: 0, created_at: iso(new Date(c.paid_at!).getTime() + T.approved * 1000) }] as Prescription[]; },
+  orders: async cid => { const c = await careByCase(cid); const s = clock(c); if (s < T.approved) return []; const st: OrderStatus = s < T.at_pharmacy ? "created" : s < T.shipped ? "at_pharmacy" : s < T.delivered ? "shipped" : "delivered";
+    return [{ id: `ord_${cid}`, case: cid, status: st, updated_at: iso(Date.now()), ...(s >= T.shipped ? { carrier: "FedEx", tracking_number: "7489 2201 0934", tracking_url: "https://www.fedex.com/fedextrack/?trknbr=748922010934" } : {}) }] as Order[]; },
+  visitSlots: async () => { const out: VisitSlot[] = []; const d = new Date(); d.setDate(d.getDate() + 1); for (let day = 0; day < 5; day++) for (const h of [9, 10, 13, 15, 16]) { const s = new Date(d); s.setDate(d.getDate() + day); s.setHours(h, day % 2 ? 20 : 40, 0, 0); out.push({ start: s.toISOString(), end: new Date(s.getTime() + 20 * 60e3).toISOString(), clinicians_free: 1 + (h % 3) }); } return out; },
+  bookVisit: async (patient, start, caseId) => ({ id: id("vis"), patient, case: caseId ?? null, status: "scheduled", scheduled_start: start, scheduled_end: new Date(new Date(start).getTime() + 20 * 60e3).toISOString(), audio_only: false } as Visit),
+  joinLink: async vid => ({ url: `https://visit.cuvo.co/join/${vid}`, expires_at: iso(Date.now() + 10 * 60e3) }),
+  labOrders: async () => [] as LabOrder[],
 };
