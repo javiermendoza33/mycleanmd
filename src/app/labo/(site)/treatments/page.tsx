@@ -100,7 +100,7 @@ export default function TreatmentsPage() {
       </section>
 
       {/* Nov 21 2026 — the treatment finder from Javier's blueprint PDF, also on the home page's quiz card. */}
-      <section className="grey" style={{ paddingBlock: 64 }}>
+      <section className="grey" id="finder" style={{ paddingBlock: 64 }}>
         <div className="wrap">
           <div className="rowhead"><div><span className="kicker">Find your treatment</span><h2 style={{ marginTop: 8 }}>Not sure which treatment fits? Five quick questions</h2></div></div>
           <TreatmentQuiz />

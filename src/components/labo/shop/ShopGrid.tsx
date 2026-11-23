@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { CONCERNS, LINES, TYPES, type Concern, type Product, type ProductType } from "@/labo/clinic/products";
 import { ProductCard } from "./ProductCard";
 
@@ -10,14 +11,17 @@ export default function ShopGrid({ products }: { products: Product[] }) {
   const [type, setType] = useState<ProductType | "">("");
   const [concern, setConcern] = useState<Concern | "">("");
   const [line, setLine] = useState<string>("");
+  const [best, setBest] = useState(false);
+  const q = useSearchParams(); const qs = q.toString();
   useEffect(() => {
-    const q = new URLSearchParams(window.location.search);
+    // Nov 22 2026: read the URL on every change (the header's Shop menu links here with ?t= / ?c= / ?line= / ?best=1).
     const c = q.get("c"), t = q.get("t"), l = q.get("line");
-    if (l && (LINES as readonly string[]).includes(l)) setLine(l);
-    if (c && (CONCERNS as string[]).includes(c)) setConcern(c as Concern);
-    if (t && (TYPES as string[]).includes(t)) setType(t as ProductType);
-  }, []);
-  const list = products.filter((p) => (!type || p.type === type) && (!concern || p.concerns.includes(concern)) && (!line || p.line === line));
+    setLine(l && (LINES as readonly string[]).includes(l) ? l : "");
+    setConcern(c && (CONCERNS as string[]).includes(c) ? (c as Concern) : "");
+    setType(t && (TYPES as string[]).includes(t) ? (t as ProductType) : "");
+    setBest(q.get("best") === "1");
+  }, [qs]);  // eslint-disable-line react-hooks/exhaustive-deps
+  const list = products.filter((p) => (!type || p.type === type) && (!concern || p.concerns.includes(concern)) && (!line || p.line === line) && (!best || p.bestSeller));
   return (
     <>
       <div className="chips" role="group" aria-label="Filter by line">
@@ -25,6 +29,7 @@ export default function ShopGrid({ products }: { products: Product[] }) {
         <button type="button" className={!line ? "on" : ""} onClick={() => setLine("")}>All</button>
         {LINES.map((l) => <button key={l} type="button" className={line === l ? "on" : ""} onClick={() => setLine(line === l ? "" : l)}>{l}</button>)}
       </div>
+      {best && <p className="count mono">Best sellers · <button type="button" className="linkbtn" onClick={() => setBest(false)}>show all</button></p>}
       <div className="chips" role="group" aria-label="Filter by type">
         <span className="kicker">Type</span>
         <button type="button" className={!type ? "on" : ""} onClick={() => setType("")}>All</button>

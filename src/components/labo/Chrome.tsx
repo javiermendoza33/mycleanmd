@@ -7,6 +7,7 @@ import { services } from "@/labo/clinic/services";
 import { CLINIC_SITE } from "@/labo/clinic/site";
 import MobileNav from "@/components/labo/MobileNav";
 import { TelePill, TeleBand } from "@/components/labo/TeleCallout";
+import MegaNav from "@/components/labo/MegaNav";
 import BagLink from "@/components/labo/shop/BagLink";
 import SearchButton from "@/components/labo/search/SearchButton";
 import { SHOP } from "@/labo/clinic/products";
@@ -34,12 +35,7 @@ export function Header() {
             (TeleCallout.tsx); the plain Telehealth link moved into the menu (TELE_LINK) and the band below the
             header carries the call-out on phones and tablets. */}
         <TelePill />
-        <nav className="main" aria-label="Primary">
-          {NAV.map((l) => (
-            <Link key={l.href} href={l.href} className={pathname === l.href || pathname.startsWith(l.href + "/") ? "on" : undefined}>{l.label}</Link>
-          ))}
-          <a className="telelink" href={TELE_LINK.href}>{TELE_LINK.label}</a>
-        </nav>
+        <MegaNav />
         <SearchButton />
         <BagLink />
         <Link className="btn btn-primary btn-sm" href="/booking">Book now</Link>

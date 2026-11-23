@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { CONCERNS, products, SHOP } from "@/labo/clinic/products";
 import { BookCta } from "@/components/labo/Clinic";
 import ShopGrid from "@/components/labo/shop/ShopGrid";
@@ -28,9 +29,9 @@ export default async function ShopPage() {
         </div>
       </section>
       <section className="shopgrid">
-        <div className="wrap"><ShopGrid products={list} /></div>
+        <div className="wrap"><Suspense><ShopGrid products={list} /></Suspense></div>
       </section>
-      <section className="grey" style={{ paddingBlock: 70 }}>
+      <section className="grey" id="how" style={{ paddingBlock: 70 }}>
         <div className="wrap values">
           <div><b>Chosen, not stocked</b><p>Every product here is one we&rsquo;ve tested ourselves and use in-clinic or send home after a treatment.</p></div>
           <div><b>Bought from the brand, direct</b><p>Each product links to the brand&rsquo;s own partner store for our clinic &mdash; you order there and it ships straight from them.</p></div>

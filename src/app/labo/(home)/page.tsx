@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Footer } from "@/components/labo/Chrome";
 import { BookCta, LocationCard, PartnerLogos, SectionHead, ServiceCard, TestimonialCard } from "@/components/labo/Clinic";
-import { CLINIC, LASER_SPECS, NAV, TELE_LINK, PRACTICE, PROGRAMS, METHOD } from "@/labo/content";
+import { CLINIC, LASER_SPECS, PRACTICE, PROGRAMS, METHOD } from "@/labo/content";
 import { services } from "@/labo/clinic/services";
 import { testimonials } from "@/labo/clinic/testimonials";
 import { CLINIC_SITE } from "@/labo/clinic/site";
@@ -13,6 +13,7 @@ const HOME_PICKS = [...bestSellers.filter((p) => p.partner === "alastin").slice(
 import QuizTabs from "@/components/labo/shop/QuizTabs";
 import MobileNav from "@/components/labo/MobileNav";
 import { TelePill, TeleBand } from "@/components/labo/TeleCallout";
+import MegaNav from "@/components/labo/MegaNav";
 import BagLink from "@/components/labo/shop/BagLink";
 import SearchButton from "@/components/labo/search/SearchButton";
 import { ProductCard } from "@/components/labo/shop/ProductCard";
@@ -57,10 +58,7 @@ export default async function LaboHome() {
         <div className="wrap bar">
           <a className="brand" href="#top">{PRACTICE.name}</a>
           <TelePill />
-          <nav className="main" aria-label="Sections">
-            {NAV.map((l) => <Link key={l.href} href={l.href}>{l.label}</Link>)}
-            <a className="telelink" href={TELE_LINK.href}>{TELE_LINK.label}</a>
-          </nav>
+          <MegaNav label="Sections" />
           <SearchButton />
           <BagLink />
           <Link className="btn btn-primary btn-sm" href="/booking">Book now</Link>
@@ -97,7 +95,7 @@ export default async function LaboHome() {
 
         {/* ── SKIN QUIZ (Nov 21 2026 — replaced the Best sellers row, Javier: "i like this idea of take our quiz") ── */}
         <section id="shop">
-          <div className="wrap">
+          <div className="wrap" id="quiz">
             <div className="rowhead"><div><span className="kicker">Find your routine</span><h2 style={{ marginTop: 8 }}>Not sure where to start? Take the skin quiz</h2></div><Link className="more" href="/shop">Shop all</Link></div>
             <QuizTabs />
           </div>
