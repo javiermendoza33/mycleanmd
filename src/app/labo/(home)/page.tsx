@@ -54,7 +54,8 @@ export default async function LaboHome() {
   return (
     <>
       <a className="skip" href="#top">Skip to content</a>
-      <div className="promo" role="region" aria-label="Promotion"><div className="wrap"><span>{SHOP.promo}</span></div></div>
+      {/* Nov 23 2026 (Javier): the value ticker rides the very top of the page (it carries the promo line too); words centred in the band */}
+      <div className="strip strip-top" role="region" aria-label="Promotion"><div className="track">{[...STRIP, ...STRIP].map((x, i) => <span key={i} aria-hidden={i >= STRIP.length}>{x}</span>)}</div></div>
       <header className="site">
         <div className="wrap bar">
           <a className="brand" href="#top"><Logo variant="clinic" name={PRACTICE.name} /></a>
@@ -91,8 +92,6 @@ export default async function LaboHome() {
           </div>
         </section>
 
-        {/* ── VALUE STRIP ───────────────────────────────────────────────── */}
-        <div className="strip" aria-hidden="true"><div className="track">{[...STRIP, ...STRIP].map((x, i) => <span key={i}>{x}</span>)}</div></div>
 
         {/* ── SKIN QUIZ (Nov 21 2026 — replaced the Best sellers row, Javier: "i like this idea of take our quiz") ── */}
         <section id="shop">

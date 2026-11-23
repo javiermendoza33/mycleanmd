@@ -777,9 +777,10 @@ html,body{overflow-x:clip}
 
 /* value ticker */
 /* Nov 22 2026 (Javier): the ticker is the teal accent ("the blue in you") with white type — a hard break between the hero and the quiz. */
-[data-labo] [data-clinic] .strip{background:var(--accent);color:#FFFFFF;border-bottom:0;overflow:hidden}
-[data-labo] [data-clinic] .strip .track{display:flex;width:max-content;animation:labostrip 48s linear infinite}
-[data-labo] [data-clinic] .strip span{padding:11px 34px;font-size:.78rem;font-weight:500;white-space:nowrap;border-right:1px solid rgba(255,255,255,.18)}
+[data-labo] [data-clinic] .strip{background:var(--accent);color:#FFFFFF;border-bottom:0;overflow:hidden;min-height:40px;display:flex;align-items:center}
+[data-labo] [data-clinic] .strip .track{display:flex;align-items:center;width:max-content;animation:labostrip 48s linear infinite}
+[data-labo] [data-clinic] .strip span{display:flex;align-items:center;min-height:40px;padding:0 34px;font-size:.78rem;font-weight:500;line-height:1;white-space:nowrap;border-right:1px solid rgba(255,255,255,.18)}
+[data-labo] [data-clinic] .strip-top{border-bottom:1px solid rgba(0,0,0,.08)}
 @keyframes labostrip{to{transform:translateX(-50%)}}
 @media (prefers-reduced-motion:reduce){[data-labo] [data-clinic] .strip .track{animation:none}}
 
