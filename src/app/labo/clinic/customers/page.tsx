@@ -1,28 +1,22 @@
 import Link from "next/link";
 import { getStaff } from "@/lib/labo/clinic";
 import { fmtDate, initials } from "@/lib/labo/provider";
-import { searchAppts, fullName } from "../_data";
+import { listCustomers, type Brand } from "@/lib/labo/crm";
 
-/** Customers are derived from bookings (grouped by email) until there is a proper customer record. */
-export default async function ClinicCustomers({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
-  if (!(await getStaff())) return null; const sp = await searchParams; const q = (sp.q ?? "").trim().slice(0, 60);
-  const rows = await searchAppts(q, ""); const now = Date.now();
-  const byEmail = new Map<string, { name: string; email: string; phone: string; visits: number; last: string | null; next: string | null; noShows: number }>();
-  for (const a of rows) {
-    const c = byEmail.get(a.email) ?? { name: fullName(a), email: a.email, phone: a.phone, visits: 0, last: null, next: null, noShows: 0 };
-    if (a.status === "completed") { c.visits++; if (!c.last || a.starts_at > c.last) c.last = a.starts_at; }
-    if (a.status === "no_show") c.noShows++;
-    if (new Date(a.starts_at).getTime() > now && !["canceled", "no_show"].includes(a.status) && (!c.next || a.starts_at < c.next)) c.next = a.starts_at;
-    byEmail.set(a.email, c);
-  }
-  const list = [...byEmail.values()].sort((a, b) => a.name.localeCompare(b.name));
+/** The Labo CRM (Nov 23 2026): one list of people across The Labo Clinic and The Labo Method. Tables in supabase-labo-crm.sql. */
+export default async function ClinicCustomers({ searchParams }: { searchParams: Promise<{ q?: string; brand?: string }> }) {
+  if (!(await getStaff())) return null; const sp = await searchParams; const q = (sp.q ?? "").trim().slice(0, 60); const brand = (["clinic", "method"].includes(sp.brand || "") ? sp.brand : undefined) as Brand | undefined;
+  const { rows, setup } = await listCustomers(q, brand);
+  const chip = (b: string) => <span key={b} className={`pill ${b === "method" ? "new" : "ok"}`} style={{ marginRight: 4 }}>{b === "method" ? "Method" : "Clinic"}</span>;
   return (
     <>
-      <div className="top"><div><h1>Customers</h1><p>{list.length} people · from the appointment book</p></div></div>
-      <div className="card"><form className="row" style={{ gap: 10 }}><input className="in" name="q" defaultValue={q} placeholder="Search name, phone or email" style={{ maxWidth: 340 }} /><button className="btn" type="submit">Search</button></form></div>
-      <div className="card"><table><thead><tr><th>Customer</th><th>Contact</th><th>Visits</th><th>Last visit</th><th>Next</th></tr></thead><tbody>
-        {list.length === 0 && <tr><td colSpan={5} className="muted">No customers yet.</td></tr>}
-        {list.map((c) => <tr key={c.email}><td><span className="row" style={{ gap: 8, alignItems: "center" }}><span className="av s">{initials(c.name, c.email)}</span><b>{c.name}</b></span></td><td className="sm">{c.phone}<br /><span className="tiny">{c.email}</span></td><td>{c.visits}{c.noShows ? <span className="tiny" style={{ color: "var(--red)" }}> · {c.noShows} no-show</span> : null}</td><td className="sm">{c.last ? fmtDate(c.last, { month: "short", day: "numeric", year: "numeric" }) : "—"}</td><td className="sm">{c.next ? <Link href={`/clinic/appointments?q=${encodeURIComponent(c.email)}`}>{fmtDate(c.next, { month: "short", day: "numeric" })}</Link> : "—"}</td></tr>)}
+      <div className="top"><div><h1>Customers</h1><p>{rows.length} people · The Labo Clinic + The Labo Method, one record each</p></div></div>
+      {setup ? <div className="card"><h3>CRM not set up yet</h3><p className="muted" style={{ marginTop: 8 }}>Run <code>supabase-labo-crm.sql</code> in the Supabase SQL editor. Existing bookings are imported automatically.</p></div> : null}
+      <div className="card"><form className="row" style={{ gap: 10, flexWrap: "wrap" }}><input className="in" name="q" defaultValue={q} placeholder="Search name, phone or email" style={{ maxWidth: 340 }} /><select className="in" name="brand" defaultValue={brand || ""} style={{ maxWidth: 160 }}><option value="">Both brands</option><option value="clinic">Clinic</option><option value="method">Method</option></select><button className="btn" type="submit">Search</button></form></div>
+      <div className="card"><table><thead><tr><th>Customer</th><th>Contact</th><th>Brands</th><th>Activity</th><th>Last</th></tr></thead><tbody>
+        {rows.length === 0 && !setup && <tr><td colSpan={5} className="muted">No customers yet.</td></tr>}
+        {rows.map((c) => { const name = `${c.first_name} ${c.last_name}`.trim() || c.email; return (
+          <tr key={c.id}><td><Link href={`/clinic/customers/${c.id}`} className="row" style={{ gap: 8, alignItems: "center" }}><span className="av s">{initials(name, c.email)}</span><b>{name}</b></Link></td><td className="sm">{c.phone || "—"}<br /><span className="tiny">{c.email}</span></td><td>{c.brands.map(chip)}</td><td className="sm">{c.events} event{c.events === 1 ? "" : "s"}{c.state ? <span className="tiny"> · {c.state}</span> : null}</td><td className="sm">{c.last_at ? fmtDate(c.last_at, { month: "short", day: "numeric", year: "numeric" }) : fmtDate(c.created_at, { month: "short", day: "numeric", year: "numeric" })}</td></tr>); })}
       </tbody></table></div>
     </>
   );

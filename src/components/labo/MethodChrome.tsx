@@ -35,7 +35,7 @@ export function MethodHeader() {
             {METHOD_NAV.map((l) => <Link key={l.href} href={l.href} className={on(l.href) ? "on" : undefined}>{l.label}</Link>)}
           </nav>
           <Link className="signin" href="/signin">Sign in</Link>
-          <Link className="btn btn-primary btn-sm" href="/programs">Get started</Link>
+          <Link className="btn btn-primary btn-sm" href="/start">Get started</Link>
           <button type="button" className="mburger" aria-expanded={open} aria-controls="msheet" aria-label={open ? "Close menu" : "Open menu"} onClick={() => setOpen((v) => !v)}>{open ? "×" : "☰"}</button>
         </div>
         <nav id="msheet" className="msheet" aria-label="Menu" hidden={!open}>
@@ -43,7 +43,7 @@ export function MethodHeader() {
           <div className="sep" />
           <Link href="/signin">Sign in</Link>
           <a href={`https://${PRACTICE.domain}`}>{PRACTICE.name} (in person) ↗</a>
-          <div className="acts"><Link className="btn btn-primary" href="/programs">Get started</Link></div>
+          <div className="acts"><Link className="btn btn-primary" href="/start">Get started</Link></div>
         </nav>
       </header>
     </>

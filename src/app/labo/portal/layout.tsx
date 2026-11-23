@@ -10,6 +10,7 @@ import PortalSignOut from "@/components/labo/PortalSignOut";
  */
 const NAV = [
   ["/portal", "Home"],
+  ["/portal/care", "My care"],
   ["/portal/visits", "Visits"],
   ["/portal/requests", "Requests"],
   ["/portal/messages", "Messages"],

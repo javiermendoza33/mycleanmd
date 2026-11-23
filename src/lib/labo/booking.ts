@@ -111,6 +111,8 @@ export async function createBooking(b: NewBooking): Promise<{ ok: true; booking:
   if (error) return { ok: false, error: missing(error) ? "Online booking isn't switched on yet — text us and we'll book you by hand." : error.message, code: missing(error) ? "setup" : undefined };
   const booking = data as Booking;
   sendEmails(booking, item, b.origin).catch((e) => console.error("[booking email]", e));
+  // Nov 23 2026: every booking is a CRM touch (one person across the clinic and the Method)
+  import("@/lib/labo/crm").then(async ({ upsertCustomer, addEvent }) => { const c = await upsertCustomer({ email, first_name: first, last_name: last, phone, brand: "clinic", source: "booking", sms_consent: !!b.smsConsent }); await addEvent(c?.id, "clinic", "booking", `Booked ${item.name}`, { booking: booking.id, starts_at: booking.starts_at, service: item.slug }); }).catch((e) => console.error("[booking crm]", e));
   return { ok: true, booking };
 }
 

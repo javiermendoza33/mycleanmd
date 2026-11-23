@@ -51,6 +51,17 @@ export async function POST(req: NextRequest) {
       } catch (e) { console.error('shop order record failed:', e) }
       return NextResponse.json({ ok: true })
     }
+    // Nov 23 2026: a Method program start from /start carries kind:"method" + careId — payment releases the Cuvo case hold.
+    if (session.metadata?.kind === 'method' && session.metadata.careId) {
+      const { careById, updateCare, addEvent } = await import('@/lib/labo/crm'); const { cuvo } = await import('@/lib/cuvo')
+      const care = await careById(session.metadata.careId)
+      if (care) {
+        if (care.cuvo_case_id) { try { await cuvo().releaseHold(care.cuvo_case_id) } catch (e) { console.error('[method] release_hold failed:', (e as Error).message) } }
+        await updateCare(care.id, { status: 'filed', paid_at: new Date().toISOString(), stripe_checkout_session_id: session.id })
+        await addEvent(care.customer_id, 'method', 'case', 'Paid · case filed for clinician review', { case: care.cuvo_case_id, session: session.id })
+      }
+      return NextResponse.json({ ok: true })
+    }
     const programSlug = session.metadata?.programSlug
     const userId = session.metadata?.userId || session.client_reference_id || null
 

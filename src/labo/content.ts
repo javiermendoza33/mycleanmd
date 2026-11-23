@@ -90,7 +90,7 @@ export const HEALTHIE = {
   login: "/signin",
   intake: "/programs",
   book: "/book",
-  program: (slug: string) => `/join/${slug}`,
+  program: (slug: string) => `/start?program=${slug}`,   // Nov 23 2026: the Cuvo-backed sign-up flow
 } as const;
 
 export const NAV = [
