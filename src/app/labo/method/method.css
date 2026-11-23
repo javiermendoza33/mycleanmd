@@ -42,7 +42,7 @@
 [data-labo] [data-method] .mpromo{background:var(--tint);color:var(--ink);text-align:center;font-size:.86rem;font-weight:600;padding:12px 16px}
 [data-labo] [data-method] .mpromo a{color:var(--deep);text-decoration:underline;text-underline-offset:3px}
 [data-labo] [data-method] .mhead{position:sticky;top:env(safe-area-inset-top,0px);z-index:60;padding:10px 16px;background:linear-gradient(180deg,var(--paper) 60%,rgba(246,249,255,0))}
-[data-labo] [data-method] .mhead .pill{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:24px;height:62px;padding:0 10px 0 24px;background:#fff;border-radius:999px;box-shadow:0 10px 30px -18px rgba(16,24,32,.45),0 0 0 1px var(--hair)}
+[data-labo] [data-method] .mhead .pill{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:24px;height:62px;padding:0 10px 0 24px;background:linear-gradient(90deg,var(--tint) 0%,#FFFFFF 42%,#FFFFFF 70%,var(--wash) 100%);border-radius:999px;box-shadow:0 10px 30px -18px rgba(29,79,145,.45),0 0 0 1px rgba(var(--accent-rgb),.18)}   /* Nov 23 2026 (Javier: "add some color on this area"): a blue wash across the pill, the mark in accent */
 [data-labo] [data-method] .mhead .brand{font-size:1.06rem;font-weight:800;letter-spacing:-.03em;color:var(--ink);text-decoration:none;white-space:nowrap}
 [data-labo] [data-method] .mhead nav.mlinks{display:flex;gap:22px;margin-right:auto}
 [data-labo] [data-method] .mhead nav.mlinks a{font-size:.95rem;font-weight:500;color:var(--ink);text-decoration:none;white-space:nowrap}
@@ -250,7 +250,9 @@
 [data-labo] [data-method] .pcard,[data-labo] [data-method] .jcard,[data-labo] [data-method] .offer{transition:box-shadow .2s,transform .2s}
 [data-labo] [data-method] .pcard:hover,[data-labo] [data-method] .jcard:hover,[data-labo] [data-method] .offer:hover{box-shadow:0 2px 4px rgba(16,24,32,.05),0 22px 44px -18px rgba(29,79,145,.45);transform:translateY(-2px)}
 @media (prefers-reduced-motion:reduce){[data-labo] [data-method] .pcard:hover,[data-labo] [data-method] .jcard:hover,[data-labo] [data-method] .offer:hover{transform:none}}
-[data-labo] [data-method] .mhead .brand{display:inline-flex;align-items:center;gap:.5em;font-weight:300;letter-spacing:.2em;text-transform:uppercase;font-size:.9rem;--logo-bg:var(--paper,#F6F8FB)}
+[data-labo] [data-method] .mhead .brand{display:inline-flex;align-items:center;gap:.5em;font-weight:300;letter-spacing:.2em;text-transform:uppercase;font-size:.9rem;color:var(--deep);--logo-bg:var(--tint)}
+[data-labo] [data-method] .mhead .brand .logo-word{color:var(--ink)}
+[data-labo] [data-method] .mhead nav.mlinks a{color:var(--graphite)}
 [data-labo] [data-method] .mhead .brand .logo-word{font-weight:300;letter-spacing:.2em}
 
 /* ── Hero demo card (Nov 23 2026): the Flexpa-style self-playing "Your clinician" widget ─────────────── */
