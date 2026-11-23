@@ -252,3 +252,37 @@
 @media (prefers-reduced-motion:reduce){[data-labo] [data-method] .pcard:hover,[data-labo] [data-method] .jcard:hover,[data-labo] [data-method] .offer:hover{transform:none}}
 [data-labo] [data-method] .mhead .brand{display:inline-flex;align-items:center;gap:.5em;font-weight:300;letter-spacing:.2em;text-transform:uppercase;font-size:.9rem;--logo-bg:var(--paper,#F6F8FB)}
 [data-labo] [data-method] .mhead .brand .logo-word{font-weight:300;letter-spacing:.2em}
+
+/* ── Hero demo card (Nov 23 2026): the Flexpa-style self-playing "Your clinician" widget ─────────────── */
+[data-labo] [data-method] .mdemo{position:relative;background:var(--canvas);border:1px solid var(--line);border-radius:24px;box-shadow:0 1px 2px rgba(16,24,32,.04),0 24px 60px -28px rgba(29,79,145,.45);display:flex;flex-direction:column;min-height:520px;font-size:.9rem}
+[data-labo] [data-method] .mdhead{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--hair)}
+[data-labo] [data-method] .mdhead .dots{display:flex;gap:5px}[data-labo] [data-method] .mdhead .dots i{width:8px;height:8px;border-radius:50%;background:var(--rule)}
+[data-labo] [data-method] .mdhead b{font-weight:600;color:var(--ink)}
+[data-labo] [data-method] .mdhead .live{margin-left:auto;display:inline-flex;align-items:center;gap:7px;font-size:.74rem;font-weight:600;color:var(--deep);background:var(--wash);border-radius:999px;padding:5px 11px}
+[data-labo] [data-method] .mdhead .live i{width:7px;height:7px;border-radius:50%;background:#2EB872;box-shadow:0 0 0 3px rgba(46,184,114,.18)}
+[data-labo] [data-method] .mdchips{display:flex;gap:8px;flex-wrap:wrap;padding:14px 18px 6px}
+[data-labo] [data-method] .mdchips button{font:inherit;font-size:.8rem;font-weight:600;color:var(--graphite);background:var(--canvas);border:1px solid var(--line);border-radius:999px;padding:7px 13px;cursor:pointer;transition:.2s}
+[data-labo] [data-method] .mdchips button.on{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+[data-labo] [data-method] .mdbody{padding:12px 18px 6px;flex:1;display:flex;flex-direction:column;gap:10px}
+[data-labo] [data-method] .mdbody>*{opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s}
+[data-labo] [data-method] .mdbody>.in{opacity:1;transform:none}
+[data-labo] [data-method] .mdq{align-self:flex-end;max-width:85%;background:var(--wash);color:var(--ink);border-radius:16px 16px 4px 16px;padding:10px 14px;font-weight:500}
+[data-labo] [data-method] .mdtool{font-family:var(--font-plex-mono),ui-monospace,monospace;font-size:.72rem;color:var(--muted);background:var(--paper);border:1px solid var(--hair);border-radius:10px;padding:8px 12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+[data-labo] [data-method] .mdtool code{font:inherit;color:var(--deep);font-weight:600}[data-labo] [data-method] .mdtool code.args{color:var(--muted);font-weight:400}
+[data-labo] [data-method] .mdtool .ok,[data-labo] [data-method] .mdph .ok{color:#2EB872;font-weight:700}
+[data-labo] [data-method] .mdpanel{border:1px solid var(--line);border-radius:14px;overflow:hidden}
+[data-labo] [data-method] .mdph{display:flex;align-items:center;justify-content:space-between;padding:9px 14px;font-family:var(--font-plex-mono),ui-monospace,monospace;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--deep);background:var(--paper);border-bottom:1px solid var(--hair)}
+[data-labo] [data-method] .spin{width:12px;height:12px;border-radius:50%;border:2px solid var(--rule);border-top-color:var(--accent);animation:mdspin .8s linear infinite}
+@keyframes mdspin{to{transform:rotate(360deg)}}
+[data-labo] [data-method] .mdrow{display:grid;grid-template-columns:10px auto 1fr auto;gap:10px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--hair);opacity:0;transform:translateX(-6px);transition:.3s}
+[data-labo] [data-method] .mdrow:last-child{border-bottom:0}[data-labo] [data-method] .mdrow.in{opacity:1;transform:none}
+[data-labo] [data-method] .mdrow .pt{width:6px;height:6px;border-radius:50%;background:var(--rule)}[data-labo] [data-method] .mdrow.tick .pt{background:var(--accent)}
+[data-labo] [data-method] .mdrow b{font-weight:600;color:var(--ink);white-space:nowrap}[data-labo] [data-method] .mdrow span{font-size:.8rem;color:var(--muted)}
+[data-labo] [data-method] .mdrow .chk{width:18px;height:18px;border-radius:50%;background:#2EB872;color:#fff;font-size:.7rem;display:grid;place-items:center;opacity:0;transform:scale(.6);transition:.25s}
+[data-labo] [data-method] .mdrow.tick .chk{opacity:1;transform:none}
+[data-labo] [data-method] .mdout{list-style:none;margin:0;padding:12px 14px;background:var(--wash);border-radius:14px;display:grid;gap:6px}
+[data-labo] [data-method] .mdout li{position:relative;padding-left:16px;color:var(--ink);font-weight:500;font-size:.86rem}
+[data-labo] [data-method] .mdout li::before{content:"";position:absolute;left:0;top:.55em;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+[data-labo] [data-method] .mdfoot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;border-top:1px solid var(--hair);font-size:.74rem;color:var(--muted)}
+[data-labo] [data-method] .mdfoot button{font:inherit;font-size:.76rem;font-weight:600;color:var(--deep);background:none;border:0;cursor:pointer}
+@media (max-width:960px){[data-labo] [data-method] .mdemo{min-height:0}[data-labo] [data-method] .mdrow{grid-template-columns:10px 1fr auto}[data-labo] [data-method] .mdrow span{grid-column:2;font-size:.76rem}[data-labo] [data-method] .mdrow .chk{grid-column:3;grid-row:1}}

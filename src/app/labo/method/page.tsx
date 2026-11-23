@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { PROGRAMS, AVAILABILITY, METHOD, PRACTICE, HOW_SHORT, INCLUDED, CLINICIAN, FAQ, HEALTHIE, EXTRA_PRICING, PRICING_FOOTNOTE } from "@/labo/content";
 import { posts } from "@/labo/method/posts";
-import HeroVideo from "@/components/labo/HeroVideo";
+import { MethodDemo } from "@/components/labo/method/MethodDemo";
 import Gate from "./Gate";
 import PlanPicker from "./PlanPicker";
 
@@ -49,10 +49,8 @@ export default function MethodHome() {
             </div>
             <ul className="trust"><li>No hidden fees</li><li>Cancel any month</li><li>Licensed US pharmacies</li><li>Labs first, always</li></ul>
           </div>
-          <div className="mmedia">
-            <HeroVideo desktopSrc="/labo/img/method/hero.mp4" mobileSrc="/labo/img/method/hero-mobile.mp4" poster="/labo/img/method/hero-poster.jpg" />
-            <div className="badge"><b>24 hours</b>Typical turnaround from lab results to your written protocol.</div>
-          </div>
+          {/* Nov 23 2026: the self-playing "Your clinician" card (Flexpa-style) replaces the hero video */}
+          <MethodDemo />
         </div>
       </section>
 
