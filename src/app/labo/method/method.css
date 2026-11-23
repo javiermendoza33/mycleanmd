@@ -241,3 +241,12 @@
 [data-labo] [data-method] .hlrow h2,[data-labo] [data-method] .hlrow h3{font-size:1.4rem;letter-spacing:-.025em;line-height:1.15;margin:0}
 [data-labo] [data-method] .faq-item h2{font-size:1.05rem;font-weight:600;letter-spacing:-.015em;line-height:1.3}
 [data-labo] [data-method] .pageh .sub{font-size:1.05rem}
+
+/* Card shadows (Nov 22 2026, Javier: "add shadows to widgets"): one soft, blue-tinted elevation on every card-like
+   surface so they lift off the blue-white page the way Mochi's do; a touch more on hover for the clickable ones. */
+[data-labo] [data-method] .pcard,[data-labo] [data-method] .offer,[data-labo] [data-method] .step,[data-labo] [data-method] .clin,[data-labo] [data-method] .jcard,[data-labo] [data-method] .xclinic,[data-labo] [data-method] .plan .cards2 div,[data-labo] [data-method] .qa details,[data-labo] [data-method] .tile,[data-labo] [data-method] .card,[data-labo] [data-method] .pricecard,[data-labo] [data-method] .mmedia{box-shadow:0 1px 2px rgba(16,24,32,.04),0 10px 30px -14px rgba(29,79,145,.28)}
+[data-labo] [data-method] .planbox,[data-labo] [data-method] .gate{box-shadow:0 2px 4px rgba(16,24,32,.05),0 30px 60px -30px rgba(29,79,145,.45)}
+[data-labo] [data-method] .offer.lead{box-shadow:0 2px 4px rgba(16,24,32,.05),0 18px 40px -18px rgba(29,79,145,.55)}
+[data-labo] [data-method] .pcard,[data-labo] [data-method] .jcard,[data-labo] [data-method] .offer{transition:box-shadow .2s,transform .2s}
+[data-labo] [data-method] .pcard:hover,[data-labo] [data-method] .jcard:hover,[data-labo] [data-method] .offer:hover{box-shadow:0 2px 4px rgba(16,24,32,.05),0 22px 44px -18px rgba(29,79,145,.45);transform:translateY(-2px)}
+@media (prefers-reduced-motion:reduce){[data-labo] [data-method] .pcard:hover,[data-labo] [data-method] .jcard:hover,[data-labo] [data-method] .offer:hover{transform:none}}
