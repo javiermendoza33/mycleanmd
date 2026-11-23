@@ -1252,7 +1252,8 @@ html,body{overflow-x:clip}
 /* Accessibility pass (Nov 22 2026, WCAG 2.2 AA): skip link, visible focus on every link, heading utilities so
    the document outline can be fixed without changing the look, 24px targets, pausable ticker. */
 [data-labo] .skip{position:absolute;left:16px;top:-200px;z-index:1000;padding:10px 16px;border-radius:8px;background:var(--ink);color:#fff;font-weight:700;text-decoration:none}
-[data-labo] .skip:focus{top:12px;outline:3px solid var(--accent);outline-offset:2px}
+[data-labo] .skip:focus-visible{top:12px;outline:3px solid var(--accent);outline-offset:2px}
+[data-labo] .skip:focus:not(:focus-visible){top:-200px}
 [data-labo] a:focus-visible,[data-labo] button:focus-visible,[data-labo] summary:focus-visible,[data-labo] [tabindex]:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 [data-labo] .h3{font-size:1.5rem;letter-spacing:-.024em;line-height:1.18;font-weight:700}
 [data-labo] .h4{font-size:1.06rem;letter-spacing:-.018em;font-weight:600}
