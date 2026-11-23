@@ -40,10 +40,10 @@ export function ClosingCTA({
         <h2>{title}</h2>
         <p className="sub" style={{ margin: "20px auto 0", maxWidth: "44ch" }}>{lede}</p>
         <div className="acts">
-          <a className="btn btn-primary" href={HEALTHIE.intake} target="_blank" rel="noopener noreferrer">
+          <a className="btn btn-primary" href={HEALTHIE.intake}>
             Start your intake
           </a>
-          <a className="btn btn-ghost" href={HEALTHIE.book} target="_blank" rel="noopener noreferrer">
+          <a className="btn btn-ghost" href={HEALTHIE.book}>
             Book a $149 consult
           </a>
         </div>

@@ -53,8 +53,7 @@ export default async function ProgramPage(
             <span className="kicker">Program fee</span>
             <span className="amt mono">{p.price}<span className="u"> / mo</span></span>
             <p style={{ fontSize: ".92rem", color: "var(--muted)" }}>{p.priceNote}</p>
-            <a className="btn btn-primary" href={HEALTHIE.program(p.slug)}
-               target="_blank" rel="noopener noreferrer">Start your intake</a>
+            <a className="btn btn-primary" href={HEALTHIE.program(p.slug)}>Start your intake</a>
           </aside>
         </div>
       </header>
@@ -89,8 +88,7 @@ export default async function ProgramPage(
           <h2 style={{ marginTop: 15 }}>{p.noteHeading}</h2>
           <p className="sub" style={{ marginTop: 17 }}>{p.noteBody}</p>
           <div style={{ display: "flex", gap: 18, flexWrap: "wrap", marginTop: 30 }}>
-            <a className="btn btn-primary" href={HEALTHIE.book}
-               target="_blank" rel="noopener noreferrer">Book a $149 consult</a>
+            <a className="btn btn-primary" href={HEALTHIE.book}>Book a $149 consult</a>
             <Link className="btn btn-ghost" href="/faq">Read the FAQ</Link>
             {EVIDENCE_POST[p.slug] && <Link className="more" href={`/blog/${EVIDENCE_POST[p.slug]}`} style={{ alignSelf: "center" }}>Read the evidence</Link>}
           </div>

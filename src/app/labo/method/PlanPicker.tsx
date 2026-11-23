@@ -36,7 +36,7 @@ export default function PlanPicker() {
       </table>
       <ul className="chips"><li>No hidden fees</li><li>Cancel any month</li><li>Written protocol you keep</li></ul>
       <Link className="btn btn-primary" href={`/join/${p.slug}`}>Start {SHORT[p.slug] ?? p.name}</Link>
-      <p className="pnote">Or <a href={HEALTHIE.book} target="_blank" rel="noopener noreferrer">book a {consult.price} consult</a> first — it is credited toward your first month. Program fees are self-pay; medication availability and compounded pricing vary by pharmacy.</p>
+      <p className="pnote">Or <a href={HEALTHIE.book}>book a {consult.price} consult</a> first — it is credited toward your first month. Program fees are self-pay; medication availability and compounded pricing vary by pharmacy.</p>
     </div>
   );
 }

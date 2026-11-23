@@ -33,14 +33,14 @@ export function MethodHeader() {
           <nav className="mlinks" aria-label="Primary">
             {METHOD_NAV.map((l) => <Link key={l.href} href={l.href} className={on(l.href) ? "on" : undefined}>{l.label}</Link>)}
           </nav>
-          <a className="signin" href={HEALTHIE.login} {...ext}>Sign in</a>
+          <Link className="signin" href="/signin">Sign in</Link>
           <Link className="btn btn-primary btn-sm" href="/programs">Get started</Link>
           <button type="button" className="mburger" aria-expanded={open} aria-controls="msheet" aria-label={open ? "Close menu" : "Open menu"} onClick={() => setOpen((v) => !v)}>{open ? "×" : "☰"}</button>
         </div>
         <nav id="msheet" className="msheet" aria-label="Menu" hidden={!open}>
           {METHOD_NAV.map((l) => <Link key={l.href} href={l.href}>{l.label}</Link>)}
           <div className="sep" />
-          <a href={HEALTHIE.login} {...ext}>Sign in</a>
+          <Link href="/signin">Sign in</Link>
           <a href={`https://${PRACTICE.domain}`}>{PRACTICE.name} (in person) ↗</a>
           <div className="acts"><Link className="btn btn-primary" href="/programs">Get started</Link></div>
         </nav>
@@ -69,8 +69,8 @@ export function MethodFooter() {
           <div>
             <p className="k">Patients</p>
             <ul>
-              <li><a href={HEALTHIE.login} {...ext}>Sign in</a></li>
-              <li><a href={HEALTHIE.book} {...ext}>Book a consult</a></li>
+              <li><Link href="/signin">Sign in</Link></li>
+              <li><Link href={HEALTHIE.book}>Book a consult</Link></li>
               <li><Link href="/programs">Start an intake</Link></li>
               <li><a href={`mailto:${METHOD.email}`}>{METHOD.email}</a></li>
             </ul>

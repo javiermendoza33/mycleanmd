@@ -223,3 +223,11 @@
 @media (max-width:960px){[data-labo] [data-method] .mfoot .cols{grid-template-columns:1fr 1fr}[data-labo] [data-method] .mfoot h2{grid-column:1/-1}}
 @media (max-width:520px){[data-labo] [data-method] .mfoot .cols{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){[data-labo] [data-method] *{transition:none!important}}
+
+/* /signin coming-soon page */
+[data-labo] [data-method] .soon{padding:96px 0 110px;text-align:center}
+[data-labo] [data-method] .soon h1{margin-top:18px}
+[data-labo] [data-method] .soon .sub{margin:18px auto 0;max-width:52ch}
+[data-labo] [data-method] .soon .acts{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:26px}
+[data-labo] [data-method] .soon .note{margin-top:20px;font-size:.86rem;color:var(--muted)}
+[data-labo] [data-method] .soon .note a{text-decoration:underline;text-underline-offset:3px}

@@ -33,7 +33,7 @@ export default function FaqPage() {
             <h3>Still unsure whether this fits?</h3>
             <p>Book a consult and ask. There is no obligation to start a program.</p>
             <div>
-              <a className="btn btn-ghost" href={HEALTHIE.book} target="_blank" rel="noopener noreferrer">
+              <a className="btn btn-ghost" href={HEALTHIE.book}>
                 Book a $149 consult
               </a>
             </div>

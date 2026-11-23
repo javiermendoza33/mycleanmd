@@ -32,8 +32,7 @@ export default function Pricing() {
                   {p.pricingBullets.map((b) => <li key={b}>{b}</li>)}
                 </ul>
                 <div style={{ marginTop: "auto", paddingTop: 16 }}>
-                  <a className="btn btn-ghost btn-sm" href={HEALTHIE.program(p.slug)}
-                     target="_blank" rel="noopener noreferrer">Choose this program</a>
+                  <a className="btn btn-ghost btn-sm" href={HEALTHIE.program(p.slug)}>Choose this program</a>
                 </div>
               </article>
             ))}

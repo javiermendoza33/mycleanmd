@@ -143,8 +143,8 @@ export default function MethodHome() {
         <div className="wrap">
           <h2>Start with <em>your numbers.</em></h2>
           <div className="acts">
-            <a className="btn btn-primary" href={HEALTHIE.intake} target="_blank" rel="noopener noreferrer">Start your intake</a>
-            <a className="btn btn-ghost" href={HEALTHIE.book} target="_blank" rel="noopener noreferrer">Book a {consult.price} consult</a>
+            <a className="btn btn-primary" href={HEALTHIE.intake}>Start your intake</a>
+            <a className="btn btn-ghost" href={HEALTHIE.book}>Book a {consult.price} consult</a>
           </div>
           <p className="note">Available to residents of {AVAILABILITY}. Intake takes about ten minutes.</p>
         </div>

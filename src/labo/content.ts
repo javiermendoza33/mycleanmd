@@ -82,11 +82,15 @@ export const PRACTICE = {
  * instance exists, change these four constants and nothing else — no CTA in
  * the codebase hardcodes a URL.
  */
+/** Nov 22 2026 (Javier: "we may not use Healthie, we are deciding on the EMR"): until the practice picks its EMR /
+ *  patient portal, every portal link stays ON this site — sign-in and consult booking land on "coming soon" pages,
+ *  intake sends people to the programs, and a program's own CTA goes to its /join page. Replace these four values
+ *  with the chosen vendor's URLs (and put target="_blank" back at the call sites) when the EMR is decided. */
 export const HEALTHIE = {
-  login: "https://app.gethealthie.com",
-  intake: "https://app.gethealthie.com",
-  book: "https://app.gethealthie.com",
-  program: (_slug: string) => "https://app.gethealthie.com",
+  login: "/signin",
+  intake: "/programs",
+  book: "/book",
+  program: (slug: string) => `/join/${slug}`,
 } as const;
 
 export const NAV = [
