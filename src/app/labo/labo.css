@@ -1262,11 +1262,12 @@ html,body{overflow-x:clip}
 
 /* Mega menu (Nov 22 2026): full-width panels under the header for Treatments and Shop, after ALASTIN's Shop
    Skincare panel — columns with mono kickers, one featured photo on the right. Desktop only (nav.main hides ≤880). */
-[data-labo] .megaitem{position:static}
-[data-labo] .megabtn{font:inherit;background:none;border:0;padding:0;cursor:pointer;color:inherit;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+[data-labo] nav.main{align-items:center}
+[data-labo] .megaitem{position:static;display:flex;align-items:center;line-height:inherit}
+[data-labo] .megabtn{font:inherit;line-height:inherit;background:none;border:0;padding:0;margin:0;cursor:pointer;color:inherit;display:inline-flex;align-items:baseline;gap:3px;white-space:nowrap;vertical-align:baseline}
 [data-labo] [data-clinic] nav.main .megabtn{font-size:.74rem;color:var(--ink);font-weight:500}
 [data-labo] [data-clinic] nav.main .megabtn.on{text-decoration:underline;text-underline-offset:6px;text-decoration-color:var(--accent)}
-[data-labo] .megabtn .chev{display:inline-block;transform:rotate(90deg);transition:transform .18s;font-size:.9em;opacity:.6}
+[data-labo] .megabtn .chev{display:inline-block;width:.8em;height:.8em;line-height:.8em;text-align:center;transform:rotate(90deg);transition:transform .18s;font-size:.9em;opacity:.6;align-self:center}
 [data-labo] .megaitem.open .megabtn{color:var(--accent)}
 [data-labo] .megaitem.open .megabtn .chev{transform:rotate(-90deg);opacity:1}
 [data-labo] .mega{position:absolute;left:0;right:0;top:100%;background:var(--paper);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);box-shadow:0 30px 50px -30px rgba(19,34,56,.35);z-index:70}
