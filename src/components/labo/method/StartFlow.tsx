@@ -14,11 +14,19 @@ const DOB_MAX = (() => { const d = new Date(); d.setFullYear(d.getFullYear() - 1
 const dobOk = (v: string) => /^\d{4}-\d{2}-\d{2}$/.test(v) && v >= "1920-01-01" && v <= DOB_MAX;
 
 
+/** Height asked in inches (Cuvo's number question) answered in feet + inches (Javier, Nov 23 2026: "easier for adding feet and inches"). */
+function HeightFtIn({ v, setV }: { v: number | undefined; setV: (x: number | string) => void }) {
+  const ft = v ? Math.floor(v / 12) : "", inch = v ? v % 12 : "";
+  const upd = (f: string, i: string) => setV(f === "" ? "" : Number(f) * 12 + (i === "" ? 0 : Number(i)));
+  return <span className="sq-ftin"><select aria-label="Feet" value={ft} onChange={e => upd(e.target.value, String(inch))}><option value="">ft</option>{[4, 5, 6, 7].map(f => <option key={f} value={f}>{f} ft</option>)}</select><select aria-label="Inches" value={ft === "" ? "" : inch} onChange={e => upd(String(ft), e.target.value)} disabled={ft === ""}><option value="">in</option>{Array.from({ length: 12 }, (_, i) => <option key={i} value={i}>{i} in</option>)}</select>{v ? <em>{ft}′ {inch}″ · {v} in</em> : null}</span>;
+}
+
 /** One intake question, typed the way Cuvo's question sets are (boolean / number / string / choice). Declared at module level so inputs keep focus between keystrokes. */
 function Q({ q, v, setV }: { q: QuestionSetQuestion; v: string | number | boolean | undefined; setV: (x: string | number | boolean) => void }) {
-  return <label className="sq"><span className="sq-q">{q.question}{q.required ? <i aria-hidden> *</i> : null}</span>{q.help ? <span className="sq-help">{q.help}</span> : null}
+  return <label className="sq"><span className="sq-q">{/height/i.test(q.question) && /inch/i.test(q.question) ? "Height" : q.question}{q.required ? <i aria-hidden> *</i> : null}</span>{q.help ? <span className="sq-help">{q.help}</span> : null}
     {q.type === "boolean" ? <span className="sq-yn"><button type="button" className={v === true ? "on" : ""} onClick={() => setV(true)}>Yes</button><button type="button" className={v === false ? "on" : ""} onClick={() => setV(false)}>No</button></span>
       : q.type === "choice" ? <select value={String(v ?? "")} onChange={e => setV(e.target.value)}><option value="">Choose…</option>{(q.options || []).map(o => <option key={o} value={o}>{o}</option>)}</select>
+      : q.type === "number" && /height/i.test(q.question) && /inch/i.test(q.question) ? <HeightFtIn v={typeof v === "number" ? v : undefined} setV={setV} />
       : q.type === "number" ? <input type="number" inputMode="decimal" value={v === undefined ? "" : String(v)} onChange={e => setV(e.target.value === "" ? "" : Number(e.target.value))} />
       : <input type="text" value={String(v ?? "")} onChange={e => setV(e.target.value)} />}
   </label>;
