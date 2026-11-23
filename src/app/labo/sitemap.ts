@@ -29,6 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...posts.map((x) => ({ p: `/blog/${x.slug}`, priority: 0.5 })),
     { p: "/contact", priority: 0.6 },
     { p: "/sms", priority: 0.4 },
+    { p: "/accessibility", priority: 0.4 },
     // Nov 19 2026: how-it-works/pricing/programs/faq/legal moved to
     // method.thelabomethod.com (The Labo Method, its own sitemap) — see
     // src/app/labo/method/sitemap.ts. Nothing lives at these paths here now.

@@ -41,9 +41,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               {p.partner && <p className="note" style={{ marginTop: 10 }}>Sold through our {PARTNER_NAME[p.partner]} partner store — it ships from them, not from the clinic.</p>}
               {!p.partner && <p className="note">{SHOP.shipsTo}. Free US shipping over {money(SHOP.freeShippingOver)}.</p>}
               <div className="prose" style={{ marginTop: 28 }}><p>{p.blurb}</p></div>
-              <h4 style={{ marginTop: 30 }}>How to use</h4>
+              <h2 className="h4" style={{ marginTop: 30 }}>How to use</h2>
               <ul className="howto">{p.how.map((h) => <li key={h}>{h}</li>)}</ul>
-              <h4 style={{ marginTop: 26 }}>Key actives</h4>
+              <h2 className="h4" style={{ marginTop: 26 }}>Key actives</h2>
               <div className="chips static">{p.actives.map((a) => <span key={a}>{a}</span>)}</div>
               <div className="chips static" style={{ marginTop: 10 }}>{p.concerns.map((c) => <Link key={c} href={`/shop?c=${c}`} className="cchip sm">{c}</Link>)}</div>
             </div>

@@ -62,7 +62,7 @@ export default function TreatmentsPage() {
         <div className="wrap">
           {GROUP_KEYS.map((g) => (
             <div key={g} id={`group-${g}`} className="txgsec">
-              <div className="txghead"><h3>{GROUPS[g]}</h3><span className="mono">{GROUP_NOTE[g]}</span></div>
+              <div className="txghead"><h2>{GROUPS[g]}</h2><span className="mono">{GROUP_NOTE[g]}</span></div>
               {g === "laser" && (
                 <div className="txphotos">
                   {LASER_PROCESS.map((p) => (
@@ -113,7 +113,7 @@ export default function TreatmentsPage() {
           <h2 style={{ marginTop: 15, marginBottom: 30 }}>Before your first visit.</h2>
           <Faq items={LASER_FAQ} />
           <div className="tile" style={{ marginTop: 48, background: "var(--paper)" }}>
-            <h3>Not sure which treatment fits?</h3>
+            <h2 className="h3">Not sure which treatment fits?</h2>
             <p>Book a consultation. You leave with an exam, a test spot and a written plan — no obligation to start.</p>
             <div><Link className="btn btn-primary" href="/contact">Request a consultation</Link></div>
           </div>

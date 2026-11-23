@@ -18,7 +18,7 @@ export default function SmsOptInForm() {
   if (state.status === "success") {
     return (
       <div className="tile" id="signup">
-        <h3>{state.emailOnly ? "You’re on the email list." : "You’re on the list."}</h3>
+        <h2 className="h3">{state.emailOnly ? "You’re on the email list." : "You’re on the list."}</h2>
         <p>{state.emailOnly
           ? "We will send updates by email only. We will never text you unless you tick the text box."
           : "You will get one confirmation text. Reply STOP at any time to cancel, or HELP for help."}</p>
@@ -29,7 +29,7 @@ export default function SmsOptInForm() {
   const consentWithLinks = CONSENT_TEXT.replace(" See our Privacy Policy and SMS Terms.", "");
   return (
     <form action={action} className="tile" id="signup">
-      <h3>Get text updates</h3>
+      <h2 className="h3">Get text updates</h2>
       <p style={{ fontSize: ".9rem", color: "var(--muted)" }}>About 1–4 messages a month. Texting is optional.</p>
       {state.status === "error" && <p className="formerr" role="alert">{state.message}</p>}
       <div aria-hidden="true" style={{ position: "absolute", left: -9999, width: 1, height: 1, overflow: "hidden" }}>

@@ -223,7 +223,7 @@ html,body{overflow-x:clip}
 [data-labo] footer.site .wrap{padding-block:38px}
 [data-labo] .fnav{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;padding-bottom:26px;border-bottom:1px solid var(--line)}
 @media (max-width:700px){[data-labo] .fnav{grid-template-columns:1fr;gap:20px}}
-[data-labo] .fnav h5{margin:0 0 12px;font-size:.78rem;color:var(--ink);font-weight:600;letter-spacing:-.015em}
+[data-labo] .fnav h5,[data-labo] .fnav .fh{margin:0 0 12px;font-size:.78rem;color:var(--ink);font-weight:600;letter-spacing:-.015em}
 [data-labo] .fnav ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
 [data-labo] .fnav a{text-decoration:none;color:var(--muted)}
 [data-labo] .fnav a:hover{color:var(--ink);text-decoration:underline}
@@ -474,7 +474,7 @@ html,body{overflow-x:clip}
 [data-labo] .concerns a:hover{border-color:var(--accent);background:var(--wash)}
 [data-labo] .txgroup+.txgroup,[data-labo] .txgsec+.txgsec{margin-top:56px}
 [data-labo] .txghead{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px}
-[data-labo] .txghead h3{margin:0;font-size:.82rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+[data-labo] .txghead h3,[data-labo] .txghead h2{margin:0;font-size:.82rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
 [data-labo] .txghead span{font-size:.72rem;color:var(--muted)}
 [data-labo] .txgsec{scroll-margin-top:90px}
 [data-labo] .txjump{align-items:center}
@@ -485,10 +485,10 @@ html,body{overflow-x:clip}
 /* Emerald & gold finishing (Oct 26 2026): gold kickers and numerals, a faint gold glow on the ground,
    photos warmed slightly so the white-room stock sits in the emerald room. */
 [data-labo]{background:radial-gradient(90% 60% at 85% -10%,rgba(var(--accent-rgb),.10),transparent 60%),var(--paper)}
-[data-labo] .kicker{color:var(--accent);opacity:.9}
+[data-labo] .kicker{color:var(--accent);opacity:1}
 [data-labo] .brand{color:var(--accent)}
 [data-labo] .tx .pr,[data-labo] .tx .go{color:var(--accent)}
-[data-labo] .txghead h3{color:var(--accent)}
+[data-labo] .txghead h3,[data-labo] .txghead h2{color:var(--accent)}
 [data-labo] .ph.has-img img{filter:saturate(.9) sepia(.08)}
 [data-labo] input,[data-labo] select,[data-labo] textarea{background:var(--wash);color:var(--ink);border-color:var(--line)}
 [data-labo] ::selection{background:rgba(var(--accent-rgb),.35);color:var(--ink)}
@@ -724,7 +724,7 @@ html,body{overflow-x:clip}
   /* Nov 22 2026 — "Crisp Medical Modern" (direction 2 of the palette PDF; Javier: "i actually like that better" after
      a full-page render — Labo Skin · Sage shipped for an hour the same morning). Cool-mist ground, mist surfaces,
      deep-navy ink, clinical teal reserved for buttons/links/the italic "you"; hero + ticker on the surface tint. */
-  --paper:#F6F8FA;--canvas:#E6ECF2;--wash:#E6ECF2;--ink:#132238;--graphite:#3C495B;--muted:#858D99;
+  --paper:#F6F8FA;--canvas:#E6ECF2;--wash:#E6ECF2;--ink:#132238;--graphite:#3C495B;--muted:#5E6978;
   --accent:#1E6B7B;--accent-rgb:30,107,123;--accent-tint:rgba(30,107,123,.10);--on-accent:#FFFFFF;
   --rule:#B6BCC4;--line:rgba(19,34,56,.18);--hair:rgba(19,34,56,.08);--sage:#DCE4EC;--hero:#E6ECF2;--strip:#E6ECF2;--radius-card:6px;
   background:var(--paper);color:var(--ink)}
@@ -1240,7 +1240,7 @@ html,body{overflow-x:clip}
 
 /* ── Patient portal (/portal) on the Crisp Medical Modern palette (Nov 22 2026, Javier: "and admin portal/client color schemes").
       The portal layout carries data-portal; it keeps its own minimal chrome but takes the clinic's tokens + font. */
-[data-labo] [data-portal]{--paper:#F6F8FA;--canvas:#FFFFFF;--wash:#E6ECF2;--ink:#132238;--graphite:#3C495B;--muted:#858D99;--line:rgba(19,34,56,.14);--hair:rgba(19,34,56,.08);--accent:#1E6B7B;--accent-rgb:30,107,123;--accent-tint:rgba(30,107,123,.10);--on-accent:#FFFFFF;--radius-card:10px;font-family:var(--font-clinic),var(--font-inter),-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}
+[data-labo] [data-portal]{--paper:#F6F8FA;--canvas:#FFFFFF;--wash:#E6ECF2;--ink:#132238;--graphite:#3C495B;--muted:#5E6978;--line:rgba(19,34,56,.14);--hair:rgba(19,34,56,.08);--accent:#1E6B7B;--accent-rgb:30,107,123;--accent-tint:rgba(30,107,123,.10);--on-accent:#FFFFFF;--radius-card:10px;font-family:var(--font-clinic),var(--font-inter),-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}
 /* Sign-up: optional mobile + SMS consent row (Nov 22 2026). The stacked .authform label would put the checkbox above
    the text; keep the consent row horizontal, and mute the "(optional…)" hint. */
 [data-labo] .authform label .opt{font-weight:400;color:var(--muted);margin-left:4px}
@@ -1248,3 +1248,14 @@ html,body{overflow-x:clip}
 [data-labo] .authform label.consent input{width:18px;height:18px;flex:none;margin:3px 0 0;padding:0;accent-color:var(--accent)}
 [data-labo] .authform label.consent span{flex:1;min-width:0}
 [data-labo] .authform label.consent a{color:var(--accent)}
+
+/* Accessibility pass (Nov 22 2026, WCAG 2.2 AA): skip link, visible focus on every link, heading utilities so
+   the document outline can be fixed without changing the look, 24px targets, pausable ticker. */
+[data-labo] .skip{position:absolute;left:16px;top:-200px;z-index:1000;padding:10px 16px;border-radius:8px;background:var(--ink);color:#fff;font-weight:700;text-decoration:none}
+[data-labo] .skip:focus{top:12px;outline:3px solid var(--accent);outline-offset:2px}
+[data-labo] a:focus-visible,[data-labo] button:focus-visible,[data-labo] summary:focus-visible,[data-labo] [tabindex]:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+[data-labo] .h3{font-size:1.5rem;letter-spacing:-.024em;line-height:1.18;font-weight:700}
+[data-labo] .h4{font-size:1.06rem;letter-spacing:-.018em;font-weight:600}
+[data-labo] .linkbtn{min-height:24px;min-width:24px}
+[data-labo] [data-clinic] .strip:hover .track,[data-labo] [data-clinic] .strip:focus-within .track{animation-play-state:paused}
+[data-labo] .fnav .fh{font-size:.78rem;letter-spacing:-.015em}

@@ -26,11 +26,13 @@ export function TelePill() {
 
 export function TeleBand() {
   return (
+    <aside aria-label="Telehealth">
     <a className="teleband" href={HREF} aria-label="Interested in weight loss and peptides? Open The Labo Method telehealth">
       <span className="wrap">
         <span className="t">Interested in Weight Loss &amp; Peptides?</span>
         <b>Click here ›</b>
       </span>
     </a>
+    </aside>
   );
 }

@@ -30,7 +30,7 @@ export default function ContactForm() {
   if (state.status === "success") {
     return (
       <div className="tile">
-        <h3>Message sent</h3>
+        <h2 className="h3">Message sent</h2>
         <p>
           Thank you — it goes straight to the practice inbox and you will hear back from
           Monika, not an autoresponder. For anything clinical, please use the patient portal.
@@ -41,7 +41,7 @@ export default function ContactForm() {
 
   return (
     <form action={action} className="tile">
-      <h3>Send a message</h3>
+      <h2 className="h3">Send a message</h2>
       <p style={{ fontSize: ".9rem", color: "var(--muted)" }}>
         For general questions. Not a secure channel — do not include medical information.
       </p>

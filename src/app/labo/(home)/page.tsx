@@ -51,7 +51,8 @@ export default async function LaboHome() {
   const picks = await applyRates(HOME_PICKS);   // Nov 22 2026: published rate-plan prices (adjustable lines only)
   return (
     <>
-      <div className="promo"><div className="wrap"><span>{SHOP.promo}</span></div></div>
+      <a className="skip" href="#top">Skip to content</a>
+      <div className="promo" role="region" aria-label="Promotion"><div className="wrap"><span>{SHOP.promo}</span></div></div>
       <header className="site">
         <div className="wrap bar">
           <a className="brand" href="#top">{PRACTICE.name}</a>
@@ -199,7 +200,7 @@ export default async function LaboHome() {
               <div className="frame" style={{ aspectRatio: "4/5" }}><img src="/labo/img/services/lasers.jpg" alt="Woman with smooth, glowing skin after a laser skin treatment" loading="lazy" /></div>
             </div>
             <div className="skinrow" aria-label="Wavelength by skin type" style={{ background: "var(--paper)" }}>
-              <div className="skhead"><h4>Which wavelength, for which skin</h4><span className="kicker">Fitzpatrick scale</span></div>
+              <div className="skhead"><h3 className="h4">Which wavelength, for which skin</h3><span className="kicker">Fitzpatrick scale</span></div>
               <div className="sk">
                 {SKIN.map((c, i) => (
                   <div className="cell" key={c}><i style={{ background: c }} /><span className="mono">{["I", "II", "III", "IV", "V", "VI"][i]}</span></div>

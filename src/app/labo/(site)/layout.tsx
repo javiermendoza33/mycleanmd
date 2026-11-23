@@ -12,7 +12,7 @@ export default function LaboSiteLayout({ children }: { children: React.ReactNode
   return (
     <div data-clinic>
       <Header />
-      <main>{children}</main>
+      <main id="main">{children}</main>
       <Footer />
       <BagDrawer />
       <SearchOverlay />

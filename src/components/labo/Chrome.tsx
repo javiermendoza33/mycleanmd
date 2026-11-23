@@ -25,7 +25,8 @@ export function Header() {
   const pathname = usePathname();
   return (
     <>
-    <div className="promo"><div className="wrap"><span>{SHOP.promo}</span></div></div>
+    <a className="skip" href="#main">Skip to content</a>
+    <div className="promo" role="region" aria-label="Promotion"><div className="wrap"><span>{SHOP.promo}</span></div></div>
     <header className="site">
       <div className="wrap bar">
         <Link className="brand" href="/" aria-label={`${PRACTICE.name} — home`}>{PRACTICE.name}</Link>
@@ -57,7 +58,7 @@ export function Footer() {
       <div className="wrap">
         <div className="fnav fnav4">
           <div>
-            <h5>Explore</h5>
+            <h2 className="fh">Explore</h2>
             <ul>
               <li><Link href="/">Home</Link></li>
               {NAV.map((l) => <li key={l.href}><Link href={l.href}>{l.label}</Link></li>)}
@@ -67,14 +68,14 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <h5>Treatments</h5>
+            <h2 className="fh">Treatments</h2>
             <ul>
               {services.map((t) => <li key={t.slug}><Link href={t.comingSoon ? "/services" : t.href ?? `/services/${t.slug}`}>{t.name}</Link></li>)}
               {TREATMENTS.filter((t) => t.group === "laser").map((t) => <li key={t.slug}><Link href={`/treatments#${t.slug}`}>{t.name}</Link></li>)}
             </ul>
           </div>
           <div>
-            <h5>{METHOD.name} ↗</h5>
+            <h2 className="fh">{METHOD.name} ↗</h2>
             <ul>
               {PROGRAMS.map((p) => <li key={p.slug}><a href={`https://${METHOD.domain}/programs/${p.slug}`}>{p.name}</a></li>)}
               <li><a href={`https://${METHOD.domain}/how-it-works`}>How it works</a></li>
@@ -84,7 +85,7 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <h5>Visit us</h5>
+            <h2 className="fh">Visit us</h2>
             <ul>
               {s.locations.map((loc) => (
                 <li key={loc.id}>
@@ -100,7 +101,7 @@ export function Footer() {
           </div>
         </div>
         <div className="legal">
-          <p>© {new Date().getFullYear()} {PRACTICE.name}. All rights reserved. · <Link href="/privacy-policy">Privacy policy</Link> · <a href={`https://${METHOD.domain}/legal`}>Legal</a> · <Link href="/sms">SMS terms</Link></p>
+          <p>© {new Date().getFullYear()} {PRACTICE.name}. All rights reserved. · <Link href="/privacy-policy">Privacy policy</Link> · <Link href="/accessibility">Accessibility</Link> · <a href={`https://${METHOD.domain}/legal`}>Legal</a> · <Link href="/sms">SMS terms</Link></p>
           <p>{FOOTER_DISCLAIMER}</p>
         </div>
       </div>
