@@ -250,3 +250,5 @@
 [data-labo] [data-method] .pcard,[data-labo] [data-method] .jcard,[data-labo] [data-method] .offer{transition:box-shadow .2s,transform .2s}
 [data-labo] [data-method] .pcard:hover,[data-labo] [data-method] .jcard:hover,[data-labo] [data-method] .offer:hover{box-shadow:0 2px 4px rgba(16,24,32,.05),0 22px 44px -18px rgba(29,79,145,.45);transform:translateY(-2px)}
 @media (prefers-reduced-motion:reduce){[data-labo] [data-method] .pcard:hover,[data-labo] [data-method] .jcard:hover,[data-labo] [data-method] .offer:hover{transform:none}}
+[data-labo] [data-method] .mhead .brand{display:inline-flex;align-items:center;gap:.5em;font-weight:300;letter-spacing:.2em;text-transform:uppercase;font-size:.9rem;--logo-bg:var(--paper,#F6F8FB)}
+[data-labo] [data-method] .mhead .brand .logo-word{font-weight:300;letter-spacing:.2em}

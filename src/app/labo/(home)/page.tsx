@@ -15,6 +15,7 @@ import MobileNav from "@/components/labo/MobileNav";
 import { TelePill, TeleBand } from "@/components/labo/TeleCallout";
 import MegaNav from "@/components/labo/MegaNav";
 import BagLink from "@/components/labo/shop/BagLink";
+import { Logo } from "@/components/labo/Logo";
 import SearchButton from "@/components/labo/search/SearchButton";
 import { ProductCard } from "@/components/labo/shop/ProductCard";
 
@@ -56,7 +57,7 @@ export default async function LaboHome() {
       <div className="promo" role="region" aria-label="Promotion"><div className="wrap"><span>{SHOP.promo}</span></div></div>
       <header className="site">
         <div className="wrap bar">
-          <a className="brand" href="#top">{PRACTICE.name}</a>
+          <a className="brand" href="#top"><Logo variant="clinic" name={PRACTICE.name} /></a>
           <TelePill />
           <MegaNav label="Sections" />
           <SearchButton />

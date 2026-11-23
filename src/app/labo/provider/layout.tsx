@@ -2,6 +2,7 @@ import { PRACTICE } from '@/labo/content'
 import PortalSignOut from '@/components/labo/PortalSignOut'
 import ProviderNav from './ProviderNav'
 import { admin, getProvider, initials } from '@/lib/labo/provider'
+import { LMark } from '@/components/labo/Logo'
 import './provider.css'
 
 export const dynamic = 'force-dynamic'
@@ -21,7 +22,7 @@ export default async function ProviderLayout({ children }: { children: React.Rea
   return (
     <div data-provider>
       <aside className="side">
-        <div className="brand"><i>LM</i><div><b>{PRACTICE.name}</b><span>Provider</span></div></div>
+        <div className="brand"><i className="lmark-tile"><LMark variant="method" size={20} /></i><div><b>{PRACTICE.name}</b><span>Provider</span></div></div>
         <ProviderNav counts={counts} />
         <div className="me"><div className="av">{initials(PRACTICE.provider)}</div><div style={{ flex: 1, minWidth: 0 }}><b>{PRACTICE.provider.split(',')[0]}</b><span>{user.email}</span></div><PortalSignOut /></div>
       </aside>

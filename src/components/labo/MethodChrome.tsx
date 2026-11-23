@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { METHOD, METHOD_NAV, PROGRAMS, HEALTHIE, PRACTICE, FOOTER_DISCLAIMER, AVAILABILITY } from "@/labo/content";
+import { Logo } from "@/components/labo/Logo";
 
 /**
  * Header and footer for The Labo Method (thelabomethod.com) — rebuilt Nov 22 2026 on the joinmochi.com pattern
@@ -29,7 +30,7 @@ export function MethodHeader() {
       <div className="mpromo" role="region" aria-label="Notice">Licensed for {AVAILABILITY} residents · one monthly fee, cancel any month · <Link href="/pricing">See pricing →</Link></div>
       <header className="mhead">
         <div className="pill">
-          <Link className="brand" href="/" aria-label={`${METHOD.name} — home`}>{METHOD.name}</Link>
+          <Link className="brand" href="/" aria-label={`${METHOD.name} — home`}><Logo variant="method" name={METHOD.name} /></Link>
           <nav className="mlinks" aria-label="Primary">
             {METHOD_NAV.map((l) => <Link key={l.href} href={l.href} className={on(l.href) ? "on" : undefined}>{l.label}</Link>)}
           </nav>

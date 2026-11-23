@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PRACTICE } from "@/labo/content";
+import { Logo } from "@/components/labo/Logo";
 
 /** Sign-in pages in the clinic look (sandbox, Nov 19 2026 — Javier: "change the login page to reflect the labo clinic style").
  *  Served on the Labo hosts by src/proxy.ts rewriting /auth/login, /auth/signup and /auth/forgot here. */
@@ -7,7 +8,7 @@ export default function LaboAuthLayout({ children }: { children: React.ReactNode
   return (
     <div data-clinic className="auth">
       <aside className="authside">
-        <Link href="/" className="brand">{PRACTICE.name}</Link>
+        <Link href="/" className="brand"><Logo variant="clinic" name={PRACTICE.name} size={30} /></Link>
         {/* Nov 19 2026 (Javier: "add high res photo from library here somewhere"): the 1877×2560 hero portrait (Monika passed on the blonde one), framed like the home hero. */}
         <div className="authphoto"><img src="/labo/img/about/team.jpg" alt="" aria-hidden="true" /></div>
         <div className="authcopy">

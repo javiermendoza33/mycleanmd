@@ -9,6 +9,7 @@ import MobileNav from "@/components/labo/MobileNav";
 import { TelePill, TeleBand } from "@/components/labo/TeleCallout";
 import MegaNav from "@/components/labo/MegaNav";
 import BagLink from "@/components/labo/shop/BagLink";
+import { Logo } from "@/components/labo/Logo";
 import SearchButton from "@/components/labo/search/SearchButton";
 import { SHOP } from "@/labo/clinic/products";
 
@@ -30,7 +31,7 @@ export function Header() {
     <div className="promo" role="region" aria-label="Promotion"><div className="wrap"><span>{SHOP.promo}</span></div></div>
     <header className="site">
       <div className="wrap bar">
-        <Link className="brand" href="/" aria-label={`${PRACTICE.name} — home`}>{PRACTICE.name}</Link>
+        <Link className="brand" href="/" aria-label={`${PRACTICE.name} — home`}><Logo variant="clinic" name={PRACTICE.name} /></Link>
         {/* Nov 21 2026: the purple "Telehealth ›" beside the wordmark became the weight-loss & peptides pill
             (TeleCallout.tsx); the plain Telehealth link moved into the menu (TELE_LINK) and the band below the
             header carries the call-out on phones and tablets. */}

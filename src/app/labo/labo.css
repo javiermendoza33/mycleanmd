@@ -1329,3 +1329,15 @@ html[data-a11y-links] [data-labo] [data-clinic] a{text-decoration:underline;text
 html[data-a11y-font] [data-labo] [data-clinic],html[data-a11y-font] [data-labo] [data-clinic] h1,html[data-a11y-font] [data-labo] [data-clinic] h2,html[data-a11y-font] [data-labo] [data-clinic] h3,html[data-a11y-font] [data-labo] [data-clinic] .kicker,html[data-a11y-font] [data-labo] [data-clinic] .mono{font-family:Verdana,"Trebuchet MS",Arial,sans-serif;letter-spacing:.015em;word-spacing:.06em}
 html[data-a11y-font] [data-labo] [data-clinic] h1,html[data-a11y-font] [data-labo] [data-clinic] h2{letter-spacing:0;line-height:1.15}
 html[data-a11y-motion] [data-labo] *{animation-play-state:paused!important;transition:none!important;scroll-behavior:auto!important}
+
+/* ── The "L" logo lockups (Nov 23 2026, Javier's concept board: solid rounded L = The Labo Clinic, outlined L with a dot = The Labo Method) ── */
+[data-labo] .logo{display:inline-flex;align-items:center;gap:.55em;line-height:1;white-space:nowrap}
+[data-labo] .logo .lmark{flex:none;display:block}
+[data-labo] .logo-word{text-transform:uppercase;letter-spacing:.16em;font-size:.82em;font-weight:700}
+[data-labo] .logo-method .logo-word{font-weight:300;letter-spacing:.2em}
+[data-labo] [data-clinic] .brand{color:var(--ink);letter-spacing:0}
+[data-labo] [data-clinic] .logo-word{font-family:var(--font-clinic),var(--font-inter),sans-serif}
+[data-labo] .authside .brand{color:#F6F8FA;--logo-bg:var(--accent)}
+[data-provider] .brand i.lmark-tile{background:var(--em);color:#fff;display:grid;place-items:center;--logo-bg:var(--em)}
+[data-provider][data-clinicp] .brand i.lmark-tile{background:var(--blue)}
+[data-labo] [data-clinic] footer .brand,[data-labo] [data-clinic] .fbrand{color:var(--ink)}

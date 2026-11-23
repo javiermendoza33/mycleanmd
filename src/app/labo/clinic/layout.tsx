@@ -3,6 +3,7 @@ import PortalSignOut from "@/components/labo/PortalSignOut";
 import ClinicNav from "./ClinicNav";
 import { getStaff } from "@/lib/labo/clinic";
 import { initials } from "@/lib/labo/provider";
+import { LMark } from "@/components/labo/Logo";
 import "../provider/provider.css";
 import "./clinic.css";
 
@@ -15,7 +16,7 @@ export default async function ClinicLayout({ children }: { children: React.React
   return (
     <div data-provider data-clinicp>
       <aside className="side">
-        <div className="brand"><i>LC</i><div><b>{PRACTICE.name}</b><span>Clinic · {s.staff.role}</span></div></div>
+        <div className="brand"><i className="lmark-tile"><LMark variant="clinic" size={20} /></i><div><b>{PRACTICE.name}</b><span>Clinic · {s.staff.role}</span></div></div>
         <ClinicNav admin={s.staff.role === "admin"} />
         <div className="me"><div className="av">{initials(s.staff.name, s.user.email)}</div><div style={{ flex: 1, minWidth: 0 }}><b>{s.staff.name}</b><span>{s.user.email}</span></div><PortalSignOut /></div>
       </aside>
