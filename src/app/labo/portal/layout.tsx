@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { PRACTICE } from "@/labo/content";
+import { headers } from "next/headers";
+import { PRACTICE, METHOD } from "@/labo/content";
 import PortalSignOut from "@/components/labo/PortalSignOut";
 
 /**
@@ -16,7 +17,10 @@ const NAV = [
   ["/portal/messages", "Messages"],
 ] as const;
 
-export default function PortalLayout({ children }: { children: React.ReactNode }) {
+export default async function PortalLayout({ children }: { children: React.ReactNode }) {
+  // Two companies, one portal code path (Nov 23 2026): the name follows the domain the patient signed up on.
+  const host = (await headers()).get("host") || "";
+  const brand = /thelabomethod\.com$/.test(host) ? METHOD.name : PRACTICE.name;
   return (
     <div data-portal style={{ minHeight: "100vh", background: "var(--paper)", color: "var(--ink)" }}>
       <header
@@ -26,7 +30,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
         }}
       >
         <Link href="/portal" style={{ color: "var(--ink)", textDecoration: "none", fontWeight: 600 }}>
-          {PRACTICE.name} · Portal
+          {brand} · Portal
         </Link>
         <nav style={{ display: "flex", gap: 18, flexWrap: "wrap" }}>
           {NAV.map(([href, label]) => (
