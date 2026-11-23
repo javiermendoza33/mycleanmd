@@ -1289,3 +1289,42 @@ html,body{overflow-x:clip}
 [data-labo] .megafeat:hover b{color:var(--accent)}
 @media (max-width:1180px){[data-labo] .megagrid{grid-template-columns:repeat(4,minmax(0,1fr))}[data-labo] .megafeat{display:none}}
 @media (max-width:880px){[data-labo] .mega{display:none}}
+
+/* Accessibility widget (Nov 22 2026): the floating button bottom-left + its panel, and the visitor preferences it
+   sets as data attributes on <html> (A11yWidget.tsx). Scoped to the clinic storefront. */
+[data-labo] .a11y-btn{position:fixed;left:18px;bottom:18px;z-index:85;width:50px;height:50px;border-radius:50%;border:2px solid #fff;background:var(--ink);color:#fff;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 24px -8px rgba(19,34,56,.55);padding:0}
+[data-labo] .a11y-btn:hover{background:var(--accent)}
+[data-labo] .a11y-btn.active::after{content:"";position:absolute;top:2px;right:2px;width:11px;height:11px;border-radius:50%;background:#F79E3C;border:2px solid #fff}
+[data-labo] .a11y-panel{position:fixed;left:18px;bottom:80px;z-index:86;width:min(320px,calc(100vw - 36px));background:var(--paper);color:var(--ink);border:1px solid var(--rule);border-radius:12px;box-shadow:0 24px 48px -20px rgba(19,34,56,.5);padding:8px 8px 10px;font-size:.88rem}
+[data-labo] .a11y-panel[hidden]{display:none}
+[data-labo] .a11y-head{display:flex;align-items:center;justify-content:space-between;padding:6px 8px 8px;border-bottom:1px solid var(--rule);margin-bottom:4px}
+[data-labo] .a11y-head b{font-size:.95rem}
+[data-labo] .a11y-head .x{font:inherit;font-size:1.3rem;line-height:1;background:none;border:0;cursor:pointer;color:var(--graphite);width:32px;height:32px;border-radius:8px}
+[data-labo] .a11y-head .x:hover{background:var(--wash)}
+[data-labo] .a11y-row,[data-labo] .a11y-opt{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:9px 8px;border-radius:8px;text-align:left}
+[data-labo] .a11y-opt{font:inherit;background:none;border:0;cursor:pointer;color:inherit;justify-content:flex-start}
+[data-labo] .a11y-opt:hover,[data-labo] .a11y-row:hover{background:var(--wash)}
+[data-labo] .a11y-row b,[data-labo] .a11y-opt b{display:block;font-weight:600}
+[data-labo] .a11y-row small,[data-labo] .a11y-opt small{display:block;color:var(--muted);font-size:.74rem;margin-top:1px}
+[data-labo] .a11y-sw{flex:none;width:38px;height:22px;border-radius:999px;background:var(--rule);position:relative;transition:background .15s}
+[data-labo] .a11y-sw::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .15s}
+[data-labo] .a11y-opt[aria-pressed="true"] .a11y-sw{background:var(--accent)}
+[data-labo] .a11y-opt[aria-pressed="true"] .a11y-sw::after{transform:translateX(16px)}
+[data-labo] .a11y-step{display:inline-flex;gap:6px;flex:none}
+[data-labo] .a11y-step button{font:inherit;font-weight:700;min-width:40px;height:32px;border-radius:8px;border:1px solid var(--rule);background:#fff;color:var(--ink);cursor:pointer}
+[data-labo] .a11y-step button:disabled{opacity:.4;cursor:default}
+[data-labo] .a11y-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 8px 2px;border-top:1px solid var(--rule);margin-top:4px;font-size:.8rem}
+[data-labo] .a11y-foot .linkbtn{color:var(--accent);font-weight:600}
+[data-labo] .a11y-foot .linkbtn:disabled{color:var(--muted);cursor:default}
+[data-labo] .a11y-foot a{color:var(--accent)}
+@media (max-width:880px){[data-labo] .a11y-btn{width:44px;height:44px;left:14px;bottom:14px}[data-labo] .a11y-panel{left:14px;bottom:70px}}
+@media print{[data-labo] .a11y-btn,[data-labo] .a11y-panel{display:none}}
+/* the preferences */
+html[data-a11y-text="1"] [data-labo] [data-clinic]{font-size:18.5px}
+html[data-a11y-text="2"] [data-labo] [data-clinic]{font-size:21px}
+html[data-a11y-contrast] [data-labo] [data-clinic]{--ink:#000;--graphite:#111826;--muted:#2E3A4A;--rule:#1B2838;--line:rgba(0,0,0,.4);--hair:rgba(0,0,0,.25);--accent:#0F4E5B;--paper:#FFFFFF;--canvas:#EEF2F6;--wash:#E3E9EF}
+html[data-a11y-contrast] [data-labo] [data-clinic] a{text-decoration:underline;text-underline-offset:3px}
+html[data-a11y-links] [data-labo] [data-clinic] a{text-decoration:underline;text-underline-offset:3px}
+html[data-a11y-font] [data-labo] [data-clinic],html[data-a11y-font] [data-labo] [data-clinic] h1,html[data-a11y-font] [data-labo] [data-clinic] h2,html[data-a11y-font] [data-labo] [data-clinic] h3,html[data-a11y-font] [data-labo] [data-clinic] .kicker,html[data-a11y-font] [data-labo] [data-clinic] .mono{font-family:Verdana,"Trebuchet MS",Arial,sans-serif;letter-spacing:.015em;word-spacing:.06em}
+html[data-a11y-font] [data-labo] [data-clinic] h1,html[data-a11y-font] [data-labo] [data-clinic] h2{letter-spacing:0;line-height:1.15}
+html[data-a11y-motion] [data-labo] *{animation-play-state:paused!important;transition:none!important;scroll-behavior:auto!important}
