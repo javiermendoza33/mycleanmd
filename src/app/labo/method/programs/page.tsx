@@ -33,7 +33,7 @@ export default function ProgramsIndexPage() {
             {PROGRAMS.map((p) => (
               <article className="tile" key={p.slug}>
                 <span className="kicker">Program {p.index}</span>
-                <h3>{p.name}</h3>
+                <h2 className="h3">{p.name}</h2>
                 <p>{p.cardBlurb}</p>
                 <p className="mono" style={{ marginTop: 12, fontWeight: 600 }}>{p.priceMeta}</p>
                 <div style={{ display: "flex", gap: 14, marginTop: 16, flexWrap: "wrap" }}>

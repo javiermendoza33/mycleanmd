@@ -1,78 +1,93 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { METHOD, METHOD_NAV, PROGRAMS, HEALTHIE, PRACTICE, FOOTER_DISCLAIMER, AVAILABILITY } from "@/labo/content";
 
 /**
- * Header and footer for The Labo Method (telehealth) — a SEPARATE brand from
- * The Labo Clinic, split out Nov 19 2026. Lives on its own subdomain
- * (method.thelabomethod.com) but shares this repo's fonts/analytics via the
- * nearest /labo layout; it does NOT get [data-clinic], so it renders the
- * original Apple-blue "White Room" tokens instead of the clinic's clay
- * storefront look — the simplest honest way to look like a different brand.
+ * Header and footer for The Labo Method (thelabomethod.com) — rebuilt Nov 22 2026 on the joinmochi.com pattern
+ * (Javier: "revamp totally to look more like this"): a one-line promo, a floating white pill header (wordmark,
+ * nav, Sign in, Get started), a phone sheet, and a dark footer that ends in the wordmark. Styles in method.css.
+ * Separate brand from The Labo Clinic — nothing here touches [data-clinic].
  */
 const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
 
 export function MethodHeader() {
   const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+  useEffect(() => { setOpen(false); }, [pathname]);
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    document.addEventListener("keydown", onKey); return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
+  const on = (href: string) => pathname === href || pathname.startsWith(href + "/");
   return (
     <>
-    <div className="promo"><div className="wrap"><span>Licensed for {AVAILABILITY} residents</span><span className="sep">·</span><span>One monthly fee — no lock-in, cancel any month</span></div></div>
-    <header className="site">
-      <div className="wrap bar">
-        <Link className="brand" href="/" aria-label={`${METHOD.name} — home`}>{METHOD.name}</Link>
-        <nav className="main" aria-label="Primary">
-          {METHOD_NAV.map((l) => (
-            <Link key={l.href} href={l.href} className={pathname === l.href || pathname.startsWith(l.href + "/") ? "on" : undefined}>{l.label}</Link>
-          ))}
+      <a className="skip" href="#main">Skip to content</a>
+      <div className="mpromo" role="region" aria-label="Notice">Licensed for {AVAILABILITY} residents · one monthly fee, cancel any month · <Link href="/pricing">See pricing →</Link></div>
+      <header className="mhead">
+        <div className="pill">
+          <Link className="brand" href="/" aria-label={`${METHOD.name} — home`}>{METHOD.name}</Link>
+          <nav className="mlinks" aria-label="Primary">
+            {METHOD_NAV.map((l) => <Link key={l.href} href={l.href} className={on(l.href) ? "on" : undefined}>{l.label}</Link>)}
+          </nav>
+          <a className="signin" href={HEALTHIE.login} {...ext}>Sign in</a>
+          <Link className="btn btn-primary btn-sm" href="/programs">Get started</Link>
+          <button type="button" className="mburger" aria-expanded={open} aria-controls="msheet" aria-label={open ? "Close menu" : "Open menu"} onClick={() => setOpen((v) => !v)}>{open ? "×" : "☰"}</button>
+        </div>
+        <nav id="msheet" className="msheet" aria-label="Menu" hidden={!open}>
+          {METHOD_NAV.map((l) => <Link key={l.href} href={l.href}>{l.label}</Link>)}
+          <div className="sep" />
+          <a href={HEALTHIE.login} {...ext}>Sign in</a>
+          <a href={`https://${PRACTICE.domain}`}>{PRACTICE.name} (in person) ↗</a>
+          <div className="acts"><Link className="btn btn-primary" href="/programs">Get started</Link></div>
         </nav>
-        <a className="more" href={HEALTHIE.login} {...ext} style={{ fontSize: ".8rem" }}>Patient login</a>
-        <Link className="btn btn-primary btn-sm" href="/programs">Get started</Link>
-      </div>
-    </header>
+      </header>
     </>
   );
 }
 
 export function MethodFooter() {
   return (
-    <footer className="site">
+    <footer className="mfoot">
       <div className="wrap">
-        <div className="fnav fnav4">
+        <div className="cols">
+          <div><h2>Care designed around your numbers.</h2><p style={{ marginTop: 12, fontSize: ".86rem", color: "#8B98B3" }}>By video, for residents of {AVAILABILITY}.</p></div>
           <div>
-            <h5>Explore</h5>
+            <p className="k">Programs</p>
+            <ul>{PROGRAMS.map((p) => <li key={p.slug}><Link href={`/programs/${p.slug}`}>{p.name}</Link></li>)}</ul>
+          </div>
+          <div>
+            <p className="k">Learn</p>
             <ul>
-              <li><Link href="/">Home</Link></li>
               {METHOD_NAV.map((l) => <li key={l.href}><Link href={l.href}>{l.label}</Link></li>)}
               <li><Link href="/legal">Legal</Link></li>
             </ul>
           </div>
           <div>
-            <h5>Programs</h5>
+            <p className="k">Patients</p>
             <ul>
-              {PROGRAMS.map((p) => <li key={p.slug}><Link href={`/programs/${p.slug}`}>{p.name}</Link></li>)}
-            </ul>
-          </div>
-          <div>
-            <h5>Patients</h5>
-            <ul>
-              <li><a href={HEALTHIE.login} {...ext}>Patient login</a></li>
+              <li><a href={HEALTHIE.login} {...ext}>Sign in</a></li>
               <li><a href={HEALTHIE.book} {...ext}>Book a consult</a></li>
               <li><Link href="/programs">Start an intake</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h5>Also from us</h5>
-            <ul>
-              <li><a href={`https://${PRACTICE.domain}`}>{PRACTICE.name} ↗<br /><span style={{ fontSize: ".78rem", color: "var(--muted)" }}>In-person, Seattle</span></a></li>
               <li><a href={`mailto:${METHOD.email}`}>{METHOD.email}</a></li>
             </ul>
           </div>
+          <div>
+            <p className="k">In person</p>
+            <ul>
+              <li><a href={`https://${PRACTICE.domain}`}>{PRACTICE.name} ↗</a></li>
+              <li><a href={`https://${PRACTICE.domain}/services`}>Injectables &amp; laser</a></li>
+              <li><a href={`https://${PRACTICE.domain}/shop`}>Skincare shop</a></li>
+            </ul>
+          </div>
         </div>
+        <div className="mark" aria-hidden="true">{METHOD.name}</div>
         <div className="legal">
-          <p>© {new Date().getFullYear()} {METHOD.name}. All rights reserved. · <Link href="/legal">Legal</Link></p>
           <p>{FOOTER_DISCLAIMER}</p>
+          <div className="row"><span>© {new Date().getFullYear()} {METHOD.name}. All rights reserved.</span><span><Link href="/legal">Legal</Link> · <a href={`https://${PRACTICE.domain}/privacy-policy`}>Privacy policy</a> · <a href={`https://${PRACTICE.domain}/accessibility`}>Accessibility</a></span></div>
         </div>
       </div>
     </footer>

@@ -63,13 +63,13 @@ export default async function ProgramPage(
         <div className="wrap">
           <div className="clin" style={{ alignItems: "start" }}>
             <div>
-              <h3>{p.leftHeading}</h3>
+              <h2 className="h3">{p.leftHeading}</h2>
               <ul className="tl" style={{ marginTop: 22, gap: 14 }}>
                 {p.leftItems.map((i) => <li key={i}>{i}</li>)}
               </ul>
             </div>
             <div>
-              <h3>{p.rightHeading}</h3>
+              <h2 className="h3">{p.rightHeading}</h2>
               <ul className="defs kv" style={{ marginTop: 10 }}>
                 {p.rightItems.map((r) => (
                   <li key={r.key}>

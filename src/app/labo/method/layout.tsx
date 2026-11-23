@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { MethodHeader, MethodFooter } from "@/components/labo/MethodChrome";
+import "./method.css";
 import { METHOD, AVAILABILITY, LAUNCH_READY } from "@/labo/content";
 
 /**
@@ -57,9 +58,9 @@ export const metadata: Metadata = {
 
 export default function MethodLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div data-clinic data-method>
+    <div data-method>
       <MethodHeader />
-      <main>{children}</main>
+      <main id="main">{children}</main>
       <MethodFooter />
     </div>
   );

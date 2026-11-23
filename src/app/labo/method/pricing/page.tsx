@@ -25,7 +25,7 @@ export default function Pricing() {
           <div className="tiles">
             {PROGRAMS.map((p) => (
               <article className="tile" key={p.slug}>
-                <h3>{p.name}</h3>
+                <h2 className="h3">{p.name}</h2>
                 <span className="price">{p.priceMeta}</span>
                 <p>{p.pricingNote}</p>
                 <ul className="tl">
@@ -42,7 +42,7 @@ export default function Pricing() {
           {/* the homepage's lab-row component, reused without the track — the signature move */}
           <div className="labwrap" style={{ marginTop: 20 }}>
             <div className="labhead">
-              <h4>Beyond the monthly fee</h4>
+              <h2 className="h4">Beyond the monthly fee</h2>
               <span className="kicker">Self-pay · superbills on request</span>
             </div>
             {EXTRA_PRICING.map((e) => (

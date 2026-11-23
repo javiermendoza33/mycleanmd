@@ -23,7 +23,7 @@ export default function HowItWorks() {
             <div key={s.n} className="hlrow">
               <span className="n">{s.n}</span>
               <div>
-                <h3>{s.title}</h3>
+                <h2 className="h3">{s.title}</h2>
                 <span className="meta">{s.meta}</span>
               </div>
               <div className="bd">
