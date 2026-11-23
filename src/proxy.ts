@@ -55,7 +55,9 @@ export async function proxy(request: NextRequest) {
     if (isMethod) {
       const first = '/' + (path.split('/')[1] ?? '')
       const clinicBlog = path.startsWith('/blog/') && CLINIC_BLOG_SLUGS.has(path.split('/')[2] ?? '')
-      const portalish = ['/portal', '/clinic', '/provider'].includes(first) || path === '/auth/login' || path === '/auth/signup' || path === '/auth/forgot' || path === '/auth/reset' || path === '/auth/confirm'
+      // Nov 23 2026: Method patients sign in and use /portal on thelabomethod.com itself (the sign-up flow lands there with its
+      // session cookies); only the staff portals still live on the clinic host.
+      const portalish = ['/clinic', '/provider'].includes(first)
       if (CLINIC_ONLY_PATHS.includes(first.slice(1)) || clinicBlog || portalish) {
         const url = new URL(request.url); url.host = CLINIC_HOST
         return NextResponse.redirect(url, 308)
