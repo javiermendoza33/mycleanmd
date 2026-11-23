@@ -9,6 +9,9 @@ export type FlowProgram = { slug: string; name: string; blurb: string; price: st
 type Props = { programs: FlowProgram[]; initial: string; states: { code: string; name: string }[]; availability: string; sets: Record<string, QuestionSet>; signedIn: { email: string } | null; mode: "mock" | "sandbox" | "live" };
 const STEPS = ["Program", "Quick check", "Account", "About you", "Consent", "Intake", "Review"] as const;
 const CONSENT_VERSION = "2026-11-23";
+// the browser's date picker otherwise scrolls to year 275760 (Javier, Nov 23 2026): adults only, born 1920 or later
+const DOB_MAX = (() => { const d = new Date(); d.setFullYear(d.getFullYear() - 18); return d.toISOString().slice(0, 10); })();
+const dobOk = (v: string) => /^\d{4}-\d{2}-\d{2}$/.test(v) && v >= "1920-01-01" && v <= DOB_MAX;
 
 
 /** One intake question, typed the way Cuvo's question sets are (boolean / number / string / choice). Declared at module level so inputs keep focus between keystrokes. */
@@ -37,7 +40,7 @@ export function StartFlow({ programs, initial, states, availability, sets, signe
   const stateOk = states.some(s => s.code === check.state);
   const ageOk = Number(check.age) >= 18 && Number(check.age) < 100;
 
-  const can = useMemo(() => [!!prog, stateOk && ageOk && !!check.sex, /\S+@\S+\.\S+/.test(account.email) && (!!signedIn || account.password.length >= 8), !!about.first_name && !!about.last_name && !!about.dob && !!about.phone && !!about.line1 && !!about.city && !!about.postal_code, consent.telehealth && consent.privacy, qs.every(q => !q.required || answers[q.id] !== undefined && answers[q.id] !== ""), true][step], [step, prog, stateOk, ageOk, check, account, signedIn, about, consent, qs, answers]);
+  const can = useMemo(() => [!!prog, stateOk && ageOk && !!check.sex, /\S+@\S+\.\S+/.test(account.email) && (!!signedIn || account.password.length >= 8), !!about.first_name && !!about.last_name && dobOk(about.dob) && !!about.phone && !!about.line1 && !!about.city && !!about.postal_code, consent.telehealth && consent.privacy, qs.every(q => !q.required || answers[q.id] !== undefined && answers[q.id] !== ""), true][step], [step, prog, stateOk, ageOk, check, account, signedIn, about, consent, qs, answers]);
 
   const submit = async () => {
     setBusy("Creating your account and filing your intake…"); setErr(null);
@@ -69,9 +72,10 @@ export function StartFlow({ programs, initial, states, availability, sets, signe
           <div className="sgrid">
             <label className="field"><span>First name</span><input value={about.first_name} onChange={e => setAbout({ ...about, first_name: e.target.value })} /></label>
             <label className="field"><span>Last name</span><input value={about.last_name} onChange={e => setAbout({ ...about, last_name: e.target.value })} /></label>
-            <label className="field"><span>Date of birth</span><input type="date" value={about.dob} onChange={e => setAbout({ ...about, dob: e.target.value })} /></label>
+            <label className="field"><span>Date of birth</span><input type="date" min="1920-01-01" max={DOB_MAX} value={about.dob} onChange={e => setAbout({ ...about, dob: e.target.value })} /></label>
             <label className="field"><span>Mobile phone</span><input type="tel" autoComplete="tel" value={about.phone} onChange={e => setAbout({ ...about, phone: e.target.value })} /></label>
             <label className="field wide"><span>Shipping address</span><input autoComplete="address-line1" value={about.line1} onChange={e => setAbout({ ...about, line1: e.target.value })} /></label>
+            {about.dob && !dobOk(about.dob) ? <p className="snote bad wide">Enter a real date of birth. You need to be 18 or older.</p> : null}
             <label className="field"><span>City</span><input autoComplete="address-level2" value={about.city} onChange={e => setAbout({ ...about, city: e.target.value })} /></label>
             <label className="field"><span>ZIP</span><input inputMode="numeric" autoComplete="postal-code" value={about.postal_code} onChange={e => setAbout({ ...about, postal_code: e.target.value })} /></label>
           </div></>}
