@@ -353,3 +353,16 @@
 [data-labo] [data-method] .mhead .mburger{background:rgba(255,255,255,.16);color:#fff}
 [data-labo] [data-method] .mhead .mburger:hover{background:rgba(255,255,255,.26)}
 @media (max-width:960px){[data-labo] [data-method] .mhead .btn.btn-primary.btn-sm{padding:10px 16px;font-size:.9rem}}
+
+/* ── Rebalanced to the header's blue (Nov 24 2026, Javier: "i like it, can you rebalance the site for this color") ──────────
+   One blue family across the Method: deep #163F78 → #1D4F91 → #2659A6. Headline emphasis, chips, dots and focus rings move from the
+   brighter #3B6ECA onto #2659A6; primary buttons and the "how it works" band carry the same gradient as the header. */
+[data-labo] [data-method]{--accent:#2659A6;--accent-rgb:38,89,166;--deep:#163F78;--tint:#D6E3F7;--wash:#E4EDFA}
+[data-labo] [data-method] .btn-primary{background:#1D4F91;border-color:#1D4F91}
+[data-labo] [data-method] .btn-primary:hover{background:#163F78;border-color:#163F78}
+[data-labo] [data-method] .btn-ghost{color:#1D4F91;border-color:rgba(29,79,145,.45)}
+[data-labo] [data-method] .btn-ghost:hover{background:rgba(29,79,145,.06)}
+[data-labo] [data-method] .mband{background:linear-gradient(90deg,#163F78 0%,#1D4F91 55%,#2659A6 100%)}
+[data-labo] [data-method] .offer.most,[data-labo] [data-method] .offer .flag{background:#1D4F91}
+[data-labo] [data-method] .mdchips button.on{background:#1D4F91;border-color:#1D4F91}
+[data-labo] [data-method] a{color:#1D4F91}
