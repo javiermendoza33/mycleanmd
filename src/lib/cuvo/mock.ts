@@ -44,6 +44,7 @@ const clock = (c: CareRow) => (c.paid_at ? (Date.now() - new Date(c.paid_at).get
 const statusAt = (s: number): CaseStatus => (s < 0 ? "received" : s < T.queued ? "received" : s < T.in_review ? "queued" : s < T.approved ? "in_review" : "approved");
 
 export const mockClient: CuvoClient = {
+  medications: async () => [{ id: "semaglutide-compounded", name: "Semaglutide (compounded)", category: "weight-management" }, { id: "testosterone-cypionate", name: "Testosterone cypionate", category: "hormone", controlled: true }],
   states: async () => [{ code: "CA", name: "California" }, { code: "WA", name: "Washington" }],
   questionSets: async () => MOCK_SETS.map(({ questions: _q, ...s }) => s),
   questionSet: async (qid) => { const s = MOCK_SETS.find(x => x.id === qid); if (!s) throw new Error("Cuvo 404 not_found: question set"); return s; },

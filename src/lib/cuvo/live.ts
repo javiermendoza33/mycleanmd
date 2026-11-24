@@ -1,6 +1,6 @@
 import "server-only";
 import { randomUUID } from "node:crypto";
-import type { Answer, Case, Consent, CuvoClient, LabOrder, Message, Order, Patient, Prescription, QuestionSet, RequestedMedication, StatusHistoryEntry, Visit, VisitSlot } from "./types";
+import type { Answer, Case, Consent, CuvoClient, LabOrder, Medication, Message, Order, Patient, Prescription, QuestionSet, RequestedMedication, StatusHistoryEntry, Visit, VisitSlot } from "./types";
 
 /** The real Cuvo Integrations API (api.cuvo.co). Bearer secret key; every write carries an Idempotency-Key; errors are problem+json. */
 export function liveClient(key: string, base = "https://api.cuvo.co"): CuvoClient {
@@ -12,6 +12,7 @@ export function liveClient(key: string, base = "https://api.cuvo.co"): CuvoClien
   const list = <T,>(path: string) => call<{ data?: T[] } | T[]>("GET", path).then(j => (Array.isArray(j) ? j : j.data || []));
   return {
     states: () => list("/v1/states"),
+    medications: () => list<Medication>("/v1/medications"),
     questionSets: () => list("/v1/question_sets"),
     questionSet: (id, version) => call<QuestionSet>("GET", `/v1/question_sets/${encodeURIComponent(id)}${version ? `?version=${version}` : ""}`),
     createPatient: p => call<Patient>("POST", "/v1/patients", p, p.external_id ? `patient:${p.external_id}` : undefined),

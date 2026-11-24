@@ -21,8 +21,12 @@ export type EventType = `${"patient" | "case" | "prescription" | "order" | "lab_
 export type CuvoEvent = { id: string; type: EventType; created_at: string; data: Record<string, unknown> };
 
 /** Everything the site needs from Cuvo. `live` talks to api.cuvo.co; `mock` plays the sandbox locally until the test key lands. */
+export type Medication = { id: string; name: string; category?: string | null; form?: string | null; strength?: string | null; controlled?: boolean; retail?: boolean };
+
 export interface CuvoClient {
   states(): Promise<{ code: string; name: string }[]>;
+  /** The formulary (`GET /v1/medications`, catalog:read) — ids go in requested_medications (Nov 24 2026). */
+  medications(): Promise<Medication[]>;
   questionSets(): Promise<QuestionSet[]>;
   questionSet(id: string, version?: number): Promise<QuestionSet>;
   createPatient(p: Omit<Patient, "id">): Promise<Patient>;
