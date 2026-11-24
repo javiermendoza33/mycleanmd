@@ -67,6 +67,7 @@ function Q({ q, a, set }: { q: QuestionSetQuestion; a: Answers; set: (id: string
 export function StartFlow({ programs, initial, states, availability, sets, signedIn, mode }: Props) {
   const [step, setStep] = useState(0);
   const top = useRef<HTMLDivElement>(null);
+  const restored = useRef(false);
   // each step starts at the top of the card (Javier, Nov 24 2026: "sometimes doesn't flow up or down right after finishing one area")
   useEffect(() => { const el = top.current; if (!el) return; const y = el.getBoundingClientRect().top + window.scrollY - 96; if (Math.abs(window.scrollY - y) > 8) window.scrollTo({ top: Math.max(0, y), behavior: "smooth" }); }, [step]);
   const [program, setProgram] = useState(initial);
@@ -77,6 +78,16 @@ export function StartFlow({ programs, initial, states, availability, sets, signe
   const [answers, setAnswers] = useState<Answers>({});
   const [busy, setBusy] = useState<string | null>(null);
   const [err, setErr] = useState<string | null>(null);
+  // Nov 24 2026 (Javier: "when i had the wrong email… i had to start over and answers were gone"): the draft lives in sessionStorage
+  // (this tab only, never the password) so a reload, a failed submit or a Back never costs the answers.
+  useEffect(() => {
+    try { const d = JSON.parse(sessionStorage.getItem("labo-start-draft") || "null"); if (d && d.v === 1) { if (d.program) setProgram(d.program); if (d.check) setCheck(d.check); if (d.account?.email && !signedIn) setAccount(a => ({ ...a, email: d.account.email })); if (d.about) setAbout(d.about); if (d.consent) setConsent(d.consent); if (d.answers) setAnswers(d.answers); if (typeof d.step === "number") setStep(d.step); } } catch { /* fresh start */ }
+    restored.current = true;
+  }, [signedIn]);
+  useEffect(() => {
+    if (!restored.current) return;
+    try { sessionStorage.setItem("labo-start-draft", JSON.stringify({ v: 1, step, program, check, account: { email: account.email }, about, consent, answers })); } catch { /* private mode */ }
+  }, [step, program, check, account.email, about, consent, answers]);
   const prog = programs.find(p => p.slug === program);
   const set = prog ? sets[prog.questionSet] : undefined;
   const qs: QuestionSetQuestion[] = set?.questions || [];
@@ -91,13 +102,18 @@ export function StartFlow({ programs, initial, states, availability, sets, signe
     try {
       const r = await fetch("/api/labo/method/enroll", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ program, check, account, about, consent, consent_version: CONSENT_VERSION, question_set: set ? { id: set.id, version: set.version } : null, answers: toCuvoAnswers(qs, answers) }) });
       const j = await r.json(); if (!r.ok) throw new Error(j.error || "Something went wrong.");
+      try { sessionStorage.removeItem("labo-start-draft"); } catch { /* ignore */ }
       window.location.href = j.url;
-    } catch (e) { setErr((e as Error).message); setBusy(null); }
+    } catch (e) {
+      const m = (e as Error).message; setErr(m); setBusy(null);
+      // take the person to the step that fixes it, answers intact
+      if (/already an account|sign in|password|email/i.test(m)) setStep(2); else if (/answer|intake|question/i.test(m)) setStep(5); else if (/date of birth|phone|address|name/i.test(m)) setStep(3);
+    }
   };
 
   return (
     <div className="sflow" ref={top}>
-      <ol className="sflow-steps" aria-label="Steps">{STEPS.map((s, i) => <li key={s} className={i === step ? "on" : i < step ? "done" : ""}><span>{i + 1}</span>{s}</li>)}</ol>
+      <ol className="sflow-steps" aria-label="Steps">{STEPS.map((s, i) => { const reachable = i < step || (i === step + 1 && can) || i === step; return <li key={s} className={i === step ? "on" : i < step ? "done" : ""}>{reachable ? <button type="button" onClick={() => { setErr(null); setStep(i); }} aria-current={i === step ? "step" : undefined} aria-label={`Step ${i + 1}: ${s}`}><span>{i + 1}</span>{s}</button> : <><span>{i + 1}</span>{s}</>}</li>; })}</ol>
       <div className="sflow-card">
         {step === 0 && <><h2>Choose your program</h2><p className="sub">Each one starts from your own labs. You can switch later.</p>
           <div className="sprog">{programs.map(p => <button key={p.slug} type="button" className={p.slug === program ? "on" : ""} onClick={() => setProgram(p.slug)}><b>{p.name}</b><span>{p.blurb}</span><em>{p.price}<small>/mo</small></em></button>)}</div></>}
@@ -131,8 +147,8 @@ export function StartFlow({ programs, initial, states, availability, sets, signe
           <div className="sqs">{visible.map(q => <Q key={q.id} q={q} a={answers} set={(id, x) => setAnswers(a => ({ ...a, [id]: x }))} />)}</div></>}
         {step === 6 && <><h2>Review and pay</h2><p className="sub">Your case is filed the moment payment clears. A clinician reviews it, orders labs if you need them, and writes your plan.</p>
           <dl className="srev"><dt>Program</dt><dd>{prog?.name} · {prog?.price}/mo, cancel any month</dd><dt>You</dt><dd>{about.first_name} {about.last_name} · {check.state} · {account.email}</dd><dt>Ships to</dt><dd>{about.line1}, {about.city} {about.postal_code}</dd><dt>Intake</dt><dd>{visible.length} answers · {visible.filter(q => q.critical && answers[q.id] === true).length ? "flagged for clinician attention" : "no flags"}</dd></dl>
-          {mode !== "live" && <p className="snote">Sandbox: no card is charged. Payment is simulated and your case goes straight to the (simulated) clinician.</p>}
-          {err && <p className="snote bad">{err}</p>}</>}
+          {mode !== "live" && <p className="snote">Sandbox: no card is charged. Payment is simulated and your case goes straight to the (simulated) clinician.</p>}</>}
+        {err && <p className="snote bad" role="alert">{err}{/already an account/i.test(err) ? <> <a href="/auth/login?redirect=/start">Sign in</a> and your answers will still be here.</> : null}</p>}
         <div className="sflow-acts">
           {step > 0 && <button type="button" className="btn btn-ghost" onClick={() => setStep(s => s - 1)} disabled={!!busy}>Back</button>}
           {step < STEPS.length - 1 ? <button type="button" className="btn btn-primary" disabled={!can} onClick={() => setStep(s => s + 1)}>Continue</button>

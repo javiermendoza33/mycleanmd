@@ -1365,3 +1365,7 @@ html[data-a11y-motion] [data-labo] *{animation-play-state:paused!important;trans
 [data-labo] .sq-sub{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
 [data-labo] .sq-subq{display:flex;flex-direction:column;gap:4px}
 @media (max-width:560px){[data-labo] .sq-sub{grid-template-columns:1fr}}
+/* step numbers are buttons when reachable (Nov 24 2026) */
+[data-labo] .sflow-steps li button{all:unset;display:inline-flex;align-items:center;gap:inherit;cursor:pointer;color:inherit;font:inherit}
+[data-labo] .sflow-steps li button:hover span{box-shadow:0 0 0 3px var(--accent-tint,rgba(200,67,42,.15))}
+[data-labo] .sflow-steps li button:focus-visible span{outline:2px solid var(--accent);outline-offset:2px}
