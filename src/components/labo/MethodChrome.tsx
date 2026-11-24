@@ -88,7 +88,7 @@ export function MethodFooter() {
         <div className="mark" aria-hidden="true">{METHOD.name}</div>
         <div className="legal">
           <p>{FOOTER_DISCLAIMER}</p>
-          <div className="row"><span>© {new Date().getFullYear()} {METHOD.name}. All rights reserved.</span><span><Link href="/legal">Legal</Link> · <a href={`https://${PRACTICE.domain}/privacy-policy`}>Privacy policy</a> · <a href={`https://${PRACTICE.domain}/accessibility`}>Accessibility</a></span></div>
+          <div className="row"><span>© {new Date().getFullYear()} {METHOD.name}. All rights reserved.</span><span><Link href="/legal">Legal</Link> · <Link href="/sms">SMS terms</Link> · <a href={`https://${PRACTICE.domain}/privacy-policy`}>Privacy policy</a> · <a href={`https://${PRACTICE.domain}/accessibility`}>Accessibility</a></span></div>
         </div>
       </div>
     </footer>

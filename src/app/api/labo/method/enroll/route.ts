@@ -5,6 +5,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { cuvo, cuvoMode, type Answer } from "@/lib/cuvo";
 import { upsertCustomer, addEvent, updateCare } from "@/lib/labo/crm";
 import { getProgram } from "@/labo/content";
+import { METHOD_CONSENT_TEXT } from "@/labo/method/sms";
 
 /* POST: the last step of /start. Creates (or uses) the sign-in, the CRM customer, the Cuvo patient and consents, files
    the case ON HOLD, records the care row, then either sends the patient to Stripe (live price) or, in sandbox/mock,
@@ -45,6 +46,7 @@ export async function POST(req: NextRequest) {
     caseId = filed.id;
     await updateCare(careId, { cuvo_case_id: caseId, status: "awaiting_payment" });
     await addEvent(customer?.id, "method", "enrolled", `Started ${program.name}`, { care: careId, case: caseId, mode });
+    if (b.consent.sms) await addEvent(customer?.id, "method", "sms_consent", "SMS opt-in during Get started", { recorded_at: new Date().toISOString(), ip: (req.headers.get("x-forwarded-for") ?? "").split(",")[0].trim() || "unknown", user_agent: req.headers.get("user-agent") ?? "unknown", source: `${req.nextUrl.origin}/start`, mobile: b.about.phone, disclosure: METHOD_CONSENT_TEXT });
     if (customer && !customer.cuvo_patient_id) await upsertCustomer({ email, brand: "method", cuvo_patient_id: patientId });
 
     // 4 · payment: Stripe when the program has a live price, else the sandbox pays itself

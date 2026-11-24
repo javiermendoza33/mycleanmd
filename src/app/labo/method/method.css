@@ -315,3 +315,14 @@
 [data-labo] [data-method] .sflow-acts{display:flex;justify-content:flex-end;gap:10px;margin-top:26px}
 @media (max-width:640px){[data-labo] [data-method] .sflow-card{padding:22px 18px;border-radius:18px}[data-labo] [data-method] .sgrid{grid-template-columns:1fr}[data-labo] [data-method] .sflow-steps li{font-size:0;gap:0;padding:4px}[data-labo] [data-method] .sflow-steps li span{font-size:.68rem}}
 [data-labo] [data-method] .sq-ftin{display:flex;gap:8px;align-items:center;flex-wrap:wrap}[data-labo] [data-method] .sq-ftin select{width:auto;min-width:96px}[data-labo] [data-method] .sq-ftin em{font-style:normal;font-size:.84rem;color:var(--muted)}
+
+/* ── /sms (Nov 23 2026) ─────────────────────────────────────────────────────────────────────────────────────── */
+[data-labo] [data-method] .smspage{padding:36px 0 56px}
+[data-labo] [data-method] .smsgrid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+[data-labo] [data-method] .smsfacts{display:grid;gap:12px}[data-labo] [data-method] .smsfact{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 18px}[data-labo] [data-method] .smsfact div{margin-top:6px;line-height:1.5}
+[data-labo] [data-method] .smsform{padding:28px 28px;gap:14px;position:relative}[data-labo] [data-method] .smsform h2{font-size:1.4rem;margin:0}[data-labo] [data-method] .smsform .sub{margin:0;color:var(--muted)}
+[data-labo] [data-method] .smsform .scheck{margin-top:4px;font-size:.86rem}[data-labo] [data-method] .smsform .btn{align-self:flex-start}
+[data-labo] [data-method] .smsterms.steps4{grid-template-columns:repeat(5,1fr)}
+[data-labo] [data-method] .smsrich{max-width:760px;margin-top:40px;line-height:1.6}[data-labo] [data-method] .smsrich h3{margin:26px 0 8px;font-size:1.1rem}[data-labo] [data-method] .smsrich ul{padding-left:20px}
+@media (max-width:900px){[data-labo] [data-method] .smsgrid{grid-template-columns:1fr}[data-labo] [data-method] .smsterms.steps4{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){[data-labo] [data-method] .smsterms.steps4{grid-template-columns:1fr}}

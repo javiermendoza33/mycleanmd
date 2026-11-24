@@ -4,6 +4,8 @@
    customer, the Cuvo patient + consents and files the case on hold; payment releases the hold. */
 import { useMemo, useState } from "react";
 import type { QuestionSet, QuestionSetQuestion } from "@/lib/cuvo/types";
+import { METHOD_CONSENT_TEXT } from "@/labo/method/sms";
+const SMS_TEXT = METHOD_CONSENT_TEXT.replace(" See our Privacy Policy and SMS Terms.", "");
 
 export type FlowProgram = { slug: string; name: string; blurb: string; price: string; questionSet: string };
 type Props = { programs: FlowProgram[]; initial: string; states: { code: string; name: string }[]; availability: string; sets: Record<string, QuestionSet>; signedIn: { email: string } | null; mode: "mock" | "sandbox" | "live" };
@@ -90,7 +92,7 @@ export function StartFlow({ programs, initial, states, availability, sets, signe
         {step === 4 && <><h2>Consent</h2><p className="sub">Two agreements a licensed clinician needs before reviewing your case.</p>
           <label className="scheck"><input type="checkbox" checked={consent.telehealth} onChange={e => setConsent({ ...consent, telehealth: e.target.checked })} /><span><b>Telehealth consent.</b> I understand my care is delivered by video, messaging and e-prescribing, that a clinician licensed in my state makes every medical decision, and that I can stop at any time. <a href="/legal#telehealth" target="_blank" rel="noopener">Read it</a>.</span></label>
           <label className="scheck"><input type="checkbox" checked={consent.privacy} onChange={e => setConsent({ ...consent, privacy: e.target.checked })} /><span><b>Privacy practices.</b> I have read how my health information is used, stored and shared. <a href="/legal#privacy" target="_blank" rel="noopener">Read it</a>.</span></label>
-          <label className="scheck"><input type="checkbox" checked={consent.sms} onChange={e => setConsent({ ...consent, sms: e.target.checked })} /><span>Text me about my visits, shipments and results. Message and data rates may apply. Reply STOP to end.</span></label></>}
+          <label className="scheck"><input type="checkbox" checked={consent.sms} onChange={e => setConsent({ ...consent, sms: e.target.checked })} /><span>{SMS_TEXT} See our <a href="/sms" target="_blank" rel="noopener">SMS Terms</a>.</span></label></>}
         {step === 5 && <><h2>Your intake</h2><p className="sub">{set ? `${set.title} · ${qs.length} questions. Your clinician reads every answer.` : "Intake questions aren't published for this program yet."}</p>
           <div className="sqs">{qs.map(q => <Q key={q.id} q={q} v={answers[q.id]} setV={x => setAnswers(a => ({ ...a, [q.id]: x }))} />)}</div></>}
         {step === 6 && <><h2>Review and pay</h2><p className="sub">Your case is filed the moment payment clears. A clinician reviews it, orders labs if you need them, and writes your plan.</p>
