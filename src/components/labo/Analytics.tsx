@@ -10,7 +10,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 
 const GA_ID = process.env.NEXT_PUBLIC_LABO_GA_ID;
-const BLOCKED = /^\/(programs|contact|start|intake)(\/|$)/;
+const BLOCKED = /^\/(programs|contact|start|intake|portal|auth|join|booking|quiz|clinic|provider)(\/|$)/;   // Nov 23 2026: no tag on any page where someone is a patient, signs in, books or answers health questions
 
 declare global { interface Window { gtag?: (...a: unknown[]) => void } }
 
