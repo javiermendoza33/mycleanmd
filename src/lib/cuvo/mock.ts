@@ -73,6 +73,7 @@ export const mockClient: CuvoClient = {
     return [{ id: `ord_${cid}`, case: cid, status: st, updated_at: iso(Date.now()), ...(s >= T.shipped ? { carrier: "FedEx", tracking_number: "7489 2201 0934", tracking_url: "https://www.fedex.com/fedextrack/?trknbr=748922010934" } : {}) }] as Order[]; },
   visitSlots: async (_state, from) => { const out: VisitSlot[] = []; const d = from ? new Date(from) : new Date(); d.setDate(d.getDate() + 1); for (let day = 0; day < 5; day++) for (const h of [9, 10, 13, 15, 16]) { const s = new Date(d); s.setDate(d.getDate() + day); s.setHours(h, day % 2 ? 30 : 0, 0, 0); out.push({ start: s.toISOString(), end: new Date(s.getTime() + 20 * 60e3).toISOString(), capacity: 1 + (h % 3) }); } return out; },
   bookVisit: async (patient, slotStart, caseId, audioOnly) => ({ id: id("vis"), patient, case: caseId ?? null, status: "scheduled", scheduled_start: slotStart, scheduled_end: new Date(new Date(slotStart).getTime() + 20 * 60e3).toISOString(), audio_only: !!audioOnly } as Visit),
+  testAction: async () => ({ ok: true }),
   order: async oid => ({ id: oid, case: "", status: "shipped", carrier: null, tracking_number: null, tracking_url: null, updated_at: iso(Date.now()) } as Order),
   visit: async vid => ({ id: vid, patient: "", case: null, status: "scheduled", scheduled_start: null, scheduled_end: null, audio_only: false } as Visit),
   joinLink: async vid => ({ url: `https://visit.cuvo.co/join/${vid}`, expires_at: iso(Date.now() + 10 * 60e3) }),

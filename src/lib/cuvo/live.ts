@@ -32,6 +32,7 @@ export function liveClient(key: string, base = "https://api.cuvo.co"): CuvoClien
     bookVisit: (patient, slotStart, caseId, audioOnly) => call<Visit>("POST", "/v1/visits", { patient, slot_start: slotStart, ...(caseId ? { case: caseId } : {}), ...(audioOnly ? { audio_only: true } : {}) }),
     joinLink: id => call<{ url: string; expires_at: string }>("GET", `/v1/visits/${id}/join`),
     order: id => call<Order>("GET", `/v1/orders/${id}`),
+    testAction: (path, body) => call<unknown>("POST", `/v1/test/${path}`, body || {}),
     visit: id => call<Visit>("GET", `/v1/visits/${id}`),
     labOrders: patient => list<LabOrder>(`/v1/lab_orders?patient=${patient}`),
   } satisfies CuvoClient & { fileCase: (i: { answers: Answer[]; requested_medications: RequestedMedication[] } & Record<string, unknown>) => Promise<Case> };

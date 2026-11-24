@@ -12,6 +12,9 @@ import { METHOD_CONSENT_TEXT } from "@/labo/method/sms";
    marks it paid and releases the hold. PHI goes to Cuvo; our tables keep the person, the ids and the money. */
 type Body = { program: string; check: { state: string; age: string; sex: "male" | "female" }; account: { email: string; password: string }; about: { first_name: string; last_name: string; dob: string; phone: string; line1: string; city: string; postal_code: string }; consent: { telehealth: boolean; privacy: boolean; sms: boolean }; consent_version: string; question_set: { id: string; version: number } | null; answers: Answer[] };
 
+// Formulary ids from the Cuvo sandbox catalog (Nov 24 2026). `prescriber_decides` leaves dose, quantity and refills to the clinician.
+const MEDICATION: Record<string, string> = { "glp-1-weight-management": "med_semaglutide_inj", "peptide-therapy": "med_nad_inj", "testosterone-for-men": "med_testosterone_cyp", "hormone-therapy-for-women": "med_estradiol" };
+
 export async function POST(req: NextRequest) {
   const b = await req.json().catch(() => null) as Body | null;
   if (!b || !b.program || !b.account?.email || !b.about?.first_name || !b.consent?.telehealth || !b.consent?.privacy) return NextResponse.json({ error: "Missing details." }, { status: 400 });
@@ -42,7 +45,7 @@ export async function POST(req: NextRequest) {
     const careIns = await admin.from("labo_care").insert({ customer_id: customer?.id, user_id: user!.id, program_slug: program.slug, cuvo_patient_id: patientId, cuvo_mode: mode, status: "awaiting_payment" }).select("id").single();
     if (careIns.error) return NextResponse.json({ error: careIns.error.message.includes("does not exist") ? "CRM tables not set up yet (run supabase-labo-crm.sql)." : careIns.error.message }, { status: 500 });
     const careId = careIns.data.id as string;
-    const filed = await c.fileCase({ patient: patientId, question_set: b.question_set || undefined as never, answers: b.answers, requested_medications: [{ medication_id: program.slug === "glp-1-weight-management" ? "semaglutide-compounded" : program.slug === "testosterone-for-men" ? "testosterone-cypionate" : program.slug === "hormone-therapy-for-women" ? "estradiol-patch" : "peptide-protocol", quantity: 1, refills: 0, days_supply: 30 }], consent_ids: [tele.id, priv.id], external_id: careId, hold: true, metadata: { program: program.slug, brand: "method" } });
+    const filed = await c.fileCase({ patient: patientId, question_set: b.question_set || undefined as never, answers: b.answers, requested_medications: [{ medication_id: MEDICATION[program.slug] || "med_semaglutide_inj", prescriber_decides: true }], consent_ids: [tele.id, priv.id], external_id: careId, hold: true, metadata: { program: program.slug, brand: "method" } });
     caseId = filed.id;
     await updateCare(careId, { cuvo_case_id: caseId, status: "awaiting_payment" });
     await addEvent(customer?.id, "method", "enrolled", `Started ${program.name}`, { care: careId, case: caseId, mode });

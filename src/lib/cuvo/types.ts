@@ -48,5 +48,7 @@ export interface CuvoClient {
   /** Thin webhook events name only a resource id — these two read the order / visit back to find its case (Nov 24 2026). */
   order(id: string): Promise<Order>;
   visit(id: string): Promise<Visit>;
+  /** Sandbox-only controls (`/v1/test/*`, scope test:manage). The live API answers 403 with a live key; the mock just returns. */
+  testAction(path: string, body?: Record<string, unknown>): Promise<unknown>;
   labOrders(patient: string): Promise<LabOrder[]>;
 }

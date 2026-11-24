@@ -8,7 +8,9 @@ export const metadata: Metadata = { title: "Get started — The Labo Method", ro
 export const dynamic = "force-dynamic";
 
 /** Which published intake (Cuvo question set) each program files against. Placeholders until we read the real set ids. */
-export const QUESTION_SET: Record<string, string> = { "glp-1-weight-management": "glp1-weight-management", "peptide-therapy": "hormone-care", "testosterone-for-men": "hormone-care", "hormone-therapy-for-women": "hormone-care" };
+// Real sandbox set ids read on Nov 24 2026 (GET /v1/question_sets): weight-loss, peptides (NAD+ is the only peptide set in the sandbox),
+// mens-hormones (testosterone is controlled → the case needs a live visit), womens-hormones. Re-check against the live catalog before launch.
+export const QUESTION_SET: Record<string, string> = { "glp-1-weight-management": "semaglutide-glp-1-weight-loss", "peptide-therapy": "nad", "testosterone-for-men": "testosterone-injectable", "hormone-therapy-for-women": "estrogen-cream-systemic-topical" };
 
 export default async function Start({ searchParams }: { searchParams: Promise<{ program?: string }> }) {
   const sp = await searchParams;
