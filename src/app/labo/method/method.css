@@ -336,3 +336,20 @@
 [data-labo] [data-method] .legalpage p{margin-top:10px;color:var(--graphite);line-height:1.6}
 [data-labo] [data-method] .legalpage ul{padding-left:20px;color:var(--graphite);line-height:1.6}
 [data-labo] [data-method] .legalpage li{margin:6px 0}
+
+/* ── Header pill, deep blue (Nov 24 2026, Javier: "lets work on this bar, adjust the style and color") ─────────────────────
+   The pale wash read as disabled against the light page; the bar now carries the Method's deep blue with white type and a white
+   Get started, matching the dark footer. Mark and links invert; the burger follows on phones. */
+[data-labo] [data-method] .mhead{background:transparent;padding:12px 16px}
+[data-labo] [data-method] .mhead .pill{background:linear-gradient(90deg,#163F78 0%,#1D4F91 55%,#2659A6 100%);box-shadow:0 16px 36px -16px rgba(13,36,70,.65),inset 0 1px 0 rgba(255,255,255,.12)}
+[data-labo] [data-method] .mhead .brand,[data-labo] [data-method] .mhead .brand .logo-word{color:#fff;--logo-bg:rgba(255,255,255,.16)}
+[data-labo] [data-method] .mhead .brand svg,[data-labo] [data-method] .mhead .brand img{filter:brightness(0) invert(1)}
+[data-labo] [data-method] .mhead nav.mlinks a{color:rgba(255,255,255,.82)}
+[data-labo] [data-method] .mhead nav.mlinks a:hover,[data-labo] [data-method] .mhead nav.mlinks a.on{color:#fff}
+[data-labo] [data-method] .mhead .signin{color:#fff}
+[data-labo] [data-method] .mhead .signin:hover{text-decoration:underline;text-underline-offset:4px}
+[data-labo] [data-method] .mhead .btn.btn-primary,[data-labo] [data-method] .mhead .btn.btn-primary.btn-sm{background:#fff;color:#1D4F91;border-color:#fff;opacity:1;white-space:nowrap}
+[data-labo] [data-method] .mhead .btn.btn-primary:hover{background:#EAF1FF;color:#163F78}
+[data-labo] [data-method] .mhead .mburger{background:rgba(255,255,255,.16);color:#fff}
+[data-labo] [data-method] .mhead .mburger:hover{background:rgba(255,255,255,.26)}
+@media (max-width:960px){[data-labo] [data-method] .mhead .btn.btn-primary.btn-sm{padding:10px 16px;font-size:.9rem}}
