@@ -22,7 +22,7 @@ const CLINIC_HOST = 'thelaboclinic.com'
 const METHOD_HOST = 'thelabomethod.com'
 const LABO_HOSTS = [CLINIC_HOST, `www.${CLINIC_HOST}`, SANDBOX_HOST]
 // Clinic-only URLs that Google indexed on thelabomethod.com before the move — 308 them to the same path on the clinic host.
-const CLINIC_ONLY_PATHS = ['about', 'booking', 'contact', 'membership', 'patient-care', 'privacy-policy', 'services', 'shop', 'testimonials', 'treatments']   // 'sms' left out Nov 23 2026: the Method has its own /sms
+const CLINIC_ONLY_PATHS = ['about', 'booking', 'contact', 'membership', 'patient-care', 'services', 'shop', 'testimonials', 'treatments']   // 'privacy-policy' left out Nov 23 2026: the Method has its own   // 'sms' left out Nov 23 2026: the Method has its own /sms
 const CLINIC_BLOG_SLUGS = new Set(['why-exosomes-are-better-than-prp', 'concerns-can-be-addressed-with-chemical-peels', 'can-iv-therapy-help-you-reduce-stress', 'is-medical-weight-loss-right-for-you', 'botox-vs-dysport-deciphering-the-perfect', 'iv-therapy-vitamin-shots-5-benefits-you-need-to-know', 'what-are-pdo-threads-and-how-they-work-cosmetic-procedures'])
 // The Labo Method (telehealth, white-labelled onto Healthie) is a SEPARATE
 // brand from The Labo Clinic (in-person, served at the LABO_HOSTS above) —

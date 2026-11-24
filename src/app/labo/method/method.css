@@ -326,3 +326,13 @@
 [data-labo] [data-method] .smsrich{max-width:760px;margin-top:40px;line-height:1.6}[data-labo] [data-method] .smsrich h3{margin:26px 0 8px;font-size:1.1rem}[data-labo] [data-method] .smsrich ul{padding-left:20px}
 @media (max-width:900px){[data-labo] [data-method] .smsgrid{grid-template-columns:1fr}[data-labo] [data-method] .smsterms.steps4{grid-template-columns:1fr 1fr}}
 @media (max-width:560px){[data-labo] [data-method] .smsterms.steps4{grid-template-columns:1fr}}
+/* Legal pages + SMS terms on the blue band (Nov 23 2026): white type inside .mband, underlined in-text links everywhere
+   a link sits in running text (axe link-in-text-block), and the legal pages' list spacing. */
+[data-labo] [data-method] .mband .smsrich,[data-labo] [data-method] .mband .smsrich h3{color:#fff}
+[data-labo] [data-method] .mband .smsrich a{color:#fff;text-decoration:underline;text-underline-offset:3px}
+[data-labo] [data-method] .mband .smsrich .note{color:#fff}
+[data-labo] [data-method] .smsfacts a,[data-labo] [data-method] .legalpage a,[data-labo] [data-method] .scheck a{text-decoration:underline;text-underline-offset:3px}
+[data-labo] [data-method] .legalpage h2{font-size:1.25rem;margin-top:34px;letter-spacing:-.02em}
+[data-labo] [data-method] .legalpage p{margin-top:10px;color:var(--graphite);line-height:1.6}
+[data-labo] [data-method] .legalpage ul{padding-left:20px;color:var(--graphite);line-height:1.6}
+[data-labo] [data-method] .legalpage li{margin:6px 0}

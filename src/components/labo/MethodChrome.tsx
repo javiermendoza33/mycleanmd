@@ -64,7 +64,11 @@ export function MethodFooter() {
             <p className="k">Learn</p>
             <ul>
               {METHOD_NAV.map((l) => <li key={l.href}><Link href={l.href}>{l.label}</Link></li>)}
-              <li><Link href="/legal">Legal</Link></li>
+              <li><Link href="/legal">Legal &amp; disclaimers</Link></li>
+              <li><Link href="/terms">Terms of use</Link></li>
+              <li><Link href="/privacy-policy">Privacy policy</Link></li>
+              <li><Link href="/sms">SMS terms</Link></li>
+              <li><Link href="/accessibility">Accessibility</Link></li>
             </ul>
           </div>
           <div>
@@ -88,7 +92,7 @@ export function MethodFooter() {
         <div className="mark" aria-hidden="true">{METHOD.name}</div>
         <div className="legal">
           <p>{FOOTER_DISCLAIMER}</p>
-          <div className="row"><span>© {new Date().getFullYear()} {METHOD.name}. All rights reserved.</span><span><Link href="/legal">Legal</Link> · <Link href="/sms">SMS terms</Link> · <a href={`https://${PRACTICE.domain}/privacy-policy`}>Privacy policy</a> · <a href={`https://${PRACTICE.domain}/accessibility`}>Accessibility</a></span></div>
+          <div className="row"><span>© {new Date().getFullYear()} {METHOD.name}. All rights reserved.</span><span><Link href="/legal">Legal</Link> · <Link href="/terms">Terms</Link> · <Link href="/privacy-policy">Privacy</Link> · <Link href="/sms">SMS terms</Link> · <Link href="/accessibility">Accessibility</Link></span></div>
         </div>
       </div>
     </footer>

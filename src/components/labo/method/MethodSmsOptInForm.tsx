@@ -22,7 +22,7 @@ export default function MethodSmsOptInForm() {
       <div className="fld"><label htmlFor="msms-name">First name *</label><input id="msms-name" name="firstName" type="text" placeholder="First name" autoComplete="given-name" required /></div>
       <div className="fld"><label htmlFor="msms-mobile">Mobile number (for texts)</label><input id="msms-mobile" name="mobile" type="tel" inputMode="tel" placeholder="(206) 555-0100" autoComplete="tel" /></div>
       <div className="fld"><label htmlFor="msms-email">Email *</label><input id="msms-email" name="email" type="email" placeholder="you@example.com" autoComplete="email" required /></div>
-      <label className="scheck"><input type="checkbox" name="consent" value="yes" /><span>{text} See our <a href={`https://${PRACTICE.domain}/privacy-policy`}>Privacy Policy</a> and <Link href="/sms">SMS Terms</Link>.</span></label>
+      <label className="scheck"><input type="checkbox" name="consent" value="yes" /><span>{text} See our <Link href="/privacy-policy">Privacy Policy</Link> and <Link href="/sms">SMS Terms</Link>.</span></label>
       <p className="note">Texting is optional. Leave the box unchecked and we will send updates by email only — we never text without this box checked.</p>
       <Submit />
     </form>

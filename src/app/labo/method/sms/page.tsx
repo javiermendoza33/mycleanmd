@@ -49,7 +49,7 @@ export default function MethodSmsPage() {
             <h3>How you can opt in</h3>
             <ul><li>Ticking the text box on the form above (it is unchecked until you tick it).</li><li>Ticking the text box during <Link href="/start">Get started</Link>, which shows the same disclosure.</li><li>Replying to a text we send about your visit, after you have opted in.</li></ul>
             <h3>Privacy</h3>
-            <p>Your mobile number and your text-message consent are never sold, rented or shared with third parties or affiliates for their marketing or promotional purposes. We share them only with the vendors that deliver our messages, and only to deliver them. Health information is never placed in a text message. The rest of our practices are in the <a href={`https://${PRACTICE.domain}/privacy-policy`}>Privacy Policy</a> and our <Link href="/legal">notices</Link>.</p>
+            <p>Your mobile number and your text-message consent are never sold, rented or shared with third parties or affiliates for their marketing or promotional purposes. We share them only with the vendors that deliver our messages, and only to deliver them. Health information is never placed in a text message. The rest of our practices are in the <Link href="/privacy-policy">Privacy Policy</Link> and our <Link href="/legal">notices</Link>.</p>
             <h3>Support</h3>
             <p>Email <a href={`mailto:${METHOD.email}`}>{METHOD.email}</a>. {METHOD.name} serves residents of {AVAILABILITY} by video; clinical services are provided by a licensed nurse practitioner.</p>
             <p className="note">Last updated November 23, 2026.</p>

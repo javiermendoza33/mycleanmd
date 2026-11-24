@@ -22,6 +22,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...posts.map((x) => ({ p: `/blog/${x.slug}`, priority: 0.5 })),
     { p: "/faq", priority: 0.5 },
     { p: "/legal", priority: 0.2 },
+    { p: "/terms", priority: 0.2 },
+    { p: "/privacy-policy", priority: 0.2 },
+    { p: "/sms", priority: 0.3 },
+    { p: "/accessibility", priority: 0.2 },
   ];
   return paths.map(({ p, priority }) => ({ url: `${BASE}${p}`, lastModified: AT, changeFrequency: "monthly" as const, priority }));
 }
