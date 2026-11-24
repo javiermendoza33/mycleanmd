@@ -1369,3 +1369,10 @@ html[data-a11y-motion] [data-labo] *{animation-play-state:paused!important;trans
 [data-labo] .sflow-steps li button{all:unset;display:inline-flex;align-items:center;gap:inherit;cursor:pointer;color:inherit;font:inherit}
 [data-labo] .sflow-steps li button:hover span{box-shadow:0 0 0 3px var(--accent-tint,rgba(200,67,42,.15))}
 [data-labo] .sflow-steps li button:focus-visible span{outline:2px solid var(--accent);outline-offset:2px}
+/* iOS Safari: a date input keeps an intrinsic width and pushes the page sideways (Javier, Nov 24 2026: "mobile page moving side to side") */
+[data-labo] .sflow .field input,[data-labo] .sflow .field select,[data-labo] .sflow .sq input,[data-labo] .sflow .sq select{width:100%;min-width:0;max-width:100%;box-sizing:border-box}
+[data-labo] .sflow input[type=date]{-webkit-appearance:none;appearance:none;display:block;min-height:48px;text-align:left}
+[data-labo] .sflow input[type=date]::-webkit-date-and-time-value{text-align:left}
+[data-labo] .sgrid>*,[data-labo] .sqs>*{min-width:0}
+[data-labo] .sflow-card{overflow:hidden}
+[data-labo] .sflow-steps{max-width:100%;overflow-x:auto;scrollbar-width:none}
