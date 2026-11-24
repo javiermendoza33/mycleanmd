@@ -14,7 +14,7 @@ export type StatusHistoryEntry = { status: CaseStatus; at: string; note?: string
 export type Message = { id: string; case: string; author: "patient" | "clinician" | "integration" | "staff"; body: string; created_at: string };
 export type Prescription = { id: string; case: string; medication: string; sig?: string; quantity?: number; refills?: number; created_at: string };
 export type Order = { id: string; case: string; status: OrderStatus; carrier?: string | null; tracking_number?: string | null; tracking_url?: string | null; updated_at: string };
-export type VisitSlot = { start: string; end: string; clinicians_free: number };
+export type VisitSlot = { start: string; end?: string; capacity: number };   // Nov 24 2026: `capacity` per docs/visits (was clinicians_free)
 export type Visit = { id: string; patient: string; case?: string | null; status: "scheduled" | "started" | "completed" | "cancelled" | "no_show"; scheduled_start?: string | null; scheduled_end?: string | null; audio_only?: boolean };
 export type LabOrder = { id: string; patient: string; case?: string | null; panel: string; status: string; created_at: string };
 export type EventType = `${"patient" | "case" | "prescription" | "order" | "lab_order" | "lab_result" | "visit" | "consent" | "file" | "purchase" | "membership" | "charge" | "webhook_endpoint"}.${string}.v1`;
@@ -36,8 +36,13 @@ export interface CuvoClient {
   postMessage(id: string, body: string): Promise<Message>;
   prescriptions(id: string): Promise<Prescription[]>;
   orders(id: string): Promise<Order[]>;
-  visitSlots(patient: string, from?: string): Promise<VisitSlot[]>;
-  bookVisit(patient: string, start: string, caseId?: string): Promise<Visit>;
+  /** Open slots for a STATE (two-letter) over a window of at most 14 days; `capacity` = clinicians free, never who. */
+  visitSlots(state: string, from?: string, to?: string): Promise<VisitSlot[]>;
+  /** Books `slot_start`; needs an Idempotency-Key (the live client adds one). */
+  bookVisit(patient: string, slotStart: string, caseId?: string, audioOnly?: boolean): Promise<Visit>;
   joinLink(visitId: string): Promise<{ url: string; expires_at: string }>;
+  /** Thin webhook events name only a resource id — these two read the order / visit back to find its case (Nov 24 2026). */
+  order(id: string): Promise<Order>;
+  visit(id: string): Promise<Visit>;
   labOrders(patient: string): Promise<LabOrder[]>;
 }

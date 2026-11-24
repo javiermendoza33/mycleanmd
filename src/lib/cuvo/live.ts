@@ -25,9 +25,13 @@ export function liveClient(key: string, base = "https://api.cuvo.co"): CuvoClien
     postMessage: (id, body) => call<Message>("POST", `/v1/cases/${id}/messages`, { author: "patient", body }),
     prescriptions: id => list<Prescription>(`/v1/cases/${id}/prescriptions`),
     orders: id => list<Order>(`/v1/cases/${id}/orders`),
-    visitSlots: (patient, from) => list<VisitSlot>(`/v1/visits/slots?patient=${patient}${from ? `&from=${encodeURIComponent(from)}` : ""}`),
-    bookVisit: (patient, start, caseId) => call<Visit>("POST", "/v1/visits", { patient, start, ...(caseId ? { case: caseId } : {}) }),
+    // Nov 24 2026, checked against developers.cuvo.co/docs/visits + the OpenAPI file: slots are by STATE over a from–to window (≤ 14 days), each
+    // with a `capacity` (clinicians free, pooled and provider-blind); booking takes `slot_start`. The old patient/start shape was wrong.
+    visitSlots: (state, from, to) => { const f = from ? new Date(from) : new Date(); const t = to ? new Date(to) : new Date(f.getTime() + 14 * 864e5); return list<VisitSlot>(`/v1/visits/slots?state=${encodeURIComponent(state)}&from=${encodeURIComponent(f.toISOString())}&to=${encodeURIComponent(t.toISOString())}`); },
+    bookVisit: (patient, slotStart, caseId, audioOnly) => call<Visit>("POST", "/v1/visits", { patient, slot_start: slotStart, ...(caseId ? { case: caseId } : {}), ...(audioOnly ? { audio_only: true } : {}) }),
     joinLink: id => call<{ url: string; expires_at: string }>("GET", `/v1/visits/${id}/join`),
+    order: id => call<Order>("GET", `/v1/orders/${id}`),
+    visit: id => call<Visit>("GET", `/v1/visits/${id}`),
     labOrders: patient => list<LabOrder>(`/v1/lab_orders?patient=${patient}`),
   } satisfies CuvoClient & { fileCase: (i: { answers: Answer[]; requested_medications: RequestedMedication[] } & Record<string, unknown>) => Promise<Case> };
 }
