@@ -2,7 +2,7 @@
 /* The Labo Method sign-up (Nov 23 2026): program → quick check → account → about you → consents → intake → pay → filed.
    Everything is held in the browser until the last step, then one POST /api/labo/method/enroll creates the sign-in, the CRM
    customer, the Cuvo patient + consents and files the case on hold; payment releases the hold. */
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { QuestionSet, QuestionSetQuestion } from "@/lib/cuvo/types";
 import { METHOD_CONSENT_TEXT } from "@/labo/method/sms";
 const SMS_TEXT = METHOD_CONSENT_TEXT.replace(" See our Privacy Policy and SMS Terms.", "");
@@ -66,6 +66,9 @@ function Q({ q, a, set }: { q: QuestionSetQuestion; a: Answers; set: (id: string
 
 export function StartFlow({ programs, initial, states, availability, sets, signedIn, mode }: Props) {
   const [step, setStep] = useState(0);
+  const top = useRef<HTMLDivElement>(null);
+  // each step starts at the top of the card (Javier, Nov 24 2026: "sometimes doesn't flow up or down right after finishing one area")
+  useEffect(() => { const el = top.current; if (!el) return; const y = el.getBoundingClientRect().top + window.scrollY - 96; if (Math.abs(window.scrollY - y) > 8) window.scrollTo({ top: Math.max(0, y), behavior: "smooth" }); }, [step]);
   const [program, setProgram] = useState(initial);
   const [check, setCheck] = useState({ state: "", age: "", sex: "" });
   const [account, setAccount] = useState({ email: signedIn?.email || "", password: "" });
@@ -93,7 +96,7 @@ export function StartFlow({ programs, initial, states, availability, sets, signe
   };
 
   return (
-    <div className="sflow">
+    <div className="sflow" ref={top}>
       <ol className="sflow-steps" aria-label="Steps">{STEPS.map((s, i) => <li key={s} className={i === step ? "on" : i < step ? "done" : ""}><span>{i + 1}</span>{s}</li>)}</ol>
       <div className="sflow-card">
         {step === 0 && <><h2>Choose your program</h2><p className="sub">Each one starts from your own labs. You can switch later.</p>
