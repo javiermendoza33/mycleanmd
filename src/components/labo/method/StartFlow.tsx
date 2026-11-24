@@ -23,15 +23,45 @@ function HeightFtIn({ v, setV }: { v: number | undefined; setV: (x: number | str
   return <span className="sq-ftin"><select aria-label="Feet" value={ft} onChange={e => upd(e.target.value, String(inch))}><option value="">ft</option>{[4, 5, 6, 7].map(f => <option key={f} value={f}>{f} ft</option>)}</select><select aria-label="Inches" value={ft === "" ? "" : inch} onChange={e => upd(String(ft), e.target.value)} disabled={ft === ""}><option value="">in</option>{Array.from({ length: 12 }, (_, i) => <option key={i} value={i}>{i} in</option>)}</select>{v ? <em>{ft}′ {inch}″ · {v} in</em> : null}</span>;
 }
 
-/** One intake question, typed the way Cuvo's question sets are (boolean / number / string / choice). Declared at module level so inputs keep focus between keystrokes. */
-function Q({ q, v, setV }: { q: QuestionSetQuestion; v: string | number | boolean | undefined; setV: (x: string | number | boolean) => void }) {
-  return <label className="sq"><span className="sq-q">{/height/i.test(q.question) && /inch/i.test(q.question) ? "Height" : q.question}{q.required ? <i aria-hidden> *</i> : null}</span>{q.help ? <span className="sq-help">{q.help}</span> : null}
-    {q.type === "boolean" ? <span className="sq-yn"><button type="button" className={v === true ? "on" : ""} onClick={() => setV(true)}>Yes</button><button type="button" className={v === false ? "on" : ""} onClick={() => setV(false)}>No</button></span>
-      : q.type === "choice" ? <select value={String(v ?? "")} onChange={e => setV(e.target.value)}><option value="">Choose…</option>{(q.options || []).map(o => <option key={o} value={o}>{o}</option>)}</select>
-      : q.type === "number" && /height/i.test(q.question) && /inch/i.test(q.question) ? <HeightFtIn v={typeof v === "number" ? v : undefined} setV={setV} />
-      : q.type === "number" ? <input type="number" inputMode="decimal" value={v === undefined ? "" : String(v)} onChange={e => setV(e.target.value === "" ? "" : Number(e.target.value))} />
-      : <input type="text" value={String(v ?? "")} onChange={e => setV(e.target.value)} />}
-  </label>;
+type Val = string | number | boolean | string[] | undefined;
+type Answers = Record<string, Val>;
+/** Is this question asked, given the answers so far? (`ask_when`: another question's answer — id, or ids for a multi — is in `any_of`.) */
+export function asked(q: QuestionSetQuestion, a: Answers): boolean {
+  if (!q.ask_when) return true;
+  const v = a[q.ask_when.question]; const picked = Array.isArray(v) ? v : v === undefined || v === "" ? [] : [String(v)];
+  return picked.some(x => q.ask_when!.any_of.includes(x));
+}
+const labelOf = (q: QuestionSetQuestion, id: string) => (q.options || []).find(o => o.id === id)?.label ?? id;
+/** Turn the browser's answers into what Cuvo validates: option LABELS exactly as written (multi joined with "; "), numbers as numbers,
+ *  `send_as` questions split into their sub-answers, hidden conditionals left out. */
+export function toCuvoAnswers(qs: QuestionSetQuestion[], a: Answers) {
+  const out: { id: string; question: string; type: string; answer: string | number | boolean; important?: boolean; critical?: boolean }[] = [];
+  for (const q of qs) {
+    if (!asked(q, a)) continue;
+    if (q.send_as?.length) { for (const sub of q.send_as) { const v = a[sub.id]; if (v !== undefined && v !== "") out.push({ id: sub.id, question: sub.question, type: sub.type, answer: Number(v) }); } continue; }
+    const v = a[q.id]; if (v === undefined || v === "") continue;
+    const answer = q.type === "choice" ? (Array.isArray(v) ? v.map(x => labelOf(q, x)).join("; ") : labelOf(q, String(v))) : q.type === "number" ? Number(v) : q.type === "boolean" ? v === true : String(v);
+    out.push({ id: q.id, question: q.question, type: q.type, answer, important: q.important, critical: q.critical });
+  }
+  return out;
+}
+const answered = (q: QuestionSetQuestion, a: Answers) => q.send_as?.length ? q.send_as.every(sub => a[sub.id] !== undefined && a[sub.id] !== "") : Array.isArray(a[q.id]) ? (a[q.id] as string[]).length > 0 : a[q.id] !== undefined && a[q.id] !== "";
+
+/** One intake question as Cuvo's question sets define it (single/multi choice with {id,label} options, text, number, height+weight via send_as). Module level so inputs keep focus. */
+function Q({ q, a, set }: { q: QuestionSetQuestion; a: Answers; set: (id: string, x: Val) => void }) {
+  const v = a[q.id];
+  const title = q.send_as?.length ? "Height and weight" : q.question;
+  const body = q.send_as?.length ? <span className="sq-sub">{q.send_as.map(sub => /height/i.test(sub.question) ? <span key={sub.id} className="sq-subq"><span className="sq-q">Height</span><HeightFtIn v={typeof a[sub.id] === "number" ? a[sub.id] as number : undefined} setV={x => set(sub.id, x)} /></span>
+      : <span key={sub.id} className="sq-subq"><span className="sq-q">{sub.question}</span><input type="number" inputMode="decimal" value={a[sub.id] === undefined ? "" : String(a[sub.id])} onChange={e => set(sub.id, e.target.value === "" ? "" : Number(e.target.value))} /></span>)}</span>
+    : q.input === "multi_choice" ? <span className="sq-multi">{(q.options || []).map(o => { const cur = Array.isArray(v) ? v : []; const on = cur.includes(o.id); return <label key={o.id} className={on ? "on" : ""}><input type="checkbox" checked={on} onChange={() => {
+        let next = on ? cur.filter(x => x !== o.id) : [...cur, o.id];
+        if (q.none_option) next = o.id === q.none_option && !on ? [o.id] : next.filter(x => x !== q.none_option || o.id === q.none_option);   // "none" can't combine with others
+        set(q.id, next); }} />{o.label}</label>; })}</span>
+    : q.type === "choice" ? <select value={String(v ?? "")} onChange={e => set(q.id, e.target.value)}><option value="">Choose…</option>{(q.options || []).map(o => <option key={o.id} value={o.id}>{o.label}</option>)}</select>
+    : q.type === "boolean" ? <span className="sq-yn"><button type="button" className={v === true ? "on" : ""} onClick={() => set(q.id, true)}>Yes</button><button type="button" className={v === false ? "on" : ""} onClick={() => set(q.id, false)}>No</button></span>
+    : q.type === "number" ? <input type="number" inputMode="decimal" value={v === undefined ? "" : String(v)} onChange={e => set(q.id, e.target.value === "" ? "" : Number(e.target.value))} />
+    : <input type="text" value={String(v ?? "")} onChange={e => set(q.id, e.target.value)} />;
+  return <label className="sq"><span className="sq-q">{title}{q.required ? <i aria-hidden> *</i> : null}</span>{q.help ? <span className="sq-help">{q.help}</span> : null}{body}</label>;
 }
 
 export function StartFlow({ programs, initial, states, availability, sets, signedIn, mode }: Props) {
@@ -41,21 +71,22 @@ export function StartFlow({ programs, initial, states, availability, sets, signe
   const [account, setAccount] = useState({ email: signedIn?.email || "", password: "" });
   const [about, setAbout] = useState({ first_name: "", last_name: "", dob: "", phone: "", line1: "", city: "", postal_code: "" });
   const [consent, setConsent] = useState({ telehealth: false, privacy: false, sms: false });
-  const [answers, setAnswers] = useState<Record<string, string | number | boolean>>({});
+  const [answers, setAnswers] = useState<Answers>({});
   const [busy, setBusy] = useState<string | null>(null);
   const [err, setErr] = useState<string | null>(null);
   const prog = programs.find(p => p.slug === program);
   const set = prog ? sets[prog.questionSet] : undefined;
   const qs: QuestionSetQuestion[] = set?.questions || [];
+  const visible = qs.filter(q => asked(q, answers));
   const stateOk = states.some(s => s.code === check.state);
   const ageOk = Number(check.age) >= 18 && Number(check.age) < 100;
 
-  const can = useMemo(() => [!!prog, stateOk && ageOk && !!check.sex, /\S+@\S+\.\S+/.test(account.email) && (!!signedIn || account.password.length >= 8), !!about.first_name && !!about.last_name && dobOk(about.dob) && !!about.phone && !!about.line1 && !!about.city && !!about.postal_code, consent.telehealth && consent.privacy, qs.every(q => !q.required || answers[q.id] !== undefined && answers[q.id] !== ""), true][step], [step, prog, stateOk, ageOk, check, account, signedIn, about, consent, qs, answers]);
+  const can = useMemo(() => [!!prog, stateOk && ageOk && !!check.sex, /\S+@\S+\.\S+/.test(account.email) && (!!signedIn || account.password.length >= 8), !!about.first_name && !!about.last_name && dobOk(about.dob) && !!about.phone && !!about.line1 && !!about.city && !!about.postal_code, consent.telehealth && consent.privacy, visible.every(q => !q.required || answered(q, answers)), true][step], [step, prog, stateOk, ageOk, check, account, signedIn, about, consent, visible, answers]);
 
   const submit = async () => {
     setBusy("Creating your account and filing your intake…"); setErr(null);
     try {
-      const r = await fetch("/api/labo/method/enroll", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ program, check, account, about, consent, consent_version: CONSENT_VERSION, question_set: set ? { id: set.id, version: set.version } : null, answers: qs.map(q => ({ id: q.id, question: q.question, type: q.type, answer: answers[q.id] ?? (q.type === "boolean" ? false : ""), important: q.important, critical: q.critical, displayed_options: q.options })) }) });
+      const r = await fetch("/api/labo/method/enroll", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ program, check, account, about, consent, consent_version: CONSENT_VERSION, question_set: set ? { id: set.id, version: set.version } : null, answers: toCuvoAnswers(qs, answers) }) });
       const j = await r.json(); if (!r.ok) throw new Error(j.error || "Something went wrong.");
       window.location.href = j.url;
     } catch (e) { setErr((e as Error).message); setBusy(null); }
@@ -93,10 +124,10 @@ export function StartFlow({ programs, initial, states, availability, sets, signe
           <label className="scheck"><input type="checkbox" checked={consent.telehealth} onChange={e => setConsent({ ...consent, telehealth: e.target.checked })} /><span><b>Telehealth consent.</b> I understand my care is delivered by video, messaging and e-prescribing, that a clinician licensed in my state makes every medical decision, and that I can stop at any time. <a href="/legal#telehealth" target="_blank" rel="noopener">Read it</a>.</span></label>
           <label className="scheck"><input type="checkbox" checked={consent.privacy} onChange={e => setConsent({ ...consent, privacy: e.target.checked })} /><span><b>Privacy practices.</b> I have read how my health information is used, stored and shared. <a href="/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a> · <a href="/legal" target="_blank" rel="noopener">notices</a>.</span></label>
           <label className="scheck"><input type="checkbox" checked={consent.sms} onChange={e => setConsent({ ...consent, sms: e.target.checked })} /><span>{SMS_TEXT} See our <a href="/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a> and <a href="/sms" target="_blank" rel="noopener">SMS Terms</a>.</span></label></>}
-        {step === 5 && <><h2>Your intake</h2><p className="sub">{set ? `${set.title} · ${qs.length} questions. Your clinician reads every answer.` : "Intake questions aren't published for this program yet."}</p>
-          <div className="sqs">{qs.map(q => <Q key={q.id} q={q} v={answers[q.id]} setV={x => setAnswers(a => ({ ...a, [q.id]: x }))} />)}</div></>}
+        {step === 5 && <><h2>Your intake</h2><p className="sub">{set ? `${set.title} · ${visible.length} questions. Your clinician reads every answer.` : "Intake questions aren't published for this program yet."}</p>
+          <div className="sqs">{visible.map(q => <Q key={q.id} q={q} a={answers} set={(id, x) => setAnswers(a => ({ ...a, [id]: x }))} />)}</div></>}
         {step === 6 && <><h2>Review and pay</h2><p className="sub">Your case is filed the moment payment clears. A clinician reviews it, orders labs if you need them, and writes your plan.</p>
-          <dl className="srev"><dt>Program</dt><dd>{prog?.name} · {prog?.price}/mo, cancel any month</dd><dt>You</dt><dd>{about.first_name} {about.last_name} · {check.state} · {account.email}</dd><dt>Ships to</dt><dd>{about.line1}, {about.city} {about.postal_code}</dd><dt>Intake</dt><dd>{qs.length} answers · {qs.filter(q => q.critical && answers[q.id] === true).length ? "flagged for clinician attention" : "no flags"}</dd></dl>
+          <dl className="srev"><dt>Program</dt><dd>{prog?.name} · {prog?.price}/mo, cancel any month</dd><dt>You</dt><dd>{about.first_name} {about.last_name} · {check.state} · {account.email}</dd><dt>Ships to</dt><dd>{about.line1}, {about.city} {about.postal_code}</dd><dt>Intake</dt><dd>{visible.length} answers · {visible.filter(q => q.critical && answers[q.id] === true).length ? "flagged for clinician attention" : "no flags"}</dd></dl>
           {mode !== "live" && <p className="snote">Sandbox: no card is charged. Payment is simulated and your case goes straight to the (simulated) clinician.</p>}
           {err && <p className="snote bad">{err}</p>}</>}
         <div className="sflow-acts">

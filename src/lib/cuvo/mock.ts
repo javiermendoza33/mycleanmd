@@ -16,7 +16,7 @@ const T = { queued: 4, in_review: 9, approved: 16, at_pharmacy: 22, shipped: 30,
 /** Question sets shaped like Cuvo's (`QuestionSetQuestion`): the GLP-1 and hormone intakes as placeholders until we read the real ones. */
 export const MOCK_SETS: QuestionSet[] = [
   { id: "glp1-weight-management", title: "GLP-1 weight management", category: "weight_loss", version: 1, published_at: "2026-11-01T00:00:00Z", medication_ids: ["semaglutide-compounded", "tirzepatide-compounded"], questions: [
-    { id: "goal", question: "What is your main goal?", type: "choice", options: ["Lose weight", "Keep weight off", "Improve labs (A1c, cholesterol)"], required: true },
+    { id: "goal", question: "What is your main goal?", type: "choice", options: [{ id: "lose_weight", label: "Lose weight" }, { id: "keep_weight_off", label: "Keep weight off" }, { id: "improve_labs_a1c_cholesterol", label: "Improve labs (A1c, cholesterol)" }], required: true },
     { id: "height_in", question: "Height (inches)", type: "number", required: true },
     { id: "weight_lb", question: "Current weight (lb)", type: "number", required: true },
     { id: "glp1_before", question: "Have you taken a GLP-1 (semaglutide, tirzepatide, liraglutide) before?", type: "boolean", required: true },
@@ -28,8 +28,8 @@ export const MOCK_SETS: QuestionSet[] = [
     { id: "a1c", question: "Most recent A1c, if you know it", type: "number", help: "Leave blank if you don't; we'll order labs." },
   ] },
   { id: "hormone-care", title: "Hormone care (TRT · menopause)", category: "hormone", version: 1, published_at: "2026-11-01T00:00:00Z", medication_ids: ["testosterone-cypionate", "estradiol-patch", "progesterone-micronized"], questions: [
-    { id: "concern", question: "What brings you in?", type: "choice", options: ["Low energy / libido", "Hot flashes / sleep", "Mood changes", "Something else"], required: true },
-    { id: "duration", question: "How long has this been going on?", type: "choice", options: ["Under 3 months", "3–12 months", "Over a year"], required: true },
+    { id: "concern", question: "What brings you in?", type: "choice", options: [{ id: "low_energy_libido", label: "Low energy / libido" }, { id: "hot_flashes_sleep", label: "Hot flashes / sleep" }, { id: "mood_changes", label: "Mood changes" }, { id: "something_else", label: "Something else" }], required: true },
+    { id: "duration", question: "How long has this been going on?", type: "choice", options: [{ id: "under_3_months", label: "Under 3 months" }, { id: "3_12_months", label: "3–12 months" }, { id: "over_a_year", label: "Over a year" }], required: true },
     { id: "prior_hrt", question: "Have you used hormone therapy before?", type: "boolean", required: true },
     { id: "clots", question: "History of blood clots, stroke or breast/prostate cancer?", type: "boolean", required: true, critical: true },
     { id: "recent_labs", question: "Had hormone labs in the last 6 months?", type: "boolean", required: true },

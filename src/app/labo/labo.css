@@ -1357,3 +1357,11 @@ html[data-a11y-motion] [data-labo] *{animation-play-state:paused!important;trans
 [data-labo] .care-hist{margin-top:24px;font-size:.88rem;color:var(--muted)}[data-labo] .care-hist ul{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:4px}
 [data-labo] .care-list{list-style:none;margin:0;padding:0;display:grid;gap:10px}[data-labo] .care-list a{display:flex;justify-content:space-between;gap:12px;align-items:center;background:var(--canvas);border:1px solid var(--line);border-radius:14px;padding:14px 16px;text-decoration:none;color:var(--ink)}[data-labo] .care-list a span{color:var(--muted);font-size:.88rem}
 [data-labo] .snote{margin-top:16px;font-size:.86rem;color:var(--muted);background:var(--canvas);border-radius:12px;padding:10px 14px}[data-labo] .snote.bad{color:#9B2C2C;background:#FFF1F0}
+/* intake controls for Cuvo's real question shape (Nov 24 2026): multi-choice checkboxes, height+weight sub-questions */
+[data-labo] .sq-multi{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+[data-labo] .sq-multi label{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--rule,var(--line));border-radius:999px;font-size:.92rem;cursor:pointer;background:var(--canvas)}
+[data-labo] .sq-multi label.on{border-color:var(--accent);background:var(--accent-tint,rgba(200,67,42,.09))}
+[data-labo] .sq-multi input{margin:0}
+[data-labo] .sq-sub{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+[data-labo] .sq-subq{display:flex;flex-direction:column;gap:4px}
+@media (max-width:560px){[data-labo] .sq-sub{grid-template-columns:1fr}}

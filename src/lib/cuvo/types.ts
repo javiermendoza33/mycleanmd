@@ -6,7 +6,13 @@ export type Patient = { id: string; external_id?: string | null; first_name: str
 export type Consent = { id: string; patient: string; kind: "telehealth" | "privacy"; version: string; accepted_at: string; created_at: string };
 export type AnswerType = "boolean" | "number" | "string" | "choice";
 export type Answer = { id: string; question: string; answer: string | number | boolean; type: AnswerType; important?: boolean; critical?: boolean; displayed_options?: string[] };
-export type QuestionSetQuestion = { id: string; question: string; type: AnswerType; options?: string[]; required?: boolean; important?: boolean; critical?: boolean; help?: string };
+/** A question as GET /v1/question_sets/{id} returns it (checked against the sandbox Nov 24 2026): options are {id,label} and the
+ *  API wants the LABEL back, exactly as written (multi-choice labels joined with "; "); `send_as` splits one question (height+weight)
+ *  into several answers; `ask_when` hides a question until another one's answer is in `any_of`. */
+export type QuestionOption = { id: string; label: string };
+export type AskWhen = { question: string; any_of: string[]; trigger_is_multi?: boolean };
+export type SendAs = { id: string; question: string; type: AnswerType };
+export type QuestionSetQuestion = { id: string; question: string; type: AnswerType; input?: "single_choice" | "multi_choice" | "text" | "number"; options?: QuestionOption[]; required?: boolean; important?: boolean; critical?: boolean; help?: string; none_option?: string; ask_when?: AskWhen; send_as?: SendAs[]; critical_options?: string[] };
 export type QuestionSet = { id: string; title: string; category: string | null; version: number; published_at: string; medication_ids: string[]; questions?: QuestionSetQuestion[] };
 export type RequestedMedication = { medication_id?: string; prescriber_decides?: boolean; retail?: boolean; retail_medication_id?: string; name?: string; quantity?: number; refills?: number; days_supply?: number; directions?: string; pharmacy_notes?: string };
 export type Case = { id: string; patient: string; status: CaseStatus; external_id?: string | null; hold: boolean; requested_medications: RequestedMedication[]; consent_ids: string[]; decline_reason?: string | null; decided_at?: string | null; created_at: string; updated_at?: string };
