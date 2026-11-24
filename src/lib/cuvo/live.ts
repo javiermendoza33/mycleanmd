@@ -6,7 +6,7 @@ import type { Answer, Case, Consent, CuvoClient, LabOrder, Medication, Message, 
 export function liveClient(key: string, base = "https://api.cuvo.co"): CuvoClient {
   async function call<T>(method: string, path: string, body?: unknown, idem?: string): Promise<T> {
     const r = await fetch(base + path, { method, headers: { authorization: `Bearer ${key}`, accept: "application/json", ...(body ? { "content-type": "application/json" } : {}), ...(method !== "GET" ? { "idempotency-key": idem || randomUUID() } : {}) }, body: body ? JSON.stringify(body) : undefined, cache: "no-store" });
-    if (!r.ok) { const p = await r.json().catch(() => ({})) as { title?: string; detail?: string; code?: string; request_id?: string }; throw new Error(`Cuvo ${r.status} ${p.code || ""}: ${p.detail || p.title || r.statusText}${p.request_id ? ` (request ${p.request_id})` : ""}`); }
+    if (!r.ok) { const p = await r.json().catch(() => ({})) as { title?: string; detail?: string; code?: string; request_id?: string; issues?: { path?: string; message?: string }[] }; const issues = Array.isArray(p.issues) && p.issues.length ? " — " + p.issues.slice(0, 8).map(i => `${i.path || "?"}: ${i.message || ""}`).join("; ") : ""; throw new Error(`Cuvo ${r.status} ${p.code || ""}: ${p.detail || p.title || r.statusText}${issues}${p.request_id ? ` (request ${p.request_id})` : ""}`); }
     return r.status === 204 ? (undefined as T) : (await r.json() as T);
   }
   const list = <T,>(path: string) => call<{ data?: T[] } | T[]>("GET", path).then(j => (Array.isArray(j) ? j : j.data || []));
