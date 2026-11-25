@@ -13,6 +13,7 @@ const STEPS = ["Program", "Quick check", "Account", "About you", "Consent", "Int
 const CONSENT_VERSION = "2026-11-23";
 // the browser's date picker otherwise scrolls to year 275760 (Javier, Nov 23 2026): adults only, born 1920 or later
 const DOB_MAX = (() => { const d = new Date(); d.setFullYear(d.getFullYear() - 18); return d.toISOString().slice(0, 10); })();
+const phoneOk = (v: string) => { const d = v.replace(/\D/g, ""); return d.length === 10 || (d.length === 11 && d.startsWith("1")) || /^\+\d{8,15}$/.test(v.trim()); };
 const dobOk = (v: string) => /^\d{4}-\d{2}-\d{2}$/.test(v) && v >= "1920-01-01" && v <= DOB_MAX;
 
 
@@ -95,7 +96,7 @@ export function StartFlow({ programs, initial, states, availability, sets, signe
   const stateOk = states.some(s => s.code === check.state);
   const ageOk = Number(check.age) >= 18 && Number(check.age) < 100;
 
-  const can = useMemo(() => [!!prog, stateOk && ageOk && !!check.sex, /\S+@\S+\.\S+/.test(account.email) && (!!signedIn || account.password.length >= 8), !!about.first_name && !!about.last_name && dobOk(about.dob) && !!about.phone && !!about.line1 && !!about.city && !!about.postal_code, consent.telehealth && consent.privacy, visible.every(q => !q.required || answered(q, answers)), true][step], [step, prog, stateOk, ageOk, check, account, signedIn, about, consent, visible, answers]);
+  const can = useMemo(() => [!!prog, stateOk && ageOk && !!check.sex, /\S+@\S+\.\S+/.test(account.email) && (!!signedIn || account.password.length >= 8), !!about.first_name && !!about.last_name && dobOk(about.dob) && phoneOk(about.phone) && !!about.line1 && !!about.city && !!about.postal_code, consent.telehealth && consent.privacy, visible.every(q => !q.required || answered(q, answers)), true][step], [step, prog, stateOk, ageOk, check, account, signedIn, about, consent, visible, answers]);
 
   const submit = async () => {
     setBusy("Creating your account and filing your intake…"); setErr(null);
@@ -133,7 +134,7 @@ export function StartFlow({ programs, initial, states, availability, sets, signe
             <label className="field"><span>First name</span><input value={about.first_name} onChange={e => setAbout({ ...about, first_name: e.target.value })} /></label>
             <label className="field"><span>Last name</span><input value={about.last_name} onChange={e => setAbout({ ...about, last_name: e.target.value })} /></label>
             <label className="field"><span>Date of birth</span><input type="date" min="1920-01-01" max={DOB_MAX} value={about.dob} onChange={e => setAbout({ ...about, dob: e.target.value })} /></label>
-            <label className="field"><span>Mobile phone</span><input type="tel" autoComplete="tel" value={about.phone} onChange={e => setAbout({ ...about, phone: e.target.value })} /></label>
+            <label className="field"><span>Mobile phone</span><input type="tel" inputMode="tel" autoComplete="tel" placeholder="(949) 555-0123" value={about.phone} onChange={e => setAbout({ ...about, phone: e.target.value })} />{about.phone && !phoneOk(about.phone) ? <small className="snote bad">Enter a 10-digit US mobile number.</small> : null}</label>
             <label className="field wide"><span>Shipping address</span><input autoComplete="address-line1" value={about.line1} onChange={e => setAbout({ ...about, line1: e.target.value })} /></label>
             {about.dob && !dobOk(about.dob) ? <p className="snote bad wide">Enter a real date of birth. You need to be 18 or older.</p> : null}
             <label className="field"><span>City</span><input autoComplete="address-level2" value={about.city} onChange={e => setAbout({ ...about, city: e.target.value })} /></label>

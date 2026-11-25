@@ -15,11 +15,19 @@ type Body = { program: string; check: { state: string; age: string; sex: "male" 
 // Formulary ids from the Cuvo sandbox catalog (Nov 24 2026). `prescriber_decides` leaves dose, quantity and refills to the clinician.
 const MEDICATION: Record<string, string> = { "glp-1-weight-management": "med_semaglutide_inj", "peptide-therapy": "med_nad_inj", "testosterone-for-men": "med_testosterone_cyp", "hormone-therapy-for-women": "med_estradiol" };
 
+/** E.164 for Cuvo (Nov 24 2026: "phone: Must be an E.164 phone number"): keep a leading +, otherwise 10 US digits → +1…, 11 starting with 1 → +…; anything else is returned as typed so Cuvo's message still explains it. */
+function e164(raw: string): string {
+  const t = String(raw || "").trim(); if (t.startsWith("+")) return "+" + t.slice(1).replace(/\D/g, "");
+  const d = t.replace(/\D/g, "");
+  if (d.length === 10) return "+1" + d; if (d.length === 11 && d.startsWith("1")) return "+" + d; return t;
+}
+
 export async function POST(req: NextRequest) {
   const b = await req.json().catch(() => null) as Body | null;
   if (!b || !b.program || !b.account?.email || !b.about?.first_name || !b.consent?.telehealth || !b.consent?.privacy) return NextResponse.json({ error: "Missing details." }, { status: 400 });
   const program = getProgram(b.program); if (!program) return NextResponse.json({ error: "Unknown program." }, { status: 400 });
   const email = b.account.email.trim().toLowerCase();
+  const phone = e164(b.about.phone);
   const sb = await createClient(); const admin = createAdminClient();
 
   // 1 · the sign-in: the current session, or a new user (email confirmed: they just proved it by paying attention), or ask to sign in
@@ -33,19 +41,21 @@ export async function POST(req: NextRequest) {
   } else if (user.email && user.email.toLowerCase() !== email) return NextResponse.json({ error: `You're signed in as ${user.email}. Sign out to start as someone else.` }, { status: 409 });
 
   // 2 · the CRM customer (both brands share it)
-  const customer = await upsertCustomer({ email, first_name: b.about.first_name, last_name: b.about.last_name, phone: b.about.phone, state: b.check.state, brand: "method", source: "method-start", user_id: user!.id, sms_consent: !!b.consent.sms, email_consent: true });
+  const customer = await upsertCustomer({ email, first_name: b.about.first_name, last_name: b.about.last_name, phone, state: b.check.state, brand: "method", source: "method-start", user_id: user!.id, sms_consent: !!b.consent.sms, email_consent: true });
 
   // 3 · Cuvo: patient, consents, the case on hold
   const c = cuvo(); const mode = cuvoMode();
   let patientId: string, caseId: string;
   try {
-    const patient = await c.createPatient({ external_id: user!.id, first_name: b.about.first_name, last_name: b.about.last_name, date_of_birth: b.about.dob, sex_at_birth: b.check.sex, email, phone: b.about.phone, address: { line1: b.about.line1, city: b.about.city, state: b.check.state, postal_code: b.about.postal_code, country: "US" } });
+    const patient = await c.createPatient({ external_id: user!.id, first_name: b.about.first_name, last_name: b.about.last_name, date_of_birth: b.about.dob, sex_at_birth: b.check.sex, email, phone, address: { line1: b.about.line1, city: b.about.city, state: b.check.state, postal_code: b.about.postal_code, country: "US" } });
     patientId = patient.id;
     const [tele, priv] = await Promise.all([c.recordConsent(patientId, "telehealth", b.consent_version), c.recordConsent(patientId, "privacy", b.consent_version)]);
     const careIns = await admin.from("labo_care").insert({ customer_id: customer?.id, user_id: user!.id, program_slug: program.slug, cuvo_patient_id: patientId, cuvo_mode: mode, status: "awaiting_payment" }).select("id").single();
     if (careIns.error) return NextResponse.json({ error: careIns.error.message.includes("does not exist") ? "CRM tables not set up yet (run supabase-labo-crm.sql)." : careIns.error.message }, { status: 500 });
     const careId = careIns.data.id as string;
-    const filed = await c.fileCase({ patient: patientId, question_set: b.question_set || undefined as never, answers: b.answers, requested_medications: [{ medication_id: MEDICATION[program.slug] || "med_semaglutide_inj", prescriber_decides: true }], consent_ids: [tele.id, priv.id], external_id: careId, hold: true, metadata: { program: program.slug, brand: "method" } });
+    let filed;
+    try { filed = await c.fileCase({ patient: patientId, question_set: b.question_set || undefined as never, answers: b.answers, requested_medications: [{ medication_id: MEDICATION[program.slug] || "med_semaglutide_inj", prescriber_decides: true }], consent_ids: [tele.id, priv.id], external_id: careId, hold: true, metadata: { program: program.slug, brand: "method" } });
+    } catch (e) { await admin.from("labo_care").delete().eq("id", careId); throw e; }
     caseId = filed.id;
     await updateCare(careId, { cuvo_case_id: caseId, status: "awaiting_payment" });
     await addEvent(customer?.id, "method", "enrolled", `Started ${program.name}`, { care: careId, case: caseId, mode });

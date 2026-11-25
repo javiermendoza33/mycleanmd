@@ -15,7 +15,8 @@ export function liveClient(key: string, base = "https://api.cuvo.co"): CuvoClien
     medications: () => list<Medication>("/v1/medications"),
     questionSets: () => list("/v1/question_sets"),
     questionSet: (id, version) => call<QuestionSet>("GET", `/v1/question_sets/${encodeURIComponent(id)}${version ? `?version=${version}` : ""}`),
-    createPatient: p => call<Patient>("POST", "/v1/patients", p, p.external_id ? `patient:${p.external_id}` : undefined),
+    // a random Idempotency-Key per attempt: a retry with corrected details must not 409 (idempotency_conflict); `external_id` already returns the existing patient
+    createPatient: p => call<Patient>("POST", "/v1/patients", p),
     patient: id => call<Patient>("GET", `/v1/patients/${id}`),
     recordConsent: (patient, kind, version) => call<Consent>("POST", `/v1/patients/${patient}/consents`, { kind, version, accepted_at: new Date().toISOString() }),
     fileCase: input => call<Case>("POST", "/v1/cases", input, input.external_id ? `case:${input.external_id}` : undefined),
