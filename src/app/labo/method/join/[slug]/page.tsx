@@ -24,7 +24,7 @@ export default async function JoinProgramPage(
 
   return (
     <section>
-      <div className="wrap tight" style={{ padding: "64px 0" }}>
+      <div className="wrap tight" style={{ paddingBlock: 8 }}>
         <Eyebrow>Program {p.index}</Eyebrow>
         <h1 style={{ marginTop: 15 }}>{p.name}</h1>
         <p className="sub" style={{ marginTop: 17 }}>{p.lede}</p>

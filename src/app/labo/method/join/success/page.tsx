@@ -34,7 +34,7 @@ export default async function JoinSuccessPage(
 
   return (
     <section>
-      <div className="wrap tight" style={{ padding: "80px 0", textAlign: "center" }}>
+      <div className="wrap tight" style={{ paddingBlock: 24, textAlign: "center" }}>
         <Eyebrow>Payment received</Eyebrow>
         <h1 style={{ marginTop: 15 }}>One more step.</h1>
         <p className="sub" style={{ marginTop: 17 }}>

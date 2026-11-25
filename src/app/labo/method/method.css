@@ -366,3 +366,13 @@
 [data-labo] [data-method] .offer.most,[data-labo] [data-method] .offer .flag{background:#1D4F91}
 [data-labo] [data-method] .mdchips button.on{background:#1D4F91;border-color:#1D4F91}
 [data-labo] [data-method] a{color:#1D4F91}
+
+/* Phone spacing (Nov 24 2026, Javier: "this page and maybe others seem to be too tight on mobile"): the wrapper keeps its gutter even
+   when a page pads it inline (padding-block only, never the shorthand), the gutter clears the phone's side insets, sections breathe less. */
+[data-labo] [data-method] .wrap{padding-inline:max(28px,env(safe-area-inset-left,0px)) max(28px,env(safe-area-inset-right,0px))}
+@media (max-width:640px){
+  [data-labo] [data-method] .wrap{padding-inline:max(20px,env(safe-area-inset-left,0px)) max(20px,env(safe-area-inset-right,0px))}
+  [data-labo] [data-method] section{padding:44px 0}
+  [data-labo] [data-method] h1{font-size:clamp(2.1rem,9vw,2.6rem)}
+  [data-labo] [data-method] .sub{font-size:1rem}
+}
