@@ -460,6 +460,15 @@ export const METHOD = {
  *  header's eye-catcher is TeleCallout.tsx. Kept out of NAV so the footer's Explore column doesn't double it. */
 export const TELE_LINK = { label: "Telehealth", href: `https://${METHOD.domain}` } as const;
 
+/**
+ * ⚠️ IS THE LABO METHOD TAKING PATIENTS? (Nov 27 2026, Javier: "can we put something to show this is coming soon, people already
+ * clicking on site".) While this is false the site says "Opening soon": the top notice line and the hero tag say so, the header
+ * button reads "Join the list", and /start — where every Get started / Start button leads — shows a coming-soon page with an
+ * email list instead of the sign-up. The sign-up itself still runs on the clinical platform's SANDBOX, so nobody should reach it
+ * by accident; testers open it with /start?preview=1. Flip to true the day the live key is in and sign-up is real.
+ */
+export const METHOD_OPEN = false;
+
 export const METHOD_NAV = [
   { label: "Programs", href: "/programs" },
   { label: "Pricing", href: "/pricing" },

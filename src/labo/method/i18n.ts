@@ -20,7 +20,7 @@ export type Lang = "en" | "es";
 export const LANGS: Lang[] = ["en", "es"];
 
 /** Path prefixes that exist in Spanish. "/programs" covers "/programs/<slug>" too. */
-const ES_ROUTES = ["/programs", "/pricing", "/how-it-works", "/faq", "/signin", "/book", "/join"];
+const ES_ROUTES = ["/programs", "/pricing", "/how-it-works", "/faq", "/signin", "/book", "/join", "/start"];   // /start in Spanish = the coming-soon page only (it sends you to the English sign-up once METHOD_OPEN)
 const hasEs = (path: string) => path === "/" || (path !== "/join/success" && ES_ROUTES.some((r) => path === r || path.startsWith(r + "/")));
 
 /** The href for `path` on a page shown in `lang`. Anchors, mailto and full URLs pass through untouched. */

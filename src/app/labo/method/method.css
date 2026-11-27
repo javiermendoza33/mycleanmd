@@ -394,3 +394,13 @@
   [data-labo] [data-method] .mpromo .mlang-top{display:inline-flex;align-items:center;gap:5px;margin-left:10px;padding:4px 11px;border-radius:999px;border:1px solid rgba(22,63,120,.4);background:rgba(255,255,255,.55);color:var(--deep);font-weight:700;text-decoration:none;vertical-align:middle;white-space:nowrap}
   [data-labo] [data-method] .mpromo .mlang-top .short{display:none}
 }
+
+/* ── Opening soon (Nov 27 2026, Javier: "put something to show this is coming soon, people already clicking on site") ─────────
+   While METHOD_OPEN is false (content.ts): a pill in the top notice line, and /start shows the opening list (StartSoon.tsx). */
+[data-labo] [data-method] .mpromo .soonpill{display:inline-block;margin-right:8px;padding:3px 10px;border-radius:999px;background:var(--deep);color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;vertical-align:middle;white-space:nowrap}
+[data-labo] [data-method] .soon .wlform{max-width:440px;margin:30px auto 0;text-align:left}
+[data-labo] [data-method] .soon .wlform .note{margin-top:2px;font-size:.82rem}
+[data-labo] [data-method] .soon .wlform .btn{align-self:stretch;text-align:center;justify-content:center}
+[data-labo] [data-method] .fld select{font:inherit;font-size:1rem;padding:13px 14px;width:100%;background:var(--paper);color:var(--ink);border:1px solid transparent;border-radius:12px}
+[data-labo] [data-method] .fld select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+[data-labo] [data-method] .mpromo a{white-space:nowrap}

@@ -34,7 +34,7 @@ export default function ProgramView({ lang, slug }: { lang: Lang; slug: string }
             <span className="kicker">{t.programFee}</span>
             <span className="amt mono">{p.price}<span className="u">{t.perMo}</span></span>
             <p style={{ fontSize: ".92rem", color: "var(--muted)" }}>{p.priceNote}</p>
-            <a className="btn btn-primary" href={HEALTHIE.program(p.slug)}>{t.startIntake}</a>
+            <a className="btn btn-primary" href={lh(lang, HEALTHIE.program(p.slug))}>{t.startIntake}</a>
           </aside>
         </div>
       </header>

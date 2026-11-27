@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { METHOD, PRACTICE, HEALTHIE } from "@/labo/content";
+import { METHOD, PRACTICE, HEALTHIE, METHOD_OPEN } from "@/labo/content";
 import { posts } from "@/labo/method/posts";
 import { mc, lh, type Lang } from "@/labo/method/i18n";
 import { MethodDemo } from "@/components/labo/method/MethodDemo";
@@ -33,7 +33,7 @@ export default function HomeView({ lang }: { lang: Lang }) {
       <section className="mhero">
         <div className="wrap">
           <div>
-            <span className="tag">{h.tag(c.AVAILABILITY)}</span>
+            <span className="tag">{METHOD_OPEN ? h.tag(c.AVAILABILITY) : t.soon.tag(c.AVAILABILITY)}</span>
             <h1>{h.h1[0]}<em>{h.h1[1]}</em></h1>
             <p className="sub">{h.sub}</p>
             <div className="offers">

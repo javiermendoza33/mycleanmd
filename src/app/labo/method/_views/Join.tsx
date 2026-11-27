@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { Eyebrow } from "@/components/labo/Sections";
-import { mc, type Lang } from "@/labo/method/i18n";
+import { METHOD_OPEN, HEALTHIE } from "@/labo/content";
+import { mc, lh, type Lang } from "@/labo/method/i18n";
 
 export default function JoinView({ lang, slug }: { lang: Lang; slug: string }) {
   const c = mc(lang), t = c.t;
@@ -27,6 +28,11 @@ export default function JoinView({ lang, slug }: { lang: Lang; slug: string }) {
             <a className="btn btn-primary" style={{ marginTop: 22 }} href={`/api/labo/checkout?program=${p.slug}`}>
               {t.join.checkout}
             </a>
+          ) : !METHOD_OPEN ? (
+            <>
+              <p style={{ marginTop: 22, fontSize: ".9rem", fontWeight: 600 }}>{t.soon.joinNote}</p>
+              <a className="btn btn-primary" style={{ marginTop: 12 }} href={lh(lang, HEALTHIE.program(p.slug))}>{t.soon.cta}</a>
+            </>
           ) : (
             <p style={{ marginTop: 22, fontSize: ".85rem", color: "var(--muted)" }}>
               {t.join.notConnected}

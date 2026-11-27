@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { METHOD, HEALTHIE, PRACTICE } from "@/labo/content";
+import { METHOD, HEALTHIE, PRACTICE, METHOD_OPEN } from "@/labo/content";
 import { mc, lh, langOf, basePath, switchHref } from "@/labo/method/i18n";
 import { Logo } from "@/components/labo/Logo";
 
@@ -50,7 +50,7 @@ export function MethodHeader() {
   return (
     <>
       <a className="skip" href="#main">{h.skip}</a>
-      <div className="mpromo" role="region" aria-label={h.notice}>{h.promo(c.AVAILABILITY)}<Link href={L("/pricing")}>{h.promoLink}</Link><LangSwitch pathname={pathname} className="mlang-top" /></div>
+      <div className="mpromo" role="region" aria-label={h.notice}>{METHOD_OPEN ? <>{h.promo(c.AVAILABILITY)}<Link href={L("/pricing")}>{h.promoLink}</Link></> : <><b className="soonpill">{t.soon.k}</b>{t.soon.promo(c.AVAILABILITY).replace(t.soon.k, "").replace(/^\s+/, "")}<Link href={L("/start")}>{t.soon.promoLink}</Link></>}<LangSwitch pathname={pathname} className="mlang-top" /></div>
       <header className="mhead">
         <div className="pill">
           <Link className="brand" href={L("/")} aria-label={h.home(METHOD.name)}><Logo variant="method" name={METHOD.name} /></Link>
@@ -59,7 +59,7 @@ export function MethodHeader() {
           </nav>
           <LangSwitch pathname={pathname} className="mlang" />
           <Link className="signin" href={L("/signin")}>{h.signIn}</Link>
-          <Link className="btn btn-primary btn-sm" href="/start">{t.getStarted}</Link>
+          <Link className="btn btn-primary btn-sm" href={L("/start")}>{METHOD_OPEN ? t.getStarted : t.soon.cta}</Link>
           <button type="button" className="mburger" aria-expanded={open} aria-controls="msheet" aria-label={open ? h.closeMenu : h.openMenu} onClick={() => setOpen((v) => !v)}>{open ? "×" : "☰"}</button>
         </div>
         <nav id="msheet" className="msheet" aria-label={h.menu} hidden={!open}>
@@ -68,7 +68,7 @@ export function MethodHeader() {
           <Link href={L("/signin")}>{h.signIn}</Link>
           <LangSwitch pathname={pathname} className="mlang-row" />
           <a href={`https://${PRACTICE.domain}`}>{h.inPerson(PRACTICE.name)}</a>
-          <div className="acts"><Link className="btn btn-primary" href="/start">{t.getStarted}</Link></div>
+          <div className="acts"><Link className="btn btn-primary" href={L("/start")}>{METHOD_OPEN ? t.getStarted : t.soon.cta}</Link></div>
         </nav>
       </header>
     </>

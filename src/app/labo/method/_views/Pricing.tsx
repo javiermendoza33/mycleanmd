@@ -1,6 +1,6 @@
 import { ClosingCTA, PageHero } from "@/components/labo/Sections";
 import { HEALTHIE } from "@/labo/content";
-import { mc, type Lang } from "@/labo/method/i18n";
+import { mc, lh, type Lang } from "@/labo/method/i18n";
 
 export default function PricingView({ lang }: { lang: Lang }) {
   const c = mc(lang), t = c.t;
@@ -23,7 +23,7 @@ export default function PricingView({ lang }: { lang: Lang }) {
                   {p.pricingBullets.map((b) => <li key={b}>{b}</li>)}
                 </ul>
                 <div style={{ marginTop: "auto", paddingTop: 16 }}>
-                  <a className="btn btn-ghost btn-sm" href={HEALTHIE.program(p.slug)}>{t.pricing.choose}</a>
+                  <a className="btn btn-ghost btn-sm" href={lh(lang, HEALTHIE.program(p.slug))}>{t.pricing.choose}</a>
                 </div>
               </article>
             ))}

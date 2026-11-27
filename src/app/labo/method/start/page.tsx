@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { PROGRAMS, AVAILABILITY } from "@/labo/content";
+import { PROGRAMS, AVAILABILITY, METHOD_OPEN } from "@/labo/content";
+import StartSoonView from "../_views/StartSoon";
 import { cuvo, cuvoMode } from "@/lib/cuvo";
 import { createClient } from "@/lib/supabase/server";
 import { StartFlow, type FlowProgram } from "@/components/labo/method/StartFlow";
@@ -13,8 +14,10 @@ export const dynamic = "force-dynamic";
 // mens-hormones (testosterone is controlled → the case needs a live visit), womens-hormones. Re-check against the live catalog before launch.
 export const QUESTION_SET: Record<string, string> = { "glp-1-weight-management": "semaglutide-glp-1-weight-loss", "peptide-therapy": "nad", "testosterone-for-men": "testosterone-injectable", "hormone-therapy-for-women": "estrogen-cream-systemic-topical" };
 
-export default async function Start({ searchParams }: { searchParams: Promise<{ program?: string }> }) {
+export default async function Start({ searchParams }: { searchParams: Promise<{ program?: string; preview?: string }> }) {
   const sp = await searchParams;
+  // Nov 27 2026: not taking patients yet → the opening list, not the sign-up. Testers reach the (sandbox) sign-up with ?preview=1.
+  if (!METHOD_OPEN && sp.preview !== "1") return <StartSoonView lang="en" program={sp.program} />;
   const c = cuvo();
   const [states, sets, { data: { user } }] = await Promise.all([c.states().catch(() => []), c.questionSets().catch(() => []), (await createClient()).auth.getUser()]);
   const programs: FlowProgram[] = PROGRAMS.map(p => ({ slug: p.slug, name: p.name, blurb: p.navBlurb, price: p.price, questionSet: QUESTION_SET[p.slug] || sets[0]?.id || "" }));
