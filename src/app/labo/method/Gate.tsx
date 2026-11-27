@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { PRACTICE } from "@/labo/content";
+import { mc, lh, type Lang } from "@/labo/method/i18n";
 
 /**
  * The eligibility gate — the hero's primary interactive element and the whole
@@ -20,46 +21,34 @@ import { PRACTICE } from "@/labo/content";
 type Residency = "WA" | "CA" | "OTHER";   // Nov 6 2026: California restored
 type Reason = "" | "glp1" | "pep" | "trt" | "hrt" | "unsure";
 
-const COPY: Record<Exclude<Reason, "">, { label: string; panel: string; slug?: string }> = {
-  glp1:   { label: "GLP-1 Weight Management",  panel: "metabolic panel with HbA1c, fasting insulin and lipids", slug: "glp-1-weight-management" },
-  pep:    { label: "Peptide Therapy",           panel: "baseline panel with IGF-1 and inflammatory markers", slug: "peptide-therapy" },
-  trt:    { label: "Testosterone for Men",      panel: "full endocrine work-up with hematocrit and PSA", slug: "testosterone-for-men" },
-  hrt:    { label: "Hormone Therapy for Women", panel: "hormone panel with estradiol, FSH and progesterone", slug: "hormone-therapy-for-women" },
-  unsure: { label: "a starting consult",        panel: "broad baseline panel" },
+/** Which program each answer leads to. The words (labels, panels, steps) are in ui.en.ts / ui.es.ts → gate. */
+const SLUG: Record<Exclude<Reason, "">, string | undefined> = {
+  glp1: "glp-1-weight-management", pep: "peptide-therapy", trt: "testosterone-for-men", hrt: "hormone-therapy-for-women", unsure: undefined,
 };
 
-const STATES: { code: Residency; label: string }[] = [
-  { code: "WA", label: "Washington" },
-  { code: "CA", label: "California" },
-  { code: "OTHER", label: "Elsewhere" },
-];
-
-const ELIGIBLE_STEPS = [
-  "Ten-minute intake in the secure portal",
-  "Lab order sent, drawn near you in 2 to 5 days",
-  "Video visit once results land, protocol agreed together",
-];
-const WAITLIST_STEPS = [
-  "Join the waitlist for your state",
-  "You hear from me only if licensure changes",
-];
-
-export default function Gate() {
+export default function Gate({ lang = "en" }: { lang?: Lang }) {
   const [residency, setResidency] = useState<Residency | null>(null);
   const [reason, setReason] = useState<Reason>("");
+  const c = mc(lang), g = c.t.gate;
+  const STATES: { code: Residency; label: string }[] = [
+    { code: "WA", label: "Washington" },
+    { code: "CA", label: "California" },
+    { code: "OTHER", label: g.elsewhere },
+  ];
 
   const eligible = residency === "WA" || residency === "CA";
-  const p = reason ? COPY[reason] : null;
+  const slug = reason ? SLUG[reason] : undefined;
+  const p = reason ? { label: slug ? c.getProgram(slug)?.name ?? null : null, panel: g.panel[reason], slug } : null;
 
   return (
     <div className="gate">
       <div className="gh">
-        <h3>See if I can treat you</h3>
-        <p>Two questions, about five seconds.</p>
+        <h3>{g.h}</h3>
+        <p>{g.p}</p>
       </div>
       <div className="gb">
         <div className="field">
-          <label id="lbl-state">Where do you live?</label>
+          <label id="lbl-state">{g.where}</label>
           <div className="seg" role="group" aria-labelledby="lbl-state" style={{ gridTemplateColumns: `repeat(${STATES.length},1fr)` }}>
             {STATES.map((s) => (
               <button key={s.code} type="button" aria-pressed={residency === s.code}
@@ -70,14 +59,14 @@ export default function Gate() {
           </div>
         </div>
         <div className="field">
-          <label htmlFor="prog">What brought you here?</label>
+          <label htmlFor="prog">{g.what}</label>
           <select id="prog" value={reason} onChange={(e) => setReason(e.target.value as Reason)}>
-            <option value="">Choose a starting point</option>
-            <option value="glp1">Weight that will not move</option>
-            <option value="pep">Recovery, sleep and performance</option>
-            <option value="trt">Low energy or low testosterone</option>
-            <option value="hrt">Perimenopause or menopause</option>
-            <option value="unsure">I am not sure yet</option>
+            <option value="">{g.choose}</option>
+            <option value="glp1">{g.opts.glp1}</option>
+            <option value="pep">{g.opts.pep}</option>
+            <option value="trt">{g.opts.trt}</option>
+            <option value="hrt">{g.opts.hrt}</option>
+            <option value="unsure">{g.opts.unsure}</option>
           </select>
         </div>
       </div>
@@ -86,40 +75,37 @@ export default function Gate() {
         <div className={`res ${eligible ? "ok" : "warn"}`} id="gate-result" role="status">
           {eligible ? (
             <>
-              <h4>Yes — I can treat you.</h4>
+              <h4>{g.yes}</h4>
               <p>
-                {p
-                  ? `You would start on ${p.label}. Your first panel would be a ${p.panel}, drawn at a lab near you.`
-                  : "Pick a starting point above and I will tell you which panel you would begin with."}
+                {p ? g.result(p.label, p.panel) : g.pick}
               </p>
               <ol className="mini">
-                {ELIGIBLE_STEPS.map((t, i) => (
+                {g.eligibleSteps.map((t, i) => (
                   <li key={t}><span className="n">{i + 1}</span><span>{t}</span></li>
                 ))}
               </ol>
               <div>
-                <a className="btn btn-primary" href={p?.slug ? `/join/${p.slug}` : "/programs"}>
-                  Start my intake
+                <a className="btn btn-primary" href={lh(lang, p?.slug ? `/join/${p.slug}` : "/programs")}>
+                  {g.startMy}
                 </a>
               </div>
             </>
           ) : (
             <>
-              <h4>Not yet — and I would rather tell you now.</h4>
+              <h4>{g.no}</h4>
               <p>
-                Telehealth rules require you to be physically located in a state where your clinician is licensed.
-                I currently treat patients in Washington and California only. Leave your email and I will tell you if that changes.
+                {g.noP}
               </p>
               <ol className="mini">
-                {WAITLIST_STEPS.map((t, i) => (
+                {g.waitlistSteps.map((t, i) => (
                   <li key={t}><span className="n">{i + 1}</span><span>{t}</span></li>
                 ))}
               </ol>
               <div>
                 {/* A mailto the visitor sends themselves: nothing is collected or stored by this site (§8). */}
                 <a className="btn btn-primary"
-                   href={`mailto:${PRACTICE.email}?subject=${encodeURIComponent("Waitlist for my state")}`}>
-                  Join the waitlist
+                   href={`mailto:${PRACTICE.email}?subject=${encodeURIComponent(g.waitlistSubject)}`}>
+                  {g.joinWaitlist}
                 </a>
               </div>
             </>

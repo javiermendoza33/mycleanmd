@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { MethodHeader, MethodFooter } from "@/components/labo/MethodChrome";
+import { MethodHeader, MethodFooter, MethodScope } from "@/components/labo/MethodChrome";
 import "./method.css";
 import { METHOD, AVAILABILITY, LAUNCH_READY } from "@/labo/content";
+import { alternates } from "@/labo/method/i18n";
 
 /**
  * The Labo Method — telehealth, split from The Labo Clinic Nov 19 2026.
@@ -44,7 +45,7 @@ export const metadata: Metadata = {
     absolute: `${TITLE} | ${METHOD.name}`,
   },
   description: DESCRIPTION,
-  alternates: { canonical: "/" },
+  alternates: alternates("en", "/"),   // Nov 27 2026: + the hreflang pair for /es
   robots: LAUNCH_READY ? undefined : { index: false, follow: false },
   openGraph: {
     type: "website",
@@ -58,10 +59,10 @@ export const metadata: Metadata = {
 
 export default function MethodLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div data-method>
+    <MethodScope>
       <MethodHeader />
       <main id="main">{children}</main>
       <MethodFooter />
-    </div>
+    </MethodScope>
   );
 }

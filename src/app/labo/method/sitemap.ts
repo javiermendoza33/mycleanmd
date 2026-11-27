@@ -27,5 +27,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { p: "/sms", priority: 0.3 },
     { p: "/accessibility", priority: 0.2 },
   ];
-  return paths.map(({ p, priority }) => ({ url: `${BASE}${p}`, lastModified: AT, changeFrequency: "monthly" as const, priority }));
+  // Nov 27 2026: the pages that exist in Spanish are listed under /es too (the hreflang pair is in each page's metadata).
+  const ES = ["", "/programs", ...PROGRAMS.map((x) => `/programs/${x.slug}`), "/pricing", "/how-it-works", "/faq"];
+  const es = paths.filter(({ p }) => ES.includes(p)).map(({ p, priority }) => ({ p: `/es${p}`, priority: Math.max(0.3, priority - 0.1) }));
+  return [...paths, ...es].map(({ p, priority }) => ({ url: `${BASE}${p}`, lastModified: AT, changeFrequency: "monthly" as const, priority }));
 }

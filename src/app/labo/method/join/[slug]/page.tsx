@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { Eyebrow } from "@/components/labo/Sections";
-import { PROGRAMS, getProgram, GATE_ROBOTS } from "@/labo/content";
+import { PROGRAMS, GATE_ROBOTS } from "@/labo/content";
+import { mc, alternates } from "@/labo/method/i18n";
+import JoinView from "../../_views/Join";
+
+const c = mc("en");
 
 export function generateStaticParams() {
   return PROGRAMS.map((p) => ({ slug: p.slug }));
@@ -10,48 +12,13 @@ export function generateStaticParams() {
 export async function generateMetadata(
   { params }: { params: Promise<{ slug: string }> }
 ): Promise<Metadata> {
-  const p = getProgram((await params).slug);
-  if (!p) return { title: "Not found" };
-  return { title: `Join · ${p.name}`, ...GATE_ROBOTS, alternates: { canonical: `/join/${p.slug}` } };
+  const p = c.getProgram((await params).slug);
+  if (!p) return { title: c.t.meta.notFound };
+  return { title: c.t.meta.join(p.name), ...GATE_ROBOTS, alternates: alternates("en", `/join/${p.slug}`) };
 }
 
-export default async function JoinProgramPage(
+export default async function Page(
   { params }: { params: Promise<{ slug: string }> }
 ) {
-  const p = getProgram((await params).slug);
-  if (!p) notFound();
-  const configured = p.stripePriceId !== "PRICE_ID_NOT_SET";
-
-  return (
-    <section>
-      <div className="wrap tight" style={{ paddingBlock: 8 }}>
-        <Eyebrow>Program {p.index}</Eyebrow>
-        <h1 style={{ marginTop: 15 }}>{p.name}</h1>
-        <p className="sub" style={{ marginTop: 17 }}>{p.lede}</p>
-
-        <div className="tile pricecard" style={{ marginTop: 34, maxWidth: 420 }}>
-          <span className="kicker">Program fee</span>
-          <span className="amt mono">{p.price}<span className="u"> / mo</span></span>
-          <p style={{ fontSize: ".92rem", color: "var(--muted)" }}>{p.priceNote}</p>
-          <ul className="tl" style={{ marginTop: 18, gap: 10 }}>
-            {p.pricingBullets.map((b) => <li key={b}>{b}</li>)}
-          </ul>
-
-          {configured ? (
-            <a className="btn btn-primary" style={{ marginTop: 22 }} href={`/api/labo/checkout?program=${p.slug}`}>
-              Continue to secure checkout
-            </a>
-          ) : (
-            <p style={{ marginTop: 22, fontSize: ".85rem", color: "var(--muted)" }}>
-              Checkout isn&rsquo;t connected yet for this program — Stripe pricing still
-              needs to be set up.
-            </p>
-          )}
-          <p style={{ marginTop: 14, fontSize: ".8rem", color: "var(--muted)" }}>
-            {p.pricingNote}
-          </p>
-        </div>
-      </div>
-    </section>
-  );
+  return <JoinView lang="en" slug={(await params).slug} />;
 }

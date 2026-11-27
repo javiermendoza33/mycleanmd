@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { METHOD, METHOD_NAV, PROGRAMS, HEALTHIE, PRACTICE, FOOTER_DISCLAIMER, AVAILABILITY } from "@/labo/content";
+import { METHOD, HEALTHIE, PRACTICE } from "@/labo/content";
+import { mc, lh, langOf, basePath, switchHref } from "@/labo/method/i18n";
 import { Logo } from "@/components/labo/Logo";
 
 /**
@@ -11,8 +12,27 @@ import { Logo } from "@/components/labo/Logo";
  * (Javier: "revamp totally to look more like this"): a one-line promo, a floating white pill header (wordmark,
  * nav, Sign in, Get started), a phone sheet, and a dark footer that ends in the wordmark. Styles in method.css.
  * Separate brand from The Labo Clinic — nothing here touches [data-clinic].
+ *
+ * Nov 27 2026 (Javier: "a button that switches in Spanish"): the chrome reads its language from the URL — anything
+ * under /es is Spanish — and carries the switch (`LangSwitch`): the same page in the other language when it exists,
+ * otherwise that language's home. Pages with no Spanish version yet keep their English links (see i18n.ts).
  */
-const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
+
+/** Wraps the whole Method site so assistive tech and the browser know which language the page is in. */
+export function MethodScope({ children }: { children: React.ReactNode }) {
+  const lang = langOf(usePathname());
+  return <div data-method lang={lang}>{children}</div>;
+}
+
+function LangSwitch({ pathname, className }: { pathname: string; className: string }) {
+  const lang = langOf(pathname), t = mc(lang).t, other = lang === "es" ? "en" : "es";
+  return (
+    <Link className={className} href={switchHref(pathname)} hrefLang={other} lang={other} aria-label={t.switchAria}>
+      <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18" /></svg>
+      <span className="full">{t.switchLabel}</span><span className="short">{t.switchShort}</span>
+    </Link>
+  );
+}
 
 export function MethodHeader() {
   const pathname = usePathname();
@@ -23,27 +43,32 @@ export function MethodHeader() {
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
     document.addEventListener("keydown", onKey); return () => document.removeEventListener("keydown", onKey);
   }, [open]);
-  const on = (href: string) => pathname === href || pathname.startsWith(href + "/");
+  const lang = langOf(pathname), c = mc(lang), t = c.t, h = t.chrome;
+  const L = (p: string) => lh(lang, p);
+  const here = basePath(pathname);
+  const on = (href: string) => here === href || here.startsWith(href + "/");
   return (
     <>
-      <a className="skip" href="#main">Skip to content</a>
-      <div className="mpromo" role="region" aria-label="Notice">Licensed for {AVAILABILITY} residents · one monthly fee, cancel any month · <Link href="/pricing">See pricing →</Link></div>
+      <a className="skip" href="#main">{h.skip}</a>
+      <div className="mpromo" role="region" aria-label={h.notice}>{h.promo(c.AVAILABILITY)}<Link href={L("/pricing")}>{h.promoLink}</Link><LangSwitch pathname={pathname} className="mlang-top" /></div>
       <header className="mhead">
         <div className="pill">
-          <Link className="brand" href="/" aria-label={`${METHOD.name} — home`}><Logo variant="method" name={METHOD.name} /></Link>
-          <nav className="mlinks" aria-label="Primary">
-            {METHOD_NAV.map((l) => <Link key={l.href} href={l.href} className={on(l.href) ? "on" : undefined}>{l.label}</Link>)}
+          <Link className="brand" href={L("/")} aria-label={h.home(METHOD.name)}><Logo variant="method" name={METHOD.name} /></Link>
+          <nav className="mlinks" aria-label={h.primary}>
+            {c.NAV.map((l) => <Link key={l.href} href={L(l.href)} className={on(l.href) ? "on" : undefined}>{l.label}</Link>)}
           </nav>
-          <Link className="signin" href="/signin">Sign in</Link>
-          <Link className="btn btn-primary btn-sm" href="/start">Get started</Link>
-          <button type="button" className="mburger" aria-expanded={open} aria-controls="msheet" aria-label={open ? "Close menu" : "Open menu"} onClick={() => setOpen((v) => !v)}>{open ? "×" : "☰"}</button>
+          <LangSwitch pathname={pathname} className="mlang" />
+          <Link className="signin" href={L("/signin")}>{h.signIn}</Link>
+          <Link className="btn btn-primary btn-sm" href="/start">{t.getStarted}</Link>
+          <button type="button" className="mburger" aria-expanded={open} aria-controls="msheet" aria-label={open ? h.closeMenu : h.openMenu} onClick={() => setOpen((v) => !v)}>{open ? "×" : "☰"}</button>
         </div>
-        <nav id="msheet" className="msheet" aria-label="Menu" hidden={!open}>
-          {METHOD_NAV.map((l) => <Link key={l.href} href={l.href}>{l.label}</Link>)}
+        <nav id="msheet" className="msheet" aria-label={h.menu} hidden={!open}>
+          {c.NAV.map((l) => <Link key={l.href} href={L(l.href)}>{l.label}</Link>)}
           <div className="sep" />
-          <Link href="/signin">Sign in</Link>
-          <a href={`https://${PRACTICE.domain}`}>{PRACTICE.name} (in person) ↗</a>
-          <div className="acts"><Link className="btn btn-primary" href="/start">Get started</Link></div>
+          <Link href={L("/signin")}>{h.signIn}</Link>
+          <LangSwitch pathname={pathname} className="mlang-row" />
+          <a href={`https://${PRACTICE.domain}`}>{h.inPerson(PRACTICE.name)}</a>
+          <div className="acts"><Link className="btn btn-primary" href="/start">{t.getStarted}</Link></div>
         </nav>
       </header>
     </>
@@ -51,48 +76,53 @@ export function MethodHeader() {
 }
 
 export function MethodFooter() {
+  const pathname = usePathname();
+  const lang = langOf(pathname), c = mc(lang), t = c.t, h = t.chrome;
+  const L = (p: string) => lh(lang, p);
   return (
     <footer className="mfoot">
       <div className="wrap">
         <div className="cols">
-          <div><h2>Care designed around your numbers.</h2><p style={{ marginTop: 12, fontSize: ".86rem", color: "#8B98B3" }}>By video, for residents of {AVAILABILITY}.</p></div>
+          <div><h2>{h.footH}</h2><p style={{ marginTop: 12, fontSize: ".86rem", color: "#8B98B3" }}>{h.footSub(c.AVAILABILITY)}</p></div>
           <div>
-            <p className="k">Programs</p>
-            <ul>{PROGRAMS.map((p) => <li key={p.slug}><Link href={`/programs/${p.slug}`}>{p.name}</Link></li>)}</ul>
+            <p className="k">{h.programs}</p>
+            <ul>{c.PROGRAMS.map((p) => <li key={p.slug}><Link href={L(`/programs/${p.slug}`)}>{p.name}</Link></li>)}</ul>
           </div>
           <div>
-            <p className="k">Learn</p>
+            <p className="k">{h.learn}</p>
             <ul>
-              {METHOD_NAV.map((l) => <li key={l.href}><Link href={l.href}>{l.label}</Link></li>)}
-              <li><Link href="/legal">Legal &amp; disclaimers</Link></li>
-              <li><Link href="/terms">Terms of use</Link></li>
-              <li><Link href="/privacy-policy">Privacy policy</Link></li>
-              <li><Link href="/sms">SMS terms</Link></li>
-              <li><Link href="/accessibility">Accessibility</Link></li>
+              {c.NAV.map((l) => <li key={l.href}><Link href={L(l.href)}>{l.label}</Link></li>)}
+              {h.journal && <li><Link href="/blog">{h.journal}</Link></li>}
+              <li><Link href="/legal">{h.legal}</Link></li>
+              <li><Link href="/terms">{h.terms}</Link></li>
+              <li><Link href="/privacy-policy">{h.privacy}</Link></li>
+              <li><Link href="/sms">{h.sms}</Link></li>
+              <li><Link href="/accessibility">{h.a11y}</Link></li>
             </ul>
           </div>
           <div>
-            <p className="k">Patients</p>
+            <p className="k">{h.patients}</p>
             <ul>
-              <li><Link href="/signin">Sign in</Link></li>
-              <li><Link href={HEALTHIE.book}>Book a consult</Link></li>
-              <li><Link href="/programs">Start an intake</Link></li>
+              <li><Link href={L("/signin")}>{h.signIn}</Link></li>
+              <li><Link href={L(HEALTHIE.book)}>{h.book}</Link></li>
+              <li><Link href={L("/programs")}>{h.startAnIntake}</Link></li>
               <li><a href={`mailto:${METHOD.email}`}>{METHOD.email}</a></li>
+              <li><LangSwitch pathname={pathname} className="mlang-foot" /></li>
             </ul>
           </div>
           <div>
-            <p className="k">In person</p>
+            <p className="k">{h.inPersonK}</p>
             <ul>
               <li><a href={`https://${PRACTICE.domain}`}>{PRACTICE.name} ↗</a></li>
-              <li><a href={`https://${PRACTICE.domain}/services`}>Injectables &amp; laser</a></li>
-              <li><a href={`https://${PRACTICE.domain}/shop`}>Skincare shop</a></li>
+              <li><a href={`https://${PRACTICE.domain}/services`}>{h.injectables}</a></li>
+              <li><a href={`https://${PRACTICE.domain}/shop`}>{h.shop}</a></li>
             </ul>
           </div>
         </div>
         <div className="mark" aria-hidden="true">{METHOD.name}</div>
         <div className="legal">
-          <p>{FOOTER_DISCLAIMER}</p>
-          <div className="row"><span>© {new Date().getFullYear()} {METHOD.name}. All rights reserved.</span><span><Link href="/legal">Legal</Link> · <Link href="/terms">Terms</Link> · <Link href="/privacy-policy">Privacy</Link> · <Link href="/sms">SMS terms</Link> · <Link href="/accessibility">Accessibility</Link></span></div>
+          <p>{c.FOOTER_DISCLAIMER}{h.englishOnly && <> {h.englishOnly}</>}</p>
+          <div className="row"><span>© {new Date().getFullYear()} {METHOD.name}. {h.rights}</span><span><Link href="/legal">{h.legalShort}</Link> · <Link href="/terms">{h.termsShort}</Link> · <Link href="/privacy-policy">{h.privacyShort}</Link> · <Link href="/sms">{h.smsShort}</Link> · <Link href="/accessibility">{h.a11yShort}</Link></span></div>
         </div>
       </div>
     </footer>

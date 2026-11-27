@@ -1,45 +1,17 @@
-import { PageHero } from "@/components/labo/Sections";
-import Faq from "@/components/labo/Faq";
-import { FAQ, HEALTHIE, GATE_ROBOTS } from "@/labo/content";
+import type { Metadata } from "next";
+import { GATE_ROBOTS } from "@/labo/content";
+import { mc, alternates } from "@/labo/method/i18n";
+import FaqView from "../_views/FaqView";
 
-export const metadata = {
-  title: "FAQ",
-  description: "Licensure, insurance, using labs you already have, how fast you can start, who prescribes, and how to cancel.",
-  alternates: { canonical: "/faq" },
+const c = mc("en");
+
+export const metadata: Metadata = {
+  title: c.t.meta.faq,
+  description: c.t.meta.faqDesc,
+  alternates: alternates("en", "/faq"),
   ...GATE_ROBOTS,
 };
 
-/** FAQPage structured data — these are the questions people search. */
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: FAQ.map((f) => ({
-    "@type": "Question",
-    name: f.q,
-    acceptedAnswer: { "@type": "Answer", text: f.a },
-  })),
-};
-
-export default function FaqPage() {
-  return (
-    <>
-      <script type="application/ld+json"
-              dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <PageHero eyebrow="Frequently asked" title="Before you start" />
-      <section>
-        <div className="wrap tight">
-          <Faq />
-          <div className="tile" style={{ marginTop: 56 }}>
-            <h3>Still unsure whether this fits?</h3>
-            <p>Book a consult and ask. There is no obligation to start a program.</p>
-            <div>
-              <a className="btn btn-ghost" href={HEALTHIE.book}>
-                Book a $149 consult
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
-  );
+export default function Page() {
+  return <FaqView lang="en" />;
 }

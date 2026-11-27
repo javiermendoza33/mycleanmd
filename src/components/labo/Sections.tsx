@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
-import { HEALTHIE, AVAILABILITY } from "@/labo/content";
+import { HEALTHIE } from "@/labo/content";
+import { mc, lh, type Lang } from "@/labo/method/i18n";
 
 /** Mono uppercase eyebrow — the White Room "kicker". */
 export function Eyebrow({ children }: { children: ReactNode }) {
@@ -30,24 +31,23 @@ export function PageHero({
  * same way. Both buttons go through the HEALTHIE constants; the note is
  * generated from AVAILABILITY like the footer and the legal page.
  */
-export function ClosingCTA({
-  title = "Start with your numbers.",
-  lede = "Intake takes about ten minutes. Labs get drawn near you. You leave the visit with a plan you understand.",
-}: { title?: string; lede?: string }) {
+export function ClosingCTA({ title, lede, lang = "en" }: { title?: string; lede?: string; lang?: Lang }) {
+  const c = mc(lang), t = c.t;   // Nov 27 2026: Spanish pages pass lang="es"; the words live in ui.en.ts / ui.es.ts
+  title ??= t.closing.title; lede ??= t.closing.lede;
   return (
     <section className="close">
       <div className="wrap">
         <h2>{title}</h2>
         <p className="sub" style={{ margin: "20px auto 0", maxWidth: "44ch" }}>{lede}</p>
         <div className="acts">
-          <a className="btn btn-primary" href={HEALTHIE.intake}>
-            Start your intake
+          <a className="btn btn-primary" href={lh(lang, HEALTHIE.intake)}>
+            {t.startIntake}
           </a>
-          <a className="btn btn-ghost" href={HEALTHIE.book}>
-            Book a $149 consult
+          <a className="btn btn-ghost" href={lh(lang, HEALTHIE.book)}>
+            {t.bookConsult(c.EXTRA_PRICING[0].price)}
           </a>
         </div>
-        <p className="note">Available to residents of {AVAILABILITY}.</p>
+        <p className="note">{t.closing.note(c.AVAILABILITY)}</p>
       </div>
     </section>
   );
