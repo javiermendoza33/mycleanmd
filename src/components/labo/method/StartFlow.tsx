@@ -118,13 +118,13 @@ export function StartFlow({ programs, initial, states, availability, sets, signe
       <div className="sflow-card">
         {step === 0 && <><h2>Choose your program</h2><p className="sub">Each one starts from your own labs. You can switch later.</p>
           <div className="sprog">{programs.map(p => <button key={p.slug} type="button" className={p.slug === program ? "on" : ""} onClick={() => setProgram(p.slug)}><b>{p.name}</b><span>{p.blurb}</span><em>{p.price}<small>/mo</small></em></button>)}</div></>}
-        {step === 1 && <><h2>Quick check</h2><p className="sub">Telehealth rules mean you need to be in {availability} at the time of your visit. Nothing here is saved until you create an account.</p>
+        {step === 1 && <><h2>Quick check</h2><p className="sub">Care is available in {availability}. Telehealth rules mean you need to be physically in the state you choose at the time of your visit. Nothing here is saved until you create an account.</p>
           <div className="sgrid">
             <label className="field"><span>State you live in</span><select value={check.state} onChange={e => setCheck({ ...check, state: e.target.value })}><option value="">Choose…</option>{states.map(s => <option key={s.code} value={s.code}>{s.name}</option>)}<option value="XX">Somewhere else</option></select></label>
             <label className="field"><span>Age</span><input type="number" inputMode="numeric" value={check.age} onChange={e => setCheck({ ...check, age: e.target.value })} /></label>
             <label className="field"><span>Sex at birth</span><select value={check.sex} onChange={e => setCheck({ ...check, sex: e.target.value })}><option value="">Choose…</option><option value="female">Female</option><option value="male">Male</option></select></label>
           </div>
-          {check.state === "XX" && <p className="snote bad">We can only treat residents of {availability} right now. Leave your email on the home page and we'll tell you when your state opens.</p>}
+          {check.state === "XX" && <p className="snote bad">We can&rsquo;t start care where you are yet. Email <a href="mailto:hello@thelabomethod.com">hello@thelabomethod.com</a> and we&rsquo;ll tell you when that changes.</p>}
           {check.age && !ageOk && <p className="snote bad">You need to be 18 or older.</p>}</>}
         {step === 2 && <><h2>{signedIn ? "Signed in" : "Create your account"}</h2><p className="sub">{signedIn ? `Continuing as ${signedIn.email}.` : "This is how you'll reach your portal, your clinician and your plan."}</p>
           {!signedIn && <div className="sgrid"><label className="field"><span>Email</span><input type="email" autoComplete="email" value={account.email} onChange={e => setAccount({ ...account, email: e.target.value })} /></label><label className="field"><span>Password (8+ characters)</span><input type="password" autoComplete="new-password" value={account.password} onChange={e => setAccount({ ...account, password: e.target.value })} /></label></div>}

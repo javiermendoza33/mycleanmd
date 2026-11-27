@@ -51,7 +51,7 @@ export default function MethodSmsPage() {
             <h3>Privacy</h3>
             <p>Your mobile number and your text-message consent are never sold, rented or shared with third parties or affiliates for their marketing or promotional purposes. We share them only with the vendors that deliver our messages, and only to deliver them. Health information is never placed in a text message. The rest of our practices are in the <Link href="/privacy-policy">Privacy Policy</Link> and our <Link href="/legal">notices</Link>.</p>
             <h3>Support</h3>
-            <p>Email <a href={`mailto:${METHOD.email}`}>{METHOD.email}</a>. {METHOD.name} serves residents of {AVAILABILITY} by video; clinical services are provided by a licensed nurse practitioner.</p>
+            <p>Email <a href={`mailto:${METHOD.email}`}>{METHOD.email}</a>. {METHOD.name} serves residents of {AVAILABILITY} by video; clinical services are provided by licensed clinicians.</p>
             <p className="note">Last updated November 23, 2026.</p>
           </div>
         </div>

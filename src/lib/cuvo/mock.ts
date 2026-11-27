@@ -1,3 +1,4 @@
+import { US_STATES } from "@/labo/method/states";
 import "server-only";
 import { createHash, randomBytes } from "node:crypto";
 import { createAdminClient } from "@/lib/supabase/admin";
@@ -45,7 +46,7 @@ const statusAt = (s: number): CaseStatus => (s < 0 ? "received" : s < T.queued ?
 
 export const mockClient: CuvoClient = {
   medications: async () => [{ id: "semaglutide-compounded", name: "Semaglutide (compounded)", category: "weight-management" }, { id: "testosterone-cypionate", name: "Testosterone cypionate", category: "hormone", controlled: true }],
-  states: async () => [{ code: "CA", name: "California" }, { code: "WA", name: "Washington" }],
+  states: async () => US_STATES,
   questionSets: async () => MOCK_SETS.map(({ questions: _q, ...s }) => s),
   questionSet: async (qid) => { const s = MOCK_SETS.find(x => x.id === qid); if (!s) throw new Error("Cuvo 404 not_found: question set"); return s; },
   createPatient: async p => ({ ...p, id: `pat_${createHash("sha1").update(p.external_id || p.email || randomBytes(8).toString("hex")).digest("hex").slice(0, 16)}` }),

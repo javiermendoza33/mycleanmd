@@ -14,7 +14,7 @@ import { PROGRAMS, type Program } from "@/labo/content";
  * ⚠️ Not yet reviewed by Monika or counsel. It is a translation of copy that is itself still flagged as
  * placeholder in content.ts (prices, clinical claims), and it stays noindex with the rest until LAUNCH_READY.
  */
-export const AVAILABILITY_ES = "California y Washington";
+export const AVAILABILITY_ES = "los 50 estados";   // Nov 27 2026: was "California y Washington" (see AVAILABILITY in content.ts)
 
 type Words = Omit<Program, "slug" | "index" | "price" | "priceMeta" | "stripePriceId">;
 
@@ -199,7 +199,7 @@ export const INCLUDED_ES = [
 
 export const CLINICIAN_ES = {
   quote: "Creé esta práctica porque me cansé de ver cómo a la gente le entregaban una receta sin que nadie revisara sus análisis, su historial ni su vida.",
-  body: `Soy enfermera de práctica avanzada (nurse practitioner) con certificación nacional y licencia en ${AVAILABILITY_ES}. Cada protocolo aquí lo escribo yo, lo reviso yo y lo ajusto yo conforme cambian tus números.`,
+  body: `La atención está disponible en ${AVAILABILITY_ES}. Cada protocolo lo escribe, lo revisa y lo ajusta una profesional de salud con licencia en tu estado, conforme cambian tus números.`,
 };
 
 export const EXTRA_PRICING_ES = [
@@ -212,7 +212,7 @@ export const PRICING_FOOTNOTE_ES =
   "Los precios corresponden al programa descrito y pueden cambiar. La disponibilidad y el precio de los medicamentos compuestos varían según la farmacia. Nada de lo aquí indicado es una cotización ni una garantía de tratamiento.";
 
 export const FAQ_ES = [
-  { q: `¿Tengo que vivir en ${AVAILABILITY_ES}?`, a: `Sí. Tengo licencia en ${AVAILABILITY_ES}, y las reglas de telesalud exigen que estés físicamente en un estado donde tu profesional de salud tenga licencia en el momento de la consulta. Si te mudas o viajas, avísame, porque afecta si puedo atenderte ese día.` },
+  { q: "¿En qué estados atienden?", a: `La atención está disponible en ${AVAILABILITY_ES}. Las reglas de telesalud exigen que estés físicamente en un estado donde tu profesional de salud tenga licencia en el momento de la consulta, así que te asignamos una profesional con licencia donde vives. Si te mudas o viajas, avísanos, porque afecta quién puede atenderte ese día.` },
   { q: "¿Lo cubre el seguro?", a: "La cuota del programa es de pago directo. Con frecuencia los análisis se pueden cobrar a tu seguro, y escribiré órdenes que te permitan usar tu propio laboratorio o tu plan. Hay recibos detallados (superbills) disponibles si quieres pedir un reembolso fuera de la red." },
   { q: "¿Puedo usar análisis que ya tengo?", a: "Muchas veces, sí. Si tu panel es reciente y suficientemente completo, lo usaremos en lugar de repetir la toma. Envíalo por el portal antes de tu primera consulta y te diré qué falta, si falta algo." },
   { q: "¿Qué tan rápido puedo empezar?", a: "La mayoría de los pacientes completa el cuestionario inicial, se hace los análisis en pocos días y tiene un protocolo dentro de las 24 horas siguientes a la llegada de los resultados. Las sustancias controladas, como la testosterona, requieren primero una consulta por video y una revisión del programa de monitoreo de recetas." },
@@ -231,5 +231,5 @@ export const METHOD_NAV_ES = [
   { label: "Preguntas", href: "/faq" },
 ] as const;
 
-export const FOOTER_DISCLAIMER_ES = `Servicios clínicos prestados por una enfermera de práctica avanzada con licencia en ${AVAILABILITY_ES}. Este sitio web no ofrece consejo médico.`;
+export const FOOTER_DISCLAIMER_ES = `Los servicios clínicos los prestan profesionales de salud con licencia en el estado del paciente; la atención está disponible en ${AVAILABILITY_ES}. Este sitio web no ofrece consejo médico.`;
 export const TAGLINE_ES = "Atención hormonal, de peso y de péptidos, por video.";

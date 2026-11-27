@@ -23,7 +23,7 @@ import { alternates } from "@/labo/method/i18n";
  * attorney sign-off. Flip LAUNCH_READY once Monika/counsel clear those.
  */
 const TITLE = "Telehealth hormone, weight & peptide care";
-const DESCRIPTION = `${METHOD.tagline} Real labs first, a real dose plan, a clinician actually watching. Licensed for residents of ${AVAILABILITY}.`;
+const DESCRIPTION = `${METHOD.tagline} Real labs first, a real dose plan, a clinician actually watching. Available in ${AVAILABILITY}.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(`https://${METHOD.domain}`),

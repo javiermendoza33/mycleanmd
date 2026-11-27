@@ -57,9 +57,12 @@ export const isGated = (path: string) => GATED.some((g) => path === g || path.st
 /** Spread into a gated page's metadata: `...GATE_ROBOTS` */
 export const GATE_ROBOTS = LAUNCH_READY ? {} : { robots: { index: false, follow: true } };
 
-// Nov 6 2026 (Javier: "she is a doctor and can prescribe in WA and CA") → restored.
-// Oct 26 2026 (Javier: "take out all things California for now") had set this to Washington only.
-export const AVAILABILITY = "California and Washington";
+// Nov 27 2026 (Javier: "we will be in 50 states now… remove [WA and CA] and replace all 50 states"): the Method serves every state
+// through clinicians licensed where the patient lives, so the copy no longer speaks as one nurse practitioner licensed in two states.
+// History: Nov 6 2026 "California and Washington"; Oct 26 2026 Washington only.
+// ⚠️ The sign-up still offers only the states the clinical platform returns (the Cuvo sandbox listed 20 on Nov 24 2026) — confirm
+// the live list really is all 50, per program, before this claim is promoted.
+export const AVAILABILITY = "all 50 states";
 
 export const PRACTICE = {
   name: "The Labo Clinic",
@@ -360,7 +363,7 @@ export const INCLUDED = [
 export const CLINICIAN = {
   quote:
     "I built this practice because I was tired of watching people get handed a prescription without anyone looking at their labs, their history, or their life.",
-  body: `I am a board-certified nurse practitioner licensed in ${AVAILABILITY}. Every protocol here is written by me, reviewed by me, and adjusted by me as your numbers change.`,
+  body: `Care is available in ${AVAILABILITY}. Every protocol is written, reviewed and adjusted by a clinician licensed in your state as your numbers change.`,
 };
 
 export const EXTRA_PRICING = [
@@ -404,7 +407,7 @@ export const ABOUT = {
 };
 
 export const FAQ = [
-  { q: `Do I need to live in ${AVAILABILITY}?`, a: `Yes. I am licensed in ${AVAILABILITY}, and telehealth rules require you to be physically located in a state where your clinician holds a license at the time of your visit. If you move or travel, tell me, because it affects whether I can see you that day.` },
+  { q: "Which states do you serve?", a: `Care is available in ${AVAILABILITY}. Telehealth rules require you to be physically located in a state where your clinician holds a license at the time of your visit, so you are matched with a clinician licensed where you live. If you move or travel, tell us, because it affects who can see you that day.` },
   { q: "Is this covered by insurance?", a: "The program fee is self-pay. Lab work can often be billed to your insurance, and I will write orders that let you use your own lab or your plan. Superbills are available on request if you want to submit for out-of-network reimbursement." },
   { q: "Can I use labs I already have?", a: "Often, yes. If your panel is recent and complete enough, we will use it rather than repeating a draw. Send it through the portal before your first visit and I will tell you what, if anything, is missing." },
   { q: "How fast can I start?", a: "Most patients complete intake, get labs drawn within a few days, and have a protocol within 24 hours of results landing. Controlled substances such as testosterone require a video visit and a prescription-monitoring check first." },
@@ -422,7 +425,7 @@ export const CONTACT = {
 
 export const LEGAL = [
   { title: "No medical advice", body: "The content on this website is for general information only. It is not medical advice, it is not a substitute for consultation with a licensed clinician, and reading it does not create a patient relationship. A patient relationship begins only after intake, a completed clinical evaluation, and a documented visit." },
-  { title: "Scope of licensure", body: `Clinical services are provided by a nurse practitioner licensed in the State of Washington. Patients must be physically located in Washington at the time of each visit. We cannot treat residents of other states.` },
+  { title: "Scope of licensure", body: `Clinical services are provided by clinicians licensed in the state where the patient is located, and care is offered in ${AVAILABILITY}. Patients must be physically located in a state where their treating clinician is licensed at the time of each visit.` },
   { title: "Telehealth consent", body: "All care is delivered by telehealth. Telehealth has limitations, including the inability to perform a physical examination. In some cases an in-person evaluation, imaging, or referral will be required, and treatment may be declined if remote care is not clinically appropriate." },
   { title: "Compounded medications", body: "Some medications prescribed through this practice are compounded by state-licensed pharmacies. Compounded preparations are not reviewed or approved by the FDA for safety, effectiveness, or manufacturing quality. Your clinician will identify whether a product is FDA-approved or compounded before you begin." },
   { title: "Peptide therapies", body: "Certain peptides are prescribed for uses that are not FDA-approved. Evidence quality varies by agent, and outcomes are not guaranteed. Risks, benefits and the state of the evidence will be discussed with you before any peptide is prescribed." },
@@ -466,7 +469,7 @@ export const METHOD_NAV = [
 ] as const;
 
 export const FOOTER_BLURB = `Telehealth hormone, peptide and metabolic care for residents of ${AVAILABILITY}.`;
-export const FOOTER_DISCLAIMER = `Clinical services provided by a nurse practitioner licensed in ${AVAILABILITY}. This website does not provide medical advice.`;
+export const FOOTER_DISCLAIMER = `Clinical services are provided by clinicians licensed in the patient's state; care is available in ${AVAILABILITY}. This website does not provide medical advice.`;
 
 /* ───────────────────────────────────────────────────────────────────────────
  * THE CLINIC — in-person laser care in Seattle (Oct 26 2026, Javier: "Now that

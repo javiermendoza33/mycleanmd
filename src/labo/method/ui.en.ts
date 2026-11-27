@@ -28,7 +28,7 @@ export const UI_EN = {
 
   meta: {
     homeTitle: "Telehealth hormone, weight & peptide care",
-    homeDesc: (tagline: string, a: string) => `${tagline} Real labs first, a real dose plan, a clinician actually watching. Licensed for residents of ${a}.`,
+    homeDesc: (tagline: string, a: string) => `${tagline} Real labs first, a real dose plan, a clinician actually watching. Available in ${a}.`,
     programs: "Programs",
     programsDesc: (a: string) => `Telehealth hormone and metabolic programs for residents of ${a}.`,
     pricing: "Pricing",
@@ -48,7 +48,7 @@ export const UI_EN = {
   chrome: {
     skip: "Skip to content",
     notice: "Notice",
-    promo: (a: string) => `Licensed for ${a} residents · one monthly fee, cancel any month · `,
+    promo: (a: string) => `Available in ${a} · one monthly fee, cancel any month · `,
     promoLink: "See pricing →",
     home: (n: string) => `${n} — home`,
     primary: "Primary",
@@ -85,7 +85,7 @@ export const UI_EN = {
   },
 
   home: {
-    tag: (a: string) => `Board-certified nurse practitioner · licensed in ${a}`,
+    tag: (a: string) => `Licensed clinicians · care in ${a}`,
     h1: ["Weight loss and hormone care, ", "prescribed online."],
     sub: "GLP-1s, peptides, testosterone and menopause care, each one started from your own labs and adjusted by a clinician who is actually watching. Visits by video, medication shipped from a licensed US pharmacy.",
     mostChosen: "Most chosen",
@@ -94,7 +94,7 @@ export const UI_EN = {
     offer2: "Peptides · TRT · hormone therapy",
     offer2P: "Three more programs, the same labs-first method. Pick one, or start with a consult.",
     from: "from",
-    cta1: "See if I can treat you",
+    cta1: "See where I would start",
     cta2: "Browse programs",
     trust: ["No hidden fees", "Cancel any month", "Licensed US pharmacies", "Labs first, always"],
     howK: "How it works",
@@ -135,7 +135,7 @@ export const UI_EN = {
   programs: {
     eyebrow: "Telehealth programs",
     h1: "What brings you here?",
-    sub: (a: string) => `Every program starts the same way: real labs, a real plan, and a clinician who is actually watching. Licensed for residents of ${a}.`,
+    sub: (a: string) => `Every program starts the same way: real labs, a real plan, and a clinician who is actually watching. Available in ${a}.`,
     imgAlt: "A diverse group of women standing close together",
   },
 
@@ -179,10 +179,10 @@ export const UI_EN = {
   },
 
   gate: {
-    h: "See if I can treat you",
-    p: "Two questions, about five seconds.",
-    where: "Where do you live?",
-    elsewhere: "Elsewhere",
+    h: "See where you would start",
+    p: "One question, about five seconds.",
+    /** Shown with the result. Nov 27 2026: the "where do you live" question went away with the two-state limit. */
+    everywhere: (a: string) => `Care is available in ${a}, with a clinician licensed where you live.`,
     what: "What brought you here?",
     choose: "Choose a starting point",
     opts: { glp1: "Weight that will not move", pep: "Recovery, sleep and performance", trt: "Low energy or low testosterone", hrt: "Perimenopause or menopause", unsure: "I am not sure yet" } as Record<GateReason, string>,
@@ -195,15 +195,9 @@ export const UI_EN = {
     } as Record<GateReason, string>,
     /** `program` is the program's name, or null for "not sure yet". */
     result: (program: string | null, panel: string) => `You would start on ${program ?? "a starting consult"}. Your first panel would be a ${panel}, drawn at a lab near you.`,
-    yes: "Yes — I can treat you.",
-    pick: "Pick a starting point above and I will tell you which panel you would begin with.",
+    yes: "Here is where you would start.",
     eligibleSteps: ["Ten-minute intake in the secure portal", "Lab order sent, drawn near you in 2 to 5 days", "Video visit once results land, protocol agreed together"],
     startMy: "Start my intake",
-    no: "Not yet — and I would rather tell you now.",
-    noP: "Telehealth rules require you to be physically located in a state where your clinician is licensed. I currently treat patients in Washington and California only. Leave your email and I will tell you if that changes.",
-    waitlistSteps: ["Join the waitlist for your state", "You hear from me only if licensure changes"],
-    joinWaitlist: "Join the waitlist",
-    waitlistSubject: "Waitlist for my state",
   },
 
   plan: {

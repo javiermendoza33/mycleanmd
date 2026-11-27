@@ -26,7 +26,7 @@ export const UI_ES: UI = {
 
   meta: {
     homeTitle: "Telesalud hormonal, de peso y de péptidos",
-    homeDesc: (tagline, a) => `${tagline} Primero análisis reales, un plan de dosis real y una profesional de salud que de verdad está pendiente. Con licencia para residentes de ${a}.`,
+    homeDesc: (tagline, a) => `${tagline} Primero análisis reales, un plan de dosis real y una profesional de salud que de verdad está pendiente. Disponible en ${a}.`,
     programs: "Programas",
     programsDesc: (a) => `Programas de telesalud hormonal y metabólica para residentes de ${a}.`,
     pricing: "Precios",
@@ -46,7 +46,7 @@ export const UI_ES: UI = {
   chrome: {
     skip: "Saltar al contenido",
     notice: "Aviso",
-    promo: (a) => `Con licencia para residentes de ${a} · una cuota mensual, cancela cualquier mes · `,
+    promo: (a) => `Disponible en ${a} · una cuota mensual, cancela cualquier mes · `,
     promoLink: "Ver precios →",
     home: (n) => `${n} — inicio`,
     primary: "Principal",
@@ -82,7 +82,7 @@ export const UI_ES: UI = {
   },
 
   home: {
-    tag: (a) => `Enfermera de práctica avanzada certificada · con licencia en ${a}`,
+    tag: (a) => `Profesionales de salud con licencia · atención en ${a}`,
     h1: ["Pérdida de peso y atención hormonal, ", "recetadas en línea."],
     sub: "GLP-1, péptidos, testosterona y atención de la menopausia, cada uno iniciado a partir de tus propios análisis y ajustado por una profesional de salud que de verdad está pendiente. Consultas por video y medicamento enviado desde una farmacia con licencia en EE. UU.",
     mostChosen: "El más elegido",
@@ -91,7 +91,7 @@ export const UI_ES: UI = {
     offer2: "Péptidos · Testosterona · Terapia hormonal",
     offer2P: "Tres programas más, con el mismo método: primero los análisis. Elige uno o empieza con una consulta.",
     from: "desde",
-    cta1: "Averigua si puedo atenderte",
+    cta1: "Averigua por dónde empezar",
     cta2: "Ver programas",
     trust: ["Sin cargos ocultos", "Cancela cualquier mes", "Farmacias con licencia en EE. UU.", "Primero los análisis, siempre"],
     howK: "Cómo funciona",
@@ -132,7 +132,7 @@ export const UI_ES: UI = {
   programs: {
     eyebrow: "Programas de telesalud",
     h1: "¿Qué te trae por aquí?",
-    sub: (a) => `Todos los programas empiezan igual: análisis reales, un plan real y una profesional de salud que de verdad está pendiente. Con licencia para residentes de ${a}.`,
+    sub: (a) => `Todos los programas empiezan igual: análisis reales, un plan real y una profesional de salud que de verdad está pendiente. Disponible en ${a}.`,
     imgAlt: "Un grupo diverso de mujeres de pie, muy juntas",
   },
 
@@ -176,10 +176,9 @@ export const UI_ES: UI = {
   },
 
   gate: {
-    h: "Averigua si puedo atenderte",
-    p: "Dos preguntas, unos cinco segundos.",
-    where: "¿Dónde vives?",
-    elsewhere: "Otro lugar",
+    h: "Averigua por dónde empezar",
+    p: "Una pregunta, unos cinco segundos.",
+    everywhere: (a) => `La atención está disponible en ${a}, con una profesional de salud con licencia donde vives.`,
     what: "¿Qué te trajo aquí?",
     choose: "Elige un punto de partida",
     opts: { glp1: "Peso que no baja", pep: "Recuperación, sueño y rendimiento", trt: "Poca energía o testosterona baja", hrt: "Perimenopausia o menopausia", unsure: "Aún no lo sé" },
@@ -191,15 +190,9 @@ export const UI_ES: UI = {
       unsure: "panel inicial amplio",
     },
     result: (program, panel) => `Empezarías con ${program ? `el programa ${program}` : "una consulta inicial"}. Tus primeros análisis: ${panel}, en un laboratorio cerca de ti.`,
-    yes: "Sí, puedo atenderte.",
-    pick: "Elige un punto de partida arriba y te diré con qué panel empezarías.",
+    yes: "Por aquí empezarías.",
     eligibleSteps: ["Cuestionario de diez minutos en el portal seguro", "Orden de laboratorio enviada; la toma se hace cerca de ti en 2 a 5 días", "Consulta por video cuando llegan los resultados; acordamos el protocolo juntos"],
     startMy: "Empezar mi cuestionario",
-    no: "Todavía no, y prefiero decírtelo ahora.",
-    noP: "Las reglas de telesalud exigen que estés físicamente en un estado donde tu profesional de salud tenga licencia. Por ahora atiendo pacientes solo en Washington y California. Déjame tu correo y te aviso si eso cambia.",
-    waitlistSteps: ["Únete a la lista de espera de tu estado", "Solo te escribiré si cambia la licencia"],
-    joinWaitlist: "Unirme a la lista de espera",
-    waitlistSubject: "Lista de espera para mi estado",
   },
 
   plan: {

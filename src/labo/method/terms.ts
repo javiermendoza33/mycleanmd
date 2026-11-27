@@ -17,7 +17,7 @@ export const methodTermsSections: LegalSection[] = [
     heading: "1. Who can use the service",
     list: [
       "You must be 18 or older.",
-      `You must be a resident of, and physically located in, ${AVAILABILITY} at the time of any video visit. Telehealth rules require the clinician to hold a licence in the state you are in.`,
+      `Care is offered in ${AVAILABILITY}. At the time of any video visit you must be physically located in a US state where your treating clinician holds a licence; telehealth rules require it.`,
       "You must give accurate, complete information about yourself and your health, and keep it current. Care decisions depend on it.",
       "You may not use the service for anyone but yourself.",
     ],

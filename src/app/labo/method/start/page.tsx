@@ -3,6 +3,7 @@ import { PROGRAMS, AVAILABILITY } from "@/labo/content";
 import { cuvo, cuvoMode } from "@/lib/cuvo";
 import { createClient } from "@/lib/supabase/server";
 import { StartFlow, type FlowProgram } from "@/components/labo/method/StartFlow";
+import { US_STATES } from "@/labo/method/states";
 
 export const metadata: Metadata = { title: "Get started — The Labo Method", robots: { index: false, follow: false } };
 export const dynamic = "force-dynamic";
@@ -21,7 +22,7 @@ export default async function Start({ searchParams }: { searchParams: Promise<{ 
   return (
     <section className="sflow-wrap">
       <div className="wrap">
-        <StartFlow programs={programs} initial={sp.program || ""} states={states.length ? states : [{ code: "CA", name: "California" }, { code: "WA", name: "Washington" }]} availability={AVAILABILITY}
+        <StartFlow programs={programs} initial={sp.program || ""} states={states.length ? states : US_STATES} availability={AVAILABILITY}
           sets={Object.fromEntries(sets2.filter(Boolean).map(s => [s!.id, s!]))} signedIn={user ? { email: user.email || "" } : null} mode={cuvoMode()} />
       </div>
     </section>
