@@ -479,6 +479,10 @@ export const JOURNAL_INDEX = true;
 /** Spread into a Journal page's metadata. Needed because the Method layout says noindex for the whole host until launch. */
 export const JOURNAL_ROBOTS = LAUNCH_READY || JOURNAL_INDEX ? { robots: { index: true, follow: true } } : {};
 
+/** IndexNow key for thelabomethod.com (Nov 27 2026). Public by design: it is served at /<key>.txt and sent with each ping
+ *  (scripts/indexnow-method.mjs) so Bing and friends know a changed-pages notice really came from this site. */
+export const INDEXNOW_KEY = "9712138c9eda4e985db1446edd0ca019";
+
 export const METHOD_NAV = [
   { label: "Programs", href: "/programs" },
   { label: "Pricing", href: "/pricing" },

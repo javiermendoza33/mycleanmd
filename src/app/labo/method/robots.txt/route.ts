@@ -1,4 +1,4 @@
-import { METHOD, LAUNCH_READY, JOURNAL_INDEX } from "@/labo/content";
+import { METHOD, LAUNCH_READY, JOURNAL_INDEX, INDEXNOW_KEY } from "@/labo/content";
 
 /**
  * A route handler, not the `robots.ts` metadata convention — see the same
@@ -12,7 +12,7 @@ export function GET() {
     // Nov 27 2026: only the Journal (English + Spanish) is open. The longest matching rule wins, so the Allow lines beat
     // "Disallow: /"; /_next/ and the images are allowed so Google can render the articles it is allowed to read.
     : JOURNAL_INDEX
-    ? ["User-agent: *", "Allow: /blog", "Allow: /es/blog", "Allow: /_next/", "Allow: /labo/", "Disallow: /", "", sitemap]
+    ? ["User-agent: *", "Allow: /blog", "Allow: /es/blog", "Allow: /_next/", "Allow: /labo/", `Allow: /${INDEXNOW_KEY}.txt`, "Disallow: /", "", sitemap]
     // Not launch-ready yet — same placeholder-pricing / no-attorney-sign-off reasons as the clinic's gated pages.
     : ["User-agent: *", "Disallow: /"]
   ).concat("").join("\n");
