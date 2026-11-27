@@ -422,3 +422,35 @@
      tint is denser at this size — the bar stays clean whether or not a given phone blurs. Check on a real iPhone. */
   @media (max-width:960px){[data-labo] [data-method] .mhead .pill{background:linear-gradient(90deg,rgba(22,63,120,.92) 0%,rgba(29,79,145,.92) 55%,rgba(38,89,166,.93) 100%)}}
 }
+
+/* ── Liquid-glass header (Nov 27 2026, Javier: "can we try liquid glass nav bar?") ─────────────────────────────────────────
+   Clear glass instead of tinted blue: the bar is mostly transparent, bends and brightens what is under it (heavy blur + saturation),
+   and carries the tells of liquid glass — a bright specular rim on top, a faint refracted blue along the bottom edge, a soft sheen
+   across the upper half. Clear glass on a light page needs DARK type, so the wordmark and links go to ink and Get started / Join the
+   list becomes the solid blue button. White at ~50% keeps ink above 4.5:1 even over the blue band and the dark footer.
+   To go back to the frosted blue bar, delete this block. Phones get a denser pane (see the note in the frosted block above). */
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  [data-labo] [data-method] .mhead .pill{
+    position:relative;isolation:isolate;
+    background:linear-gradient(135deg,rgba(255,255,255,.62) 0%,rgba(255,255,255,.40) 42%,rgba(255,255,255,.54) 100%);
+    -webkit-backdrop-filter:blur(22px) saturate(190%) brightness(1.05);backdrop-filter:blur(22px) saturate(190%) brightness(1.05);
+    border:1px solid rgba(255,255,255,.75);
+    box-shadow:0 18px 40px -18px rgba(22,63,120,.38),0 2px 6px rgba(22,63,120,.08),
+      inset 0 1.5px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(255,255,255,.4),
+      inset 0 -12px 18px -12px rgba(38,89,166,.20),inset 12px 0 18px -14px rgba(255,255,255,.65),inset -12px 0 18px -14px rgba(255,255,255,.45);
+  }
+  [data-labo] [data-method] .mhead .pill::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;
+    background:radial-gradient(120% 90% at 12% -30%,rgba(255,255,255,.75) 0%,rgba(255,255,255,0) 60%),linear-gradient(180deg,rgba(255,255,255,.35) 0%,rgba(255,255,255,0) 52%)}
+  [data-labo] [data-method] .mhead .brand,[data-labo] [data-method] .mhead .brand .logo-word{color:var(--ink);--logo-bg:initial}
+  [data-labo] [data-method] .mhead .brand svg,[data-labo] [data-method] .mhead .brand img{filter:brightness(0);opacity:.9}   /* a solid ink mark: unfiltered, the ivory L read as a hollow outline on clear glass */
+  [data-labo] [data-method] .mhead nav.mlinks a{color:var(--ink)}
+  [data-labo] [data-method] .mhead nav.mlinks a:hover,[data-labo] [data-method] .mhead nav.mlinks a.on{color:var(--deep)}
+  [data-labo] [data-method] .mhead .signin{color:var(--ink)}   /* ink, not blue: over the blue band the glass turns blue and blue type faded */
+  [data-labo] [data-method] .mhead .btn.btn-primary,[data-labo] [data-method] .mhead .btn.btn-primary.btn-sm{background:#1D4F91;color:#fff;border-color:#1D4F91;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 6px 14px -8px rgba(22,63,120,.7)}
+  [data-labo] [data-method] .mhead .btn.btn-primary:hover{background:#163F78;color:#fff}
+  [data-labo] [data-method] .mhead .mlang{color:var(--ink);border-color:rgba(16,24,32,.28);background:rgba(255,255,255,.35)}
+  [data-labo] [data-method] .mhead .mlang:hover{background:rgba(255,255,255,.7);border-color:rgba(22,63,120,.5)}
+  [data-labo] [data-method] .mhead .mburger{background:rgba(22,63,120,.10);color:var(--deep)}
+  [data-labo] [data-method] .mhead .mburger:hover{background:rgba(22,63,120,.18)}
+  @media (max-width:960px){[data-labo] [data-method] .mhead .pill{background:linear-gradient(135deg,rgba(255,255,255,.95) 0%,rgba(255,255,255,.92) 45%,rgba(255,255,255,.94) 100%)}}
+}
