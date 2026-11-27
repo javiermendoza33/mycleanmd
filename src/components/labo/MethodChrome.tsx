@@ -24,12 +24,15 @@ export function MethodScope({ children }: { children: React.ReactNode }) {
   return <div data-method lang={lang}>{children}</div>;
 }
 
-function LangSwitch({ pathname, className }: { pathname: string; className: string }) {
+/** `current`: show the name of the language being read (the header pill and the phone notice chip, per the Nov 27 2026 review:
+ *  on /es the pill reads "Español"); otherwise the link names the language it switches TO (menu row, footer). Either way one
+ *  click goes to the other language, and the aria-label says so. */
+function LangSwitch({ pathname, className, current = false }: { pathname: string; className: string; current?: boolean }) {
   const lang = langOf(pathname), t = mc(lang).t, other = lang === "es" ? "en" : "es";
   return (
     <Link className={className} href={switchHref(pathname)} hrefLang={other} lang={other} aria-label={t.switchAria}>
       <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18" /></svg>
-      <span className="full">{t.switchLabel}</span><span className="short">{t.switchShort}</span>
+      <span className="full">{current ? t.langName : t.switchLabel}</span><span className="short">{t.switchShort}</span>
     </Link>
   );
 }
@@ -50,14 +53,14 @@ export function MethodHeader() {
   return (
     <>
       <a className="skip" href="#main">{h.skip}</a>
-      <div className="mpromo" role="region" aria-label={h.notice}>{METHOD_OPEN ? <>{h.promo(c.AVAILABILITY)}<Link href={L("/pricing")}>{h.promoLink}</Link></> : <><b className="soonpill">{t.soon.k}</b>{t.soon.promo(c.AVAILABILITY).replace(t.soon.k, "").replace(/^\s+/, "")}<Link href={L("/start")}>{t.soon.promoLink}</Link></>}<LangSwitch pathname={pathname} className="mlang-top" /></div>
+      <div className="mpromo" role="region" aria-label={h.notice}>{METHOD_OPEN ? <>{h.promo(c.AVAILABILITY)}<Link href={L("/pricing")}>{h.promoLink}</Link></> : <><b className="soonpill">{t.soon.k}</b>{t.soon.promo(c.AVAILABILITY).replace(t.soon.k, "").replace(/^\s+/, "")}<Link href={L("/start")}>{t.soon.promoLink}</Link></>}<LangSwitch pathname={pathname} className="mlang-top" current /></div>
       <header className="mhead">
         <div className="pill">
           <Link className="brand" href={L("/")} aria-label={h.home(METHOD.name)}><Logo variant="method" name={METHOD.name} /></Link>
           <nav className="mlinks" aria-label={h.primary}>
             {c.NAV.map((l) => <Link key={l.href} href={L(l.href)} className={on(l.href) ? "on" : undefined}>{l.label}</Link>)}
           </nav>
-          <LangSwitch pathname={pathname} className="mlang" />
+          <LangSwitch pathname={pathname} className="mlang" current />
           <Link className="signin" href={L("/signin")}>{h.signIn}</Link>
           <Link className="btn btn-primary btn-sm" href={L("/start")}>{METHOD_OPEN ? t.getStarted : t.soon.cta}</Link>
           <button type="button" className="mburger" aria-expanded={open} aria-controls="msheet" aria-label={open ? h.closeMenu : h.openMenu} onClick={() => setOpen((v) => !v)}>{open ? "×" : "☰"}</button>

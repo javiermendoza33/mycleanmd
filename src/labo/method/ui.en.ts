@@ -12,6 +12,8 @@ export type DemoScene = { chip: string; q: string; tool: string; args: string; h
 export const UI_EN = {
   /** Shown on the switch: the name of the OTHER language, in that language. */
   switchLabel: "Español",
+  /** This language's own name — what the header pill shows (Nov 27 2026: the pill names the language you are reading). */
+  langName: "English",
   switchShort: "ES",
   switchAria: "Ver este sitio en español",
   ogLocale: "en_US",

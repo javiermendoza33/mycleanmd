@@ -194,7 +194,7 @@ export const INCLUDED_ES = [
   "Todos los ajustes de dosis y resurtidos",
   "Protocolo escrito que puedes conservar",
   "Notas compartidas con tu médico de atención primaria si lo pides",
-  "Cancela cualquier mes",
+  "Cancela cuando quieras",
 ];
 
 export const CLINICIAN_ES = {

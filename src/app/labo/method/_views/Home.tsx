@@ -40,7 +40,7 @@ export default function HomeView({ lang }: { lang: Lang }) {
               <Link href={L(`/programs/${glp.slug}`)} className="offer lead">
                 <span className="flag">{h.mostChosen}</span>
                 <div><span className="lbl">{glp.name}</span><p>{glp.navBlurb}{h.glpExtra}</p></div>
-                <div className="amt"><small>{h.perMonth}</small><b>{glp.price}<span>{t.mo}</span></b></div>
+                <div className="amt">{h.perMonth && <small>{h.perMonth}</small>}<b>{glp.price}<span>{t.mo}</span></b></div>
               </Link>
               <Link href={L("/programs")} className="offer">
                 <div><span className="lbl">{h.offer2}</span><p>{h.offer2P}</p></div>

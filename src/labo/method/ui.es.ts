@@ -11,6 +11,7 @@ const START_WITH: Record<string, string> = { "glp-1-weight-management": "GLP-1",
 
 export const UI_ES: UI = {
   switchLabel: "English",
+  langName: "Español",
   switchShort: "EN",
   switchAria: "View this site in English",
   ogLocale: "es_US",
@@ -84,16 +85,16 @@ export const UI_ES: UI = {
   home: {
     tag: (a) => `Profesionales de salud con licencia · atención en ${a}`,
     h1: ["Pérdida de peso y atención hormonal, ", "recetadas en línea."],
-    sub: "GLP-1, péptidos, testosterona y atención de la menopausia, cada uno iniciado a partir de tus propios análisis y ajustado por una profesional de salud que de verdad está pendiente. Consultas por video y medicamento enviado desde una farmacia con licencia en EE. UU.",
+    sub: "GLP-1, péptidos, testosterona y atención de la menopausia, cada uno iniciado a partir de tus propios análisis y ajustado por un profesional de la salud que realmente te da seguimiento. Consultas por video y medicamentos enviados desde una farmacia con licencia en EE. UU.",
     mostChosen: "El más elegido",
     glpExtra: " Consultas, mensajes y cambios de dosis incluidos.",
-    perMonth: "al mes",
+    perMonth: "",   // Nov 27 2026: left empty on purpose — "$299/mes" already says it (the English card keeps "per month")
     offer2: "Péptidos · Testosterona · Terapia hormonal",
     offer2P: "Tres programas más, con el mismo método: primero los análisis. Elige uno o empieza con una consulta.",
     from: "desde",
-    cta1: "Averigua por dónde empezar",
+    cta1: "Descubre por dónde empezar",
     cta2: "Ver programas",
-    trust: ["Sin cargos ocultos", "Cancela cualquier mes", "Farmacias con licencia en EE. UU.", "Primero los análisis, siempre"],
+    trust: ["Sin cargos ocultos", "Cancela cuando quieras", "Farmacias con licencia en EE. UU.", "Primero los análisis, siempre"],
     howK: "Cómo funciona",
     howH: "Cuatro pasos hasta tu tratamiento.",
     howSub: "El cuestionario inicial toma unos diez minutos. Los análisis se hacen cerca de ti. Sales de la consulta por video con un plan que entiendes.",
@@ -176,7 +177,7 @@ export const UI_ES: UI = {
   },
 
   gate: {
-    h: "Averigua por dónde empezar",
+    h: "Descubre por dónde empezar",
     p: "Una pregunta, unos cinco segundos.",
     everywhere: (a) => `La atención está disponible en ${a}, con una profesional de salud con licencia donde vives.`,
     what: "¿Qué te trajo aquí?",
@@ -197,13 +198,13 @@ export const UI_ES: UI = {
 
   plan: {
     aria: "Elige un programa",
-    cancel: "Cancela cualquier mes",
+    cancel: "Cancela cuando quieras",
     whatYouPay: "Lo que pagas",
     feeSmall: "Consultas, mensajes, cambios de dosis, resurtidos",
     labsSmall: "A menudo se cobran al seguro",
     followRow: "Seguimientos, mensajes, resurtidos, envío",
     included: "Incluido",
-    chips: ["Sin cargos ocultos", "Cancela cualquier mes", "Protocolo escrito que conservas"],
+    chips: ["Sin cargos ocultos", "Cancela cuando quieras", "Protocolo escrito que conservas"],
     start: (short, slug) => `Empezar con ${START_WITH[slug] ?? short}`,
     noteOr: "O ",
     noteLink: (price) => `reserva primero una consulta de ${price}`,
@@ -219,8 +220,8 @@ export const UI_ES: UI = {
     replay: "↻ Repetir",
     playing: "Reproduciendo…",
     scenes: [
-      { chip: "Empezar GLP-1", q: "¿Puedo empezar un GLP-1? Mi última A1c salió en el límite.", tool: "check_eligibility", args: '{"program":"glp-1"}', head: "Armando tu plan",
-        rows: [{ who: "Panel metabólico", what: "Toma de muestra cerca de ti · recibido" }, { who: "Revisión clínica", what: "Enfermera certificada · 24 h" }, { who: "Farmacia con licencia en EE. UU.", what: "Semaglutida · envío en 2–3 días" }],
+      { chip: "Empezar GLP-1", q: "¿Puedo empezar un tratamiento GLP-1? Mi última A1c salió en el límite.", tool: "check_eligibility", args: '{"program":"glp-1"}', head: "Armando tu plan",
+        rows: [{ who: "Panel metabólico", what: "Toma de muestra cerca de ti · recibido" }, { who: "Revisión clínica", what: "Especialista clínico · 24 h" }, { who: "Farmacia con licencia en EE. UU.", what: "Semaglutida · envío en 2–3 días" }],
         out: ["A1c 5.9% · glucosa en ayunas 104 → elegible", "Inicia con 0.25 mg semanal, sube en 4 semanas", "Consulta por video mar 10:20 a. m. · cambios de dosis incluidos"] },
       { chip: "Revisar mis hormonas", q: "Llevo meses con poca energía. ¿Qué deberíamos analizar?", tool: "order_labs", args: '{"panel":"hormone"}', head: "Pidiendo tus análisis",
         rows: [{ who: "Panel hormonal", what: "Testosterona, estradiol, TSH, hemograma, metabólico" }, { who: "Lugar de la toma", what: "12 sedes cerca de ti · sin cita" }, { who: "Resultados", what: "2–3 días · revisados en 24 h" }],
