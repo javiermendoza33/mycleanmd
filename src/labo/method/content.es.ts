@@ -223,11 +223,12 @@ export const FAQ_ES = [
   { q: "¿Trabajas con mi médico de atención primaria?", a: "Con gusto. Con tu consentimiento envío las notas de las consultas y los resultados de laboratorio a tu médico para que tu expediente se mantenga completo. La atención coordinada da mejores resultados y menos análisis duplicados." },
 ];
 
-/** The header nav in Spanish. The Journal is left out on purpose: its articles are English only for now (footer links to it). */
+/** The header nav in Spanish (the Journal joined it Nov 27 2026, when its articles were translated). */
 export const METHOD_NAV_ES = [
   { label: "Programas", href: "/programs" },
   { label: "Precios", href: "/pricing" },
   { label: "Cómo funciona", href: "/how-it-works" },
+  { label: "Revista", href: "/blog" },
   { label: "Preguntas", href: "/faq" },
 ] as const;
 

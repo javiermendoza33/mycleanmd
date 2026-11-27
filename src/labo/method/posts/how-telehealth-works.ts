@@ -38,7 +38,7 @@ export const post: Post = {
     {
       heading: "Licensing is a real boundary, not a formality",
       paragraphs: [
-        "A clinician can only legally treat a patient who is physically located in a state where that clinician is licensed — this is true no matter how good the technology is. That's why eligibility starts with a straightforward question about where you live, and why an honest \"I can't treat you yet, but I'll tell you if that changes\" is the correct answer for someone outside the licensed states, instead of pretending geography doesn't matter.",
+        "A clinician can only legally treat a patient who is physically located in a state where that clinician is licensed — this is true no matter how good the technology is. That's why sign-up starts with a straightforward question about where you live, and why your care is matched to a clinician licensed in your state, instead of pretending geography doesn't matter.",
       ],
     },
   ],

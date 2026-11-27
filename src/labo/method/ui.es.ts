@@ -61,7 +61,7 @@ export const UI_ES: UI = {
     footSub: (a) => `Por video, para residentes de ${a}.`,
     programs: "Programas",
     learn: "Conoce más",
-    journal: "Revista (en inglés)",
+    journal: "",   // the Journal is in the Spanish nav now
     legal: "Aviso legal (en inglés)",
     terms: "Términos de uso (en inglés)",
     privacy: "Política de privacidad (en inglés)",
@@ -79,7 +79,7 @@ export const UI_ES: UI = {
     privacyShort: "Privacidad",
     smsShort: "SMS",
     a11yShort: "Accesibilidad",
-    englishOnly: "Por ahora, el registro, el portal de pacientes, la revista y las páginas legales están solo en inglés.",
+    englishOnly: "Por ahora, el registro, el portal de pacientes y las páginas legales están solo en inglés.",
   },
 
   home: {
@@ -118,7 +118,7 @@ export const UI_ES: UI = {
     faqH: ["Las respuestas ", "cortas."],
     faqSub: "¿Aún con dudas? Escríbenos por el portal o al correo ",
     allQ: "Todas las preguntas",
-    journal: false,   // the articles are English only for now
+    journal: true,
     journalK: "Revista",
     journalH: ["Lo que la evidencia ", "realmente muestra."],
     readAll: "Leer todo",
@@ -140,7 +140,7 @@ export const UI_ES: UI = {
   program: {
     plainK: "Vale la pena decirlo claro",
     readFaq: "Lee las preguntas frecuentes",
-    readEvidence: "Lee la evidencia (en inglés)",
+    readEvidence: "Lee la evidencia",
     otherK: "Otros programas",
     otherH: "Todos empiezan con un panel de análisis.",
   },
@@ -230,6 +230,19 @@ export const UI_ES: UI = {
         rows: [{ who: "Progreso", what: "−11 lb en 8 semanas · sin efectos secundarios registrados" }, { who: "Aprobación clínica", what: "Misma dosis · 14 min" }, { who: "Farmacia", what: "Envío el martes · rastreo por mensaje de texto" }],
         out: ["Resurtido aprobado, sin necesidad de consulta", "El próximo aumento se revisa en la semana 12", "Cancela cualquier mes, sin cargos ocultos"] },
     ],
+  },
+
+  blog: {
+    metaTitle: "Revista",
+    metaDesc: "La evidencia detrás de los GLP-1, los péptidos, la testosterona y la terapia hormonal, y cómo funciona de verdad la atención hormonal por telesalud, explicado con claridad y en español por The Labo Method.",
+    eyebrow: "La revista",
+    title: "La evidencia, explicada con claridad",
+    lede: "Lo que de verdad encontraron los estudios, lo que no, y cómo funciona la atención, antes de que empieces nada.",
+    crumb: "Revista",
+    dateLocale: "es-US",
+    disclaimer1: "Este artículo es información general, no consejo médico, y no crea una relación de paciente. Consulta el ",
+    legal: "aviso legal (en inglés)",
+    disclaimer2: " para ver las advertencias completas.",
   },
 
   soon: {

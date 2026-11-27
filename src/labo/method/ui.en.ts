@@ -239,6 +239,19 @@ export const UI_EN = {
     ] as DemoScene[],
   },
 
+  blog: {
+    metaTitle: "Journal",
+    metaDesc: "The evidence behind GLP-1, peptide, testosterone and hormone therapy, and how telehealth hormone care actually works — explained plainly, from The Labo Method.",
+    eyebrow: "The journal",
+    title: "The evidence, explained plainly",
+    lede: "What the trials actually found, what they didn't, and how the care itself works — before you start anything.",
+    crumb: "Journal",
+    dateLocale: "en-US",
+    disclaimer1: "This article is general information, not medical advice, and does not create a patient relationship. See ",
+    legal: "Legal",
+    disclaimer2: " for the full disclaimers.",
+  },
+
   /** Shown while METHOD_OPEN is false (content.ts): the site is visible but not taking patients yet. */
   soon: {
     metaTitle: "Opening soon",

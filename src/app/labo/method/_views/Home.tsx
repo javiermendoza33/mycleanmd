@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { METHOD, PRACTICE, HEALTHIE, METHOD_OPEN } from "@/labo/content";
-import { posts } from "@/labo/method/posts";
+import { postByEnSlug } from "@/labo/method/posts";
 import { mc, lh, type Lang } from "@/labo/method/i18n";
 import { MethodDemo } from "@/components/labo/method/MethodDemo";
 import Gate from "../Gate";
@@ -20,7 +20,7 @@ const JOURNAL_TEASER = [
   "peptide-therapy-what-we-know-and-dont",
   "testosterone-therapy-for-men-what-to-know",
   "hormone-therapy-for-women-the-new-evidence",
-].map((slug) => posts.find((p) => p.slug === slug)!);
+];
 
 export default function HomeView({ lang }: { lang: Lang }) {
   const c = mc(lang), t = c.t, h = t.home;
@@ -28,6 +28,7 @@ export default function HomeView({ lang }: { lang: Lang }) {
   const lowest = Math.min(...c.PROGRAMS.map((p) => Number(p.price.replace(/[^0-9.]/g, ""))));
   const glp = c.PROGRAMS[0];
   const consult = c.EXTRA_PRICING[0];
+  const teaser = JOURNAL_TEASER.map((slug) => postByEnSlug(lang, slug)).filter((p) => !!p);
   return (
     <>
       <section className="mhero">
@@ -130,10 +131,10 @@ export default function HomeView({ lang }: { lang: Lang }) {
       {h.journal && (
         <section className="grey">
           <div className="wrap">
-            <div className="rowhead"><div className="sechead"><span className="kicker">{h.journalK}</span><h2>{h.journalH[0]}<em>{h.journalH[1]}</em></h2></div><Link className="more" href="/blog">{h.readAll}</Link></div>
+            <div className="rowhead"><div className="sechead"><span className="kicker">{h.journalK}</span><h2>{h.journalH[0]}<em>{h.journalH[1]}</em></h2></div><Link className="more" href={L("/blog")}>{h.readAll}</Link></div>
             <div className="jcards">
-              {JOURNAL_TEASER.map((p) => (
-                <Link key={p.slug} href={`/blog/${p.slug}`} className="jcard">
+              {teaser.map((p) => (
+                <Link key={p.slug} href={L(`/blog/${p.slug}`)} className="jcard">
                   <img src={p.image.src} alt={p.image.alt} loading="lazy" />
                   <div className="cb"><h3>{p.title}</h3><p>{p.excerpt}</p><span className="more">{h.readMore}</span></div>
                 </Link>

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { PROGRAMS, METHOD, LAUNCH_READY } from "@/labo/content";
-import { posts } from "@/labo/method/posts";
+import { posts, postsFor } from "@/labo/method/posts";
 
 /**
  * Served at method.thelabomethod.com/sitemap.xml — see the same note on
@@ -28,7 +28,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { p: "/accessibility", priority: 0.2 },
   ];
   // Nov 27 2026: the pages that exist in Spanish are listed under /es too (the hreflang pair is in each page's metadata).
-  const ES = ["", "/programs", ...PROGRAMS.map((x) => `/programs/${x.slug}`), "/pricing", "/how-it-works", "/faq"];
-  const es = paths.filter(({ p }) => ES.includes(p)).map(({ p, priority }) => ({ p: `/es${p}`, priority: Math.max(0.3, priority - 0.1) }));
+  const ES = ["", "/programs", ...PROGRAMS.map((x) => `/programs/${x.slug}`), "/pricing", "/how-it-works", "/faq", "/blog"];
+  const es = [...paths.filter(({ p }) => ES.includes(p)).map(({ p, priority }) => ({ p: `/es${p}`, priority: Math.max(0.3, priority - 0.1) })),
+    ...postsFor("es").map((x) => ({ p: `/es/blog/${x.slug}`, priority: 0.5 }))];   // Spanish articles have their own slugs
   return [...paths, ...es].map(({ p, priority }) => ({ url: `${BASE}${p}`, lastModified: AT, changeFrequency: "monthly" as const, priority }));
 }

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Eyebrow, ClosingCTA } from "@/components/labo/Sections";
 import { HEALTHIE } from "@/labo/content";
 import { mc, lh, type Lang } from "@/labo/method/i18n";
+import { postByEnSlug } from "@/labo/method/posts";
 
 /** Program slug → its matching journal article, for the cross-link below. */
 const EVIDENCE_POST: Record<string, string> = {
@@ -18,6 +19,7 @@ export default function ProgramView({ lang, slug }: { lang: Lang; slug: string }
   const p = c.getProgram(slug);
   if (!p) notFound();
   const others = c.PROGRAMS.filter((o) => o.slug !== p.slug);
+  const evidence = EVIDENCE_POST[p.slug] ? postByEnSlug(lang, EVIDENCE_POST[p.slug]) : undefined;
 
   return (
     <>
@@ -71,7 +73,7 @@ export default function ProgramView({ lang, slug }: { lang: Lang; slug: string }
           <div style={{ display: "flex", gap: 18, flexWrap: "wrap", marginTop: 30 }}>
             <a className="btn btn-primary" href={lh(lang, HEALTHIE.book)}>{t.bookConsult(c.EXTRA_PRICING[0].price)}</a>
             <Link className="btn btn-ghost" href={lh(lang, "/faq")}>{t.program.readFaq}</Link>
-            {EVIDENCE_POST[p.slug] && <Link className="more" href={`/blog/${EVIDENCE_POST[p.slug]}`} style={{ alignSelf: "center" }}>{t.program.readEvidence}</Link>}
+            {evidence && <Link className="more" href={lh(lang, `/blog/${evidence.slug}`)} style={{ alignSelf: "center" }}>{t.program.readEvidence}</Link>}
           </div>
         </div>
       </section>
