@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 import { getPostFor, fromOtherLang, twinSlug } from "@/labo/method/posts";
 import { ClosingCTA } from "@/components/labo/Sections";
-import { METHOD } from "@/labo/content";
+import { METHOD, JOURNAL_ROBOTS } from "@/labo/content";
 import { mc, lh, type Lang } from "@/labo/method/i18n";
 
 const url = (lang: Lang, slug: string) => (lang === "es" ? `/es/blog/${slug}` : `/blog/${slug}`);
@@ -14,7 +14,7 @@ export function postMetadata(lang: Lang, slug: string): Metadata {
   if (!p) return {};
   const twin = twinSlug(lang, slug), other: Lang = lang === "es" ? "en" : "es";
   const languages = twin ? { [lang]: url(lang, slug), [other]: url(other, twin), "x-default": lang === "en" ? url("en", slug) : url("en", twin) } : undefined;
-  return { title: { absolute: p.seo.title }, description: p.seo.description, alternates: { canonical: url(lang, slug), languages }, openGraph: { type: "article", locale: mc(lang).t.ogLocale, images: [{ url: p.image.src, alt: p.image.alt }] } };
+  return { title: { absolute: p.seo.title }, description: p.seo.description, ...JOURNAL_ROBOTS, alternates: { canonical: url(lang, slug), languages }, openGraph: { type: "article", locale: mc(lang).t.ogLocale, images: [{ url: p.image.src, alt: p.image.alt }] } };
 }
 
 /** One Journal article. A slug from the OTHER language (the language switch keeps the slug) is sent to this language's article. */

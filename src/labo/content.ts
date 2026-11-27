@@ -469,6 +469,16 @@ export const TELE_LINK = { label: "Telehealth", href: `https://${METHOD.domain}`
  */
 export const METHOD_OPEN = false;
 
+/**
+ * The Method's JOURNAL is open to search engines (Nov 27 2026, Javier: "ok journal is good") while the rest of the Method —
+ * programs, pricing, sign-up — stays hidden until LAUNCH_READY. The articles are educational and quote no prices, and search
+ * takes weeks to build. This one flag drives the articles' robots meta, the Method's robots.txt and its sitemap. English and
+ * Spanish articles alike. Set it to false to pull the Journal back out of search.
+ */
+export const JOURNAL_INDEX = true;
+/** Spread into a Journal page's metadata. Needed because the Method layout says noindex for the whole host until launch. */
+export const JOURNAL_ROBOTS = LAUNCH_READY || JOURNAL_INDEX ? { robots: { index: true, follow: true } } : {};
+
 export const METHOD_NAV = [
   { label: "Programs", href: "/programs" },
   { label: "Pricing", href: "/pricing" },

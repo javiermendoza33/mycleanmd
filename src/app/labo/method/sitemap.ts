@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { PROGRAMS, METHOD, LAUNCH_READY } from "@/labo/content";
+import { PROGRAMS, METHOD, LAUNCH_READY, JOURNAL_INDEX } from "@/labo/content";
 import { posts, postsFor } from "@/labo/method/posts";
 
 /**
@@ -11,7 +11,12 @@ const BASE = `https://${METHOD.domain}`;
 const AT = new Date("2026-11-19");
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  if (!LAUNCH_READY) return [];
+  if (!LAUNCH_READY) {
+    // Before launch only the Journal is open to search (JOURNAL_INDEX): list its two indexes and every article, both languages.
+    if (!JOURNAL_INDEX) return [];
+    const j = ["/blog", "/es/blog", ...posts.map((x) => `/blog/${x.slug}`), ...postsFor("es").map((x) => `/es/blog/${x.slug}`)];
+    return j.map((p) => ({ url: `${BASE}${p}`, lastModified: new Date("2026-11-27"), changeFrequency: "monthly" as const, priority: p.endsWith("/blog") ? 0.7 : 0.6 }));
+  }
   const paths = [
     { p: "", priority: 1.0 },
     { p: "/programs", priority: 0.9 },
