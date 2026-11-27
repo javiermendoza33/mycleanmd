@@ -263,6 +263,9 @@ export const UI_EN = {
     seePrograms: "See the programs",
     seePricing: "See pricing",
     joinNote: "Sign-up for this program opens soon.",
+    /** Under the list form: a way to ask something now. The sentence continues after the address. */
+    ask1: "Have a question before we open? Email ",
+    ask2: " and a person will answer. Please leave health details out of email.",
   },
 
   signin: {

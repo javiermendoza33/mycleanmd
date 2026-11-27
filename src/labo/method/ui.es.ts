@@ -256,6 +256,8 @@ export const UI_ES: UI = {
     seePrograms: "Ver los programas",
     seePricing: "Ver precios",
     joinNote: "El registro para este programa abre pronto.",
+    ask1: "¿Tienes una pregunta antes de que abramos? Escribe a ",
+    ask2: " y te responderá una persona. Por favor, no incluyas datos de salud en el correo.",
   },
 
   signin: {
