@@ -404,3 +404,21 @@
 [data-labo] [data-method] .fld select{font:inherit;font-size:1rem;padding:13px 14px;width:100%;background:var(--paper);color:var(--ink);border:1px solid transparent;border-radius:12px}
 [data-labo] [data-method] .fld select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 [data-labo] [data-method] .mpromo a{white-space:nowrap}
+
+/* ── Frosted-glass header (Nov 27 2026, Javier: "can we add a frosted glass?") ─────────────────────────────────────────────
+   The pill keeps the Method's deep blue but lets the page show through, blurred, as it scrolls underneath. The tint stays at
+   80–84% so white type holds 4.5:1 even over a white section (worked out against #fff: 4.9 / 4.9 / 4.7). The blur is on .pill,
+   not on header.mhead, on purpose: backdrop-filter turns an element into the containing block for position:fixed children, and
+   the phone menu sheet lives inside the header. Browsers without backdrop-filter keep the solid bar. */
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  [data-labo] [data-method] .mhead .pill{
+    background:linear-gradient(90deg,rgba(22,63,120,.80) 0%,rgba(29,79,145,.80) 55%,rgba(38,89,166,.84) 100%);
+    -webkit-backdrop-filter:blur(18px) saturate(170%);backdrop-filter:blur(18px) saturate(170%);
+    border:1px solid rgba(255,255,255,.22);
+    box-shadow:0 16px 36px -18px rgba(13,36,70,.55),inset 0 1px 0 rgba(255,255,255,.28),inset 0 -1px 0 rgba(255,255,255,.06);
+  }
+  [data-labo] [data-method] .mhead nav.mlinks a{color:rgba(255,255,255,.94)}
+  /* Phones: headless Chrome's phone emulation showed the page text sharp through the bar (the blur did not paint there), so the
+     tint is denser at this size — the bar stays clean whether or not a given phone blurs. Check on a real iPhone. */
+  @media (max-width:960px){[data-labo] [data-method] .mhead .pill{background:linear-gradient(90deg,rgba(22,63,120,.92) 0%,rgba(29,79,145,.92) 55%,rgba(38,89,166,.93) 100%)}}
+}
