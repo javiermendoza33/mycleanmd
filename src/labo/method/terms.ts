@@ -17,7 +17,7 @@ export const methodTermsSections: LegalSection[] = [
     heading: "1. Who can use the service",
     list: [
       "You must be 18 or older.",
-      `Care is offered in ${AVAILABILITY}. At the time of any video visit you must be physically located in a US state where your treating clinician holds a licence; telehealth rules require it.`,
+      `Care is offered in ${AVAILABILITY}. At the time you receive care, including any video visit, you must be physically located in a US state where your treating clinician holds a licence; telehealth rules require it.`,
       "You must give accurate, complete information about yourself and your health, and keep it current. Care decisions depend on it.",
       "You may not use the service for anyone but yourself.",
     ],
@@ -30,7 +30,7 @@ export const methodTermsSections: LegalSection[] = [
   {
     heading: "3. The website is not the clinician",
     paragraphs: [
-      "Content on this website is general information and is not medical advice. Medical care is provided only by the licensed clinician after a video visit and a review of your labs, under the telehealth consent at /legal. Starting a program does not guarantee that any medication will be prescribed; prescribing is always the clinician's decision. Compounded medications and certain peptides carry the notices described at /legal.",
+      "Content on this website is general information and is not medical advice. Medical care is provided only by a licensed clinician after an evaluation of your intake and labs, with a live video visit where your state or the medication requires one, under the telehealth consent at /legal. Starting a program does not guarantee that any medication will be prescribed; prescribing is always the clinician's decision. Compounded medications and certain peptides carry the notices described at /legal.",
     ],
   },
   {

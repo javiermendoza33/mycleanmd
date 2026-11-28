@@ -10,7 +10,7 @@ export const methodPrivacyUpdated = "November 23, 2026";
 export const methodPrivacySections: LegalSection[] = [
   {
     paragraphs: [
-      `${METHOD.name} ("we", "us") provides telehealth hormone, weight and peptide care by video to residents of ${AVAILABILITY}. This policy explains what we collect on ${METHOD.domain} and in your account, how we use it, who we share it with, and the choices you have.`,
+      `${METHOD.name} ("we", "us") provides telehealth hormone, weight and peptide care online to residents of ${AVAILABILITY}. This policy explains what we collect on ${METHOD.domain} and in your account, how we use it, who we share it with, and the choices you have.`,
       "Your medical record — intake answers reviewed by your clinician, visit notes, prescriptions, lab results and the messages you exchange with your clinician — is protected health information. It is held in our HIPAA-compliant clinical platform under a business associate agreement and governed by the Notice of Privacy Practices you receive when you start care. This page covers the website, your account and the communications around your care.",
     ],
   },

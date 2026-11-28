@@ -322,7 +322,8 @@ export const TRUST_BAR = [
 export const HOW_SHORT = [
   { n: "01", title: "Intake", body: "Ten minutes of history, goals and medications through the secure portal." },
   { n: "02", title: "Labs", body: "An order for a panel drawn at a lab near you, or we use a recent one." },
-  { n: "03", title: "Video visit", body: "We go through your results together and agree on a plan." },
+  // Nov 27 2026 (Javier: "not all states will require video visits"): step 3 is the clinician's review; video only where the state or the medication requires it.
+  { n: "03", title: "Clinician review", body: "A licensed clinician reviews your results and writes your plan, with a video visit when your state or medication calls for one." },
   { n: "04", title: "Treatment", body: "Medication ships to you. We adjust as your numbers move." },
 ];
 
@@ -338,19 +339,19 @@ export const HOW_LONG = [
     detail: "Labs can frequently be billed to your insurance. If you prefer, you can use your own lab or your primary care provider to complete the draw.",
   },
   {
-    n: "03", title: "Video visit", meta: "30 TO 45 MINUTES",
-    body: "We review every relevant marker on your panel, not just the flagged ones, and I explain what I think is driving your symptoms.",
-    detail: "Then we agree on a protocol together. You will leave the visit knowing what you are taking, why, what to watch for, and when we look again.",
+    n: "03", title: "Clinician review", meta: "USUALLY WITHIN 24 HOURS",
+    body: "A licensed clinician reviews every relevant marker on your panel, not just the flagged ones, alongside your history. Some states and some medications, testosterone among them, require a live video visit; where one is needed we schedule it, and you can always ask for one.",
+    detail: "Either way you get a written plan: what you are taking, why, what to watch for, and when we look again.",
   },
   {
     n: "04", title: "Treatment and follow-up", meta: "ONGOING",
     body: "Medication ships to your door from a licensed pharmacy. Dose changes happen based on repeat labs and how you are actually doing.",
-    detail: "Portal messaging is included, unlimited, and answered by me within one business day. Follow-up visits are included in your monthly fee.",
+    detail: "Portal messaging is included, unlimited, and answered by me within one business day. Follow-ups, by message or by video, are included in your monthly fee.",
   },
 ];
 
 export const INCLUDED = [
-  "Video visits with your clinician",
+  "Clinician review, with video visits when needed",
   "Unlimited portal messaging",
   "Lab orders and interpretation",
   "Medication shipped from a licensed pharmacy",
@@ -411,7 +412,7 @@ export const FAQ = [
   { q: "Is this covered by insurance?", a: "The program fee is self-pay. Lab work can often be billed to your insurance, and I will write orders that let you use your own lab or your plan. Superbills are available on request if you want to submit for out-of-network reimbursement." },
   { q: "Can I use labs I already have?", a: "Often, yes. If your panel is recent and complete enough, we will use it rather than repeating a draw. Send it through the portal before your first visit and I will tell you what, if anything, is missing." },
   { q: "How fast can I start?", a: "Most patients complete intake, get labs drawn within a few days, and have a protocol within 24 hours of results landing. Controlled substances such as testosterone require a video visit and a prescription-monitoring check first." },
-  { q: "Who prescribes my medication?", a: "I do. Every prescription on this site is written by me after a video visit and a review of your labs. Nothing is generated automatically from a form." },
+  { q: "Who prescribes my medication?", a: "A clinician licensed in your state. Every prescription is written after a review of your intake and labs, and after a live video visit where your state or the medication requires one. Nothing is generated automatically from a form." },
   { q: "Where does the medication come from?", a: "State-licensed US pharmacies, including licensed compounding pharmacies where a compounded preparation is appropriate. I will tell you which pharmacy is filling your prescription and whether the product is FDA-approved or compounded." },
   { q: "What if I need to reach you between visits?", a: "Message me in the portal. It is included in your fee, there is no per-message charge, and I answer within one business day. Anything urgent should go to your primary care provider or an emergency department." },
   { q: "Can I cancel?", a: "Any month, with no penalty and no lock-in. If you stop a hormone or GLP-1 program I will give you a written taper or maintenance plan so you are not left improvising." },
@@ -452,7 +453,7 @@ export const METHOD = {
   // [data-clinic] scope has no [data-method], so var(--accent) there is
   // still clay; a Method-coloured mention there has to be hardcoded).
   accent: "#6E3F99",
-  tagline: "Hormone, weight and peptide care, by video.",
+  tagline: "Hormone, weight and peptide care, online.",
   email: PRACTICE.email,
 } as const;
 

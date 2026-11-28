@@ -159,7 +159,7 @@ export const PROGRAMS_ES: Program[] = PROGRAMS.map((p) => ({ ...p, ...(WORDS[p.s
 export const HOW_SHORT_ES = [
   { n: "01", title: "Cuestionario inicial", body: "Diez minutos de historial, metas y medicamentos en el portal seguro." },
   { n: "02", title: "Análisis", body: "Una orden para un panel que te toman en un laboratorio cerca de ti, o usamos uno reciente." },
-  { n: "03", title: "Consulta por video", body: "Revisamos tus resultados juntos y acordamos un plan." },
+  { n: "03", title: "Revisión clínica", body: "Profesionales de salud con licencia revisan tus resultados y escriben tu plan, con consulta por video cuando tu estado o el medicamento lo requieren." },
   { n: "04", title: "Tratamiento", body: "El medicamento llega a tu casa. Ajustamos según cambien tus números." },
 ];
 
@@ -175,19 +175,19 @@ export const HOW_LONG_ES = [
     detail: "Con frecuencia los análisis se pueden cobrar a tu seguro. Si prefieres, puedes usar tu propio laboratorio o a tu médico de atención primaria para la toma.",
   },
   {
-    n: "03", title: "Consulta por video", meta: "DE 30 A 45 MINUTOS",
-    body: "Revisamos cada marcador relevante de tu panel, no solo los que salen marcados, y te explico qué creo que está causando tus síntomas.",
-    detail: "Después acordamos un protocolo juntos. Saldrás de la consulta sabiendo qué tomas, por qué, qué vigilar y cuándo volvemos a revisar.",
+    n: "03", title: "Revisión clínica", meta: "NORMALMENTE EN 24 HORAS",
+    body: "Un profesional de salud con licencia revisa cada marcador relevante de tu panel, no solo los que salen marcados, junto con tu historial. Algunos estados y algunos medicamentos, entre ellos la testosterona, exigen una consulta por video en vivo; cuando hace falta la programamos, y siempre puedes pedir una.",
+    detail: "En cualquier caso recibes un plan escrito: qué tomas, por qué, qué vigilar y cuándo volvemos a revisar.",
   },
   {
     n: "04", title: "Tratamiento y seguimiento", meta: "CONTINUO",
     body: "El medicamento llega a tu puerta desde una farmacia con licencia. Los cambios de dosis se basan en análisis de control y en cómo te va de verdad.",
-    detail: "Los mensajes por el portal están incluidos, son ilimitados y los respondo yo en un día hábil. Las consultas de seguimiento están incluidas en tu cuota mensual.",
+    detail: "Los mensajes por el portal están incluidos, son ilimitados y los respondo yo en un día hábil. Los seguimientos, por mensaje o por video, están incluidos en tu cuota mensual.",
   },
 ];
 
 export const INCLUDED_ES = [
-  "Consultas por video con tu profesional de salud",
+  "Revisión clínica, con consultas por video cuando hacen falta",
   "Mensajes ilimitados por el portal",
   "Órdenes de laboratorio e interpretación",
   "Medicamento enviado desde una farmacia con licencia",
@@ -216,7 +216,7 @@ export const FAQ_ES = [
   { q: "¿Lo cubre el seguro?", a: "La cuota del programa es de pago directo. Con frecuencia los análisis se pueden cobrar a tu seguro, y escribiré órdenes que te permitan usar tu propio laboratorio o tu plan. Hay recibos detallados (superbills) disponibles si quieres pedir un reembolso fuera de la red." },
   { q: "¿Puedo usar análisis que ya tengo?", a: "Muchas veces, sí. Si tu panel es reciente y suficientemente completo, lo usaremos en lugar de repetir la toma. Envíalo por el portal antes de tu primera consulta y te diré qué falta, si falta algo." },
   { q: "¿Qué tan rápido puedo empezar?", a: "La mayoría de los pacientes completa el cuestionario inicial, se hace los análisis en pocos días y tiene un protocolo dentro de las 24 horas siguientes a la llegada de los resultados. Las sustancias controladas, como la testosterona, requieren primero una consulta por video y una revisión del programa de monitoreo de recetas." },
-  { q: "¿Quién receta mi medicamento?", a: "Yo. Cada receta de este sitio la escribo yo después de una consulta por video y de revisar tus análisis. Nada se genera automáticamente a partir de un formulario." },
+  { q: "¿Quién receta mi medicamento?", a: "Un profesional de salud con licencia en tu estado. Cada receta se escribe después de revisar tu cuestionario y tus análisis, y después de una consulta por video en vivo cuando tu estado o el medicamento lo requieren. Nada se genera automáticamente a partir de un formulario." },
   { q: "¿De dónde viene el medicamento?", a: "De farmacias con licencia estatal en EE. UU., incluidas farmacias de compuestos con licencia cuando un preparado compuesto es apropiado. Te diré qué farmacia surte tu receta y si el producto está aprobado por la FDA o es compuesto." },
   { q: "¿Y si necesito contactarte entre consultas?", a: "Escríbeme por el portal. Está incluido en tu cuota, no hay cargo por mensaje y respondo en un día hábil. Cualquier urgencia debe ir a tu médico de atención primaria o a una sala de emergencias." },
   { q: "¿Puedo cancelar?", a: "Cualquier mes, sin penalización y sin permanencia. Si dejas un programa hormonal o de GLP-1, te daré un plan escrito de reducción gradual o de mantenimiento para que no tengas que improvisar." },
@@ -233,4 +233,4 @@ export const METHOD_NAV_ES = [
 ] as const;
 
 export const FOOTER_DISCLAIMER_ES = `Los servicios clínicos los prestan profesionales de salud con licencia en el estado del paciente; la atención está disponible en ${AVAILABILITY_ES}. Este sitio web no ofrece consejo médico.`;
-export const TAGLINE_ES = "Atención hormonal, de peso y de péptidos, por video.";
+export const TAGLINE_ES = "Atención hormonal, de peso y de péptidos, en línea.";
