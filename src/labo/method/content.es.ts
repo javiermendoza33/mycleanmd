@@ -171,7 +171,7 @@ export const HOW_LONG_ES = [
   },
   {
     n: "02", title: "Análisis de laboratorio", meta: "DE 2 A 5 DÍAS",
-    body: "Escribo la orden para el panel que requiere tu programa y te lo toman en un laboratorio cerca de ti, en el horario que te convenga.",
+    body: "Tu profesional de salud ordena el panel que requiere tu programa y te lo toman en un laboratorio cerca de ti, en el horario que te convenga.",
     detail: "Con frecuencia los análisis se pueden cobrar a tu seguro. Si prefieres, puedes usar tu propio laboratorio o a tu médico de atención primaria para la toma.",
   },
   {
@@ -182,7 +182,7 @@ export const HOW_LONG_ES = [
   {
     n: "04", title: "Tratamiento y seguimiento", meta: "CONTINUO",
     body: "El medicamento llega a tu puerta desde una farmacia con licencia. Los cambios de dosis se basan en análisis de control y en cómo te va de verdad.",
-    detail: "Los mensajes por el portal están incluidos, son ilimitados y los respondo yo en un día hábil. Los seguimientos, por mensaje o por video, están incluidos en tu cuota mensual.",
+    detail: "Los mensajes por el portal están incluidos, son ilimitados y tu equipo de atención los responde en un día hábil. Los seguimientos, por mensaje o por video, están incluidos en tu cuota mensual.",
   },
 ];
 

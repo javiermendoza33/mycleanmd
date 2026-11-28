@@ -335,7 +335,7 @@ export const HOW_LONG = [
   },
   {
     n: "02", title: "Lab work", meta: "2 TO 5 DAYS",
-    body: "I write an order for the panel your program requires and you have it drawn at a lab near you, on your schedule.",
+    body: "Your clinician orders the panel your program requires and you have it drawn at a lab near you, on your schedule.",
     detail: "Labs can frequently be billed to your insurance. If you prefer, you can use your own lab or your primary care provider to complete the draw.",
   },
   {
@@ -346,7 +346,7 @@ export const HOW_LONG = [
   {
     n: "04", title: "Treatment and follow-up", meta: "ONGOING",
     body: "Medication ships to your door from a licensed pharmacy. Dose changes happen based on repeat labs and how you are actually doing.",
-    detail: "Portal messaging is included, unlimited, and answered by me within one business day. Follow-ups, by message or by video, are included in your monthly fee.",
+    detail: "Portal messaging is included, unlimited, and answered by your care team within one business day. Follow-ups, by message or by video, are included in your monthly fee.",
   },
 ];
 
