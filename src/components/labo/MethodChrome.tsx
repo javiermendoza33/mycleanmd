@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { METHOD, HEALTHIE, PRACTICE, METHOD_OPEN } from "@/labo/content";
 import { mc, lh, langOf, basePath, switchHref } from "@/labo/method/i18n";
 import { Logo } from "@/components/labo/Logo";
+import { HoneyBreath } from "@/components/labo/method/HoneyBreath";
 
 /**
  * Header and footer for The Labo Method (thelabomethod.com) — rebuilt Nov 22 2026 on the joinmochi.com pattern
@@ -21,7 +22,7 @@ import { Logo } from "@/components/labo/Logo";
 /** Wraps the whole Method site so assistive tech and the browser know which language the page is in. */
 export function MethodScope({ children, className }: { children: React.ReactNode; className?: string }) {
   const lang = langOf(usePathname());
-  return <div data-method lang={lang} className={className}>{children}</div>;
+  return <div data-method lang={lang} className={className}><HoneyBreath />{children}</div>;
 }
 
 /** `current`: show the name of the language being read (the header pill and the phone notice chip, per the Nov 27 2026 review:
