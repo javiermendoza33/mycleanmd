@@ -527,3 +527,6 @@ Javier: "could you do a bit of spot breathing on the honeycomb?… lightly… li
 
 ## Nov 27 2026 — Spot breathing removed; the honeycomb stays, static
 Javier: "lets remove the breathing doesnt look what i imagened". `HoneyBreath.tsx`, its layer CSS and the `position/isolation` on `[data-method]` are gone. The page background is the plain static honeycomb. Four motion ideas have now been tried and dropped on this site (peptide chains, ripples, carbon weave as texture, breathing cells): before building another, ask him for a reference of what he pictures.
+
+## Nov 27 2026 — Running text sits on a panel, not on the honeycomb
+Javier, looking at /how-it-works: "this section needs to change a bit… all i see is the honeycomb" — paragraphs were laid straight on the patterned page. The last block of method.css gives every block of running text the same solid panel the cards use: `.mpanel` (new wrapper around the How-it-works steps and the included list, `_views/How.tsx`), `.faqlist` (new class on the Faq component's root), `.post` (Journal articles), `.wrap.tight > .defs` (/legal) and `.wrap.legalpage` (/terms, /privacy-policy, /accessibility). Rule: on this theme, headlines may sit on the honeycomb; body copy goes on a panel. Same day: steps 2 and 4 of How it works stopped speaking as one clinician ("Your clinician orders…", "answered by your care team").

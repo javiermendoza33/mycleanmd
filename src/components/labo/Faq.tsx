@@ -11,7 +11,7 @@ import { FAQ } from "@/labo/content";
 export default function Faq({ items = FAQ }: { items?: ReadonlyArray<{ q: string; a: string }> } = {}) {
   const [open, setOpen] = useState(0);
   return (
-    <div>
+    <div className="faqlist">
       {items.map((f, i) => {
         const isOpen = open === i;
         return (

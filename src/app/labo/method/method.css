@@ -578,3 +578,25 @@ html:has([data-method]),body:has([data-method]){background:#0A1F24}
   background-size:29.44px 51px;
 }
 [data-labo] [data-method] section.grey{background:rgba(127,240,210,.028)}
+
+/* ── Long text sits on a panel, not on the honeycomb (Nov 27 2026, Javier, on /how-it-works: "all i see is the honeycomb") ─────
+   The pattern is fine behind headlines and between cards, but paragraphs laid straight on it read as text over wallpaper.
+   Every block of running text on the inner pages now gets the same solid panel the cards use: the How-it-works steps and
+   included list (.mpanel in _views/How.tsx), the FAQ list, Journal articles, /legal, /terms, /privacy-policy, /accessibility. */
+[data-labo] [data-method] .mpanel,[data-labo] [data-method] .faqlist,[data-labo] [data-method] .post,[data-labo] [data-method] .wrap.tight > .defs,[data-labo] [data-method] .wrap.legalpage{
+  background:var(--canvas);border:1px solid var(--rule);border-radius:22px}
+[data-labo] [data-method] .mpanel{padding:6px 38px}
+[data-labo] [data-method] .mpanel .inclgrid>div:nth-child(-n+2){border-top:0}
+[data-labo] [data-method] .faqlist{padding:4px 30px}
+[data-labo] [data-method] .faqlist .faq-item:first-child{border-top:0}
+[data-labo] [data-method] .post{max-width:780px;padding:14px 46px 40px}
+[data-labo] [data-method] .wrap.tight > .defs{padding:8px 34px}
+[data-labo] [data-method] .wrap.legalpage{max-width:860px;padding:10px 46px 40px}
+@media (max-width:760px){
+  [data-labo] [data-method] .mpanel{padding:2px 20px}
+  [data-labo] [data-method] .mpanel .inclgrid>div:nth-child(2){border-top:1px solid var(--line)}
+  [data-labo] [data-method] .faqlist{padding:2px 18px}
+  [data-labo] [data-method] .post{padding:6px 22px 28px}
+  [data-labo] [data-method] .wrap.tight > .defs{padding:4px 20px}
+  [data-labo] [data-method] .wrap.legalpage{padding:6px 22px 28px;margin-inline:14px}
+}

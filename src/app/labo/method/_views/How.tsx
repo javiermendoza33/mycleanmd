@@ -9,6 +9,7 @@ export default function HowView({ lang }: { lang: Lang }) {
 
       <section>
         <div className="wrap">
+          <div className="mpanel">
           {c.HOW_LONG.map((s) => (
             <div key={s.n} className="hlrow">
               <span className="n">{s.n}</span>
@@ -22,6 +23,7 @@ export default function HowView({ lang }: { lang: Lang }) {
               </div>
             </div>
           ))}
+          </div>
         </div>
       </section>
 
@@ -31,8 +33,10 @@ export default function HowView({ lang }: { lang: Lang }) {
             <Eyebrow>{t.how.getK}</Eyebrow>
             <h2 style={{ marginTop: 15 }}>{t.how.getH}</h2>
           </div>
-          <div className="inclgrid" style={{ marginTop: 38 }}>
-            {c.INCLUDED.map((i) => <div key={i}>{i}</div>)}
+          <div className="mpanel" style={{ marginTop: 38 }}>
+            <div className="inclgrid">
+              {c.INCLUDED.map((i) => <div key={i}>{i}</div>)}
+            </div>
           </div>
         </div>
       </section>
