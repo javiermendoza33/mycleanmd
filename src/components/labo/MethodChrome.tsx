@@ -86,7 +86,7 @@ export function MethodFooter() {
     <footer className="mfoot">
       <div className="wrap">
         <div className="cols">
-          <div><h2>{h.footH}</h2><p style={{ marginTop: 12, fontSize: ".86rem", color: "#8B98B3" }}>{h.footSub(c.AVAILABILITY)}</p></div>
+          <div><h2>{h.footH}</h2><p style={{ marginTop: 12, fontSize: ".86rem", color: "#8FA396" }}>{h.footSub(c.AVAILABILITY)}</p></div>
           <div>
             <p className="k">{h.programs}</p>
             <ul>{c.PROGRAMS.map((p) => <li key={p.slug}><Link href={L(`/programs/${p.slug}`)}>{p.name}</Link></li>)}</ul>

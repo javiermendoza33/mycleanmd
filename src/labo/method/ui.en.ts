@@ -239,6 +239,9 @@ export const UI_EN = {
     ] as DemoScene[],
   },
 
+  /** The pause control on the hero's moving background (PeptideField.tsx). */
+  bg: { pause: "Pause background", play: "Play background" },
+
   blog: {
     metaTitle: "Journal",
     metaDesc: "The evidence behind GLP-1, peptide, testosterone and hormone therapy, and how telehealth hormone care actually works — explained plainly, from The Labo Method.",

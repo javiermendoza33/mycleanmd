@@ -5,11 +5,11 @@
    a plan picker with a what-you-pay table, numbered FAQ, and a dark footer carrying the wordmark. */
 
 [data-labo] [data-method]{
-  --paper:#F6F9FF; --canvas:#FFFFFF; --wash:#E6EFFF; --tint:#DCE9FF;
-  --ink:#101820; --graphite:#3A4556; --muted:#55637A;
-  --accent:#3B6ECA; --accent-rgb:59,110,202; --deep:#1D4F91; --on-accent:#FFFFFF;
-  --line:rgba(16,24,32,.10); --hair:rgba(16,24,32,.06); --rule:#C9D6EA; --sage:var(--wash);
-  --dark:#0B1222;
+  --paper:#F1F5EE; --canvas:#FFFFFF; --wash:#E7EFE4; --tint:#DDE8DA;
+  --ink:#14261C; --graphite:#3A4A40; --muted:#5B6D62;
+  --accent:#2A7E5A; --accent-rgb:59,110,202; --deep:#1F6B4A; --on-accent:#FFFFFF;
+  --line:rgba(20,38,28,.10); --hair:rgba(20,38,28,.06); --rule:#C9D6C6; --sage:var(--wash);
+  --dark:#0F1F17;
   font-family:var(--font-clinic),var(--font-inter),-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
   font-size:16.5px; letter-spacing:-.01em; color:var(--ink); background:var(--paper); color-scheme:light;
 }
@@ -29,7 +29,7 @@
 /* buttons: pills */
 [data-labo] [data-method] .btn{border-radius:999px;padding:14px 26px;font-weight:600;font-size:.98rem;letter-spacing:-.01em;border:1.5px solid transparent;line-height:1.1}
 [data-labo] [data-method] .btn-primary{background:var(--deep);color:#fff}
-[data-labo] [data-method] .btn-primary:hover{background:#163F76}
+[data-labo] [data-method] .btn-primary:hover{background:#154D36}
 [data-labo] [data-method] .btn-ghost{background:#fff;border-color:var(--deep);color:var(--deep)}
 [data-labo] [data-method] .btn-ghost:hover{background:var(--wash)}
 [data-labo] [data-method] .btn-soft{background:var(--wash);color:var(--deep)}
@@ -41,8 +41,8 @@
 /* promo line + floating pill header */
 [data-labo] [data-method] .mpromo{background:var(--tint);color:var(--ink);text-align:center;font-size:.86rem;font-weight:600;padding:12px 16px}
 [data-labo] [data-method] .mpromo a{color:var(--deep);text-decoration:underline;text-underline-offset:3px}
-[data-labo] [data-method] .mhead{position:sticky;top:env(safe-area-inset-top,0px);z-index:60;padding:10px 16px;background:linear-gradient(180deg,var(--paper) 60%,rgba(246,249,255,0))}
-[data-labo] [data-method] .mhead .pill{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:24px;height:62px;padding:0 10px 0 24px;background:linear-gradient(90deg,var(--tint) 0%,#FFFFFF 42%,#FFFFFF 70%,var(--wash) 100%);border-radius:999px;box-shadow:0 10px 30px -18px rgba(29,79,145,.45),0 0 0 1px rgba(var(--accent-rgb),.18)}   /* Nov 23 2026 (Javier: "add some color on this area"): a blue wash across the pill, the mark in accent */
+[data-labo] [data-method] .mhead{position:sticky;top:env(safe-area-inset-top,0px);z-index:60;padding:10px 16px;background:linear-gradient(180deg,var(--paper) 60%,rgba(241,245,238,0))}
+[data-labo] [data-method] .mhead .pill{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:24px;height:62px;padding:0 10px 0 24px;background:linear-gradient(90deg,var(--tint) 0%,#FFFFFF 42%,#FFFFFF 70%,var(--wash) 100%);border-radius:999px;box-shadow:0 10px 30px -18px rgba(31,107,74,.45),0 0 0 1px rgba(var(--accent-rgb),.18)}   /* Nov 23 2026 (Javier: "add some color on this area"): a blue wash across the pill, the mark in accent */
 [data-labo] [data-method] .mhead .brand{font-size:1.06rem;font-weight:800;letter-spacing:-.03em;color:var(--ink);text-decoration:none;white-space:nowrap}
 [data-labo] [data-method] .mhead nav.mlinks{display:flex;gap:22px;margin-right:auto}
 [data-labo] [data-method] .mhead nav.mlinks a{font-size:.95rem;font-weight:500;color:var(--ink);text-decoration:none;white-space:nowrap}
@@ -54,7 +54,7 @@
   [data-labo] [data-method] .mhead nav.mlinks,[data-labo] [data-method] .mhead .signin{display:none}
   [data-labo] [data-method] .mhead .pill{height:58px;padding:0 8px 0 18px;gap:10px}
   [data-labo] [data-method] .mhead .mburger{display:inline-flex;align-items:center;justify-content:center}
-  [data-labo] [data-method] .msheet{display:block;position:fixed;inset:84px 12px auto 12px;z-index:70;background:#fff;border-radius:20px;box-shadow:0 30px 60px -20px rgba(16,24,32,.5),0 0 0 1px var(--hair);padding:14px}
+  [data-labo] [data-method] .msheet{display:block;position:fixed;inset:84px 12px auto 12px;z-index:70;background:#fff;border-radius:20px;box-shadow:0 30px 60px -20px rgba(20,38,28,.5),0 0 0 1px var(--hair);padding:14px}
   [data-labo] [data-method] .msheet[hidden]{display:none}
   [data-labo] [data-method] .msheet a{display:block;padding:12px 14px;border-radius:12px;font-size:1.05rem;font-weight:600;color:var(--ink);text-decoration:none}
   [data-labo] [data-method] .msheet a:hover{background:var(--wash)}
@@ -71,7 +71,7 @@
 [data-labo] [data-method] .mhero .sub{margin-top:18px;max-width:52ch}
 [data-labo] [data-method] .offers{margin-top:26px;display:grid;gap:10px}
 [data-labo] [data-method] .offer{position:relative;display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;padding:16px 20px;background:#fff;border:1px solid var(--line);border-radius:14px;text-decoration:none;color:var(--ink)}
-[data-labo] [data-method] .offer.lead{border:1.5px solid var(--deep);box-shadow:0 12px 30px -22px rgba(29,79,145,.6)}
+[data-labo] [data-method] .offer.lead{border:1.5px solid var(--deep);box-shadow:0 12px 30px -22px rgba(31,107,74,.6)}
 [data-labo] [data-method] .offer .lbl{display:block;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--deep)}
 [data-labo] [data-method] .offer p{margin-top:4px;font-size:.9rem;color:var(--graphite);line-height:1.4}
 [data-labo] [data-method] .offer .amt{text-align:right}
@@ -86,7 +86,7 @@
 [data-labo] [data-method] .mmedia video,[data-labo] [data-method] .mmedia img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 25%}
 [data-labo] [data-method] .mmedia video{opacity:0;transition:opacity .6s}
 [data-labo] [data-method] .mmedia video.on{opacity:1}
-[data-labo] [data-method] .mmedia .badge{position:absolute;left:18px;bottom:18px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-radius:14px;padding:12px 16px;font-size:.84rem;line-height:1.35;max-width:300px;box-shadow:0 10px 30px -16px rgba(16,24,32,.5)}
+[data-labo] [data-method] .mmedia .badge{position:absolute;left:18px;bottom:18px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-radius:14px;padding:12px 16px;font-size:.84rem;line-height:1.35;max-width:300px;box-shadow:0 10px 30px -16px rgba(20,38,28,.5)}
 [data-labo] [data-method] .mmedia .badge b{display:block;color:var(--deep)}
 @media (max-width:960px){[data-labo] [data-method] .mhero .wrap{grid-template-columns:1fr;gap:28px}[data-labo] [data-method] .mmedia{min-height:0;aspect-ratio:4/3}[data-labo] [data-method] .mhero{padding-top:20px}}
 
@@ -129,7 +129,7 @@
 [data-labo] [data-method] .plan .cards2 div{background:#fff;border-radius:14px;padding:18px 20px;border:1px solid var(--line)}
 [data-labo] [data-method] .plan .cards2 b{display:block;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--deep)}
 [data-labo] [data-method] .plan .cards2 p{margin-top:6px;font-size:.92rem;color:var(--graphite);line-height:1.45}
-[data-labo] [data-method] .planbox{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 30px 60px -40px rgba(29,79,145,.4)}
+[data-labo] [data-method] .planbox{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 30px 60px -40px rgba(31,107,74,.4)}
 [data-labo] [data-method] .pseg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:6px;background:var(--paper);border-radius:14px}
 [data-labo] [data-method] .pseg button{font:inherit;font-size:.82rem;font-weight:600;padding:10px 6px;border-radius:10px;border:0;background:none;color:var(--graphite);cursor:pointer}
 [data-labo] [data-method] .pseg button[aria-pressed="true"]{background:var(--deep);color:#fff}
@@ -146,7 +146,7 @@
 [data-labo] [data-method] .paytable tr:last-child td{border-bottom:0}
 [data-labo] [data-method] .paytable th{font-weight:600;color:var(--ink)}
 [data-labo] [data-method] .paytable th small{display:block;font-weight:400;color:var(--muted);font-size:.74rem}
-[data-labo] [data-method] .paytable td{font-weight:600;color:var(--deep);background:#F3F7FF;text-align:right;white-space:nowrap}
+[data-labo] [data-method] .paytable td{font-weight:600;color:var(--deep);background:#EEF3EA;text-align:right;white-space:nowrap}
 [data-labo] [data-method] .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;padding:0;list-style:none}
 [data-labo] [data-method] .chips li{font-family:inherit;font-size:.78rem;font-weight:600;color:var(--deep);background:var(--wash);border-radius:999px;padding:6px 12px}
 [data-labo] [data-method] .planbox .btn{display:block;text-align:center;margin-top:16px}
@@ -165,7 +165,7 @@
 @media (max-width:860px){[data-labo] [data-method] .clin{grid-template-columns:1fr;padding:28px}[data-labo] [data-method] .clin ul{grid-template-columns:1fr}}
 
 /* the gate (shared component) — give it the card look */
-[data-labo] [data-method] .gate{background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 30px 60px -40px rgba(29,79,145,.35)}
+[data-labo] [data-method] .gate{background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 30px 60px -40px rgba(31,107,74,.35)}
 [data-labo] [data-method] .gate .seg button{border-radius:999px}
 [data-labo] [data-method] .gate .seg button.on{background:var(--deep);color:#fff;border-color:var(--deep)}
 
@@ -209,16 +209,16 @@
 [data-labo] [data-method] .seg button{border-radius:999px}
 
 /* footer */
-[data-labo] [data-method] .mfoot{background:var(--dark);color:#C9D3E6;padding:56px 0 28px;margin-top:40px}
+[data-labo] [data-method] .mfoot{background:var(--dark);color:#CBD8CE;padding:56px 0 28px;margin-top:40px}
 [data-labo] [data-method] .mfoot .cols{display:grid;grid-template-columns:1.2fr repeat(4,1fr);gap:28px}
 [data-labo] [data-method] .mfoot h2{font-size:1.2rem;color:#fff;letter-spacing:-.02em;max-width:14ch}
-[data-labo] [data-method] .mfoot .k{font-family:var(--font-plex-mono),ui-monospace,monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:#8B98B3;margin:0 0 12px}
+[data-labo] [data-method] .mfoot .k{font-family:var(--font-plex-mono),ui-monospace,monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:#8FA396;margin:0 0 12px}
 [data-labo] [data-method] .mfoot ul{list-style:none;margin:0;padding:0;display:grid;gap:9px}
-[data-labo] [data-method] .mfoot ul a{color:#C9D3E6;text-decoration:none;font-size:.9rem}
+[data-labo] [data-method] .mfoot ul a{color:#CBD8CE;text-decoration:none;font-size:.9rem}
 [data-labo] [data-method] .mfoot ul a:hover{color:#fff;text-decoration:underline;text-underline-offset:4px}
 [data-labo] [data-method] .mfoot .mark{margin-top:44px;font-size:clamp(1.4rem,2.6vw,2.1rem);font-weight:800;letter-spacing:-.03em;line-height:1;color:#fff;opacity:.9;white-space:nowrap;overflow:hidden}
-[data-labo] [data-method] .mfoot .legal{margin-top:28px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);display:grid;gap:10px;font-size:.78rem;color:#8B98B3;line-height:1.5}
-[data-labo] [data-method] .mfoot .legal a{color:#C9D3E6}
+[data-labo] [data-method] .mfoot .legal{margin-top:28px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);display:grid;gap:10px;font-size:.78rem;color:#8FA396;line-height:1.5}
+[data-labo] [data-method] .mfoot .legal a{color:#CBD8CE}
 [data-labo] [data-method] .mfoot .legal .row{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 @media (max-width:960px){[data-labo] [data-method] .mfoot .cols{grid-template-columns:1fr 1fr}[data-labo] [data-method] .mfoot h2{grid-column:1/-1}}
 @media (max-width:520px){[data-labo] [data-method] .mfoot .cols{grid-template-columns:1fr}}
@@ -244,11 +244,11 @@
 
 /* Card shadows (Nov 22 2026, Javier: "add shadows to widgets"): one soft, blue-tinted elevation on every card-like
    surface so they lift off the blue-white page the way Mochi's do; a touch more on hover for the clickable ones. */
-[data-labo] [data-method] .pcard,[data-labo] [data-method] .offer,[data-labo] [data-method] .step,[data-labo] [data-method] .clin,[data-labo] [data-method] .jcard,[data-labo] [data-method] .xclinic,[data-labo] [data-method] .plan .cards2 div,[data-labo] [data-method] .qa details,[data-labo] [data-method] .tile,[data-labo] [data-method] .card,[data-labo] [data-method] .pricecard,[data-labo] [data-method] .mmedia{box-shadow:0 1px 2px rgba(16,24,32,.04),0 10px 30px -14px rgba(29,79,145,.28)}
-[data-labo] [data-method] .planbox,[data-labo] [data-method] .gate{box-shadow:0 2px 4px rgba(16,24,32,.05),0 30px 60px -30px rgba(29,79,145,.45)}
-[data-labo] [data-method] .offer.lead{box-shadow:0 2px 4px rgba(16,24,32,.05),0 18px 40px -18px rgba(29,79,145,.55)}
+[data-labo] [data-method] .pcard,[data-labo] [data-method] .offer,[data-labo] [data-method] .step,[data-labo] [data-method] .clin,[data-labo] [data-method] .jcard,[data-labo] [data-method] .xclinic,[data-labo] [data-method] .plan .cards2 div,[data-labo] [data-method] .qa details,[data-labo] [data-method] .tile,[data-labo] [data-method] .card,[data-labo] [data-method] .pricecard,[data-labo] [data-method] .mmedia{box-shadow:0 1px 2px rgba(20,38,28,.04),0 10px 30px -14px rgba(31,107,74,.28)}
+[data-labo] [data-method] .planbox,[data-labo] [data-method] .gate{box-shadow:0 2px 4px rgba(20,38,28,.05),0 30px 60px -30px rgba(31,107,74,.45)}
+[data-labo] [data-method] .offer.lead{box-shadow:0 2px 4px rgba(20,38,28,.05),0 18px 40px -18px rgba(31,107,74,.55)}
 [data-labo] [data-method] .pcard,[data-labo] [data-method] .jcard,[data-labo] [data-method] .offer{transition:box-shadow .2s,transform .2s}
-[data-labo] [data-method] .pcard:hover,[data-labo] [data-method] .jcard:hover,[data-labo] [data-method] .offer:hover{box-shadow:0 2px 4px rgba(16,24,32,.05),0 22px 44px -18px rgba(29,79,145,.45);transform:translateY(-2px)}
+[data-labo] [data-method] .pcard:hover,[data-labo] [data-method] .jcard:hover,[data-labo] [data-method] .offer:hover{box-shadow:0 2px 4px rgba(20,38,28,.05),0 22px 44px -18px rgba(31,107,74,.45);transform:translateY(-2px)}
 @media (prefers-reduced-motion:reduce){[data-labo] [data-method] .pcard:hover,[data-labo] [data-method] .jcard:hover,[data-labo] [data-method] .offer:hover{transform:none}}
 [data-labo] [data-method] .mhead .brand{display:inline-flex;align-items:center;gap:.5em;font-weight:300;letter-spacing:.2em;text-transform:uppercase;font-size:.9rem;color:var(--deep);--logo-bg:var(--tint)}
 [data-labo] [data-method] .mhead .brand .logo-word{color:var(--ink)}
@@ -256,7 +256,7 @@
 [data-labo] [data-method] .mhead .brand .logo-word{font-weight:300;letter-spacing:.2em}
 
 /* ── Hero demo card (Nov 23 2026): the Flexpa-style self-playing "Your clinician" widget ─────────────── */
-[data-labo] [data-method] .mdemo{position:relative;background:var(--canvas);border:1px solid var(--line);border-radius:24px;box-shadow:0 1px 2px rgba(16,24,32,.04),0 24px 60px -28px rgba(29,79,145,.45);display:flex;flex-direction:column;min-height:520px;font-size:.9rem}
+[data-labo] [data-method] .mdemo{position:relative;background:var(--canvas);border:1px solid var(--line);border-radius:24px;box-shadow:0 1px 2px rgba(20,38,28,.04),0 24px 60px -28px rgba(31,107,74,.45);display:flex;flex-direction:column;min-height:520px;font-size:.9rem}
 [data-labo] [data-method] .mdhead{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--hair)}
 [data-labo] [data-method] .mdhead .dots{display:flex;gap:5px}[data-labo] [data-method] .mdhead .dots i{width:8px;height:8px;border-radius:50%;background:var(--rule)}
 [data-labo] [data-method] .mdhead b{font-weight:600;color:var(--ink)}
@@ -297,7 +297,7 @@
 [data-labo] [data-method] .sflow-steps li span{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:.68rem;background:var(--wash);color:var(--deep)}
 [data-labo] [data-method] .sflow-steps li.on{color:var(--ink);border-color:rgba(var(--accent-rgb),.35)}[data-labo] [data-method] .sflow-steps li.on span{background:var(--accent);color:#fff}
 [data-labo] [data-method] .sflow-steps li.done span{background:#2EB872;color:#fff}
-[data-labo] [data-method] .sflow-card{background:var(--canvas);border:1px solid var(--line);border-radius:24px;padding:30px 32px;box-shadow:0 1px 2px rgba(16,24,32,.04),0 20px 50px -28px rgba(29,79,145,.4)}
+[data-labo] [data-method] .sflow-card{background:var(--canvas);border:1px solid var(--line);border-radius:24px;padding:30px 32px;box-shadow:0 1px 2px rgba(20,38,28,.04),0 20px 50px -28px rgba(31,107,74,.4)}
 [data-labo] [data-method] .sflow-card h2{font-size:1.6rem;letter-spacing:-.02em;margin:0}[data-labo] [data-method] .sflow-card .sub{margin-top:8px;color:var(--muted)}
 [data-labo] [data-method] .sprog{display:grid;gap:10px;margin-top:20px}
 [data-labo] [data-method] .sprog button{display:grid;grid-template-columns:1fr auto;gap:2px 16px;text-align:left;font:inherit;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:14px 18px;cursor:pointer;transition:.15s}
@@ -341,31 +341,31 @@
    The pale wash read as disabled against the light page; the bar now carries the Method's deep blue with white type and a white
    Get started, matching the dark footer. Mark and links invert; the burger follows on phones. */
 [data-labo] [data-method] .mhead{background:transparent;padding:12px 16px}
-[data-labo] [data-method] .mhead .pill{background:linear-gradient(90deg,#163F78 0%,#1D4F91 55%,#2659A6 100%);box-shadow:0 16px 36px -16px rgba(13,36,70,.65),inset 0 1px 0 rgba(255,255,255,.12)}
+[data-labo] [data-method] .mhead .pill{background:linear-gradient(90deg,#154D36 0%,#1F6B4A 55%,#2A7E5A 100%);box-shadow:0 16px 36px -16px rgba(12,40,28,.65),inset 0 1px 0 rgba(255,255,255,.12)}
 [data-labo] [data-method] .mhead .brand,[data-labo] [data-method] .mhead .brand .logo-word{color:#fff;--logo-bg:rgba(255,255,255,.16)}
 [data-labo] [data-method] .mhead .brand svg,[data-labo] [data-method] .mhead .brand img{filter:brightness(0) invert(1)}
 [data-labo] [data-method] .mhead nav.mlinks a{color:rgba(255,255,255,.82)}
 [data-labo] [data-method] .mhead nav.mlinks a:hover,[data-labo] [data-method] .mhead nav.mlinks a.on{color:#fff}
 [data-labo] [data-method] .mhead .signin{color:#fff}
 [data-labo] [data-method] .mhead .signin:hover{text-decoration:underline;text-underline-offset:4px}
-[data-labo] [data-method] .mhead .btn.btn-primary,[data-labo] [data-method] .mhead .btn.btn-primary.btn-sm{background:#fff;color:#1D4F91;border-color:#fff;opacity:1;white-space:nowrap}
-[data-labo] [data-method] .mhead .btn.btn-primary:hover{background:#EAF1FF;color:#163F78}
+[data-labo] [data-method] .mhead .btn.btn-primary,[data-labo] [data-method] .mhead .btn.btn-primary.btn-sm{background:#fff;color:#1F6B4A;border-color:#fff;opacity:1;white-space:nowrap}
+[data-labo] [data-method] .mhead .btn.btn-primary:hover{background:#E3EDE0;color:#154D36}
 [data-labo] [data-method] .mhead .mburger{background:rgba(255,255,255,.16);color:#fff}
 [data-labo] [data-method] .mhead .mburger:hover{background:rgba(255,255,255,.26)}
 @media (max-width:960px){[data-labo] [data-method] .mhead .btn.btn-primary.btn-sm{padding:10px 16px;font-size:.9rem}}
 
 /* ── Rebalanced to the header's blue (Nov 24 2026, Javier: "i like it, can you rebalance the site for this color") ──────────
-   One blue family across the Method: deep #163F78 → #1D4F91 → #2659A6. Headline emphasis, chips, dots and focus rings move from the
-   brighter #3B6ECA onto #2659A6; primary buttons and the "how it works" band carry the same gradient as the header. */
-[data-labo] [data-method]{--accent:#2659A6;--accent-rgb:38,89,166;--deep:#163F78;--tint:#D6E3F7;--wash:#E4EDFA}
-[data-labo] [data-method] .btn-primary{background:#1D4F91;border-color:#1D4F91}
-[data-labo] [data-method] .btn-primary:hover{background:#163F78;border-color:#163F78}
-[data-labo] [data-method] .btn-ghost{color:#1D4F91;border-color:rgba(29,79,145,.45)}
-[data-labo] [data-method] .btn-ghost:hover{background:rgba(29,79,145,.06)}
-[data-labo] [data-method] .mband{background:linear-gradient(90deg,#163F78 0%,#1D4F91 55%,#2659A6 100%)}
-[data-labo] [data-method] .offer.most,[data-labo] [data-method] .offer .flag{background:#1D4F91}
-[data-labo] [data-method] .mdchips button.on{background:#1D4F91;border-color:#1D4F91}
-[data-labo] [data-method] a{color:#1D4F91}
+   One blue family across the Method: deep #154D36 → #1F6B4A → #2A7E5A. Headline emphasis, chips, dots and focus rings move from the
+   brighter #2A7E5A onto #2A7E5A; primary buttons and the "how it works" band carry the same gradient as the header. */
+[data-labo] [data-method]{--accent:#2A7E5A;--accent-rgb:38,89,166;--deep:#154D36;--tint:#DDE8DA;--wash:#E7EFE4}
+[data-labo] [data-method] .btn-primary{background:#1F6B4A;border-color:#1F6B4A}
+[data-labo] [data-method] .btn-primary:hover{background:#154D36;border-color:#154D36}
+[data-labo] [data-method] .btn-ghost{color:#1F6B4A;border-color:rgba(31,107,74,.45)}
+[data-labo] [data-method] .btn-ghost:hover{background:rgba(31,107,74,.06)}
+[data-labo] [data-method] .mband{background:linear-gradient(90deg,#154D36 0%,#1F6B4A 55%,#2A7E5A 100%)}
+[data-labo] [data-method] .offer.most,[data-labo] [data-method] .offer .flag{background:#1F6B4A}
+[data-labo] [data-method] .mdchips button.on{background:#1F6B4A;border-color:#1F6B4A}
+[data-labo] [data-method] a{color:#1F6B4A}
 
 /* Phone spacing (Nov 24 2026, Javier: "this page and maybe others seem to be too tight on mobile"): the wrapper keeps its gutter even
    when a page pads it inline (padding-block only, never the shorthand), the gutter clears the phone's side insets, sections breathe less. */
@@ -391,7 +391,7 @@
 [data-labo] [data-method] .mpromo .mlang-top{display:none}
 @media (max-width:960px){
   [data-labo] [data-method] .mhead .mlang{display:none}
-  [data-labo] [data-method] .mpromo .mlang-top{display:inline-flex;align-items:center;gap:5px;margin-left:10px;padding:4px 11px;border-radius:999px;border:1px solid rgba(22,63,120,.4);background:rgba(255,255,255,.55);color:var(--deep);font-weight:700;text-decoration:none;vertical-align:middle;white-space:nowrap}
+  [data-labo] [data-method] .mpromo .mlang-top{display:inline-flex;align-items:center;gap:5px;margin-left:10px;padding:4px 11px;border-radius:999px;border:1px solid rgba(21,77,54,.4);background:rgba(255,255,255,.55);color:var(--deep);font-weight:700;text-decoration:none;vertical-align:middle;white-space:nowrap}
   [data-labo] [data-method] .mpromo .mlang-top .short{display:none}
 }
 
@@ -412,15 +412,15 @@
    the phone menu sheet lives inside the header. Browsers without backdrop-filter keep the solid bar. */
 @supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
   [data-labo] [data-method] .mhead .pill{
-    background:linear-gradient(90deg,rgba(22,63,120,.80) 0%,rgba(29,79,145,.80) 55%,rgba(38,89,166,.84) 100%);
+    background:linear-gradient(90deg,rgba(21,77,54,.80) 0%,rgba(31,107,74,.80) 55%,rgba(42,126,90,.84) 100%);
     -webkit-backdrop-filter:blur(18px) saturate(170%);backdrop-filter:blur(18px) saturate(170%);
     border:1px solid rgba(255,255,255,.22);
-    box-shadow:0 16px 36px -18px rgba(13,36,70,.55),inset 0 1px 0 rgba(255,255,255,.28),inset 0 -1px 0 rgba(255,255,255,.06);
+    box-shadow:0 16px 36px -18px rgba(12,40,28,.55),inset 0 1px 0 rgba(255,255,255,.28),inset 0 -1px 0 rgba(255,255,255,.06);
   }
   [data-labo] [data-method] .mhead nav.mlinks a{color:rgba(255,255,255,.94)}
   /* Phones: headless Chrome's phone emulation showed the page text sharp through the bar (the blur did not paint there), so the
      tint is denser at this size — the bar stays clean whether or not a given phone blurs. Check on a real iPhone. */
-  @media (max-width:960px){[data-labo] [data-method] .mhead .pill{background:linear-gradient(90deg,rgba(22,63,120,.92) 0%,rgba(29,79,145,.92) 55%,rgba(38,89,166,.93) 100%)}}
+  @media (max-width:960px){[data-labo] [data-method] .mhead .pill{background:linear-gradient(90deg,rgba(21,77,54,.92) 0%,rgba(31,107,74,.92) 55%,rgba(42,126,90,.93) 100%)}}
 }
 
 /* ── Liquid-glass header (Nov 27 2026, Javier: "can we try liquid glass nav bar?") ─────────────────────────────────────────
@@ -435,9 +435,9 @@
     background:linear-gradient(135deg,rgba(255,255,255,.62) 0%,rgba(255,255,255,.40) 42%,rgba(255,255,255,.54) 100%);
     -webkit-backdrop-filter:blur(22px) saturate(190%) brightness(1.05);backdrop-filter:blur(22px) saturate(190%) brightness(1.05);
     border:1px solid rgba(255,255,255,.75);
-    box-shadow:0 18px 40px -18px rgba(22,63,120,.38),0 2px 6px rgba(22,63,120,.08),
+    box-shadow:0 18px 40px -18px rgba(21,77,54,.38),0 2px 6px rgba(21,77,54,.08),
       inset 0 1.5px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(255,255,255,.4),
-      inset 0 -12px 18px -12px rgba(38,89,166,.20),inset 12px 0 18px -14px rgba(255,255,255,.65),inset -12px 0 18px -14px rgba(255,255,255,.45);
+      inset 0 -12px 18px -12px rgba(42,126,90,.20),inset 12px 0 18px -14px rgba(255,255,255,.65),inset -12px 0 18px -14px rgba(255,255,255,.45);
   }
   [data-labo] [data-method] .mhead .pill::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;
     background:radial-gradient(120% 90% at 12% -30%,rgba(255,255,255,.75) 0%,rgba(255,255,255,0) 60%),linear-gradient(180deg,rgba(255,255,255,.35) 0%,rgba(255,255,255,0) 52%)}
@@ -446,11 +446,37 @@
   [data-labo] [data-method] .mhead nav.mlinks a{color:var(--ink)}
   [data-labo] [data-method] .mhead nav.mlinks a:hover,[data-labo] [data-method] .mhead nav.mlinks a.on{color:var(--deep)}
   [data-labo] [data-method] .mhead .signin{color:var(--ink)}   /* ink, not blue: over the blue band the glass turns blue and blue type faded */
-  [data-labo] [data-method] .mhead .btn.btn-primary,[data-labo] [data-method] .mhead .btn.btn-primary.btn-sm{background:#1D4F91;color:#fff;border-color:#1D4F91;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 6px 14px -8px rgba(22,63,120,.7)}
-  [data-labo] [data-method] .mhead .btn.btn-primary:hover{background:#163F78;color:#fff}
-  [data-labo] [data-method] .mhead .mlang{color:var(--ink);border-color:rgba(16,24,32,.28);background:rgba(255,255,255,.35)}
-  [data-labo] [data-method] .mhead .mlang:hover{background:rgba(255,255,255,.7);border-color:rgba(22,63,120,.5)}
-  [data-labo] [data-method] .mhead .mburger{background:rgba(22,63,120,.10);color:var(--deep)}
-  [data-labo] [data-method] .mhead .mburger:hover{background:rgba(22,63,120,.18)}
+  [data-labo] [data-method] .mhead .btn.btn-primary,[data-labo] [data-method] .mhead .btn.btn-primary.btn-sm{background:#1F6B4A;color:#fff;border-color:#1F6B4A;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 6px 14px -8px rgba(21,77,54,.7)}
+  [data-labo] [data-method] .mhead .btn.btn-primary:hover{background:#154D36;color:#fff}
+  [data-labo] [data-method] .mhead .mlang{color:var(--ink);border-color:rgba(20,38,28,.28);background:rgba(255,255,255,.35)}
+  [data-labo] [data-method] .mhead .mlang:hover{background:rgba(255,255,255,.7);border-color:rgba(21,77,54,.5)}
+  [data-labo] [data-method] .mhead .mburger{background:rgba(21,77,54,.10);color:var(--deep)}
+  [data-labo] [data-method] .mhead .mburger:hover{background:rgba(21,77,54,.18)}
   @media (max-width:960px){[data-labo] [data-method] .mhead .pill{background:linear-gradient(135deg,rgba(255,255,255,.95) 0%,rgba(255,255,255,.92) 45%,rgba(255,255,255,.94) 100%)}}
 }
+
+/* ── DAYLIGHT SAGE (Nov 27 2026, Javier: "i love Daylight Sage with Peptide Chains lets do that") ─────────────────────────
+   The Method moved from its blue family to a soft sage page with one deep-green accent — palette 10 of the colour-directions
+   PDF. Every blue value in this file was remapped in place the same day (#1D4F91→#1F6B4A, #163F78→#154D36, #2659A6→#2A7E5A,
+   paper #F6F9FF→#F1F5EE, ink #101820→#14261C, footer #0B1222→#0F1F17, and the matching rgba() tints), so older notes above that
+   say "blue" now describe greens. These tokens are the source of truth:
+     page #F1F5EE · notice strip #DDE8DA · cards #FFFFFF · borders #C9D6C6 · text #14261C · secondary #5B6D62 · accent #1F6B4A
+   Contrast on the page: text 14.4, secondary 5.0, accent headline 5.8; white on the accent button 6.4. */
+[data-labo] [data-method]{
+  --paper:#F1F5EE; --canvas:#FFFFFF; --wash:#E7EFE4; --tint:#DDE8DA;
+  --ink:#14261C; --graphite:#3A4A40; --muted:#5B6D62;
+  --accent:#1F6B4A; --accent-rgb:31,107,74; --deep:#154D36; --rule:#C9D6C6;
+  --line:rgba(20,38,28,.12); --hair:rgba(20,38,28,.07);
+}
+
+/* ── Peptide chains: the moving background behind the hero (PeptideField.tsx) ──────────────────────────────────────────────
+   Short strings of linked beads drift and briefly join end to end, like amino acids linking. Drawn on one canvas behind the
+   hero's content, in the accent colour at low strength; it stops for prefers-reduced-motion, when the hero is off screen or
+   the tab is hidden, and from the small pause control (remembered per browser). */
+[data-labo] [data-method] .mhero{position:relative;overflow:hidden}
+[data-labo] [data-method] .mhero > .wrap{position:relative;z-index:1}
+[data-labo] [data-method] .pfield{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+[data-labo] [data-method] .pfield-toggle{position:absolute;right:16px;bottom:10px;z-index:2;display:inline-flex;align-items:center;gap:7px;font:inherit;font-size:.74rem;font-weight:600;color:var(--muted);background:rgba(255,255,255,.7);border:1px solid var(--line);border-radius:999px;padding:5px 11px;cursor:pointer}
+[data-labo] [data-method] .pfield-toggle:hover{color:var(--ink);background:#fff}
+@media (max-width:960px){[data-labo] [data-method] .pfield-toggle{right:12px;bottom:8px;font-size:.7rem}}
+@media (prefers-reduced-motion:reduce){[data-labo] [data-method] .pfield-toggle{display:none}}
