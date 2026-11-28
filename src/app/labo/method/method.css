@@ -480,3 +480,12 @@
 [data-labo] [data-method] .pfield-toggle:hover{color:var(--ink);background:#fff}
 @media (max-width:960px){[data-labo] [data-method] .pfield-toggle{right:12px;bottom:8px;font-size:.7rem}}
 @media (prefers-reduced-motion:reduce){[data-labo] [data-method] .pfield-toggle{display:none}}
+
+/* ── Type (Nov 27 2026, Javier: "lets use the flexa site fonts") ───────────────────────────────────────────────────────────
+   Hanken Grotesk + Geist Mono, the free stand-ins for flexpa.com's licensed Maison Neue pair (loaded in method/layout.tsx).
+   Every rule in the Method reads its family from --font-clinic (text) or --font-plex-mono (labels), so pointing those two
+   variables at the new fonts inside [data-method] re-types the whole Method and nothing on the clinic site. Hanken runs a
+   little wider and lighter than Outfit did, so the big headlines get slightly tighter tracking. */
+[data-labo] [data-method]{--font-clinic:var(--font-method);--font-plex-mono:var(--font-method-mono)}
+[data-labo] [data-method] h1{letter-spacing:-.035em}
+[data-labo] [data-method] h2{letter-spacing:-.028em}

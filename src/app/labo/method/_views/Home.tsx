@@ -42,7 +42,7 @@ export default function HomeView({ lang }: { lang: Lang }) {
             <div className="offers">
               <Link href={L(`/programs/${glp.slug}`)} className="offer lead">
                 <span className="flag">{h.mostChosen}</span>
-                <div><span className="lbl">{glp.name}</span><p>{glp.navBlurb}{h.glpExtra}</p></div>
+                <div><span className="lbl">{glp.name.split("GLP-1").flatMap((part, i) => (i ? [<span key={i} style={{ whiteSpace: "nowrap" }}>GLP-1</span>, part] : [part]))}</span><p>{glp.navBlurb}{h.glpExtra}</p></div>
                 <div className="amt">{h.perMonth && <small>{h.perMonth}</small>}<b>{glp.price}<span>{t.mo}</span></b></div>
               </Link>
               <Link href={L("/programs")} className="offer">

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Hanken_Grotesk, Geist_Mono } from "next/font/google";
 import { MethodHeader, MethodFooter, MethodScope } from "@/components/labo/MethodChrome";
 import "./method.css";
 import { METHOD, AVAILABILITY, LAUNCH_READY } from "@/labo/content";
@@ -22,6 +23,13 @@ import { alternates } from "@/labo/method/i18n";
  * same unconfirmed placeholder flagged in content.ts, and /legal hasn't had
  * attorney sign-off. Flip LAUNCH_READY once Monika/counsel clear those.
  */
+/* The Method's own type (Nov 27 2026, Javier: "lets use the flexa site fonts"). flexpa.com sets Maison Neue + Maison Neue Mono
+   (Milieu Grotesque) — commercial fonts that need a paid web licence, so their files are not ours to use. These are the closest
+   free pair: Hanken Grotesk for text and headlines, Geist Mono for the small labels and code lines. To switch to the real
+   thing after buying the licence: load the licensed files with next/font/local here under the same two variable names. */
+const methodSans = Hanken_Grotesk({ subsets: ["latin"], display: "swap", variable: "--font-method" });
+const methodMono = Geist_Mono({ subsets: ["latin"], display: "swap", variable: "--font-method-mono" });
+
 const TITLE = "Telehealth hormone, weight & peptide care";
 const DESCRIPTION = `${METHOD.tagline} Real labs first, a real dose plan, a clinician actually watching. Available in ${AVAILABILITY}.`;
 
@@ -59,7 +67,7 @@ export const metadata: Metadata = {
 
 export default function MethodLayout({ children }: { children: React.ReactNode }) {
   return (
-    <MethodScope>
+    <MethodScope className={`${methodSans.variable} ${methodMono.variable}`}>
       <MethodHeader />
       <main id="main">{children}</main>
       <MethodFooter />

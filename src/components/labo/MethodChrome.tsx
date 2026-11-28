@@ -19,9 +19,9 @@ import { Logo } from "@/components/labo/Logo";
  */
 
 /** Wraps the whole Method site so assistive tech and the browser know which language the page is in. */
-export function MethodScope({ children }: { children: React.ReactNode }) {
+export function MethodScope({ children, className }: { children: React.ReactNode; className?: string }) {
   const lang = langOf(usePathname());
-  return <div data-method lang={lang}>{children}</div>;
+  return <div data-method lang={lang} className={className}>{children}</div>;
 }
 
 /** `current`: show the name of the language being read (the header pill and the phone notice chip, per the Nov 27 2026 review:
