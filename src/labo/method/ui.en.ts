@@ -239,7 +239,7 @@ export const UI_EN = {
     ] as DemoScene[],
   },
 
-  /** The pause control on the hero's moving background (PeptideField.tsx). */
+  /** The pause control on the hero's moving background (RippleField.tsx). */
   bg: { pause: "Pause background", play: "Play background" },
 
   blog: {

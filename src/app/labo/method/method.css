@@ -469,8 +469,8 @@
   --line:rgba(20,38,28,.12); --hair:rgba(20,38,28,.07);
 }
 
-/* ── Peptide chains: the moving background behind the hero (PeptideField.tsx) ──────────────────────────────────────────────
-   Short strings of linked beads drift and briefly join end to end, like amino acids linking. Drawn on one canvas behind the
+/* ── Slow ripples: the moving background behind the hero (RippleField.tsx; replaced the peptide chains the same day) ─────────
+   A few points around the hero's edges each send out a soft ring that widens and fades. Drawn on one canvas behind the
    hero's content, in the accent colour at low strength; it stops for prefers-reduced-motion, when the hero is off screen or
    the tab is hidden, and from the small pause control (remembered per browser). */
 [data-labo] [data-method] .mhero{position:relative;overflow:hidden}
