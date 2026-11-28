@@ -515,3 +515,6 @@ Javier: "lets go ahead of Midnight Teal & Mint theme for the site" (palette 01 o
 
 ## Nov 27 2026 — No moving background on the Method hero
 Javier: "remove the slow ripples now". `RippleField.tsx`, its canvas/pause-pill CSS and the `t.bg` strings are deleted; the hero is the plain dark page again. Both background experiments are out (peptide chains, then ripples) — don't add hero motion back unless he asks.
+
+## Nov 27 2026 — Carbon-fibre weave behind the Method (static)
+Javier: "in trademako site we have a carbon fiber background. can we add some element like that in the background". The last block of method.css puts trademako's pure-CSS weave (six gradients on a 20px tile, from trademako `src/app/globals.css`) on `[data-method]`, retuned to deep teal (#081B20 base, tones #091D22–#0E282F). Static, no image. `section.grey` is now a 2.8% mint wash so the weave shows through; panels, the band and the footer stay opaque. Deploy note from the same evening: a push can fail on Vercel with the Google-font fetch error ("next/font/google queries have exactly one entry") — check `vercel ls` after pushing and run `vercel --prod --yes --scope mycleantext` if the newest deployment says Error.

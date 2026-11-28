@@ -566,3 +566,23 @@ html:has([data-method]),body:has([data-method]){background:#0A1F24}
 [data-labo] [data-method] .clin li::before{background-color:rgba(127,240,210,.14)}
 [data-labo] [data-method] .res.ok,[data-labo] [data-method] .res.warn{background:rgba(127,240,210,.07);border-top-color:var(--rule)}
 [data-labo] [data-method] .mini .n{background:var(--accent);color:var(--on-accent)}
+
+/* ── Carbon-fibre weave on the page (Nov 27 2026, Javier: "in trademako site we have a carbon fiber background. can we add some
+   element like that in the background") ─────────────────────────────────────────────────────────────────────────────────
+   The same pure-CSS weave trademako.com uses on its black (trademako src/app/globals.css), retuned to this theme's deep teal: six
+   stacked gradients on a 20px tile, every tone within a few points of the page colour so it reads as texture, not pattern.
+   No image, no animation, nothing to download. Panels stay opaque on top of it; the alternating sections become a faint wash
+   instead of a flat fill so the weave carries through them; the blue-green band and the footer stay solid. */
+[data-labo] [data-method]{
+  background-color:#081B20;
+  background-image:
+    linear-gradient(27deg,#0B2228 5px,transparent 5px),
+    linear-gradient(207deg,#0B2228 5px,transparent 5px),
+    linear-gradient(27deg,#0E282F 5px,transparent 5px),
+    linear-gradient(207deg,#0E282F 5px,transparent 5px),
+    linear-gradient(90deg,#0A1F24 10px,transparent 10px),
+    linear-gradient(#0B2127 25%,#091D22 25%,#091D22 50%,transparent 50%,transparent 75%,#0D262C 75%,#0D262C);
+  background-position:0 5px,10px 0,0 10px,10px 5px,0 0,0 0;
+  background-size:20px 20px;
+}
+[data-labo] [data-method] section.grey{background:rgba(127,240,210,.028)}
