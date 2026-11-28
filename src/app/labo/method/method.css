@@ -578,12 +578,3 @@ html:has([data-method]),body:has([data-method]){background:#0A1F24}
   background-size:29.44px 51px;
 }
 [data-labo] [data-method] section.grey{background:rgba(127,240,210,.028)}
-
-/* ── Spot breathing on the honeycomb (HoneyBreath.tsx) ────────────────────────────────────────────────────────────────────
-   A layer behind the page content and above the honeycomb, holding single cells that fade in and out one by one.
-   `isolation` makes [data-method] a stacking context so the layer's z-index:-1 lands between its background and its content. */
-[data-labo] [data-method]{position:relative;isolation:isolate}
-[data-labo] [data-method] .hbreath{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
-[data-labo] [data-method] .hbreath i{position:absolute;width:29.44px;height:34px;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:rgb(127,240,210);opacity:0;animation:hbreath var(--d,9s) ease-in-out var(--w,0s) infinite}
-@keyframes hbreath{0%,100%{opacity:0}50%{opacity:var(--o,.12)}}
-@media (prefers-reduced-motion:reduce){[data-labo] [data-method] .hbreath{display:none}}

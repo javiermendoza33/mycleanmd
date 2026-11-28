@@ -524,3 +524,6 @@ Javier: "lets try honeycomb style". The last background block in method.css is n
 
 ## Nov 27 2026 — Spot breathing on the honeycomb
 Javier: "could you do a bit of spot breathing on the honeycomb?… lightly… like individual spots breath". `src/components/labo/method/HoneyBreath.tsx` (mounted in `MethodScope`, so every Method page): a layer between the honeycomb background and the content (`.hbreath`, z-index −1 inside `[data-method]`, which is `position:relative; isolation:isolate`) holding up to 170 single cells, each placed exactly on a cell of the pattern (the component's `R = 17` must match the tile in method.css) and fading 0 → 4–10% → 0 over 6–13 s with its own delay. Opacity-only CSS animation; hidden for prefers-reduced-motion; re-scattered when the page height changes by more than 400px. Sticky header and the phone menu sheet checked after adding `isolation`.
+
+## Nov 27 2026 — Spot breathing removed; the honeycomb stays, static
+Javier: "lets remove the breathing doesnt look what i imagened". `HoneyBreath.tsx`, its layer CSS and the `position/isolation` on `[data-method]` are gone. The page background is the plain static honeycomb. Four motion ideas have now been tried and dropped on this site (peptide chains, ripples, carbon weave as texture, breathing cells): before building another, ask him for a reference of what he pictures.
