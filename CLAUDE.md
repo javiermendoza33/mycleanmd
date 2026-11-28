@@ -512,3 +512,6 @@ Javier: "lets go ahead of Midnight Teal & Mint theme for the site" (palette 01 o
 - **Unchanged:** slow-ripple hero background (mint rings now), Hanken Grotesk + Geist Mono, all copy. **Still light, on purpose or not yet done:** the patient portal and the sign-in pages on the Method host (`[data-portal]` / clinic auth styles), email templates, favicons, the clinic site.
 - **Checked by screenshot:** home (hero, band, plan picker, clinician card, starting-point card with a result, FAQ), program page, pricing, FAQ, a Journal article, the opening-list page, the sign-up preview, the Spanish phone menu. Contrast: text 16.0, secondary 8.2, mint 12.4, button label 12.2.
 - To return to Daylight Sage: `git revert` this commit.
+
+## Nov 27 2026 — No moving background on the Method hero
+Javier: "remove the slow ripples now". `RippleField.tsx`, its canvas/pause-pill CSS and the `t.bg` strings are deleted; the hero is the plain dark page again. Both background experiments are out (peptide chains, then ripples) — don't add hero motion back unless he asks.

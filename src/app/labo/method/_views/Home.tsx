@@ -3,7 +3,6 @@ import { METHOD, PRACTICE, HEALTHIE, METHOD_OPEN } from "@/labo/content";
 import { postByEnSlug } from "@/labo/method/posts";
 import { mc, lh, type Lang } from "@/labo/method/i18n";
 import { MethodDemo } from "@/components/labo/method/MethodDemo";
-import { RippleField } from "@/components/labo/method/RippleField";
 import Gate from "../Gate";
 import PlanPicker from "../PlanPicker";
 
@@ -33,7 +32,6 @@ export default function HomeView({ lang }: { lang: Lang }) {
   return (
     <>
       <section className="mhero">
-        <RippleField lang={lang} />
         <div className="wrap">
           <div>
             <span className="tag">{METHOD_OPEN ? h.tag(c.AVAILABILITY) : t.soon.tag(c.AVAILABILITY)}</span>

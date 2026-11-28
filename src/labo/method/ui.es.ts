@@ -232,8 +232,6 @@ export const UI_ES: UI = {
     ],
   },
 
-  bg: { pause: "Pausar fondo", play: "Reanudar fondo" },
-
   blog: {
     metaTitle: "Revista",
     metaDesc: "La evidencia detrás de los GLP-1, los péptidos, la testosterona y la terapia hormonal, y cómo funciona de verdad la atención hormonal por telesalud, explicado con claridad y en español por The Labo Method.",
